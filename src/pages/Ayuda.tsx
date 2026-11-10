@@ -13,9 +13,11 @@ type AidRecord = {
   program: string;
   record: string;
   period: string;
-  amount: number | null;
-  amountLabel: string;
-  recipients: string;
+  totalOrBatchAmount: number | null;
+  incurredAmount: number | null;
+  perRecipientAmount: number | null;
+  recipientCount: number | null;
+  recipientLabel: string;
   note: string;
   sourceLabel: string;
   sourceUrl: string;
@@ -26,9 +28,11 @@ const aidRecords: AidRecord[] = [
     program: 'Senior citizen social pension',
     record: 'Q3 trust-fund utilization',
     period: 'As of September 30, 2026',
-    amount: 34_494_000,
-    amountLabel: '₱34,494,000 total cost · ₱17,355,000 incurred',
-    recipients: 'Not stated',
+    totalOrBatchAmount: 34_494_000,
+    incurredAmount: 17_355_000,
+    perRecipientAmount: null,
+    recipientCount: null,
+    recipientLabel: 'Not stated',
     note: 'Trust-fund project line; not a verified recipient count.',
     sourceLabel: 'Q3 trust-fund utilization',
     sourceUrl: `${official}/wp-content/uploads/2026/10/Trust-Fund-Utilization-as-of-September-30-2026-F.xlsx`,
@@ -37,9 +41,11 @@ const aidRecords: AidRecord[] = [
     program: 'Assistance to Individuals in Crisis Situation (AICS)',
     record: 'Q3 consolidated program report',
     period: 'January–December 2026',
-    amount: 2_704_000,
-    amountLabel: '₱2,704,000 total cost · ₱2,300,000 incurred',
-    recipients: 'Not stated',
+    totalOrBatchAmount: 2_704_000,
+    incurredAmount: 2_300_000,
+    perRecipientAmount: null,
+    recipientCount: null,
+    recipientLabel: 'Not stated',
     note: 'Continuing program · 85.05% reported completion; not a beneficiary roster or aid-release count.',
     sourceLabel: 'MSWDO worksheet, rows 10–11',
     sourceUrl: `${official}/wp-content/uploads/2026/10/consolidated-report-3rd-qtr-2026-1.xlsx`,
@@ -48,9 +54,11 @@ const aidRecords: AidRecord[] = [
     program: 'Presidential Assistance for Farmers and Fisherfolk (PAFF)',
     record: 'Reported distribution',
     period: 'November 6, 2026',
-    amount: 476_625,
-    amountLabel: '₱476,625 implied batch total · ₱2,325 each',
-    recipients: '205 fisherfolk',
+    totalOrBatchAmount: 476_625,
+    incurredAmount: null,
+    perRecipientAmount: 2_325,
+    recipientCount: 205,
+    recipientLabel: 'fisherfolk',
     note: 'Recipients × stated per-person amount. Distribution report; not a municipal appropriation or funding split.',
     sourceLabel: 'Official PAFF distribution report',
     sourceUrl: `${official}/about-miagao/news/%F0%9D%97%A0%F0%9D%97%94%F0%9D%97%AC%F0%9D%97%A2%F0%9D%97%A5-%F0%9D%97%9A%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%9C%F0%9D%97%A1-%F0%9D%97%9F%F0%9D%97%98%F0%9D%97%94%F0%9D%97%97%F0%9D%97%A6-%F0%9D%97%A3/`,
@@ -59,9 +67,11 @@ const aidRecords: AidRecord[] = [
     program: 'TUPAD',
     record: 'Reported salary distribution · 10 workdays',
     period: 'May 14, 2026',
-    amount: null,
-    amountLabel: 'Not stated',
-    recipients: '320 beneficiaries',
+    totalOrBatchAmount: null,
+    incurredAmount: null,
+    perRecipientAmount: null,
+    recipientCount: 320,
+    recipientLabel: 'beneficiaries',
     note: 'The municipal post reports 10 workdays but does not state the wage amount.',
     sourceLabel: 'Official 320-beneficiary report',
     sourceUrl: `${official}/about-miagao/news/%F0%9D%97%97%F0%9D%97%A2%F0%9D%97%9F%F0%9D%97%98-%F0%9D%97%A7%F0%9D%97%A8%F0%9D%97%A3%F0%9D%97%94%F0%9D%97%97-%F0%9D%97%95%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%98%F0%9D%97%99%F0%9D%97%9C%F0%9D%97%96/`,
@@ -70,9 +80,11 @@ const aidRecords: AidRecord[] = [
     program: 'TUPAD',
     record: 'Reported wage distribution · 10 workdays',
     period: 'July 3, 2026',
-    amount: 874_500,
-    amountLabel: '₱874,500 implied batch total · ₱5,500 each',
-    recipients: '159 beneficiaries',
+    totalOrBatchAmount: 874_500,
+    incurredAmount: null,
+    perRecipientAmount: 5_500,
+    recipientCount: 159,
+    recipientLabel: 'beneficiaries',
     note: 'Recipients × stated per-person wage. One cohort, not a full-year TUPAD allocation.',
     sourceLabel: 'Official TUPAD distribution report',
     sourceUrl: `${official}/about-miagao/news/dole-tupad-beneficiaries-receive-p5500-wages/`,
@@ -81,9 +93,11 @@ const aidRecords: AidRecord[] = [
     program: 'Pantawid Pamilya',
     record: 'Q3 MSWDO program line',
     period: 'Q3 2026',
-    amount: 90_000,
-    amountLabel: '₱90,000 total cost · ₱36,000 incurred',
-    recipients: 'Not stated',
+    totalOrBatchAmount: 90_000,
+    incurredAmount: 36_000,
+    perRecipientAmount: null,
+    recipientCount: null,
+    recipientLabel: 'Not stated',
     note: 'Program-line cost, not the value of household cash transfers.',
     sourceLabel: '2026 Full Disclosure index',
     sourceUrl: `${official}/transparency/2026-full-disclosure/`,
@@ -131,9 +145,17 @@ export default function Ayuda() {
     );
   }, [query]);
   const chartRows = matchingRows
-    .filter((row): row is AidRecord & { amount: number } => row.amount !== null)
-    .sort((a, b) => b.amount - a.amount);
-  const maximumAmount = Math.max(...chartRows.map(row => row.amount), 1);
+    .filter(
+      row => row.totalOrBatchAmount !== null || row.incurredAmount !== null
+    )
+    .sort((a, b) => (b.totalOrBatchAmount ?? 0) - (a.totalOrBatchAmount ?? 0));
+  const maximumAmount = Math.max(
+    ...chartRows.flatMap(row => [
+      row.totalOrBatchAmount ?? 0,
+      row.incurredAmount ?? 0,
+    ]),
+    1
+  );
   const pageRows = matchingRows.slice(page * pageSize, (page + 1) * pageSize);
   const pageCount = Math.max(1, Math.ceil(matchingRows.length / pageSize));
 
@@ -169,38 +191,79 @@ export default function Ayuda() {
               id="ayuda-chart-title"
               className="mt-1 text-xl font-bold text-slate-950"
             >
-              Reported or implied amount by program
+              Total or batch amount and incurred amount
             </h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              Scale comparison only: total program costs, incurred amounts, and
-              distribution batch totals are different measures. Search filters
-              both the chart and table.
+              Bars compare reported program costs or implied distribution batch
+              totals with incurred amounts where both are published. Batch
+              totals are calculated from recipient counts and per-person
+              amounts; they are not municipal appropriations. Search filters the
+              chart and table.
             </p>
+            <div className="mt-3 flex flex-wrap gap-4 text-xs font-semibold text-slate-700">
+              <span className="inline-flex items-center gap-2">
+                <i className="h-3 w-3 rounded-sm bg-blue-800" /> Total or batch
+                amount
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <i className="h-3 w-3 rounded-sm bg-teal-600" /> Incurred
+              </span>
+            </div>
           </div>
           <div className="space-y-4">
             {chartRows.map(row => (
               <div
                 key={`${row.program}-${row.record}`}
-                className="grid gap-1 sm:grid-cols-[minmax(11rem,0.8fr)_minmax(0,2fr)_auto] sm:items-center sm:gap-4"
+                className="grid gap-1 sm:grid-cols-[minmax(11rem,0.8fr)_minmax(0,2fr)_minmax(7rem,auto)] sm:items-center sm:gap-4"
               >
                 <span className="text-sm font-semibold text-slate-800">
                   {row.program}
+                  <span className="block text-xs font-normal text-slate-500">
+                    {row.record}
+                  </span>
                 </span>
-                <div
-                  className="h-3 overflow-hidden rounded-full bg-slate-100"
-                  role="img"
-                  aria-label={`${row.program}: ${peso.format(row.amount)}`}
-                >
-                  <div
-                    className="h-full rounded-full bg-blue-800"
-                    style={{
-                      width: `${Math.max(1.5, (row.amount / maximumAmount) * 100)}%`,
-                    }}
-                  />
+                <div className="space-y-1.5">
+                  {[
+                    {
+                      label: 'Total / batch',
+                      value: row.totalOrBatchAmount,
+                      color: 'bg-blue-800',
+                    },
+                    {
+                      label: 'Incurred',
+                      value: row.incurredAmount,
+                      color: 'bg-teal-600',
+                    },
+                  ].map(
+                    series =>
+                      series.value !== null && (
+                        <div
+                          key={series.label}
+                          className="flex items-center gap-2"
+                          role="img"
+                          aria-label={`${row.program} ${series.label}: ${peso.format(series.value)}`}
+                        >
+                          <span className="w-16 shrink-0 text-[10px] text-slate-500 sm:hidden">
+                            {series.label}
+                          </span>
+                          <div className="h-3 min-w-0 flex-1 overflow-hidden rounded-full bg-slate-100">
+                            <div
+                              className={`h-full rounded-full ${series.color}`}
+                              style={{
+                                width: `${Math.max(1.5, (series.value / maximumAmount) * 100)}%`,
+                              }}
+                            />
+                          </div>
+                          <strong className="w-24 shrink-0 text-right text-xs tabular-nums text-slate-900">
+                            {peso.format(series.value)}
+                          </strong>
+                        </div>
+                      )
+                  )}
                 </div>
-                <strong className="text-sm tabular-nums text-slate-950 sm:text-right">
-                  {peso.format(row.amount)}
-                </strong>
+                <span className="hidden text-xs text-slate-500 sm:block">
+                  {row.period}
+                </span>
               </div>
             ))}
             {!chartRows.length && (
@@ -304,18 +367,22 @@ export default function Ayuda() {
 
           <table className="w-full table-fixed text-left text-xs sm:text-sm">
             <colgroup>
-              <col className="w-[20%]" />
-              <col className="w-[16%]" />
-              <col className="w-[25%]" />
+              <col className="w-[17%]" />
+              <col className="w-[14%]" />
               <col className="w-[13%]" />
-              <col className="w-[26%]" />
+              <col className="w-[12%]" />
+              <col className="w-[10%]" />
+              <col className="w-[10%]" />
+              <col className="w-[24%]" />
             </colgroup>
             <thead className="bg-slate-900 text-white">
               <tr>
                 {[
                   'Program',
                   'Record · period',
-                  'Amount reported',
+                  'Total / batch amount',
+                  'Incurred',
+                  'Per recipient',
                   'Recipients',
                   'Source and note',
                 ].map(label => (
@@ -343,11 +410,31 @@ export default function Ayuda() {
                       {row.period}
                     </span>
                   </td>
-                  <td className="break-words p-2 text-slate-800 sm:p-3">
-                    {row.amountLabel}
+                  <td className="break-words p-2 text-right tabular-nums text-slate-800 sm:p-3">
+                    {row.totalOrBatchAmount === null
+                      ? '—'
+                      : peso.format(row.totalOrBatchAmount)}
+                    {row.record.toLowerCase().includes('distribution') &&
+                      row.totalOrBatchAmount !== null && (
+                        <span className="mt-1 block text-left text-[10px] leading-4 text-slate-500">
+                          Implied batch total
+                        </span>
+                      )}
+                  </td>
+                  <td className="break-words p-2 text-right tabular-nums text-slate-800 sm:p-3">
+                    {row.incurredAmount === null
+                      ? '—'
+                      : peso.format(row.incurredAmount)}
+                  </td>
+                  <td className="break-words p-2 text-right tabular-nums text-slate-800 sm:p-3">
+                    {row.perRecipientAmount === null
+                      ? '—'
+                      : peso.format(row.perRecipientAmount)}
                   </td>
                   <td className="break-words p-2 text-slate-700 sm:p-3">
-                    {row.recipients}
+                    {row.recipientCount === null
+                      ? '—'
+                      : `${row.recipientCount.toLocaleString('en-PH')} ${row.recipientLabel}`}
                   </td>
                   <td className="break-words p-2 text-slate-700 sm:p-3">
                     <a
@@ -366,7 +453,7 @@ export default function Ayuda() {
               ))}
               {!pageRows.length && (
                 <tr>
-                  <td colSpan={5} className="p-5 text-center text-slate-600">
+                  <td colSpan={7} className="p-5 text-center text-slate-600">
                     No records match this search.
                   </td>
                 </tr>
