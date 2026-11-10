@@ -120,6 +120,678 @@
       "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/05/FDP-DILG-Compliance-1st-Quarter-2026-CivilGoods-and-Consulting-Services.xlsx"
     }
   ],
+  "sreQ1Rows": [
+    {
+      "row": 8,
+      "particulars": "Particulars",
+      "budgetOrIncomeTarget": "Income/Targat Budget Appropriations",
+      "generalFund": "General Fund",
+      "sef": "SEF",
+      "total": "Total",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 9,
+      "particulars": "LOCAL SOURCES",
+      "budgetOrIncomeTarget": "43,554,184.00",
+      "generalFund": "22,710,166.51",
+      "sef": "3,041,347.19",
+      "total": "25,751,513.70",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 10,
+      "particulars": "TAX REVENUE",
+      "budgetOrIncomeTarget": "24,140,500.00",
+      "generalFund": "15,130,570.73",
+      "sef": "3,037,676.67",
+      "total": "18,168,247.40",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 11,
+      "particulars": "Real Property Tax",
+      "budgetOrIncomeTarget": "11,000,000.00",
+      "generalFund": "2,430,141.33",
+      "sef": "3,037,676.67",
+      "total": "5,467,818.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 12,
+      "particulars": "Tax on Business",
+      "budgetOrIncomeTarget": "12,106,500.00",
+      "generalFund": "12,007,526.23",
+      "sef": "0.00",
+      "total": "12,007,526.23",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 13,
+      "particulars": "Other Taxes",
+      "budgetOrIncomeTarget": "1,034,000.00",
+      "generalFund": "692,903.17",
+      "sef": "0.00",
+      "total": "692,903.17",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 14,
+      "particulars": "NON TAX REVENUE",
+      "budgetOrIncomeTarget": "19,413,684.00",
+      "generalFund": "7,579,595.78",
+      "sef": "3,670.52",
+      "total": "7,583,266.30",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 15,
+      "particulars": "Regulatory Fees 9permits and Licenses",
+      "budgetOrIncomeTarget": "3,915,000.00",
+      "generalFund": "2,907,478.74",
+      "sef": "0.00",
+      "total": "2,907,478.74",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 16,
+      "particulars": "Sevice/UserCharges (Service Income)",
+      "budgetOrIncomeTarget": "2,941,620.00",
+      "generalFund": "1,804,043.30",
+      "sef": "0.00",
+      "total": "1,804,043.30",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 17,
+      "particulars": "Receipts from Economic Enterprises (Business Income)",
+      "budgetOrIncomeTarget": "12,087,064.00",
+      "generalFund": "2,748,913.52",
+      "sef": "0.00",
+      "total": "2,748,913.52",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 18,
+      "particulars": "Other Receipts (Other General Income)",
+      "budgetOrIncomeTarget": "470,000.00",
+      "generalFund": "119,160.22",
+      "sef": "3,670.52",
+      "total": "122,830.74",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 19,
+      "particulars": "EXTERNAL SOURCES",
+      "budgetOrIncomeTarget": "329,588,943.00",
+      "generalFund": "82,397,238.00",
+      "sef": "0.00",
+      "total": "82,397,238.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 20,
+      "particulars": "Internal Revenue Allotment",
+      "budgetOrIncomeTarget": "329,588,943.00",
+      "generalFund": "82,397,238.00",
+      "sef": "0.00",
+      "total": "82,397,238.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 21,
+      "particulars": "Other Shares from National Tax Collections",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 22,
+      "particulars": "Inter-Local Transfers",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 23,
+      "particulars": "Extraordinary Receipt/Grants/Donations/Aids",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 24,
+      "particulars": "TOTAL CURRENT OPERATING INCOME",
+      "budgetOrIncomeTarget": "373,143,127.00",
+      "generalFund": "105,107,404.51",
+      "sef": "3,041,347.19",
+      "total": "108,148,751.70",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 25,
+      "particulars": "ADD SUPPLEMENT BUDGET(UNAPPROPRIATED SURPLUS)",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 26,
+      "particulars": "FOR CURRENT OPERATING EXPENDITURES",
+      "budgetOrIncomeTarget": null,
+      "generalFund": null,
+      "sef": null,
+      "total": null,
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 27,
+      "particulars": "TOTAL AVAILABLE FOR CURRENT OPERATING EXPENDITURES",
+      "budgetOrIncomeTarget": "373,143,127.00",
+      "generalFund": "105,107,404.51",
+      "sef": "3,041,347.19",
+      "total": "108,148,751.70",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 28,
+      "particulars": "LESS CURRENT OPERATING EXPENDITURES (PS + MOOE + FE)",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": null,
+      "sef": null,
+      "total": null,
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 29,
+      "particulars": "General Pubic Services",
+      "budgetOrIncomeTarget": "180,864,865.20",
+      "generalFund": "19,494,581.49",
+      "sef": "0.00",
+      "total": "19,494,581.49",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 30,
+      "particulars": "Education, Culture & Sports/Manpower Development",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 31,
+      "particulars": "Health, Nutrition & Population Control",
+      "budgetOrIncomeTarget": "33,324,401.00",
+      "generalFund": "4,222,548.48",
+      "sef": "0.00",
+      "total": "4,222,548.48",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 32,
+      "particulars": "Labor and Employment",
+      "budgetOrIncomeTarget": "3,829,278.00",
+      "generalFund": "831,293.03",
+      "sef": "0.00",
+      "total": "831,293.03",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 33,
+      "particulars": "Housing and Community Development",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 34,
+      "particulars": "Scial Services and Social Welfare",
+      "budgetOrIncomeTarget": "14,452,963.00",
+      "generalFund": "1,854,254.96",
+      "sef": "0.00",
+      "total": "1,854,254.96",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 35,
+      "particulars": "Economic Services",
+      "budgetOrIncomeTarget": "43,894,657.00",
+      "generalFund": "6,332,382.84",
+      "sef": "0.00",
+      "total": "6,332,382.84",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 36,
+      "particulars": "Debt Service (FE) (InterestExpense & Other Charges)",
+      "budgetOrIncomeTarget": "1,088,569.00",
+      "generalFund": "155,874.87",
+      "sef": "0.00",
+      "total": "155,874.87",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 37,
+      "particulars": "TOTAL CURRENT OPERATING EXPENDITURES",
+      "budgetOrIncomeTarget": "277,454,733.20",
+      "generalFund": "32,890,935.67",
+      "sef": "0.00",
+      "total": "32,890,935.67",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 38,
+      "particulars": "NET OPERATING INCOME (LOSS) FROM CURRENT OPERATIONS",
+      "budgetOrIncomeTarget": "95,688,393.80",
+      "generalFund": "72,216,468.84",
+      "sef": "3,041,347.19",
+      "total": "75,257,816.03",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 39,
+      "particulars": "ADD:NON-INCOME RECEIPTS",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": null,
+      "sef": null,
+      "total": null,
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 40,
+      "particulars": "CAPITAL/INVESTENT RECEIPTS",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 41,
+      "particulars": "Proceeds from Sale of Assets",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 42,
+      "particulars": "Proceeds from Sale of Debt Securities of Other Entities",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 43,
+      "particulars": "Collection of loans Receivables",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 44,
+      "particulars": "RECEIPTS FROM  LOANS AND BORROWINGS (Payable)",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 45,
+      "particulars": "Acquisition of Loans",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 46,
+      "particulars": "Issuance of Bonds",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 47,
+      "particulars": "OTHER NON-INCOME RECEIPTS",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 48,
+      "particulars": "TOTAL INCOME RECEIPTS",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 49,
+      "particulars": "ADD: SUPPLEMENTAL BUDGET FOR CAPITAL OUTLAY",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 50,
+      "particulars": "TOTAL AMOUNT AVAILABLE FOR CAPITAL EXPENDITURES",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 51,
+      "particulars": "LESS: NON-OPERATING EXPENDITURES",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": null,
+      "sef": null,
+      "total": null,
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 52,
+      "particulars": "CAPITAL/INVESTMENT EXPENDITURES",
+      "budgetOrIncomeTarget": "87,276,962.80",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 53,
+      "particulars": "Purchase/Construct of Property Plant and Equipment (Assets/Capital Outlay)",
+      "budgetOrIncomeTarget": "87,276,962.80",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 54,
+      "particulars": "Puchase of Debt Securities of  Other Entities (Investment Outlay)",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 55,
+      "particulars": "Grant/Make Loan to Other Entities (Investment Outlay)",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 56,
+      "particulars": "DEBT SERVICE (Principal Cost)",
+      "budgetOrIncomeTarget": "3,411,431.00",
+      "generalFund": "852,857.65",
+      "sef": "0.00",
+      "total": "852,857.65",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 57,
+      "particulars": "Payment of Loan Amortization",
+      "budgetOrIncomeTarget": "3,411,431.00",
+      "generalFund": "852,857.65",
+      "sef": "0.00",
+      "total": "852,857.65",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 58,
+      "particulars": "Retiremet/Redemption of Bonds/Debt Securities",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 59,
+      "particulars": "OTHER NON-OPERATING EXPENDITURES",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 60,
+      "particulars": "TOTAL NON-OPERATING EXPENDITIRES",
+      "budgetOrIncomeTarget": "90,688,393.80",
+      "generalFund": "852,857.65",
+      "sef": "0.00",
+      "total": "852,857.65",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 61,
+      "particulars": "NET INCREASE/(DECREASE) IN FUNDS",
+      "budgetOrIncomeTarget": "5,000,000.00",
+      "generalFund": "71,363,611.19",
+      "sef": "3,041,347.19",
+      "total": "74,404,958.38",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 62,
+      "particulars": "ADD:CASH BALANCE, BEGINNING",
+      "budgetOrIncomeTarget": "396,531,963.03",
+      "generalFund": "366,638,026.00",
+      "sef": "29,893,937.03",
+      "total": "396,531,963.03",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 63,
+      "particulars": "FUND/CASH AVAILABLE",
+      "budgetOrIncomeTarget": "401,531,963.03",
+      "generalFund": "438,001,637.19",
+      "sef": "32,935,284.22",
+      "total": "470,936,921.41",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 64,
+      "particulars": "LESS: Payment of Prior Year/s Accounts Payable",
+      "budgetOrIncomeTarget": "52,237,652.22",
+      "generalFund": "51,623,727.22",
+      "sef": "613,925.00",
+      "total": "52,237,652.22",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 65,
+      "particulars": "CONTINUING APPROPRIATION",
+      "budgetOrIncomeTarget": "137,702,507.45",
+      "generalFund": "5,208,468.24",
+      "sef": "0.00",
+      "total": "5,208,468.24",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 66,
+      "particulars": "ADD:ADVANCE PAYMET FR RPT",
+      "budgetOrIncomeTarget": "0.00",
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 67,
+      "particulars": "FUND/CASH BALANCE, END",
+      "budgetOrIncomeTarget": "211,591,803.36",
+      "generalFund": "381,169,441.73",
+      "sef": "32,321,359.22",
+      "total": "413,490,800.95",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 69,
+      "particulars": "FUND/CASH BALANCE, END",
+      "budgetOrIncomeTarget": null,
+      "generalFund": "381,169,441.73",
+      "sef": "32,321,359.22",
+      "total": "413,490,800.95",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 70,
+      "particulars": "Amount set aside to finance projects with appropriations",
+      "budgetOrIncomeTarget": null,
+      "generalFund": null,
+      "sef": null,
+      "total": null,
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 71,
+      "particulars": "provided in the previous years (Continuing appropriations)",
+      "budgetOrIncomeTarget": null,
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 72,
+      "particulars": "Amount set aside for payment of Accounts Payable",
+      "budgetOrIncomeTarget": null,
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 73,
+      "particulars": "Amount set aside for Obligation not yet Due and Demandable",
+      "budgetOrIncomeTarget": null,
+      "generalFund": "0.00",
+      "sef": "0.00",
+      "total": "0.00",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 74,
+      "particulars": "Amount Available for appropriations/operations",
+      "budgetOrIncomeTarget": null,
+      "generalFund": "381,169,441.73",
+      "sef": "32,321,359.22",
+      "total": "413,490,800.95",
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    },
+    {
+      "row": 75,
+      "particulars": "Total Assets (net of accumulated depreciation)",
+      "budgetOrIncomeTarget": "1,795,996,786.06",
+      "generalFund": null,
+      "sef": null,
+      "total": null,
+      "sourceUrl": "https://www.miagao.gov.ph/wp-content/uploads/2026/06/template-sre-1STQ2026.xlsx",
+      "sourceSheet": "Form 3 - SRE"
+    }
+  ],
   "q1ProgressRows": [
     {
       "departmentSheet": "TOURISM",

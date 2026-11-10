@@ -16,6 +16,7 @@
     "appRows": 3578,
     "infrastructureAppRows": 80,
     "bidResultsQ1Rows": 5,
+    "sreQ1Rows": 67,
     "bidResultsByForm": {
       "FORM 10a - CW": 3,
       "FORM 10b - GS": 2,
@@ -47,17 +48,18 @@
     "sreIsProjectLevel": false
   },
   "files": {
-    "budget-app.json": {
-      "url": "/data/miagao-disclosure/budget-app.json",
-      "rows": 3578
-    },
     "q1-execution.json": {
       "url": "/data/miagao-disclosure/q1-execution.json",
-      "rows": 5
+      "rows": 106
     },
     "barangay-history.json": {
       "url": "/data/miagao-disclosure/barangay-history.json",
       "rows": 11
     }
+  },
+  "appRows": {
+    "manifestUrl": "/data/miagao-disclosure/budget-app/manifest.json",
+    "rows": 3578,
+    "shards": 8
   }
 }
