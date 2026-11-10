@@ -40,6 +40,43 @@ const peso = new Intl.NumberFormat('en-PH', {
   maximumFractionDigits: 0,
 });
 
+function BarangayRankChart({
+  title,
+  rows,
+}: {
+  title: string;
+  rows: { label: string; value: number; display: string }[];
+}) {
+  const maximum = Math.max(...rows.map(row => row.value), 1);
+  return (
+    <section className="rounded-xl border border-gray-200 bg-white p-4 sm:p-5">
+      <h2 className="text-base font-bold text-slate-950">{title}</h2>
+      <div className="mt-4 space-y-3">
+        {rows.map((row, index) => (
+          <div key={`${row.label}-${index}`}>
+            <div className="mb-1 flex items-start justify-between gap-3 text-xs sm:text-sm">
+              <span className="min-w-0 break-words text-slate-700">
+                {row.label}
+              </span>
+              <span className="shrink-0 font-semibold tabular-nums text-slate-950">
+                {row.display}
+              </span>
+            </div>
+            <div className="h-2 rounded-full bg-slate-100">
+              <div
+                className="h-2 rounded-full bg-blue-800"
+                style={{
+                  width: `${Math.max(2, (row.value / maximum) * 100)}%`,
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function downloadRows(rows: BarangayRecord[], format: 'json' | 'csv') {
   const exportRows = rows.map(row => ({
     psgc: row.psgc,
@@ -104,6 +141,35 @@ export default function Barangays() {
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const firstRow = filtered.length ? page * pageSize + 1 : 0;
   const lastRow = Math.min(filtered.length, (page + 1) * pageSize);
+  const latestMpbRanks = barangays
+    .map(row => ({
+      label: row.name,
+      value: row.mpb.records
+        .filter(project => project.year === 2027)
+        .reduce((sum, project) => sum + (project.amountPesos || 0), 0),
+    }))
+    .filter(row => row.value > 0)
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 8)
+    .map(row => ({ ...row, display: peso.format(row.value) }));
+  const latestDpwhRanks = barangays
+    .map(row => ({
+      label: row.name,
+      value: row.titleMatchedProjects.filter(project => project.year === 2027)
+        .length,
+    }))
+    .filter(row => row.value > 0)
+    .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label))
+    .slice(0, 8)
+    .map(row => ({ ...row, display: `${row.value} rows` }));
+  const populationRanks = [...barangays]
+    .sort((a, b) => b.population2024 - a.population2024)
+    .slice(0, 8)
+    .map(row => ({
+      label: row.name,
+      value: row.population2024,
+      display: row.population2024.toLocaleString(),
+    }));
   const pagination = (
     <div className="flex flex-wrap items-center justify-between gap-3 py-3">
       <label className="flex items-center gap-2 text-sm text-gray-600">
@@ -201,6 +267,21 @@ export default function Barangays() {
             captains confirmed by a text source
           </span>
         </div>
+      </section>
+
+      <section className="mb-8 grid gap-4 lg:grid-cols-2">
+        <BarangayRankChart
+          title="FY2027 MPB allocations · by named barangay"
+          rows={latestMpbRanks}
+        />
+        <BarangayRankChart
+          title="FY2027 DPWH project-title matches · by barangay"
+          rows={latestDpwhRanks}
+        />
+        <BarangayRankChart
+          title="PSA 2024 population · largest barangays"
+          rows={populationRanks}
+        />
       </section>
 
       <section className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
