@@ -32,7 +32,9 @@ export default function SEO({
   const fullKeywords = keywords || defaultKeywords;
   const fullUrl = url || import.meta.env.VITE_WEBSITE_URL || '';
   const fullImage =
-    image || import.meta.env.VITE_OG_IMAGE_URL || `${fullUrl}/og-image.jpg`;
+    image ||
+    import.meta.env.VITE_OG_IMAGE_URL ||
+    'https://bettermiagao.org/images/better-miagao-logo.png';
   const twitterHandle = import.meta.env.VITE_TWITTER_HANDLE || '';
 
   return (
@@ -52,6 +54,13 @@ export default function SEO({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={fullDescription} />
       <meta property="og:image" content={fullImage} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="2170" />
+      <meta property="og:image:height" content="725" />
+      <meta
+        property="og:image:alt"
+        content="Better Miagao logo with an illustrated Miagao Church"
+      />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:locale" content="en_US" />
 
