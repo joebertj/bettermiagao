@@ -11,11 +11,13 @@ export default function Navbar() {
         className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8"
         aria-label="Main navigation"
       >
-        <Link to="/" className="flex flex-col leading-tight">
-          <span className="text-xl font-extrabold tracking-tight text-slate-950">
-            Better Miagao
-          </span>
-          <span className="text-xs text-gray-600">
+        <Link to="/" className="flex flex-col items-start gap-1 leading-tight">
+          <img
+            src="/images/better-miagao-logo.png"
+            alt="Better Miagao.org"
+            className="h-9 w-auto sm:h-10"
+          />
+          <span className="text-[10px] text-gray-600 sm:text-xs">
             Independent civic information project
           </span>
         </Link>
