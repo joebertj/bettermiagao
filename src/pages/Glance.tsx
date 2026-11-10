@@ -13,6 +13,23 @@ type Feature = {
   properties: { psgc?: string; brgy_name?: string };
   geometry: Geometry;
 };
+type TransportFeature = {
+  type: 'Feature';
+  properties: {
+    kind: 'road' | 'bridge';
+    name?: string | null;
+    roadName?: string | null;
+    roadId?: string | null;
+    bridgeId?: string | null;
+    roadClass?: string | null;
+    condition?: string | null;
+    lengthM?: number | null;
+  };
+  geometry:
+    | { type: 'LineString'; coordinates: Position[] }
+    | { type: 'MultiLineString'; coordinates: Position[][] }
+    | { type: 'Point'; coordinates: Position };
+};
 type Project = (typeof records.projects)[number];
 type MapRow = {
   psgc: string;
@@ -29,6 +46,9 @@ const mpbCounts = new Map(
     row.psgc,
     row.mpb.buildingCountAllYears,
   ])
+);
+const mpbRecordsByPsgc = new Map(
+  barangayInventory.barangays.map(row => [row.psgc, row.mpb.records])
 );
 
 const peso = new Intl.NumberFormat('en-PH', {
@@ -118,10 +138,24 @@ function colorText(amount: number, maximum: number) {
   return amount / maximum >= 0.55 ? '#ffffff' : '#0f172a';
 }
 
+function conditionColor(condition?: string | null) {
+  const value = condition?.trim().toLocaleLowerCase();
+  if (value === 'good') return '#15803d';
+  if (value === 'fair') return '#d97706';
+  if (value === 'poor' || value === 'bad') return '#dc2626';
+  return '#64748b';
+}
+
 export default function Glance() {
   const [period, setPeriod] = useState<'gaa' | 'hgab' | 'all'>('hgab');
   const [features, setFeatures] = useState<Feature[]>([]);
   const [boundaryState, setBoundaryState] = useState<
+    'loading' | 'ready' | 'error'
+  >('loading');
+  const [transportFeatures, setTransportFeatures] = useState<
+    TransportFeature[]
+  >([]);
+  const [transportState, setTransportState] = useState<
     'loading' | 'ready' | 'error'
   >('loading');
 
@@ -143,6 +177,32 @@ export default function Glance() {
       })
       .catch(() => {
         if (active) setBoundaryState('error');
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    fetch(
+      `${import.meta.env.BASE_URL}data/miagao-dpwh-transport-network.geojson`
+    )
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(payload => {
+        const loaded = Array.isArray(payload.features)
+          ? (payload.features as TransportFeature[])
+          : [];
+        if (active) {
+          setTransportFeatures(loaded);
+          setTransportState(loaded.length ? 'ready' : 'error');
+        }
+      })
+      .catch(() => {
+        if (active) setTransportState('error');
       });
     return () => {
       active = false;
@@ -206,6 +266,20 @@ export default function Glance() {
     (sum, row) => sum + row.mpbCount,
     0
   );
+  const roadFeatures = transportFeatures.filter(
+    feature => feature.properties.kind === 'road'
+  );
+  const bridgeFeatures = transportFeatures.filter(
+    feature => feature.properties.kind === 'bridge'
+  );
+  const conditionCounts = transportFeatures.reduce<Record<string, number>>(
+    (counts, feature) => {
+      const condition = feature.properties.condition?.trim() || 'No condition';
+      counts[condition] = (counts[condition] ?? 0) + 1;
+      return counts;
+    },
+    {}
+  );
 
   const points = rows.flatMap(row => polygons(row.geometry).flat(2));
   const minLon = Math.min(...points.map(point => point[0]));
@@ -256,6 +330,24 @@ export default function Glance() {
       Math.min(...projected.map(point => point[1]));
     return Math.min(8, width / (row.mpbCount * 1.55), height / 1.6);
   };
+  const transportLines = (feature: TransportFeature) => {
+    if (feature.geometry.type === 'LineString')
+      return [feature.geometry.coordinates];
+    if (feature.geometry.type === 'MultiLineString')
+      return feature.geometry.coordinates;
+    return [];
+  };
+  const transportPath = (feature: TransportFeature) =>
+    transportLines(feature)
+      .map(line =>
+        line
+          .map((point, index) => {
+            const [x, y] = projectPoint(point);
+            return `${index === 0 ? 'M' : 'L'}${x.toFixed(2)} ${y.toFixed(2)}`;
+          })
+          .join(' ')
+      )
+      .join(' ');
 
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
@@ -264,12 +356,13 @@ export default function Glance() {
           Miagao · In a Glance
         </p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-          Where national project budgets name a barangay
+          National DPWH projects named in barangay titles
         </h1>
         <p className="mt-4 text-lg leading-8 text-gray-700">
-          The map shades barangays by their title-matched share of listed DPWH
-          GAA or HGAB project allocations. The number on each shaded barangay is
-          the count of project rows naming it.
+          These are national DPWH project amounts in enacted GAA budgets and the
+          FY2027 House proposal. Miagao’s LGU does not set or allocate these
+          national amounts; they are separate from the municipality’s NTA/IRA.
+          The map groups amounts by the barangays named in project titles.
         </p>
       </header>
 
@@ -293,7 +386,7 @@ export default function Glance() {
         </label>
         <article className="rounded-xl border border-gray-200 bg-white p-4">
           <span className="block text-sm text-gray-600">
-            Title-matched project rows
+            National DPWH project rows matched by title
           </span>
           <strong className="mt-1 block text-2xl tabular-nums text-slate-950">
             {representedRows.toLocaleString('en-PH')}
@@ -308,7 +401,7 @@ export default function Glance() {
         </article>
         <article className="rounded-xl border border-gray-200 bg-white p-4">
           <span className="block text-sm text-gray-600">
-            Assigned allocation
+            Title-assigned national DPWH amount
           </span>
           <strong className="mt-1 block text-2xl tabular-nums text-slate-950">
             {peso.format(assignedAmount)}
@@ -320,11 +413,11 @@ export default function Glance() {
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-slate-950">
-              Allocation by title-named barangay
+              National DPWH amounts by title-named barangay
             </h2>
             <p className="mt-1 text-sm text-gray-600">
-              Darker blue means a larger assigned allocation. Numbers show
-              project-row counts.
+              Darker blue means a larger title-assigned amount. Numbers show
+              national project-row counts.
             </p>
           </div>
           <div
@@ -376,7 +469,9 @@ export default function Glance() {
                   >
                     <title>
                       {row.name}: {row.count} project rows ·{' '}
-                      {peso.format(row.amount)} assigned allocation
+                      {peso.format(row.amount)} national DPWH project amount ·{' '}
+                      {row.mpbCount} mapped historical MPB project{' '}
+                      {row.mpbCount === 1 ? 'record' : 'records'}
                     </title>
                   </path>
                   {row.count > 0 && (
@@ -408,10 +503,13 @@ export default function Glance() {
         <p className="mt-4 text-xs leading-5 text-gray-600">
           Rows are assigned only when the project title explicitly names one or
           more of the 119 barangays. For titles naming several barangays, the
-          listed amount is split evenly among those named; this is a display
-          estimate, not an official barangay allocation. Projects naming Miagao
-          without a barangay are not mapped. Counts are project rows, not unique
-          sites or completed projects.
+          listed national project amount is split evenly among those named; this
+          is a display estimate, not an official barangay allocation. These
+          national appropriations are not allocated or controlled by Miagao’s
+          municipal LGU and are separate from its NTA/IRA. FY2027 figures are a
+          House proposal, not an enacted GAA. Projects naming Miagao without a
+          barangay are not mapped. Counts are project rows, not unique sites or
+          completed projects.
         </p>
       </section>
 
@@ -420,7 +518,8 @@ export default function Glance() {
           Largest title-matched shares
         </h2>
         <p className="mb-4 mt-1 text-sm text-gray-600">
-          Amounts are summed after splitting multi-barangay titles evenly.
+          National DPWH amounts are summed after splitting multi-barangay titles
+          evenly; they are not municipal LGU funds.
         </p>
         <div className="divide-y divide-slate-100">
           {ranked.slice(0, 10).map((row, index) => (
@@ -456,10 +555,11 @@ export default function Glance() {
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-slate-950">
-              Historical multi-purpose building projects by barangay
+              MPB project records by barangay · GAA history + FY2027 proposal
             </h2>
             <p className="mt-1 text-sm text-gray-600">
-              Each house marks one MPB project record found for that barangay.
+              Each house marks one MPB project record. FY2027 House proposals
+              are outlined; enacted GAA records are filled.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -482,6 +582,35 @@ export default function Glance() {
             </article>
           </div>
         </div>
+        <div
+          className="mb-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-gray-700"
+          aria-label="MPB map legend"
+        >
+          <span className="inline-flex items-center gap-2">
+            <svg viewBox="0 0 12 12" aria-hidden="true" className="h-4 w-4">
+              <path
+                d="M1 5.5 6 1l5 4.5V11H7.5V7.5h-3V11H1Z"
+                fill="#c2410c"
+                stroke="#fff"
+                strokeWidth="1.1"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Filled · enacted GAA
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <svg viewBox="0 0 12 12" aria-hidden="true" className="h-4 w-4">
+              <path
+                d="M1 5.5 6 1l5 4.5V11H7.5V7.5h-3V11H1Z"
+                fill="none"
+                stroke="#c2410c"
+                strokeWidth="1.25"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Outline · FY2027 House proposal
+          </span>
+        </div>
         {boundaryState === 'ready' && (
           <svg
             viewBox={`0 0 ${mapWidth} ${mapHeight}`}
@@ -502,23 +631,35 @@ export default function Glance() {
                     stroke="#1e3a8a"
                     strokeWidth="1.2"
                     vectorEffect="non-scaling-stroke"
-                  />
+                  >
+                    <title>
+                      {row.name}:{' '}
+                      {row.mpbCount
+                        ? `${row.mpbCount} mapped historical MPB project ${row.mpbCount === 1 ? 'record' : 'records'}`
+                        : 'No mapped historical MPB project records'}
+                    </title>
+                  </path>
                   {Array.from({ length: row.mpbCount }, (_, index) => {
                     const x = labelX + (index - (row.mpbCount - 1) / 2) * step;
+                    const record = mpbRecordsByPsgc.get(row.psgc)?.[index];
+                    const isFy2027Proposal =
+                      record?.year === 2027 ||
+                      record?.stage.toLocaleLowerCase().includes('hgab');
                     return (
                       <g
                         key={`${row.psgc}-mpb-${index}`}
                         transform={`translate(${x} ${labelY}) scale(${iconSize / 12}) translate(-6 -6)`}
                       >
                         <title>
-                          {row.name}: {row.mpbCount} mapped historical MPB
-                          project {row.mpbCount === 1 ? 'record' : 'records'}
+                          {row.name} · {record?.year} {record?.stage} ·{' '}
+                          {record?.title} ·{' '}
+                          {peso.format(record?.amountPesos ?? 0)}
                         </title>
                         <path
                           d="M1 5.5 6 1l5 4.5V11H7.5V7.5h-3V11H1Z"
-                          fill="#c2410c"
-                          stroke="#fff"
-                          strokeWidth="1.1"
+                          fill={isFy2027Proposal ? 'none' : '#c2410c'}
+                          stroke={isFy2027Proposal ? '#c2410c' : '#fff'}
+                          strokeWidth={isFy2027Proposal ? '1.25' : '1.1'}
                           strokeLinejoin="round"
                         />
                       </g>
@@ -537,6 +678,163 @@ export default function Glance() {
           a building was completed or still exists; mapped sites are based on a
           barangay named in the title or a source-listed coordinate. Icon size
           scales down to fit narrow barangay shapes.
+        </p>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-slate-950">
+              DPWH roads and bridges by recorded condition
+            </h2>
+            <p className="mt-1 text-sm text-gray-600">
+              Good is green, fair is amber, poor or bad is red, and no
+              assessment is gray.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-700">
+            {[
+              ['Good', '#15803d'],
+              ['Fair', '#d97706'],
+              ['Poor / bad', '#dc2626'],
+              ['No assessment', '#64748b'],
+            ].map(([label, color]) => (
+              <span key={label} className="inline-flex items-center gap-1.5">
+                <span
+                  className="h-3 w-3 rounded-full"
+                  style={{ backgroundColor: color }}
+                />
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="mb-4 flex flex-wrap gap-3">
+          <article className="rounded-xl border border-gray-200 px-4 py-3">
+            <span className="block text-xs text-gray-600">Road sections</span>
+            <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+              {roadFeatures.length}
+            </strong>
+          </article>
+          <article className="rounded-xl border border-gray-200 px-4 py-3">
+            <span className="block text-xs text-gray-600">Bridges</span>
+            <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+              {bridgeFeatures.length}
+            </strong>
+          </article>
+          {Object.entries(conditionCounts).map(([condition, count]) => (
+            <article
+              key={condition}
+              className="rounded-xl border border-gray-200 px-4 py-3"
+            >
+              <span className="block text-xs text-gray-600">{condition}</span>
+              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+                {count}
+              </strong>
+            </article>
+          ))}
+        </div>
+        {transportState === 'loading' && (
+          <p className="py-16 text-center text-sm text-gray-600">
+            Loading DPWH road and bridge conditions…
+          </p>
+        )}
+        {transportState === 'error' && (
+          <p className="py-16 text-center text-sm text-red-700">
+            DPWH road and bridge features could not be loaded.
+          </p>
+        )}
+        {transportState === 'ready' && boundaryState === 'ready' && (
+          <svg
+            viewBox={`0 0 ${mapWidth} ${mapHeight}`}
+            role="img"
+            aria-label="Map of Miagao national roads and bridges colored by DPWH recorded condition"
+            className="block w-full rounded-xl bg-sky-50"
+          >
+            {rows.map(row => (
+              <path
+                key={row.psgc}
+                d={pathFor(row.geometry)}
+                fill="#f8fafc"
+                fillRule="evenodd"
+                stroke="#94a3b8"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+              >
+                <title>
+                  {row.name}: barangay boundary in the DPWH road and bridge
+                  condition map
+                </title>
+              </path>
+            ))}
+            {roadFeatures.map((feature, index) => (
+              <path
+                key={`road-${feature.properties.roadId ?? index}`}
+                d={transportPath(feature)}
+                fill="none"
+                stroke={conditionColor(feature.properties.condition)}
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                vectorEffect="non-scaling-stroke"
+              >
+                <title>
+                  {feature.properties.name || 'DPWH road'} ·{' '}
+                  {feature.properties.condition || 'No condition'}
+                  {feature.properties.roadClass
+                    ? ` · ${feature.properties.roadClass}`
+                    : ''}
+                  {feature.properties.roadId
+                    ? ` · Road ID ${feature.properties.roadId}`
+                    : ''}
+                  {feature.properties.lengthM
+                    ? ` · ${feature.properties.lengthM} m`
+                    : ''}
+                </title>
+              </path>
+            ))}
+            {bridgeFeatures.map((feature, index) => {
+              if (feature.geometry.type !== 'Point') return null;
+              const [x, y] = projectPoint(feature.geometry.coordinates);
+              return (
+                <circle
+                  key={`bridge-${feature.properties.bridgeId ?? index}`}
+                  cx={x}
+                  cy={y}
+                  r="4.5"
+                  fill={conditionColor(feature.properties.condition)}
+                  stroke="#fff"
+                  strokeWidth="1.5"
+                  vectorEffect="non-scaling-stroke"
+                >
+                  <title>
+                    {feature.properties.name || 'DPWH bridge'} ·{' '}
+                    {feature.properties.condition || 'No condition'}
+                    {feature.properties.lengthM
+                      ? ` · ${feature.properties.lengthM} m`
+                      : ''}
+                    {feature.properties.bridgeId
+                      ? ` · Bridge ID ${feature.properties.bridgeId}`
+                      : ''}
+                    {feature.properties.roadName
+                      ? ` · ${feature.properties.roadName}`
+                      : ''}
+                    {feature.properties.roadClass
+                      ? ` · ${feature.properties.roadClass}`
+                      : ''}
+                  </title>
+                </circle>
+              );
+            })}
+          </svg>
+        )}
+        <p className="mt-4 text-xs leading-5 text-gray-600">
+          Uses offline DPWH ArcGIS snapshots: road condition as of January 2026
+          and bridge inventory as of July 2026. Road segments are clipped to the
+          Miagao barangay-boundary union; bridges are included when their
+          recorded point falls within it. The recorded condition describes the
+          source snapshot and is not a current field inspection. Roads marked
+          “No Assessment” are gray.
         </p>
       </section>
     </main>
