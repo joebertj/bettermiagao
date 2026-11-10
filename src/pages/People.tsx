@@ -95,20 +95,28 @@ export default function People() {
             {officials.currentOfficials.map(person => (
               <article
                 key={`${person.role}-${person.name}`}
-                className="rounded-xl border border-gray-200 p-4"
+                className="flex items-center gap-4 rounded-xl border border-gray-200 p-4"
               >
-                <p className="text-xs font-bold uppercase tracking-wide text-gray-500">
-                  {person.role}
-                </p>
-                <p className="mt-1 font-semibold text-gray-950">
-                  {person.name}
-                </p>
+                <img
+                  src={person.photo}
+                  alt={person.name}
+                  loading="lazy"
+                  className="h-20 w-20 shrink-0 rounded-lg object-cover object-top"
+                />
+                <div className="min-w-0">
+                  <p className="text-xs font-bold uppercase tracking-wide text-gray-500">
+                    {person.role}
+                  </p>
+                  <p className="mt-1 font-semibold text-gray-950">
+                    {person.name}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
           <p className="mt-4 text-xs text-gray-500">
-            Roster checked {officials.asOf}; term and role details follow the
-            municipality’s public listing.
+            Portraits and roster from the Municipality of Miagao public listing;
+            roster checked {officials.asOf}.
           </p>
         </div>
       </section>

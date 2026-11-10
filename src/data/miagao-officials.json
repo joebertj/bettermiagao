@@ -31,22 +31,56 @@
     }
   ],
   "currentOfficials": [
-    { "name": "Oscar “Richard” S. Garin, Jr.", "role": "Municipal Mayor" },
-    { "name": "Maria Salve N. Pechayco, M.D.", "role": "Vice Mayor" },
-    { "name": "Japhet Grace G. Moleta", "role": "Sangguniang Bayan Member" },
+    {
+      "name": "Oscar “Richard” S. Garin, Jr.",
+      "role": "Municipal Mayor",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/RSG-scaled.jpg"
+    },
+    {
+      "name": "Maria Salve N. Pechayco, M.D.",
+      "role": "Vice Mayor",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/VMAYOR-scaled.jpg"
+    },
+    {
+      "name": "Japhet Grace G. Moleta",
+      "role": "Sangguniang Bayan Member",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/JAPHET-scaled.jpg"
+    },
     {
       "name": "Lea Marie D. Naldoza-Zhang",
-      "role": "Sangguniang Bayan Member"
+      "role": "Sangguniang Bayan Member",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/LEA-scaled.jpg"
     },
-    { "name": "Richard T. Esposo", "role": "Sangguniang Bayan Member" },
-    { "name": "Gemma C. Sucob-Nulada", "role": "Sangguniang Bayan Member" },
-    { "name": "Gemma Rei S. Nismal", "role": "Sangguniang Bayan Member" },
+    {
+      "name": "Richard T. Esposo",
+      "role": "Sangguniang Bayan Member",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/ESPOSO-scaled.jpg"
+    },
+    {
+      "name": "Gemma C. Sucob-Nulada",
+      "role": "Sangguniang Bayan Member",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/NULADA-scaled.jpg"
+    },
+    {
+      "name": "Gemma Rei S. Nismal",
+      "role": "Sangguniang Bayan Member",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/NISMAL-scaled.jpg"
+    },
     {
       "name": "Jun Carlu A. Napulan, M.D.",
-      "role": "Sangguniang Bayan Member"
+      "role": "Sangguniang Bayan Member",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/NAPULAN-scaled.jpg"
     },
-    { "name": "Marlou R. Niones", "role": "Sangguniang Bayan Member" },
-    { "name": "Jessica P. Torrecampo", "role": "Sangguniang Bayan Member" }
+    {
+      "name": "Marlou R. Niones",
+      "role": "Sangguniang Bayan Member",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/NIONES-scaled.jpg"
+    },
+    {
+      "name": "Jessica P. Torrecampo",
+      "role": "Sangguniang Bayan Member",
+      "photo": "https://www.miagao.gov.ph/wp-content/uploads/2025/08/TORRECAMPO-scaled.jpg"
+    }
   ],
   "historicalCouncilTerms": [
     {
