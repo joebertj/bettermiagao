@@ -1,4 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type FocusEvent,
+  type PointerEvent,
+} from 'react';
 import records from '../data/miagao-projects.json';
 import barangayInventory from '../data/miagao-barangay-inventory.json';
 
@@ -48,6 +54,7 @@ type MapRow = {
   geometry: Geometry;
   label: Position;
 };
+type MapTooltip = { title: string; details: string[]; x: number; y: number };
 
 const mpbCounts = new Map(
   barangayInventory.barangays.map(row => [
@@ -166,6 +173,35 @@ export default function Glance() {
   const [transportState, setTransportState] = useState<
     'loading' | 'ready' | 'error'
   >('loading');
+  const [mapTooltip, setMapTooltip] = useState<MapTooltip | null>(null);
+
+  const positionMapTooltip = (x: number, y: number) => ({
+    x: Math.max(8, Math.min(x + 16, window.innerWidth - 348)),
+    y: Math.max(8, Math.min(y + 16, window.innerHeight - 250)),
+  });
+  const showMapTooltip = (
+    title: string,
+    details: string[],
+    event: PointerEvent<SVGElement> | FocusEvent<SVGElement>
+  ) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x =
+      'clientX' in event && event.clientX
+        ? event.clientX
+        : bounds.left + bounds.width / 2;
+    const y =
+      'clientY' in event && event.clientY
+        ? event.clientY
+        : bounds.top + bounds.height / 2;
+    setMapTooltip({ title, details, ...positionMapTooltip(x, y) });
+  };
+  const moveMapTooltip = (event: PointerEvent<SVGElement>) => {
+    setMapTooltip(current =>
+      current
+        ? { ...current, ...positionMapTooltip(event.clientX, event.clientY) }
+        : current
+    );
+  };
 
   useEffect(() => {
     let active = true;
@@ -478,14 +514,34 @@ export default function Glance() {
                     stroke="#1e3a8a"
                     strokeWidth="1.2"
                     vectorEffect="non-scaling-stroke"
-                  >
-                    <title>
-                      {row.name}: {row.count} project rows ·{' '}
-                      {peso.format(row.amount)} national DPWH project amount ·{' '}
-                      {row.mpbCount} mapped historical MPB project{' '}
-                      {row.mpbCount === 1 ? 'record' : 'records'}
-                    </title>
-                  </path>
+                    tabIndex={0}
+                    aria-label={`${row.name}, ${row.count} national project rows, title-assigned amount ${peso.format(row.amount)}, ${row.mpbCount} historical MPB records`}
+                    onPointerEnter={event =>
+                      showMapTooltip(
+                        row.name,
+                        [
+                          `${row.count.toLocaleString('en-PH')} national project rows`,
+                          `Title-assigned amount: ${peso.format(row.amount)}`,
+                          `${row.mpbCount.toLocaleString('en-PH')} mapped historical MPB ${row.mpbCount === 1 ? 'record' : 'records'}`,
+                        ],
+                        event
+                      )
+                    }
+                    onPointerMove={moveMapTooltip}
+                    onPointerLeave={() => setMapTooltip(null)}
+                    onFocus={event =>
+                      showMapTooltip(
+                        row.name,
+                        [
+                          `${row.count.toLocaleString('en-PH')} national project rows`,
+                          `Title-assigned amount: ${peso.format(row.amount)}`,
+                          `${row.mpbCount.toLocaleString('en-PH')} mapped historical MPB ${row.mpbCount === 1 ? 'record' : 'records'}`,
+                        ],
+                        event
+                      )
+                    }
+                    onBlur={() => setMapTooltip(null)}
+                  ></path>
                   {row.count > 0 && (
                     <text
                       x={labelX}
@@ -494,6 +550,7 @@ export default function Glance() {
                       dominantBaseline="central"
                       fontSize="19"
                       fontWeight="700"
+                      pointerEvents="none"
                       fill={colorText(row.amount, maximumAmount)}
                       stroke={
                         row.amount / maximumAmount >= 0.55
@@ -643,14 +700,34 @@ export default function Glance() {
                     stroke="#1e3a8a"
                     strokeWidth="1.2"
                     vectorEffect="non-scaling-stroke"
-                  >
-                    <title>
-                      {row.name}:{' '}
-                      {row.mpbCount
-                        ? `${row.mpbCount} mapped historical MPB project ${row.mpbCount === 1 ? 'record' : 'records'}`
-                        : 'No mapped historical MPB project records'}
-                    </title>
-                  </path>
+                    tabIndex={0}
+                    aria-label={`${row.name}: ${row.mpbCount ? `${row.mpbCount} mapped historical MPB records` : 'no mapped historical MPB records'}`}
+                    onPointerEnter={event =>
+                      showMapTooltip(
+                        row.name,
+                        [
+                          row.mpbCount
+                            ? `${row.mpbCount.toLocaleString('en-PH')} mapped historical MPB ${row.mpbCount === 1 ? 'record' : 'records'}`
+                            : 'No mapped historical MPB records',
+                        ],
+                        event
+                      )
+                    }
+                    onPointerMove={moveMapTooltip}
+                    onPointerLeave={() => setMapTooltip(null)}
+                    onFocus={event =>
+                      showMapTooltip(
+                        row.name,
+                        [
+                          row.mpbCount
+                            ? `${row.mpbCount.toLocaleString('en-PH')} mapped historical MPB ${row.mpbCount === 1 ? 'record' : 'records'}`
+                            : 'No mapped historical MPB records',
+                        ],
+                        event
+                      )
+                    }
+                    onBlur={() => setMapTooltip(null)}
+                  ></path>
                   {Array.from({ length: row.mpbCount }, (_, index) => {
                     const x = labelX + (index - (row.mpbCount - 1) / 2) * step;
                     const record = mpbRecordsByPsgc.get(row.psgc)?.[index];
@@ -661,12 +738,34 @@ export default function Glance() {
                       <g
                         key={`${row.psgc}-mpb-${index}`}
                         transform={`translate(${x} ${labelY}) scale(${iconSize / 12}) translate(-6 -6)`}
+                        tabIndex={0}
+                        aria-label={`${row.name}, FY${record?.year ?? 'unknown'} ${record?.stage ?? ''}, ${record?.title ?? 'MPB project'}, ${peso.format(record?.amountPesos ?? 0)}`}
+                        onPointerEnter={event =>
+                          showMapTooltip(
+                            row.name,
+                            [
+                              `FY${record?.year ?? '—'} · ${record?.stage ?? 'MPB'}`,
+                              record?.title ?? 'Project title unavailable',
+                              `Listed amount: ${peso.format(record?.amountPesos ?? 0)}`,
+                            ],
+                            event
+                          )
+                        }
+                        onPointerMove={moveMapTooltip}
+                        onPointerLeave={() => setMapTooltip(null)}
+                        onFocus={event =>
+                          showMapTooltip(
+                            row.name,
+                            [
+                              `FY${record?.year ?? '—'} · ${record?.stage ?? 'MPB'}`,
+                              record?.title ?? 'Project title unavailable',
+                              `Listed amount: ${peso.format(record?.amountPesos ?? 0)}`,
+                            ],
+                            event
+                          )
+                        }
+                        onBlur={() => setMapTooltip(null)}
                       >
-                        <title>
-                          {row.name} · {record?.year} {record?.stage} ·{' '}
-                          {record?.title} ·{' '}
-                          {peso.format(record?.amountPesos ?? 0)}
-                        </title>
                         <path
                           d="M1 5.5 6 1l5 4.5V11H7.5V7.5h-3V11H1Z"
                           fill={isFy2027Proposal ? 'none' : '#c2410c'}
@@ -796,12 +895,18 @@ export default function Glance() {
                 stroke="#94a3b8"
                 strokeWidth="1"
                 vectorEffect="non-scaling-stroke"
-              >
-                <title>
-                  {row.name}: barangay boundary in the DPWH road and bridge
-                  condition map
-                </title>
-              </path>
+                tabIndex={0}
+                aria-label={`${row.name} barangay boundary`}
+                onPointerEnter={event =>
+                  showMapTooltip(row.name, ['Barangay boundary'], event)
+                }
+                onPointerMove={moveMapTooltip}
+                onPointerLeave={() => setMapTooltip(null)}
+                onFocus={event =>
+                  showMapTooltip(row.name, ['Barangay boundary'], event)
+                }
+                onBlur={() => setMapTooltip(null)}
+              ></path>
             ))}
             {roadFeatures.map((feature, index) => (
               <path
@@ -813,21 +918,52 @@ export default function Glance() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 vectorEffect="non-scaling-stroke"
-              >
-                <title>
-                  {feature.properties.name || 'DPWH road'} ·{' '}
-                  {feature.properties.condition || 'No condition'}
-                  {feature.properties.roadClass
-                    ? ` · ${feature.properties.roadClass}`
-                    : ''}
-                  {feature.properties.roadId
-                    ? ` · Road ID ${feature.properties.roadId}`
-                    : ''}
-                  {feature.properties.lengthM
-                    ? ` · ${feature.properties.lengthM} m`
-                    : ''}
-                </title>
-              </path>
+                tabIndex={0}
+                aria-label={`${feature.properties.name || 'DPWH road'}, ${feature.properties.condition || 'No condition'}${feature.properties.roadClass ? `, ${feature.properties.roadClass}` : ''}${feature.properties.lengthM ? `, ${feature.properties.lengthM} metres` : ''}`}
+                onPointerEnter={event =>
+                  showMapTooltip(
+                    feature.properties.name || 'DPWH road',
+                    [
+                      `Recorded condition: ${feature.properties.condition || 'No condition'}`,
+                      ...(feature.properties.roadClass
+                        ? [`Road class: ${feature.properties.roadClass}`]
+                        : []),
+                      ...(feature.properties.roadId
+                        ? [`Road ID: ${feature.properties.roadId}`]
+                        : []),
+                      ...(feature.properties.lengthM
+                        ? [
+                            `Recorded length: ${feature.properties.lengthM.toLocaleString('en-PH')} m`,
+                          ]
+                        : []),
+                    ],
+                    event
+                  )
+                }
+                onPointerMove={moveMapTooltip}
+                onPointerLeave={() => setMapTooltip(null)}
+                onFocus={event =>
+                  showMapTooltip(
+                    feature.properties.name || 'DPWH road',
+                    [
+                      `Recorded condition: ${feature.properties.condition || 'No condition'}`,
+                      ...(feature.properties.roadClass
+                        ? [`Road class: ${feature.properties.roadClass}`]
+                        : []),
+                      ...(feature.properties.roadId
+                        ? [`Road ID: ${feature.properties.roadId}`]
+                        : []),
+                      ...(feature.properties.lengthM
+                        ? [
+                            `Recorded length: ${feature.properties.lengthM.toLocaleString('en-PH')} m`,
+                          ]
+                        : []),
+                    ],
+                    event
+                  )
+                }
+                onBlur={() => setMapTooltip(null)}
+              ></path>
             ))}
             {bridgeFeatures.map((feature, index) => {
               if (feature.geometry.type !== 'Point') return null;
@@ -842,24 +978,58 @@ export default function Glance() {
                   stroke="#fff"
                   strokeWidth="1.5"
                   vectorEffect="non-scaling-stroke"
-                >
-                  <title>
-                    {feature.properties.name || 'DPWH bridge'} ·{' '}
-                    {feature.properties.condition || 'No condition'}
-                    {feature.properties.lengthM
-                      ? ` · ${feature.properties.lengthM} m`
-                      : ''}
-                    {feature.properties.bridgeId
-                      ? ` · Bridge ID ${feature.properties.bridgeId}`
-                      : ''}
-                    {feature.properties.roadName
-                      ? ` · ${feature.properties.roadName}`
-                      : ''}
-                    {feature.properties.roadClass
-                      ? ` · ${feature.properties.roadClass}`
-                      : ''}
-                  </title>
-                </circle>
+                  tabIndex={0}
+                  aria-label={`${feature.properties.name || 'DPWH bridge'}, ${feature.properties.condition || 'No condition'}${feature.properties.lengthM ? `, ${feature.properties.lengthM} metres` : ''}`}
+                  onPointerEnter={event =>
+                    showMapTooltip(
+                      feature.properties.name || 'DPWH bridge',
+                      [
+                        `Recorded condition: ${feature.properties.condition || 'No condition'}`,
+                        ...(feature.properties.lengthM
+                          ? [
+                              `Recorded length: ${feature.properties.lengthM.toLocaleString('en-PH')} m`,
+                            ]
+                          : []),
+                        ...(feature.properties.bridgeId
+                          ? [`Bridge ID: ${feature.properties.bridgeId}`]
+                          : []),
+                        ...(feature.properties.roadName
+                          ? [`Road: ${feature.properties.roadName}`]
+                          : []),
+                        ...(feature.properties.roadClass
+                          ? [`Road class: ${feature.properties.roadClass}`]
+                          : []),
+                      ],
+                      event
+                    )
+                  }
+                  onPointerMove={moveMapTooltip}
+                  onPointerLeave={() => setMapTooltip(null)}
+                  onFocus={event =>
+                    showMapTooltip(
+                      feature.properties.name || 'DPWH bridge',
+                      [
+                        `Recorded condition: ${feature.properties.condition || 'No condition'}`,
+                        ...(feature.properties.lengthM
+                          ? [
+                              `Recorded length: ${feature.properties.lengthM.toLocaleString('en-PH')} m`,
+                            ]
+                          : []),
+                        ...(feature.properties.bridgeId
+                          ? [`Bridge ID: ${feature.properties.bridgeId}`]
+                          : []),
+                        ...(feature.properties.roadName
+                          ? [`Road: ${feature.properties.roadName}`]
+                          : []),
+                        ...(feature.properties.roadClass
+                          ? [`Road class: ${feature.properties.roadClass}`]
+                          : []),
+                      ],
+                      event
+                    )
+                  }
+                  onBlur={() => setMapTooltip(null)}
+                ></circle>
               );
             })}
             {floodControlFeatures.map((feature, index) => {
@@ -881,29 +1051,72 @@ export default function Glance() {
                       : '1.5'
                   }
                   vectorEffect="non-scaling-stroke"
-                >
-                  <title>
-                    {feature.properties.name || 'DPWH flood-control project'}
-                    {feature.properties.fundingYear
-                      ? ` · Funding year ${feature.properties.fundingYear}`
-                      : ''}
-                    {feature.properties.completionYear
-                      ? ` · Completed ${feature.properties.completionYear}`
-                      : ''}
-                    {feature.properties.contractCost
-                      ? ` · Contract cost ${peso.format(feature.properties.contractCost)}`
-                      : ''}
-                    {feature.properties.contractId
-                      ? ` · Contract ${feature.properties.contractId}`
-                      : ''}
-                    {feature.properties.workType
-                      ? ` · ${feature.properties.workType}`
-                      : ''}
-                    {feature.properties.withinMunicipalBoundary === false
-                      ? ' · Recorded point falls outside mapped Miagao barangay boundaries'
-                      : ''}
-                  </title>
-                </path>
+                  tabIndex={0}
+                  aria-label={`${feature.properties.name || 'DPWH flood-control project'}${feature.properties.fundingYear ? `, funding year ${feature.properties.fundingYear}` : ''}${feature.properties.contractCost ? `, contract cost ${peso.format(feature.properties.contractCost)}` : ''}`}
+                  onPointerEnter={event =>
+                    showMapTooltip(
+                      feature.properties.name || 'DPWH flood-control project',
+                      [
+                        ...(feature.properties.fundingYear
+                          ? [`Funding year: ${feature.properties.fundingYear}`]
+                          : []),
+                        ...(feature.properties.completionYear
+                          ? [`Completed: ${feature.properties.completionYear}`]
+                          : []),
+                        ...(feature.properties.contractCost
+                          ? [
+                              `Contract cost: ${peso.format(feature.properties.contractCost)}`,
+                            ]
+                          : []),
+                        ...(feature.properties.contractId
+                          ? [`Contract: ${feature.properties.contractId}`]
+                          : []),
+                        ...(feature.properties.workType
+                          ? [`Work type: ${feature.properties.workType}`]
+                          : []),
+                        ...(feature.properties.withinMunicipalBoundary === false
+                          ? [
+                              'Recorded point is outside mapped Miagao barangay boundaries',
+                            ]
+                          : []),
+                      ],
+                      event
+                    )
+                  }
+                  onPointerMove={moveMapTooltip}
+                  onPointerLeave={() => setMapTooltip(null)}
+                  onFocus={event =>
+                    showMapTooltip(
+                      feature.properties.name || 'DPWH flood-control project',
+                      [
+                        ...(feature.properties.fundingYear
+                          ? [`Funding year: ${feature.properties.fundingYear}`]
+                          : []),
+                        ...(feature.properties.completionYear
+                          ? [`Completed: ${feature.properties.completionYear}`]
+                          : []),
+                        ...(feature.properties.contractCost
+                          ? [
+                              `Contract cost: ${peso.format(feature.properties.contractCost)}`,
+                            ]
+                          : []),
+                        ...(feature.properties.contractId
+                          ? [`Contract: ${feature.properties.contractId}`]
+                          : []),
+                        ...(feature.properties.workType
+                          ? [`Work type: ${feature.properties.workType}`]
+                          : []),
+                        ...(feature.properties.withinMunicipalBoundary === false
+                          ? [
+                              'Recorded point is outside mapped Miagao barangay boundaries',
+                            ]
+                          : []),
+                      ],
+                      event
+                    )
+                  }
+                  onBlur={() => setMapTooltip(null)}
+                ></path>
               );
             })}
           </svg>
@@ -921,6 +1134,22 @@ export default function Glance() {
           Roads marked “No Assessment” are gray.
         </p>
       </section>
+      {mapTooltip && (
+        <div
+          role="tooltip"
+          className="pointer-events-none fixed z-50 w-[min(340px,calc(100vw-16px))] rounded-xl border border-slate-300 bg-white p-4 text-[15px] leading-6 text-slate-800 shadow-xl"
+          style={{ left: mapTooltip.x, top: mapTooltip.y }}
+        >
+          <strong className="block text-base leading-6 text-slate-950">
+            {mapTooltip.title}
+          </strong>
+          <ul className="mt-1 space-y-0.5">
+            {mapTooltip.details.map((detail, index) => (
+              <li key={`${index}-${detail}`}>{detail}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </main>
   );
 }
