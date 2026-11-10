@@ -39,7 +39,7 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/projects"
+                to="/transparency"
                 className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950 hover:bg-amber-300"
               >
                 Explore projects <ArrowRight size={17} />

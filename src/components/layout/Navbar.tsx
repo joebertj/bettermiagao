@@ -1,10 +1,35 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { mainNavigation } from '../../data/navigation';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const budgetMenu = useRef<HTMLDetailsElement>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      const menu = budgetMenu.current;
+      if (menu?.open && !menu.contains(event.target as Node)) menu.open = false;
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && budgetMenu.current?.open) {
+        budgetMenu.current.open = false;
+      }
+    };
+    document.addEventListener('pointerdown', closeOnOutsideClick);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsideClick);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (budgetMenu.current) budgetMenu.current.open = false;
+  }, [location.pathname]);
+
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur">
       <nav
@@ -24,7 +49,11 @@ export default function Navbar() {
         <div className="hidden items-center gap-7 md:flex">
           {mainNavigation.map(link =>
             link.children ? (
-              <details key={link.href} className="group relative">
+              <details
+                key={link.href}
+                ref={link.href === '/transparency' ? budgetMenu : undefined}
+                className="group relative"
+              >
                 <summary className="flex cursor-pointer list-none items-center gap-1 text-sm font-semibold text-gray-700 hover:text-blue-800">
                   {link.label} <ChevronDown size={14} />
                 </summary>

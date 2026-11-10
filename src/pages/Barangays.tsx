@@ -701,9 +701,9 @@ export default function Barangays() {
           Barangay records
         </h1>
         <p className="mt-4 text-lg leading-8 text-gray-700">
-          Browse barangay population, MPB records, and DPWH project titles that
-          name each place. Project title matches are leads to records; they do
-          not confirm a project’s exact site.
+          Start with Miagao population, barangay officials, and local budget and
+          procurement records. National DPWH and MPB records are grouped in the
+          National dashboard at the bottom of this page.
         </p>
         <p className="mt-3 text-sm leading-6 text-gray-600">
           The DILG Barangay Information System Region VI workbook provides a
@@ -714,47 +714,56 @@ export default function Barangays() {
         </p>
       </header>
 
-      <section className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <section
+        className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5"
+        aria-label="Local barangay statistics"
+      >
         <div className="rounded-xl bg-slate-950 p-5 text-white">
           <strong className="block text-3xl">{barangays.length}</strong>
           <span className="text-sm text-slate-300">PSGC barangays</span>
-        </div>
-        <div className="rounded-xl bg-blue-800 p-5 text-white">
-          <strong className="block text-3xl">
-            {barangays.filter(r => r.titleMatchedProjects.length).length}
-          </strong>
-          <span className="text-sm text-blue-100">
-            with a title-matched DPWH record
-          </span>
-        </div>
-        <div className="rounded-xl bg-amber-400 p-5 text-slate-950">
-          <strong className="block text-3xl">
-            {
-              barangays.filter(r => r.mpb.records.some(p => p.year === 2027))
-                .length
-            }
-          </strong>
-          <span className="text-sm">with an FY2027 MPB record</span>
         </div>
         <div className="rounded-xl border border-gray-200 bg-white p-5">
           <strong className="block text-3xl">
             {captainRoster.captainRows}
           </strong>
           <span className="text-sm text-gray-600">
-            DILG captain entries · {captainRoster.barangayRows} barangays
+            DILG captain entries · 2025 snapshot
           </span>
         </div>
+        {localAllocationData && (
+          <>
+            <div className="rounded-xl bg-emerald-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.ntaLocatedRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-emerald-950">
+                barangay-named Q3 20% NTA rows
+              </span>
+            </div>
+            <div className="rounded-xl bg-amber-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.appBarangayProjectRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-amber-950">
+                APP rows naming barangays
+              </span>
+            </div>
+            <div className="rounded-xl bg-green-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.civilWorksBidRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-green-950">
+                local civil-works bid records
+              </span>
+            </div>
+          </>
+        )}
       </section>
 
-      <section className="mb-8 grid gap-4 lg:grid-cols-2">
-        <BarangayRankChart
-          title="FY2027 MPB allocations · by named barangay"
-          rows={latestMpbRanks}
-        />
-        <BarangayRankChart
-          title="FY2027 DPWH project-title matches · by barangay"
-          rows={latestDpwhRanks}
-        />
+      <section
+        className="mb-8 grid gap-4 lg:grid-cols-2"
+        aria-label="Local barangay charts"
+      >
         <BarangayRankChart
           title="PSA 2024 population · largest barangays"
           rows={populationRanks}
@@ -1408,6 +1417,51 @@ export default function Barangays() {
         })}
       </div>
       {pagination}
+      <section className="mt-14" aria-labelledby="national-dashboard-title">
+        <div className="rounded-2xl bg-slate-950 px-6 py-5 text-white sm:px-8">
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-200">
+            National records · separate from Miagao local funds
+          </p>
+          <h2 id="national-dashboard-title" className="mt-2 text-2xl font-bold">
+            National dashboard
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
+            These are national DPWH and House proposal records whose titles
+            mention Miagao or a barangay. A title match does not establish an
+            exact project site or a local-government allocation.
+          </p>
+        </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <article className="rounded-xl bg-blue-800 p-5 text-white">
+            <strong className="block text-3xl">
+              {barangays.filter(row => row.titleMatchedProjects.length).length}
+            </strong>
+            <span className="text-sm text-blue-100">
+              barangays with a national DPWH title match
+            </span>
+          </article>
+          <article className="rounded-xl bg-amber-400 p-5 text-slate-950">
+            <strong className="block text-3xl">
+              {
+                barangays.filter(row =>
+                  row.mpb.records.some(project => project.year === 2027)
+                ).length
+              }
+            </strong>
+            <span className="text-sm">barangays with an FY2027 MPB record</span>
+          </article>
+        </div>
+        <div className="mt-4 grid gap-4 lg:grid-cols-2">
+          <BarangayRankChart
+            title="FY2027 MPB allocations · by named barangay"
+            rows={latestMpbRanks}
+          />
+          <BarangayRankChart
+            title="FY2027 DPWH project-title matches · by barangay"
+            rows={latestDpwhRanks}
+          />
+        </div>
+      </section>
       <p className="mt-4 text-xs leading-5 text-gray-500">
         Population source: PSA 2024 POPCEN, checked through the PSGC
         municipality record. MPB figures come from BetterGov’s title and
