@@ -8,7 +8,7 @@ if [[ -f "$REPO_ROOT/.env" ]]; then
   ENV_SSH_TARGET="$(sed -n 's/^BETTERMIAGAO_SSH_TARGET=//p' "$REPO_ROOT/.env" | tail -n 1)"
 fi
 REMOTE_TARGET="${BETTERMIAGAO_SSH_TARGET:-$ENV_SSH_TARGET}"
-REMOTE_REPO="${BETTERMIAGAO_REMOTE_REPO:-}"
+REMOTE_REPO="${BETTERMIAGAO_REMOTE_REPO:-AUTO}"
 REMOTE_WEB_ROOT="/var/www/bettermiagao.org"
 BRANCH="${BETTERMIAGAO_BRANCH:-main}"
 SSH_IDENTITY="${BETTERMIAGAO_SSH_IDENTITY:-$HOME/.ssh/klti}"
@@ -61,7 +61,7 @@ repo="$1"
 branch="$2"
 web_root="$3"
 expected_commit="$4"
-if [[ -z "$repo" ]]; then repo="$HOME/bettermiagao"; fi
+if [[ "$repo" == "AUTO" ]]; then repo="$HOME/bettermiagao"; fi
 
 if ! git -C "$repo" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   git clone --branch "$branch" git@github.com:joebertj/bettermiagao.git "$repo"
