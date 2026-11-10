@@ -231,7 +231,11 @@ function conditionColor(condition?: string | null) {
   return '#64748b';
 }
 
-export default function Glance() {
+export default function Glance({
+  nationalOnly = false,
+}: {
+  nationalOnly?: boolean;
+}) {
   const [period, setPeriod] = useState<'gaa' | 'hgab' | 'all'>('hgab');
   const [features, setFeatures] = useState<Feature[]>([]);
   const [boundaryState, setBoundaryState] = useState<
@@ -306,6 +310,7 @@ export default function Glance() {
   }, []);
 
   useEffect(() => {
+    if (nationalOnly) return;
     let active = true;
     fetch(`${import.meta.env.BASE_URL}data/miagao-local-allocations.json`)
       .then(response => {
@@ -324,9 +329,10 @@ export default function Glance() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [nationalOnly]);
 
   useEffect(() => {
+    if (!nationalOnly) return;
     let active = true;
     Promise.all([
       fetch(
@@ -361,7 +367,7 @@ export default function Glance() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [nationalOnly]);
 
   const selectedProjects = useMemo(() => {
     if (period === 'hgab')
@@ -557,23 +563,31 @@ export default function Glance() {
       .join(' ');
 
   return (
-    <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
-      <header className="mb-8 max-w-4xl">
+    <div
+      className={
+        nationalOnly
+          ? 'w-full'
+          : 'mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8'
+      }
+    >
+      <header hidden={nationalOnly} className="mb-8 max-w-4xl">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-800">
           Miagao · In a Glance
         </p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-          Miagao projects and funding across barangays
+          Local projects and funding across barangays
         </h1>
         <p className="mt-4 text-lg leading-8 text-gray-700">
-          Explore municipal 20% NTA projects and procurement records alongside
-          national DPWH projects. The funding source and project stage are kept
-          separate: local NTA entries are not the same as procurement plans, bid
-          results, or national GAA and FY2027 House proposal amounts.
+          Explore Miagao’s 20% NTA projects and local procurement records. NTA
+          entries, procurement plans, and bid results are shown as distinct
+          records and are not added together.
         </p>
       </header>
 
-      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+      <section
+        hidden={nationalOnly}
+        className="mb-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6"
+      >
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-800">
@@ -940,8 +954,10 @@ export default function Glance() {
           </>
         )}
       </section>
-
-      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+      <section
+        hidden={!nationalOnly}
+        className="mb-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6"
+      >
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-blue-800">
@@ -1123,7 +1139,10 @@ export default function Glance() {
         </p>
       </section>
 
-      <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-5 sm:p-7">
+      <section
+        hidden={!nationalOnly}
+        className="mt-8 rounded-2xl border border-gray-200 bg-white p-5 sm:p-7"
+      >
         <h2 className="text-xl font-bold text-slate-950">
           Largest title-matched shares
         </h2>
@@ -1161,7 +1180,10 @@ export default function Glance() {
         </p>
       </section>
 
-      <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+      <section
+        hidden={!nationalOnly}
+        className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6"
+      >
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-orange-800">
@@ -1447,7 +1469,10 @@ export default function Glance() {
         </p>
       </section>
 
-      <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+      <section
+        hidden={!nationalOnly}
+        className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6"
+      >
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-slate-950">
@@ -1765,7 +1790,7 @@ export default function Glance() {
           individual DPWH road or bridge allocations.
         </p>
       </section>
-      {mapTooltip && (
+      {nationalOnly && mapTooltip && (
         <div
           role="tooltip"
           className="pointer-events-none fixed z-50 w-[min(340px,calc(100vw-16px))] rounded-xl border border-slate-300 bg-white p-4 text-[15px] leading-6 text-slate-800 shadow-xl"
@@ -1781,6 +1806,6 @@ export default function Glance() {
           </ul>
         </div>
       )}
-    </main>
+    </div>
   );
 }

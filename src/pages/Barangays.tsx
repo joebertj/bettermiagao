@@ -190,27 +190,10 @@ function MiagaoBarangayMap({
   );
 }
 
-type ProjectRecord = {
-  year: number;
-  stage: string;
-  category: string;
-  title: string;
-  amountPesos: number;
-  source: string;
-  locationBasis?: string;
-  identityConfidence?: string;
-};
 type BarangayRecord = {
   psgc: string;
   name: string;
   population2024: number;
-  mpb: {
-    projectRowsAllYears: number;
-    buildingCountAllYears: number;
-    allocationPesosAllYears: number;
-    records: ProjectRecord[];
-  };
-  titleMatchedProjects: ProjectRecord[];
   captain: null | {
     name: string;
     role: string;
@@ -363,16 +346,6 @@ function downloadRows(
       historicalProfiles.find(
         profile => normalizePlace(profile.title) === normalizePlace(row.name)
       )?.sourceUrl ?? '',
-    fy2027MpbProjects: row.mpb.records
-      .filter(project => project.year === 2027)
-      .map(project => project.title)
-      .join(' | '),
-    fy2027MpbAllocationPesos: row.mpb.records
-      .filter(project => project.year === 2027)
-      .reduce((sum, project) => sum + project.amountPesos, 0),
-    titleMatchedDpwhProjects: row.titleMatchedProjects
-      .map(project => project.title)
-      .join(' | '),
   }));
   const csv = [
     Object.keys(exportRows[0] ?? {}).join(','),
@@ -565,7 +538,6 @@ export default function Barangays() {
         row.name,
         row.psgc,
         row.captain?.name ?? '',
-        ...row.titleMatchedProjects.map(p => p.title),
         ...(localByPsgc.get(row.psgc)
           ? [
               ...localByPsgc.get(row.psgc)!.ntaRecords.map(item => item.title),
@@ -584,27 +556,6 @@ export default function Barangays() {
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const firstRow = filtered.length ? page * pageSize + 1 : 0;
   const lastRow = Math.min(filtered.length, (page + 1) * pageSize);
-  const latestMpbRanks = barangays
-    .map(row => ({
-      label: row.name,
-      value: row.mpb.records
-        .filter(project => project.year === 2027)
-        .reduce((sum, project) => sum + (project.amountPesos || 0), 0),
-    }))
-    .filter(row => row.value > 0)
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 8)
-    .map(row => ({ ...row, display: peso.format(row.value) }));
-  const latestDpwhRanks = barangays
-    .map(row => ({
-      label: row.name,
-      value: row.titleMatchedProjects.filter(project => project.year === 2027)
-        .length,
-    }))
-    .filter(row => row.value > 0)
-    .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label))
-    .slice(0, 8)
-    .map(row => ({ ...row, display: `${row.value} rows` }));
   const localNtaRanks = [...(localAllocationData?.barangays ?? [])]
     .filter(row => row.ntaListedAmountPesos > 0)
     .sort(
@@ -701,9 +652,8 @@ export default function Barangays() {
           Barangay records
         </h1>
         <p className="mt-4 text-lg leading-8 text-gray-700">
-          Start with Miagao population, barangay officials, and local budget and
-          procurement records. National DPWH and MPB records are grouped in the
-          National dashboard at the bottom of this page.
+          Population, barangay officials, local budget records, and procurement
+          entries published by the Municipality of Miagao.
         </p>
         <p className="mt-3 text-sm leading-6 text-gray-600">
           The DILG Barangay Information System Region VI workbook provides a
@@ -743,118 +693,6 @@ export default function Barangays() {
         </p>
       </header>
 
-      <section
-        className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5"
-        aria-label="Local barangay statistics"
-      >
-        <div className="rounded-xl bg-slate-950 p-5 text-white">
-          <strong className="block text-3xl">{barangays.length}</strong>
-          <span className="text-sm text-slate-300">PSGC barangays</span>
-        </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-5">
-          <strong className="block text-3xl">
-            {captainRoster.captainRows}
-          </strong>
-          <span className="text-sm text-gray-600">
-            DILG captain entries · 2025 snapshot
-          </span>
-        </div>
-        {localAllocationData && (
-          <>
-            <div className="rounded-xl bg-emerald-50 p-5">
-              <strong className="block text-3xl">
-                {localAllocationData.summary.ntaLocatedRows.toLocaleString()}
-              </strong>
-              <span className="text-sm text-emerald-950">
-                barangay-named Q3 20% NTA rows
-              </span>
-            </div>
-            <div className="rounded-xl bg-amber-50 p-5">
-              <strong className="block text-3xl">
-                {localAllocationData.summary.appBarangayProjectRows.toLocaleString()}
-              </strong>
-              <span className="text-sm text-amber-950">
-                APP rows naming barangays
-              </span>
-            </div>
-            <div className="rounded-xl bg-green-50 p-5">
-              <strong className="block text-3xl">
-                {localAllocationData.summary.civilWorksBidRows.toLocaleString()}
-              </strong>
-              <span className="text-sm text-green-950">
-                local civil-works bid records
-              </span>
-            </div>
-          </>
-        )}
-      </section>
-
-      <section
-        className="mb-8 grid gap-4 lg:grid-cols-2"
-        aria-label="Local barangay charts"
-      >
-        <BarangayRankChart
-          title="PSA 2024 population · largest barangays"
-          rows={populationRanks}
-        />
-        <BarangayRankChart
-          title="Positions listed in Miagao · DILG roster"
-          rows={rosterRoleRanks}
-        />
-        {localAllocationData && (
-          <BarangayRankChart
-            title="2026 Q3 20% NTA · highest barangay-named amounts"
-            rows={localNtaRanks}
-          />
-        )}
-      </section>
-
-      <section className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
-        <strong>Barangay captain roster:</strong> the DILG workbook lists{' '}
-        {captainRoster.captainRows} Punong Barangay entries across all{' '}
-        {captainRoster.barangayRows} Miagao barangays, within{' '}
-        {captainRoster.officialPositionRows.toLocaleString()} total position
-        records. This is a complete dated baseline from 14 September 2025 for
-        the stated 2023–2025 term; it does not establish whether anyone changed
-        office after the snapshot. Republic Act 12326 moved the next barangay
-        election to November 2028.
-        <div className="mt-2 flex flex-wrap gap-4">
-          <a
-            className="inline-flex items-center gap-1 font-semibold underline"
-            href={captainRoster.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            DILG BIS Region VI workbook · 14 Sep 2025 <ExternalLink size={13} />
-          </a>
-          <a
-            className="inline-flex items-center gap-1 font-semibold underline"
-            href={records.sources.barangayOfficialsRoster}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Municipal roster post <ExternalLink size={13} />
-          </a>
-          <a
-            className="inline-flex items-center gap-1 font-semibold underline"
-            href="https://www.comelec.gov.ph/index.html?r=References%2FRelatedLaws%2FElectionLaws%2FSynchronizedBarangayandSK%2FRA12326"
-            target="_blank"
-            rel="noreferrer"
-          >
-            RA 12326 <ExternalLink size={13} />
-          </a>
-          <a
-            className="inline-flex items-center gap-1 font-semibold underline"
-            href={records.sources.barangayProfiles}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Municipal barangay profiles · older records{' '}
-            <ExternalLink size={13} />
-          </a>
-        </div>
-      </section>
-
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <label className="flex min-w-64 flex-1 items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2">
           <Search size={17} className="text-gray-500" />
@@ -890,6 +728,277 @@ export default function Barangays() {
         </span>
       </div>
 
+      <section className="mb-3 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-950">
+            Barangays · map and archive profiles
+          </h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-gray-600">
+            Each card shows the barangay boundary. Where the municipal 2018
+            archive has a matching profile, it is linked here; missing archive
+            profiles do not remove the map or barangay record.
+          </p>
+        </div>
+        <span className="text-xs text-gray-500">
+          {boundaryLoadState === 'ready'
+            ? `${boundaryByPsgc.size} mapped shapes`
+            : boundaryLoadState === 'loading'
+              ? 'Loading barangay shapes…'
+              : 'Barangay shapes unavailable'}
+        </span>
+      </section>
+      <p className="mb-4 text-xs text-gray-500">
+        Boundary source:{' '}
+        <a
+          className="underline"
+          href="https://github.com/faeldon/philippines-json-maps"
+          target="_blank"
+          rel="noreferrer"
+        >
+          PSGC 3Q 2026 barangay boundaries
+        </a>
+        . Underlying source: NAMRIA and PSA through OCHA's COD-AB (CC BY-IGO).
+        Boundary lines are indicative; barangay codes join the shapes to this
+        page's records.
+      </p>
+      {pagination}
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {visibleRows.map(row => {
+          const localStats = localByPsgc.get(row.psgc);
+          const profile = profilesByBarangay.get(normalizePlace(row.name));
+          const isOpen = expanded === row.psgc;
+          const boundary = boundaryByPsgc.get(row.psgc);
+          const profileSummary =
+            profile?.contentText
+              .replace(/^Brief History\s*/i, '')
+              .slice(0, 360) ?? '';
+          return (
+            <article
+              key={row.psgc}
+              id={`barangay-${row.psgc}`}
+              className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+            >
+              <div className="flex gap-4">
+                <BarangayShape
+                  name={row.name}
+                  geometry={boundary}
+                  onClick={() =>
+                    setMapBarangay({ psgc: row.psgc, name: row.name })
+                  }
+                />
+                <div className="min-w-0 flex-1">
+                  <h3 className="break-words text-lg font-bold text-slate-950">
+                    {row.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-500">PSGC {row.psgc}</p>
+                  <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        Population · 2024
+                      </dt>
+                      <dd className="font-semibold">
+                        {row.population2024.toLocaleString()}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        Captain · DILG 2025
+                      </dt>
+                      <dd className="break-words font-semibold">
+                        {row.captain?.name ?? 'Not listed'}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        2026 Q3 · 20% NTA
+                      </dt>
+                      <dd>
+                        {localStats?.ntaProjectRows
+                          ? `${peso.format(localStats.ntaListedAmountPesos)} · ${localStats.ntaProjectRows} rows`
+                          : '—'}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        APP plans · bid records
+                      </dt>
+                      <dd>
+                        {localStats &&
+                        (localStats.appRows || localStats.civilWorksBidRows)
+                          ? `${localStats.appRows} · ${localStats.civilWorksBidRows}`
+                          : '—'}
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+              <div className="mt-4 rounded-lg bg-slate-50 p-3">
+                {profile ? (
+                  <>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-xs font-bold uppercase tracking-wide text-slate-600">
+                        2018 archive profile
+                      </span>
+                      <time
+                        className="text-xs text-slate-500"
+                        dateTime={profile.publishedAt}
+                      >
+                        {profile.publishedAt.slice(0, 10)}
+                      </time>
+                    </div>
+                    <p className="mt-2 text-sm leading-5 text-slate-700">
+                      {profileSummary}
+                      {profile.contentText.length > 360 ? '…' : ''}
+                    </p>
+                    <a
+                      className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-blue-800 underline"
+                      href={profile.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Open full archived profile <ExternalLink size={13} />
+                    </a>
+                  </>
+                ) : (
+                  <p className="text-sm text-slate-600">
+                    No matching profile page was found in the current 2018
+                    archive import. Barangay boundary is shown above.
+                  </p>
+                )}
+              </div>
+              <button
+                type="button"
+                className="mt-4 min-h-10 rounded-lg border border-blue-800 px-3 py-2 text-sm font-bold text-blue-800 hover:bg-blue-50"
+                onClick={() => setExpanded(isOpen ? null : row.psgc)}
+              >
+                {isOpen ? 'Hide linked records' : 'Show linked records'}
+              </button>
+              {isOpen && (
+                <div className="mt-4 space-y-4 border-t border-slate-200 pt-4">
+                  <section>
+                    <h4 className="font-bold text-slate-950">
+                      Local NTA, procurement, and bid records · 2026
+                    </h4>
+                    {localStats &&
+                    (localStats.ntaRecords.length ||
+                      localStats.appRecords.length ||
+                      localStats.bidRecords.length) ? (
+                      <div className="mt-2 space-y-3">
+                        {localStats.ntaRecords.map(record => (
+                          <div
+                            key={record.id}
+                            className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm"
+                          >
+                            <p className="font-semibold">{record.title}</p>
+                            <p className="mt-1">
+                              Q3 20% NTA schedule · listed project cost{' '}
+                              {peso.format(
+                                record.assignedAmountForBarangayPesos ??
+                                  record.listedAmountPesos ??
+                                  0
+                              )}
+                            </p>
+                            {record.remarks && (
+                              <p className="mt-1 text-xs text-gray-600">
+                                Status / remarks: {record.remarks}
+                              </p>
+                            )}
+                            {record.sourceUrl && (
+                              <a
+                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
+                                href={record.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Source · {record.sourceDocument}, row{' '}
+                                {record.sourceRow} <ExternalLink size={12} />
+                              </a>
+                            )}
+                          </div>
+                        ))}
+                        {localStats.appRecords.map(record => (
+                          <div
+                            key={record.id}
+                            className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm"
+                          >
+                            <p className="font-semibold">{record.title}</p>
+                            <p className="mt-1">
+                              Annual Procurement Plan · planned amount{' '}
+                              {peso.format(
+                                record.plannedProcurementAmountPesos ?? 0
+                              )}
+                            </p>
+                            {record.sourceUrl && (
+                              <a
+                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
+                                href={record.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Source · {record.sourceDocument}, row{' '}
+                                {record.sourceRow} <ExternalLink size={12} />
+                              </a>
+                            )}
+                          </div>
+                        ))}
+                        {localStats.bidRecords.map(record => (
+                          <div
+                            key={record.id}
+                            className="rounded-lg border border-green-200 bg-green-50 p-3 text-sm"
+                          >
+                            <p className="font-semibold">{record.title}</p>
+                            <p className="mt-1">
+                              Civil-works bid result · Ref{' '}
+                              {record.reference || '—'}
+                            </p>
+                            <p className="mt-1 text-xs text-gray-700">
+                              Approved budget{' '}
+                              {peso.format(record.approvedBudgetPesos ?? 0)}
+                              {record.bidAmountPesos != null &&
+                                ` · Bid ${peso.format(record.bidAmountPesos)}`}
+                            </p>
+                            {record.sourceUrl && (
+                              <a
+                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
+                                href={record.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Source · {record.sourceDocument}, row{' '}
+                                {record.sourceRow} <ExternalLink size={12} />
+                              </a>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="mt-1 text-sm text-gray-600">
+                        No barangay-named NTA, APP, or civil-works bid record in
+                        the current 2026 source files.
+                      </p>
+                    )}
+                  </section>
+                  {row.captain && (
+                    <p className="break-words text-xs leading-5 text-gray-600">
+                      {row.captain.status}{' '}
+                      <a
+                        className="font-semibold underline"
+                        href={row.captain.source}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {row.captain.sourceLabel}
+                      </a>
+                      .
+                    </p>
+                  )}
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </div>
+      {pagination}
       <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -1098,423 +1207,118 @@ export default function Barangays() {
         )}
       </section>
 
-      <section className="mb-3 flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h2 className="text-2xl font-bold text-slate-950">
-            Barangays · map and archive profiles
-          </h2>
-          <p className="mt-1 max-w-3xl text-sm leading-6 text-gray-600">
-            Each card shows the barangay boundary. Where the municipal 2018
-            archive has a matching profile, it is linked here; missing archive
-            profiles do not remove the map or barangay record.
-          </p>
+      <section
+        className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5"
+        aria-label="Local barangay statistics"
+      >
+        <div className="rounded-xl bg-slate-950 p-5 text-white">
+          <strong className="block text-3xl">{barangays.length}</strong>
+          <span className="text-sm text-slate-300">PSGC barangays</span>
         </div>
-        <span className="text-xs text-gray-500">
-          {boundaryLoadState === 'ready'
-            ? `${boundaryByPsgc.size} mapped shapes`
-            : boundaryLoadState === 'loading'
-              ? 'Loading barangay shapes…'
-              : 'Barangay shapes unavailable'}
-        </span>
+        <div className="rounded-xl border border-gray-200 bg-white p-5">
+          <strong className="block text-3xl">
+            {captainRoster.captainRows}
+          </strong>
+          <span className="text-sm text-gray-600">
+            DILG captain entries · 2025 snapshot
+          </span>
+        </div>
+        {localAllocationData && (
+          <>
+            <div className="rounded-xl bg-emerald-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.ntaLocatedRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-emerald-950">
+                barangay-named Q3 20% NTA rows
+              </span>
+            </div>
+            <div className="rounded-xl bg-amber-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.appBarangayProjectRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-amber-950">
+                APP rows naming barangays
+              </span>
+            </div>
+            <div className="rounded-xl bg-green-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.civilWorksBidRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-green-950">
+                local civil-works bid records
+              </span>
+            </div>
+          </>
+        )}
       </section>
-      <p className="mb-4 text-xs text-gray-500">
-        Boundary source:{' '}
-        <a
-          className="underline"
-          href="https://github.com/faeldon/philippines-json-maps"
-          target="_blank"
-          rel="noreferrer"
-        >
-          PSGC 3Q 2026 barangay boundaries
-        </a>
-        . Underlying source: NAMRIA and PSA through OCHA's COD-AB (CC BY-IGO).
-        Boundary lines are indicative; barangay codes join the shapes to this
-        page's records.
-      </p>
-      {pagination}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {visibleRows.map(row => {
-          const currentMpb = row.mpb.records.filter(
-            project => project.year === 2027
-          );
-          const localStats = localByPsgc.get(row.psgc);
-          const currentMpbAmount = currentMpb.reduce(
-            (sum, project) => sum + (project.amountPesos || 0),
-            0
-          );
-          const profile = profilesByBarangay.get(normalizePlace(row.name));
-          const isOpen = expanded === row.psgc;
-          const boundary = boundaryByPsgc.get(row.psgc);
-          const profileSummary =
-            profile?.contentText
-              .replace(/^Brief History\s*/i, '')
-              .slice(0, 360) ?? '';
-          return (
-            <article
-              key={row.psgc}
-              id={`barangay-${row.psgc}`}
-              className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
-            >
-              <div className="flex gap-4">
-                <BarangayShape
-                  name={row.name}
-                  geometry={boundary}
-                  onClick={() =>
-                    setMapBarangay({ psgc: row.psgc, name: row.name })
-                  }
-                />
-                <div className="min-w-0 flex-1">
-                  <h3 className="break-words text-lg font-bold text-slate-950">
-                    {row.name}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-500">PSGC {row.psgc}</p>
-                  <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
-                    <div>
-                      <dt className="text-xs text-gray-500">
-                        Population · 2024
-                      </dt>
-                      <dd className="font-semibold">
-                        {row.population2024.toLocaleString()}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs text-gray-500">
-                        Captain · DILG 2025
-                      </dt>
-                      <dd className="break-words font-semibold">
-                        {row.captain?.name ?? 'Not listed'}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs text-gray-500">FY2027 MPB</dt>
-                      <dd>
-                        {currentMpb.length
-                          ? `${currentMpb.length} · ${peso.format(currentMpbAmount)}`
-                          : '—'}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs text-gray-500">
-                        DPWH title matches
-                      </dt>
-                      <dd>{row.titleMatchedProjects.length || '—'}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs text-gray-500">
-                        2026 Q3 · 20% NTA
-                      </dt>
-                      <dd>
-                        {localStats?.ntaProjectRows
-                          ? `${peso.format(localStats.ntaListedAmountPesos)} · ${localStats.ntaProjectRows} rows`
-                          : '—'}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs text-gray-500">
-                        APP plans · bid records
-                      </dt>
-                      <dd>
-                        {localStats &&
-                        (localStats.appRows || localStats.civilWorksBidRows)
-                          ? `${localStats.appRows} · ${localStats.civilWorksBidRows}`
-                          : '—'}
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
-              </div>
-              <div className="mt-4 rounded-lg bg-slate-50 p-3">
-                {profile ? (
-                  <>
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="text-xs font-bold uppercase tracking-wide text-slate-600">
-                        2018 archive profile
-                      </span>
-                      <time
-                        className="text-xs text-slate-500"
-                        dateTime={profile.publishedAt}
-                      >
-                        {profile.publishedAt.slice(0, 10)}
-                      </time>
-                    </div>
-                    <p className="mt-2 text-sm leading-5 text-slate-700">
-                      {profileSummary}
-                      {profile.contentText.length > 360 ? '…' : ''}
-                    </p>
-                    <a
-                      className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-blue-800 underline"
-                      href={profile.sourceUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Open full archived profile <ExternalLink size={13} />
-                    </a>
-                  </>
-                ) : (
-                  <p className="text-sm text-slate-600">
-                    No matching profile page was found in the current 2018
-                    archive import. Barangay boundary is shown above.
-                  </p>
-                )}
-              </div>
-              <button
-                type="button"
-                className="mt-4 min-h-10 rounded-lg border border-blue-800 px-3 py-2 text-sm font-bold text-blue-800 hover:bg-blue-50"
-                onClick={() => setExpanded(isOpen ? null : row.psgc)}
-              >
-                {isOpen ? 'Hide linked records' : 'Show linked records'}
-              </button>
-              {isOpen && (
-                <div className="mt-4 space-y-4 border-t border-slate-200 pt-4">
-                  <section>
-                    <h4 className="font-bold text-slate-950">
-                      FY2027 MPB records
-                    </h4>
-                    {currentMpb.length ? (
-                      currentMpb.map((project, index) => (
-                        <div
-                          key={`${project.source}-${index}`}
-                          className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm"
-                        >
-                          <p className="font-semibold">{project.title}</p>
-                          <p className="mt-1">
-                            {peso.format(project.amountPesos)} · {project.stage}
-                          </p>
-                          <p className="mt-1 text-xs text-gray-600">
-                            {project.locationBasis};{' '}
-                            {project.identityConfidence}
-                          </p>
-                          <p className="mt-1 break-words text-xs text-gray-500">
-                            {project.source}
-                          </p>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="mt-1 text-sm text-gray-600">
-                        No FY2027 MPB record linked by the current source data.
-                      </p>
-                    )}
-                  </section>
-                  <section>
-                    <h4 className="font-bold text-slate-950">
-                      Local NTA, procurement, and bid records · 2026
-                    </h4>
-                    {localStats &&
-                    (localStats.ntaRecords.length ||
-                      localStats.appRecords.length ||
-                      localStats.bidRecords.length) ? (
-                      <div className="mt-2 space-y-3">
-                        {localStats.ntaRecords.map(record => (
-                          <div
-                            key={record.id}
-                            className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm"
-                          >
-                            <p className="font-semibold">{record.title}</p>
-                            <p className="mt-1">
-                              Q3 20% NTA schedule · listed project cost{' '}
-                              {peso.format(
-                                record.assignedAmountForBarangayPesos ??
-                                  record.listedAmountPesos ??
-                                  0
-                              )}
-                            </p>
-                            {record.remarks && (
-                              <p className="mt-1 text-xs text-gray-600">
-                                Status / remarks: {record.remarks}
-                              </p>
-                            )}
-                            {record.sourceUrl && (
-                              <a
-                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
-                                href={record.sourceUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                Source · {record.sourceDocument}, row{' '}
-                                {record.sourceRow} <ExternalLink size={12} />
-                              </a>
-                            )}
-                          </div>
-                        ))}
-                        {localStats.appRecords.map(record => (
-                          <div
-                            key={record.id}
-                            className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm"
-                          >
-                            <p className="font-semibold">{record.title}</p>
-                            <p className="mt-1">
-                              Annual Procurement Plan · planned amount{' '}
-                              {peso.format(
-                                record.plannedProcurementAmountPesos ?? 0
-                              )}
-                            </p>
-                            {record.sourceUrl && (
-                              <a
-                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
-                                href={record.sourceUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                Source · {record.sourceDocument}, row{' '}
-                                {record.sourceRow} <ExternalLink size={12} />
-                              </a>
-                            )}
-                          </div>
-                        ))}
-                        {localStats.bidRecords.map(record => (
-                          <div
-                            key={record.id}
-                            className="rounded-lg border border-green-200 bg-green-50 p-3 text-sm"
-                          >
-                            <p className="font-semibold">{record.title}</p>
-                            <p className="mt-1">
-                              Civil-works bid result · Ref{' '}
-                              {record.reference || '—'}
-                            </p>
-                            <p className="mt-1 text-xs text-gray-700">
-                              Approved budget{' '}
-                              {peso.format(record.approvedBudgetPesos ?? 0)}
-                              {record.bidAmountPesos != null &&
-                                ` · Bid ${peso.format(record.bidAmountPesos)}`}
-                            </p>
-                            {record.sourceUrl && (
-                              <a
-                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
-                                href={record.sourceUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                Source · {record.sourceDocument}, row{' '}
-                                {record.sourceRow} <ExternalLink size={12} />
-                              </a>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="mt-1 text-sm text-gray-600">
-                        No barangay-named NTA, APP, or civil-works bid record in
-                        the current 2026 source files.
-                      </p>
-                    )}
-                  </section>
-                  <section>
-                    <h4 className="font-bold text-slate-950">
-                      Historical and proposed DPWH title matches
-                    </h4>
-                    {row.titleMatchedProjects.length ? (
-                      row.titleMatchedProjects.map((project, index) => (
-                        <div
-                          key={`${project.source}-${index}`}
-                          className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm"
-                        >
-                          <p className="font-semibold">{project.title}</p>
-                          <p className="mt-1">
-                            {project.year} · {project.category} ·{' '}
-                            {peso.format(project.amountPesos)}
-                          </p>
-                          <p className="mt-1 break-words text-xs text-gray-500">
-                            {project.source}
-                          </p>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="mt-1 text-sm text-gray-600">
-                        No current title match. Municipality-level or corridor
-                        projects may not appear under a barangay.
-                      </p>
-                    )}
-                  </section>
-                  {row.captain && (
-                    <p className="break-words text-xs leading-5 text-gray-600">
-                      {row.captain.status}{' '}
-                      <a
-                        className="font-semibold underline"
-                        href={row.captain.source}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {row.captain.sourceLabel}
-                      </a>
-                      .
-                    </p>
-                  )}
-                </div>
-              )}
-            </article>
-          );
-        })}
-      </div>
-      {pagination}
-      <section className="mt-14" aria-labelledby="national-dashboard-title">
-        <div className="rounded-2xl bg-slate-950 px-6 py-5 text-white sm:px-8">
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-200">
-            National records · separate from Miagao local funds
-          </p>
-          <h2 id="national-dashboard-title" className="mt-2 text-2xl font-bold">
-            National dashboard
-          </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
-            These are national DPWH and House proposal records whose titles
-            mention Miagao or a barangay. A title match does not establish an
-            exact project site or a local-government allocation.
-          </p>
-        </div>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <article className="rounded-xl bg-blue-800 p-5 text-white">
-            <strong className="block text-3xl">
-              {barangays.filter(row => row.titleMatchedProjects.length).length}
-            </strong>
-            <span className="text-sm text-blue-100">
-              barangays with a national DPWH title match
-            </span>
-          </article>
-          <article className="rounded-xl bg-amber-400 p-5 text-slate-950">
-            <strong className="block text-3xl">
-              {
-                barangays.filter(row =>
-                  row.mpb.records.some(project => project.year === 2027)
-                ).length
-              }
-            </strong>
-            <span className="text-sm">barangays with an FY2027 MPB record</span>
-          </article>
-        </div>
-        <div className="mt-4 grid gap-4 lg:grid-cols-2">
+
+      <section
+        className="mb-8 grid gap-4 lg:grid-cols-2"
+        aria-label="Local barangay charts"
+      >
+        <BarangayRankChart
+          title="PSA 2024 population · largest barangays"
+          rows={populationRanks}
+        />
+        <BarangayRankChart
+          title="Positions listed in Miagao · DILG roster"
+          rows={rosterRoleRanks}
+        />
+        {localAllocationData && (
           <BarangayRankChart
-            title="FY2027 MPB allocations · by named barangay"
-            rows={latestMpbRanks}
+            title="2026 Q3 20% NTA · highest barangay-named amounts"
+            rows={localNtaRanks}
           />
-          <BarangayRankChart
-            title="FY2027 DPWH project-title matches · by barangay"
-            rows={latestDpwhRanks}
-          />
+        )}
+      </section>
+
+      <section className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+        <strong>Barangay captain roster:</strong> the DILG workbook lists{' '}
+        {captainRoster.captainRows} Punong Barangay entries across all{' '}
+        {captainRoster.barangayRows} Miagao barangays, within{' '}
+        {captainRoster.officialPositionRows.toLocaleString()} total position
+        records. This is a complete dated baseline from 14 September 2025 for
+        the stated 2023–2025 term; it does not establish whether anyone changed
+        office after the snapshot. Republic Act 12326 moved the next barangay
+        election to November 2028.
+        <div className="mt-2 flex flex-wrap gap-4">
+          <a
+            className="inline-flex items-center gap-1 font-semibold underline"
+            href={captainRoster.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            DILG BIS Region VI workbook · 14 Sep 2025 <ExternalLink size={13} />
+          </a>
+          <a
+            className="inline-flex items-center gap-1 font-semibold underline"
+            href={records.sources.barangayOfficialsRoster}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Municipal roster post <ExternalLink size={13} />
+          </a>
+          <a
+            className="inline-flex items-center gap-1 font-semibold underline"
+            href="https://www.comelec.gov.ph/index.html?r=References%2FRelatedLaws%2FElectionLaws%2FSynchronizedBarangayandSK%2FRA12326"
+            target="_blank"
+            rel="noreferrer"
+          >
+            RA 12326 <ExternalLink size={13} />
+          </a>
+          <a
+            className="inline-flex items-center gap-1 font-semibold underline"
+            href={records.sources.barangayProfiles}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Municipal barangay profiles · older records{' '}
+            <ExternalLink size={13} />
+          </a>
         </div>
       </section>
-      <p className="mt-4 text-xs leading-5 text-gray-500">
-        Population source:{' '}
-        <a
-          className="font-semibold text-blue-800 underline"
-          href={records.sources.psgcAndPopulation}
-          target="_blank"
-          rel="noreferrer"
-        >
-          PSA 2024 POPCEN, checked through the PSGC municipality record
-        </a>
-        . MPB figures come from{' '}
-        <a
-          className="font-semibold text-blue-800 underline"
-          href={records.sources.historicalAndFy2027DpwhProjects}
-          target="_blank"
-          rel="noreferrer"
-        >
-          BetterGov’s title and source-line map
-        </a>
-        . Project amounts are attached to every named barangay where a shared
-        title mentions it and must not be added across rows as if each were a
-        separate allocation. Local NTA, APP, and bid table rows link to their
-        municipal source spreadsheets above the table.
-      </p>
+
       {mapBarangay && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-3 sm:p-6"

@@ -42,7 +42,7 @@ export default function Home() {
                 to="/transparency"
                 className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950 hover:bg-amber-300"
               >
-                Explore projects <ArrowRight size={17} />
+                Explore budget <ArrowRight size={17} />
               </Link>
               <Link
                 to="/people"
