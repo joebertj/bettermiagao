@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import records from '../data/miagao-projects.json';
+import barangayInventory from '../data/miagao-barangay-inventory.json';
 
 type Position = [number, number];
 type Ring = Position[];
@@ -18,9 +19,17 @@ type MapRow = {
   name: string;
   count: number;
   amount: number;
+  mpbCount: number;
   geometry: Geometry;
   label: Position;
 };
+
+const mpbCounts = new Map(
+  barangayInventory.barangays.map(row => [
+    row.psgc,
+    row.mpb.buildingCountAllYears,
+  ])
+);
 
 const peso = new Intl.NumberFormat('en-PH', {
   style: 'currency',
@@ -160,6 +169,7 @@ export default function Glance() {
         name,
         count: 0,
         amount: 0,
+        mpbCount: mpbCounts.get(feature.properties.psgc ?? '') ?? 0,
         geometry: feature.geometry,
         label: featureLabel(feature.geometry),
       });
@@ -191,6 +201,11 @@ export default function Glance() {
   const representedRows = ranked.reduce((sum, row) => sum + row.count, 0);
   const assignedAmount = ranked.reduce((sum, row) => sum + row.amount, 0);
   const representedBarangays = ranked.length;
+  const mpbBarangays = rows.filter(row => row.mpbCount > 0);
+  const totalMpbRecords = mpbBarangays.reduce(
+    (sum, row) => sum + row.mpbCount,
+    0
+  );
 
   const points = rows.flatMap(row => polygons(row.geometry).flat(2));
   const minLon = Math.min(...points.map(point => point[0]));
@@ -229,6 +244,18 @@ export default function Glance() {
           .join(' ')
       )
       .join(' ');
+  const houseSizeFor = (row: MapRow) => {
+    const projected = polygons(row.geometry)
+      .flat(2)
+      .map(point => projectPoint(point));
+    const width =
+      Math.max(...projected.map(point => point[0])) -
+      Math.min(...projected.map(point => point[0]));
+    const height =
+      Math.max(...projected.map(point => point[1])) -
+      Math.min(...projected.map(point => point[1]));
+    return Math.min(8, width / (row.mpbCount * 1.55), height / 1.6);
+  };
 
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
@@ -422,6 +449,94 @@ export default function Glance() {
           >
             Project source data
           </a>
+        </p>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-slate-950">
+              Historical multi-purpose building projects by barangay
+            </h2>
+            <p className="mt-1 text-sm text-gray-600">
+              Each house marks one MPB project record found for that barangay.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <article className="rounded-xl border border-gray-200 bg-white px-4 py-3">
+              <span className="block text-xs text-gray-600">
+                Mapped MPB records
+              </span>
+              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+                {totalMpbRecords.toLocaleString('en-PH')}
+              </strong>
+            </article>
+            <article className="rounded-xl border border-gray-200 bg-white px-4 py-3">
+              <span className="block text-xs text-gray-600">
+                Barangays with records
+              </span>
+              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+                {mpbBarangays.length.toLocaleString('en-PH')} /{' '}
+                {features.length || 119}
+              </strong>
+            </article>
+          </div>
+        </div>
+        {boundaryState === 'ready' && (
+          <svg
+            viewBox={`0 0 ${mapWidth} ${mapHeight}`}
+            role="img"
+            aria-label="Map of Miagao barangays with one house icon for each mapped historical multi-purpose building project record"
+            className="block w-full rounded-xl bg-sky-50"
+          >
+            {rows.map(row => {
+              const [labelX, labelY] = projectPoint(row.label);
+              const iconSize = houseSizeFor(row);
+              const step = iconSize * 1.25;
+              return (
+                <g key={row.psgc}>
+                  <path
+                    d={pathFor(row.geometry)}
+                    fill={row.mpbCount ? '#dbeafe' : '#f1f5f9'}
+                    fillRule="evenodd"
+                    stroke="#1e3a8a"
+                    strokeWidth="1.2"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                  {Array.from({ length: row.mpbCount }, (_, index) => {
+                    const x = labelX + (index - (row.mpbCount - 1) / 2) * step;
+                    return (
+                      <g
+                        key={`${row.psgc}-mpb-${index}`}
+                        transform={`translate(${x} ${labelY}) scale(${iconSize / 12}) translate(-6 -6)`}
+                      >
+                        <title>
+                          {row.name}: {row.mpbCount} mapped historical MPB
+                          project {row.mpbCount === 1 ? 'record' : 'records'}
+                        </title>
+                        <path
+                          d="M1 5.5 6 1l5 4.5V11H7.5V7.5h-3V11H1Z"
+                          fill="#c2410c"
+                          stroke="#fff"
+                          strokeWidth="1.1"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                    );
+                  })}
+                </g>
+              );
+            })}
+          </svg>
+        )}
+        <p className="mt-4 text-xs leading-5 text-gray-600">
+          The count uses BetterGov’s Miagao MPB records for FY2015–FY2027 and
+          the barangay assignments in the current inventory (
+          {barangayInventory.generatedAt}). It includes FY2027 House Bill
+          proposals. A marker represents a project record, not confirmation that
+          a building was completed or still exists; mapped sites are based on a
+          barangay named in the title or a source-listed coordinate. Icon size
+          scales down to fit narrow barangay shapes.
         </p>
       </section>
     </main>
