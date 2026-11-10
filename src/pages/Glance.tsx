@@ -16,11 +16,19 @@ type Feature = {
 type TransportFeature = {
   type: 'Feature';
   properties: {
-    kind: 'road' | 'bridge';
+    kind: 'road' | 'bridge' | 'floodControl';
     name?: string | null;
     roadName?: string | null;
     roadId?: string | null;
     bridgeId?: string | null;
+    projectId?: string | null;
+    contractId?: string | null;
+    fundingYear?: number | null;
+    completionYear?: number | null;
+    contractCost?: number | null;
+    workType?: string | null;
+    implementingOffice?: string | null;
+    withinMunicipalBoundary?: boolean;
     roadClass?: string | null;
     condition?: string | null;
     lengthM?: number | null;
@@ -272,8 +280,12 @@ export default function Glance() {
   const bridgeFeatures = transportFeatures.filter(
     feature => feature.properties.kind === 'bridge'
   );
+  const floodControlFeatures = transportFeatures.filter(
+    feature => feature.properties.kind === 'floodControl'
+  );
   const conditionCounts = transportFeatures.reduce<Record<string, number>>(
     (counts, feature) => {
+      if (feature.properties.kind === 'floodControl') return counts;
       const condition = feature.properties.condition?.trim() || 'No condition';
       counts[condition] = (counts[condition] ?? 0) + 1;
       return counts;
@@ -685,7 +697,7 @@ export default function Glance() {
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-slate-950">
-              DPWH roads and bridges by recorded condition
+              DPWH roads, bridges, and completed flood-control projects
             </h2>
             <p className="mt-1 text-sm text-gray-600">
               Good is green, fair is amber, poor or bad is red, and no
@@ -707,6 +719,22 @@ export default function Glance() {
                 {label}
               </span>
             ))}
+            <span className="inline-flex items-center gap-1.5">
+              <svg
+                viewBox="0 0 12 12"
+                aria-hidden="true"
+                className="h-3.5 w-3.5"
+              >
+                <path
+                  d="M6 0.8 11.2 6 6 11.2 .8 6Z"
+                  fill="#7c3aed"
+                  stroke="#fff"
+                  strokeWidth="1"
+                />
+              </svg>
+              Completed flood-control contract · red outline = point outside
+              boundary
+            </span>
           </div>
         </div>
         <div className="mb-4 flex flex-wrap gap-3">
@@ -720,6 +748,14 @@ export default function Glance() {
             <span className="block text-xs text-gray-600">Bridges</span>
             <strong className="mt-1 block text-xl tabular-nums text-slate-950">
               {bridgeFeatures.length}
+            </strong>
+          </article>
+          <article className="rounded-xl border border-gray-200 px-4 py-3">
+            <span className="block text-xs text-gray-600">
+              Completed flood-control contracts
+            </span>
+            <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+              {floodControlFeatures.length}
             </strong>
           </article>
           {Object.entries(conditionCounts).map(([condition, count]) => (
@@ -748,7 +784,7 @@ export default function Glance() {
           <svg
             viewBox={`0 0 ${mapWidth} ${mapHeight}`}
             role="img"
-            aria-label="Map of Miagao national roads and bridges colored by DPWH recorded condition"
+            aria-label="Map of Miagao DPWH roads and bridges colored by recorded condition, with historical flood-control contract locations"
             className="block w-full rounded-xl bg-sky-50"
           >
             {rows.map(row => (
@@ -826,15 +862,63 @@ export default function Glance() {
                 </circle>
               );
             })}
+            {floodControlFeatures.map((feature, index) => {
+              if (feature.geometry.type !== 'Point') return null;
+              const [x, y] = projectPoint(feature.geometry.coordinates);
+              return (
+                <path
+                  key={`flood-control-${feature.properties.projectId ?? index}`}
+                  d={`M${x} ${y - 6} L${x + 6} ${y} L${x} ${y + 6} L${x - 6} ${y} Z`}
+                  fill="#7c3aed"
+                  stroke={
+                    feature.properties.withinMunicipalBoundary === false
+                      ? '#dc2626'
+                      : '#fff'
+                  }
+                  strokeWidth={
+                    feature.properties.withinMunicipalBoundary === false
+                      ? '2.5'
+                      : '1.5'
+                  }
+                  vectorEffect="non-scaling-stroke"
+                >
+                  <title>
+                    {feature.properties.name || 'DPWH flood-control project'}
+                    {feature.properties.fundingYear
+                      ? ` · Funding year ${feature.properties.fundingYear}`
+                      : ''}
+                    {feature.properties.completionYear
+                      ? ` · Completed ${feature.properties.completionYear}`
+                      : ''}
+                    {feature.properties.contractCost
+                      ? ` · Contract cost ${peso.format(feature.properties.contractCost)}`
+                      : ''}
+                    {feature.properties.contractId
+                      ? ` · Contract ${feature.properties.contractId}`
+                      : ''}
+                    {feature.properties.workType
+                      ? ` · ${feature.properties.workType}`
+                      : ''}
+                    {feature.properties.withinMunicipalBoundary === false
+                      ? ' · Recorded point falls outside mapped Miagao barangay boundaries'
+                      : ''}
+                  </title>
+                </path>
+              );
+            })}
           </svg>
         )}
         <p className="mt-4 text-xs leading-5 text-gray-600">
-          Uses offline DPWH ArcGIS snapshots: road condition as of January 2026
-          and bridge inventory as of July 2026. Road segments are clipped to the
-          Miagao barangay-boundary union; bridges are included when their
-          recorded point falls within it. The recorded condition describes the
-          source snapshot and is not a current field inspection. Roads marked
-          “No Assessment” are gray.
+          Uses offline DPWH ArcGIS snapshots: road condition as of January 2026,
+          bridge inventory as of July 2026, and completed flood-control contract
+          records. Flood-control diamonds use recorded project coordinates, not
+          title-based geocoding. Red outlines mark points outside the mapped
+          barangay boundaries; their recorded coordinates are shown without
+          snapping. Hover for project, funding year, completion year, contract
+          cost, and work type. Road segments are clipped to the boundary union;
+          bridges are included when their recorded point falls within it.
+          Conditions describe source snapshots, not current field inspections.
+          Roads marked “No Assessment” are gray.
         </p>
       </section>
     </main>

@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ARCGIS_ROOT = Path(__file__).resolve().parents[2] / "nep/data_sources/arcgis_dpwh/archive/selected"
 ROAD_LAYER = "road_condition/layers/Road_Condition_with_No_Assessment_FeatureServer_0-ba559ab9"
 BRIDGE_LAYER = "bridge_inventory/layers/Detailed_Bridge_Inventory_Final_FeatureServer_1-72c1d1a7"
+FLOOD_CONTROL_LAYER = "flood_control_completed/layers/FloodControl_Data_Completed_FeatureServer_0-5deb37a0"
 
 
 def utm51_to_lonlat(x: float, y: float) -> tuple[float, float]:
@@ -218,6 +219,42 @@ def bridge_features(path: Path, boundaries: list[dict[str, Any]]) -> list[dict[s
     return result
 
 
+def flood_control_features(path: Path, boundaries: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    result = []
+    earth_radius = 6378137.0
+    with path.open(encoding="utf-8") as source:
+        for line in source:
+            feature = json.loads(line)
+            attrs = feature.get("attributes") or {}
+            municipality = str(attrs.get("Municipality") or "").strip().upper()
+            if "MIAGAO" not in municipality:
+                continue
+            geometry = feature.get("geometry") or {}
+            if geometry.get("x") is None or geometry.get("y") is None:
+                continue
+            lon = geometry["x"] / earth_radius * 180 / math.pi
+            lat = (2 * math.atan(math.exp(geometry["y"] / earth_radius)) - math.pi / 2) * 180 / math.pi
+            lonlat = (lon, lat)
+            within_boundary = in_miagao(lonlat, boundaries)
+            result.append({
+                "type": "Feature",
+                "properties": {
+                    "kind": "floodControl",
+                    "name": attrs.get("ProjectDescription"),
+                    "projectId": attrs.get("ProjectID"),
+                    "contractId": attrs.get("ContractID"),
+                    "fundingYear": attrs.get("InfraYear"),
+                    "completionYear": attrs.get("CompletionYear"),
+                    "contractCost": attrs.get("ContractCost"),
+                    "workType": attrs.get("TypeofWork"),
+                    "implementingOffice": attrs.get("ImplementingOffice"),
+                    "withinMunicipalBoundary": within_boundary,
+                },
+                "geometry": {"type": "Point", "coordinates": [lon, lat]},
+            })
+    return result
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--arcgis-root", type=Path, default=DEFAULT_ARCGIS_ROOT)
@@ -228,18 +265,25 @@ def main() -> None:
     boundaries = json.loads(boundary_path.read_text(encoding="utf-8"))["features"]
     road_dir = args.arcgis_root / ROAD_LAYER
     bridge_dir = args.arcgis_root / BRIDGE_LAYER
+    flood_dir = args.arcgis_root / FLOOD_CONTROL_LAYER
     roads = esri_line_features(road_dir / "features.jsonl", boundaries)
     bridges = bridge_features(bridge_dir / "features.jsonl", boundaries)
+    flood_controls = flood_control_features(flood_dir / "features.jsonl", boundaries)
     metadata = {
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "coordinateSystem": "WGS84 longitude/latitude, converted from source EPSG:32651",
-        "sourceNote": "Offline DPWH ArcGIS snapshots: Road Condition (database as of January 2026) and General Bridge Type/condition (database as of July 2026).",
-        "scopeNote": "Features are clipped or filtered to the 3Q 2026 Miagao barangay boundary union. Road-condition geometry is sampled/clipped at approximately 25 m and simplified by 8 m for display.",
+        "sourceNote": "Offline DPWH ArcGIS snapshots: Road Condition (database as of January 2026), General Bridge Type/condition (database as of July 2026), and completed flood-control contract inventory.",
+        "scopeNote": "Road-condition features are clipped to the 3Q 2026 Miagao barangay boundary union, and bridges are filtered by their recorded points. Completed flood-control records are selected by their DPWH municipality field and retain their exact recorded coordinates even when those fall outside the mapped barangay boundary union.",
         "roadCount": len(roads),
         "bridgeCount": len(bridges),
+        "floodControlCount": len(flood_controls),
+        "floodControlPointsOutsideBoundary": sum(
+            not feature["properties"]["withinMunicipalBoundary"]
+            for feature in flood_controls
+        ),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps({"type": "FeatureCollection", "metadata": metadata, "features": roads + bridges}, separators=(",", ":")), encoding="utf-8")
+    args.output.write_text(json.dumps({"type": "FeatureCollection", "metadata": metadata, "features": roads + bridges + flood_controls}, separators=(",", ":")), encoding="utf-8")
     print(json.dumps(metadata, indent=2))
 
 
