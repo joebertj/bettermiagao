@@ -11,6 +11,7 @@ REMOTE_TARGET="${BETTERMIAGAO_SSH_TARGET:-$ENV_SSH_TARGET}"
 REMOTE_REPO="${BETTERMIAGAO_REMOTE_REPO:-}"
 REMOTE_WEB_ROOT="/var/www/bettermiagao.org"
 BRANCH="${BETTERMIAGAO_BRANCH:-main}"
+SSH_IDENTITY="${BETTERMIAGAO_SSH_IDENTITY:-$HOME/.ssh/klti}"
 
 if [[ -z "$REMOTE_TARGET" ]]; then
   echo "Set BETTERMIAGAO_SSH_TARGET in the local .env file (user@host or an SSH alias)." >&2
@@ -24,6 +25,11 @@ for command in git ssh; do
     exit 2
   }
 done
+
+if [[ ! -r "$SSH_IDENTITY" ]]; then
+  echo "SSH identity is not readable: $SSH_IDENTITY" >&2
+  exit 2
+fi
 
 if [[ -n "$(git -C "$REPO_ROOT" status --porcelain)" ]]; then
   echo "Refusing deployment: commit and push the Better Miagao changes first." >&2
@@ -47,7 +53,9 @@ read -r -p "Deploy origin/$BRANCH to Better Miagao? [y/N] " CONFIRM
   exit 0
 }
 
-ssh "$REMOTE_TARGET" bash -s -- "$REMOTE_REPO" "$BRANCH" "$REMOTE_WEB_ROOT" "$REMOTE_COMMIT" <<'REMOTE_SCRIPT'
+ssh -i "$SSH_IDENTITY" -o BatchMode=yes -o ConnectTimeout=10 \
+  -o StrictHostKeyChecking=accept-new \
+  "$REMOTE_TARGET" bash -s -- "$REMOTE_REPO" "$BRANCH" "$REMOTE_WEB_ROOT" "$REMOTE_COMMIT" <<'REMOTE_SCRIPT'
 set -euo pipefail
 repo="$1"
 branch="$2"
