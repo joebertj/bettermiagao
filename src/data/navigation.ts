@@ -1,30 +1,8 @@
 import type { NavigationItem } from '../types';
-import { serviceCategories as servicesData } from './yamlLoader';
-
-interface Subcategory {
-  name: string;
-  slug: string;
-}
-
-interface Category {
-  category: string;
-  slug: string;
-  subcategories: Subcategory[];
-}
 
 export const mainNavigation: NavigationItem[] = [
-  {
-    label: 'Services',
-    href: '/services',
-    children: (servicesData.categories as Category[]).map(category => ({
-      label: category.category,
-      href: `/services/${category.slug}`,
-    })),
-  },
-  {
-    label: 'Government',
-    href: '/government/departments',
-  },
+  { label: 'Projects', href: '/projects' },
+  { label: 'People & offices', href: '/people' },
 ];
 
 export const footerNavigation = {
@@ -32,40 +10,35 @@ export const footerNavigation = {
     {
       title: 'About',
       links: [
-        { label: 'About the Portal', href: '/about' },
+        { label: 'About this project', href: '/about' },
         // { label: 'Privacy Policy', href: '/privacy' },
         // { label: 'Terms of Use', href: '/terms' },
         { label: 'Accessibility', href: '/accessibility' },
         { label: 'Contact Us', href: '/about' },
-        { label: 'Community Discord', href: '/discord' },
-      ],
-    },
-    {
-      title: 'Services',
-      links: [
-        { label: 'All Services', href: '/services' },
-        ...(servicesData.categories as Category[])
-          .slice(0, 6)
-          .map(category => ({
-            label: category.category,
-            href: `/services/${category.slug}`,
-          })),
-        { label: 'Hotlines', href: '/philippines/hotlines' },
-        { label: 'Holidays', href: '/philippines/holidays' },
-      ],
-    },
-    {
-      title: 'Government',
-      links: [
-        { label: 'Open Data', href: 'https://data.gov.ph' },
-        { label: 'Freedom of Information', href: 'https://www.foi.gov.ph' },
         {
-          label: 'Contact Center',
-          href: 'https://contactcenterngbayan.gov.ph',
+          label: 'Official Miagao website',
+          href: 'https://www.miagao.gov.ph/',
+        },
+      ],
+    },
+    {
+      title: 'Explore',
+      links: [
+        { label: 'Projects', href: '/projects' },
+        { label: 'People & offices', href: '/people' },
+      ],
+    },
+    {
+      title: 'Official sources',
+      links: [
+        { label: 'Municipality of Miagao', href: 'https://www.miagao.gov.ph/' },
+        {
+          label: 'Miagao elected officials',
+          href: 'https://www.miagao.gov.ph/the-lgu/elected-officials/',
         },
         {
-          label: 'Official Gazette',
-          href: 'https://www.officialgazette.gov.ph',
+          label: 'House of Representatives',
+          href: 'https://www.congress.gov.ph/house-members/view/E032',
         },
       ],
     },

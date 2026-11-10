@@ -1,0 +1,1028 @@
+{
+  "title": "Publicly listed DPWH project rows with Miagao title matches",
+  "generatedAt": "2026-11-10",
+  "scope": "Rows from ODV integrated project data whose project title contains the locality name Miagao or Miag-ao after punctuation normalization. This title search can omit projects listed only by barangay or another locality and can include corridor or district-wide works whose full physical footprint needs confirmation.",
+  "sourceDataset": "ODV integrated-project-data.json",
+  "sourceUrl": "https://research.bettergov.ph/static/nep-preview/integrated-project-data.json",
+  "proposalNote": "FY2027 records are from the House General Appropriations Bill, 3rd-reading extract. They are proposals, not enacted appropriations or verified completed work.",
+  "count": 113,
+  "projects": [
+    {
+      "year": 2017,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Access Road leading to Miag-ao Port, Miagao, Iloilo",
+      "amountPesos": 20000000,
+      "source": "FY2017 GAA Explorer · A.xls · #Sheet 1 · UACS PAP 165003030700113",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2017,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Completion of Miagao SK Covered Multipurpose Building, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2017 GAA Explorer · A.xls · #Sheet 1 · UACS PAP 103004010312111",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2017,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Concreting of Igpuro Local Road, Igpuro, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2017 GAA Explorer · A.xls · #Sheet 1 · UACS PAP 165004050308045",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2017,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Miagao Multipurpose School Building, Miagao CES, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2017 GAA Explorer · A.xls · #Sheet 1 · UACS PAP 103004010312114",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2017,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Kirayan National High School, Naulid, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2017 GAA Explorer · A.xls · #Sheet 1 · UACS PAP 103004010312122",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Concreting of Bacolod National High School Road, Brgy. Bacolod, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300117201588000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Concreting of Extension Road, Brgy. Igbugo, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300117201591000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Concreting of Road, Naulid-Kirayan High School, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300117201598000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Consrtruction of Tumagbok Flood Control Project, Miagao, Iloilo",
+      "amountPesos": 30000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 8 · UACS PAP 320101101800000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Miagao Multi-Purpose Building, Miagao, Iloilo",
+      "amountPesos": 4000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300104202986000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Bridge",
+      "name": "Construction of Miagao Road including Bridge, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300117201605000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of a Multi-purpose Building  (Classroom),  UP Visayas Iloilo High School, Miagao, Iloilo",
+      "amountPesos": 30000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300104203004000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of a Multi-purpose Building (Weaving Center), Miagao, Iloilo",
+      "amountPesos": 3000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300104203002000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Igtalongon-Corocuan-Lab-on-Bagay-Wayang-San Jose-Miagao-Cadre Road leading to Mt. Napulak, Igbaras, Iloilo",
+      "amountPesos": 20000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300203100352000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Improvement/Concreting of ISATU Road, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300117201610000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2018,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Malagyan-Tigmalapad Road leading to Sinuhotan Cave and Tinagong Dagat Lake, Miagao, Iloilo",
+      "amountPesos": 61275000,
+      "source": "FY2018 GAA Explorer · GAA2018.xls · #Sheet 7 · UACS PAP 300203100105000",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2019,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Consrtruction of Tumagbok Flood Control/River Control, Miagao, Iloilo",
+      "amountPesos": 25000000,
+      "source": "FY2019 DPWH Technical GAA · UACS 320101103644000 · PDF p. 376 · printed p. 1841",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2019,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road, UPV Road to Brgy. Bagumbnayan, Miagao, Iloilo",
+      "amountPesos": 3000000,
+      "source": "FY2019 DPWH Technical GAA · UACS 300117204287000 · PDF p. 1331 · printed p. 2796",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2019,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Rehab/Improvement of ABC Multipurpose Building, Miagao, Iloilo",
+      "amountPesos": 2000000,
+      "source": "FY2019 DPWH Technical GAA · UACS 300104209579000 · PDF p. 804 · printed p. 2269",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2020,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Concreting of Brgy. Igtuba High School Local Road, Miagao, Iloilo",
+      "amountPesos": 2500000,
+      "source": "FY2020 GAA · gaa_2020_batch_0005.json · row 492767",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2020,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Consrtruction of Tumagbok Flood Control Project, Miagao, Iloilo",
+      "amountPesos": 30000000,
+      "source": "FY2020 GAA · gaa_2020_batch_0006.json · row 522698",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2020,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction (Completion) of Miagao Multipurpose Building, Poblacion, Miagao, Iloilo",
+      "amountPesos": 6000000,
+      "source": "FY2020 GAA · gaa_2020_batch_0005.json · row 483513",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2020,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Brgy. Potrido to Brgy. Alimodias Road, Miagao, Iloilo",
+      "amountPesos": 50000000,
+      "source": "FY2020 GAA · gaa_2020_batch_0005.json · row 492769",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2021,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction / Improvement of Miagao Municipal Local Roads, Miagao, Iloilo",
+      "amountPesos": 6000000,
+      "source": "FY2021 GAA · docs/2021-GAA.xlsx · row 428976",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2021,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Bacauan Flood Control Projects, Miagao, Iloilo",
+      "amountPesos": 10000000,
+      "source": "FY2021 GAA · docs/2021-GAA.xlsx · row 440145",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2021,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Brgy. Potrido to Brgy. Alimodias Road, Miagao, Iloilo",
+      "amountPesos": 40614000,
+      "source": "FY2021 GAA · docs/2021-GAA.xlsx · row 424891",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2021,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Naulid Flood Control Project, Miagao, Iloilo",
+      "amountPesos": 10000000,
+      "source": "FY2021 GAA · docs/2021-GAA.xlsx · row 440144",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2021,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Tumagbok Flood Control Project, Miagao, Iloilo",
+      "amountPesos": 30000000,
+      "source": "FY2021 GAA · docs/2021-GAA.xlsx · row 440139",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction (Completion) of Multi-Purpose Building, Miagao Coast Guard and Municipal DRRMC, Poblacion, Miagao, Iloilo",
+      "amountPesos": 3000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 531712",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao Shoreline Protection/Seawall including Access Road, Miagao, Iloilo",
+      "amountPesos": 50000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 524641",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building including Pavement, Superintendent Arsenio Napud MNHS, Barangay Baraclayan, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 531722",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Oyungan River Flood Control Project, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 562917",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Tumagbok River Flood Control Project, Miagao, Iloilo",
+      "amountPesos": 15000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 562914",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Malagyan-Tigmalapad Road leading to Sinuhotan Cave and Tinagong Dagat Lake, Miagao, Iloilo",
+      "amountPesos": 10000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 517967",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Rehabilitation and Improvement of Naclub-Igdalaquit-Cabangcalan-Tigbagacay-Tig-Apog-Apog Local Road With Box Culvert Component, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 527362",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Rehabilitation and Improvement of Oyungan-Igcabidio-Ilog-Ilog-Narorogan Local Road, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 527361",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Rehabilitation of Road Including Drainage, Barangay Guibongan, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 527359",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2022,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Rehabilitation of Road, Barangay Oyungan, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2022 GAA · docs/GAA-2022.xlsx · row 527364",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Bliss - Evacuation Center Road, Miagao, Iloilo",
+      "amountPesos": 35000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 528031",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Dalije Elementary School Multipurpose Building, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 546451",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Guibongan-Kirayan Shoreline Protection including Access Road, Miagao, Iloilo",
+      "amountPesos": 50000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 530609",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of La Consolacion Elementary School Multipurpose Building, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 546450",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao Circumferential Road, Miagao, Iloilo",
+      "amountPesos": 25000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 528028",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao Road, Miagao, Iloilo",
+      "amountPesos": 25000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 527370",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao Shoreline Protection/Seawall Including Access Road, Miagao, Iloilo",
+      "amountPesos": 50000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 585321",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao Shoreline Protection/Seawall including Access Road Leading to UNESCO World Heritage Church, Miagao, Iloilo",
+      "amountPesos": 90000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 530232",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building (Classroom Building), Miagao National High School, Miagao, Iloilo",
+      "amountPesos": 30000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 546462",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building (Miagao Economic Enterprise), Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 546458",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building (People's Center) with Pavement, Barangay Poblacion, Miagao, Iloilo",
+      "amountPesos": 50000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 546448",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 546457",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of San Jose Flood Control Structure, Miagao, Iloilo",
+      "amountPesos": 100000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 530233",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Tigmarabo Elementary School Multipurpose Building, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 546454",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Tumagbok Flood Control Structure including Access Road, Miagao, Iloilo",
+      "amountPesos": 50000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 530614",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of UP Visayas Road leading to Academic Institutions, Miagao, Iloilo",
+      "amountPesos": 70000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 527369",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Improvement and Repair of Government Center Multipurpose Building, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 546442",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2023,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Malagyan - Tigmalapad Road leading to Sinuhotan Cave and Tinagong Dagat Lake, Miagao, Iloilo",
+      "amountPesos": 30000000,
+      "source": "FY2023 GAA · docs/GAA-2023.xlsx · row 519523",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Brgy. Potrido to Brgy. Alimodias Road leading to various Tourism Sites including Bugsukan and Banogon Falls and the 500 Hectares Rice Terraces, Miagao, Iloilo",
+      "amountPesos": 15000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 529912",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Bacauan - Palaca River Control including Access Road , Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 617311",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Bliss - Evacuation Center Road, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 540688",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Cagbang Flood Control Structure, Miagao, Iloilo",
+      "amountPesos": 15000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 617312",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Calampitao - Gines Road, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 540684",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Durog - Baraklayan Road, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 540683",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Igbita Road including Box Culvert, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 540681",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Malagyan Road, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 540679",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao East Coastline Access Road, including Protection Works / Seawall, Miagao, Iloilo",
+      "amountPesos": 80000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 541456",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Miagao Poblacion Flood Control Structures including access Road, Miagao, Iloilo",
+      "amountPesos": 14994000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 617304",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao Shoreline Protection / Seawall including Access Road , Miagao, Iloilo",
+      "amountPesos": 50000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 617306",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao Tumagbok Access Road, including River Control Structure, Miagao, Iloilo",
+      "amountPesos": 76000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 539725",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Narorogan - Igsoligue Road, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 540682",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Palaca - Lumangan Road, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 540680",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Tumagbok Flood Control Structure including Access Road, Miagao, Iloilo",
+      "amountPesos": 50000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 617307",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Improvement of Miagao Road including Facilities, Miagao, Iloilo",
+      "amountPesos": 41000000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 552549",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2024,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Malagyan - Tigmalapad Road leading to Sinuhotan Cave and Tinagong Dagat Lake, Miagao, Iloilo",
+      "amountPesos": 7500000,
+      "source": "FY2024 GAA · docs/GAA-2024.xlsx · row 529913",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Brgy. Potrido to Brgy. Alimodias Road leading to various Tourism Sites including Bugsukan and Banogon Falls and the 500 Hectares Rice Terraces, Miagao, Iloilo",
+      "amountPesos": 10000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 546003",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Barangay Malagyan Multi-Purpose Building including Facilites, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 600562",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Concrete Road including Facilites, Barangay Bliss - Camp Monteclaro, Barangay Kirayan Tacas, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575562",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Concrete Road including Facilites, Barangay Dingle, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575564",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Flood Mitigating Structure including Facilites, Miagao San Jose River, Miagao, Iloilo",
+      "amountPesos": 30000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 606654",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Flood Mitigating Structure including Facilites, Miagao Tumagbok River, Miagao, Iloilo",
+      "amountPesos": 30000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 606650",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Flood control",
+      "name": "Construction of Flood Mitigation Structure, Miagao, Iloilo",
+      "amountPesos": 145000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 605282",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao East Coastline Access Road including Facilities, Miagao, Iloilo",
+      "amountPesos": 44000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 560889",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Multi-purpose building",
+      "name": "Construction of Miagao Multi-Purpose Building (Municipal Hall) including Facilites, Miagao, Iloilo",
+      "amountPesos": 19000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 600556",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Miagao Shoreline/Seawall Protection including Access Road, Miagao, Iloilo",
+      "amountPesos": 100000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 655970",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay Aguiawan - Barangay Tambong, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575565",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay Durog - Barangay Baraklayan, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575558",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay Guibuangan, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575559",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay Igdulaca-Barangay Buenavista Sur, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575566",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay Igpuro Bariri - Barangay Tig-amaga, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575561",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay Lumangan, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575557",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay Maricolcol - Barangay Sta. Barbara, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575560",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay Oyungan-Barangay Narorogan, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575555",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Construction of Road including Facilites, Barangay San Fernando-Barangay Buenavista Norte, Miagao, Iloilo",
+      "amountPesos": 5000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 575553",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2025,
+      "stage": "GAA",
+      "category": "Road",
+      "name": "Malagyan-Tigmalapad Road leading to Sinuhotan Cave and Tinagong Dagat Lake, Miagao, Iloilo",
+      "amountPesos": 10000000,
+      "source": "FY2025 GAA · docs/GAA-2025.xlsx · row 546222",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Barangay Cabunotan - Barangay Olango - Barangay Alimodias Road, Miagao, Iloilo",
+      "amountPesos": 92330000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 433",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Barangay Durog - Barangay Tigmarabo Road, Miagao, Iloilo",
+      "amountPesos": 92330000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 433",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Barangay Igtuba - Barangay Kirayan Tacas Road, narangay Igtuba and Barangay Kirayan Tacas, Miagao, Iloilo",
+      "amountPesos": 39000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 571",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Bridge",
+      "name": "Construction of Cubay Ubos to Pungtod Monteclaro Bridge, Barangay Cubay Ubos and Barangay Puntod Monteclaro, Miagao, Iloilo",
+      "amountPesos": 9000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 571",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Kirayan Norte Shoreline Protection including Access Roads, Sta. 27+861- Sta. 28+200, Barangay Kirayan Norte, Miagao, Iloilo",
+      "amountPesos": 92330000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 311",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Kirayan Sur Shoreline Protection including Access Roads, Sta. 28+693 - Sta. 29+007, Barangay Kirayan Sur, Miagao, Iloilo",
+      "amountPesos": 92330000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 311",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 27+512 - Sta. 27+856, Barangay Kirayan Norte - Barangay Banuyao, Miagao, Iloilo",
+      "amountPesos": 92330000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 311",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 29+682 - Sta. 30+175, Barangay Guibongan, Miagao, Iloilo",
+      "amountPesos": 138495000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 311",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 37+621 - Sta. 38+135, Barangay Lanutan - Barangay San Rafael, Miagao, Iloilo",
+      "amountPesos": 138495000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 311",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Banbanan, Miagao, Iloilo",
+      "amountPesos": 8000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 817",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Baybay Norte, Miagao, Iloilo",
+      "amountPesos": 9000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Dawog, Miagao, Iloilo",
+      "amountPesos": 8000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Igsoligue, Miagao, Iloilo",
+      "amountPesos": 8000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Igtuba, Miagao, Iloilo",
+      "amountPesos": 9000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay La Consolacion, Miagao, Iloilo",
+      "amountPesos": 8000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Lacadon, Miagao, Iloilo",
+      "amountPesos": 8000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Lumangan, Miagao, Iloilo",
+      "amountPesos": 8000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Nam-o Sur, Miagao, Iloilo",
+      "amountPesos": 8000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Multi-purpose building",
+      "name": "Construction of Multi-Purpose Building, Barangay Palaca, Miagao, Iloilo",
+      "amountPesos": 8000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 818",
+      "districtId": "leg:iloilo:1st"
+    },
+    {
+      "year": 2027,
+      "stage": "HGAB 3rd",
+      "category": "Road",
+      "name": "Construction of Naclub - Igbugo Road, Barangay Naclub and Igbugo, Miagao, Iloilo",
+      "amountPesos": 45000000,
+      "source": "HGAB 3rd · 3- HB 10858 FOR 3RD READING VOL I-C .pdf · PDF p. 571",
+      "districtId": "leg:iloilo:1st"
+    }
+  ]
+}

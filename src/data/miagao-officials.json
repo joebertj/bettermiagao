@@ -1,0 +1,133 @@
+{
+  "asOf": "2026-11-10",
+  "sources": {
+    "municipalOfficials": "https://www.miagao.gov.ph/the-lgu/elected-officials/",
+    "municipalElection": "https://www.miagao.gov.ph/the-lgu/elected-officials/",
+    "mayorHistory": "https://www.miagao.gov.ph/the-lgu/about-the-mayor/",
+    "municipalHistory": "https://www.miagao.gov.ph/about-miagao/municipal-profile/",
+    "districtRepresentative": "https://www.congress.gov.ph/house-members/view/E032",
+    "districtOffice": "https://www.dpwh.gov.ph/dpwh/sites/default/files/GAA/APP/UPDATED%20FINAL%20APP%20CONSOLIDATED.pdf",
+    "parsedDocumentData": "https://research.bettergov.ph/static/nep-preview/development-council-data.json",
+    "historicalCongressSources": "https://research.bettergov.ph/static/nep-preview/congress-historical-rosters.json"
+  },
+  "mayors": [
+    {
+      "name": "Julieta N. Flores",
+      "period": "2010–2013",
+      "basis": "Miagao municipal records identify her administration before the 2013 local-government transition.",
+      "source": "https://www.miagao.gov.ph/about-miagao/news/inauguration-ceremonies-held/"
+    },
+    {
+      "name": "Macario N. Napulan, M.D.",
+      "period": "2013–2022",
+      "basis": "Municipal profile/official biography identifies his mayoral service beginning in 2013; 2021 and 2022 municipal reports identify him as mayor before the 2022 transition.",
+      "source": "https://www.miagao.gov.ph/the-lgu/legislative/officials/"
+    },
+    {
+      "name": "Oscar “Richard” S. Garin, Jr.",
+      "period": "2022–present",
+      "basis": "The municipal government says he received a mandate in 2022 and its 2025 election report records his reelection.",
+      "source": "https://www.miagao.gov.ph/the-lgu/about-the-mayor/"
+    }
+  ],
+  "currentOfficials": [
+    { "name": "Oscar “Richard” S. Garin, Jr.", "role": "Municipal Mayor" },
+    { "name": "Maria Salve N. Pechayco, M.D.", "role": "Vice Mayor" },
+    { "name": "Japhet Grace G. Moleta", "role": "Sangguniang Bayan Member" },
+    {
+      "name": "Lea Marie D. Naldoza-Zhang",
+      "role": "Sangguniang Bayan Member"
+    },
+    { "name": "Richard T. Esposo", "role": "Sangguniang Bayan Member" },
+    { "name": "Gemma C. Sucob-Nulada", "role": "Sangguniang Bayan Member" },
+    { "name": "Gemma Rei S. Nismal", "role": "Sangguniang Bayan Member" },
+    {
+      "name": "Jun Carlu A. Napulan, M.D.",
+      "role": "Sangguniang Bayan Member"
+    },
+    { "name": "Marlou R. Niones", "role": "Sangguniang Bayan Member" },
+    { "name": "Jessica P. Torrecampo", "role": "Sangguniang Bayan Member" }
+  ],
+  "historicalCouncilTerms": [
+    {
+      "period": "2010–2013",
+      "source": "https://www.miagao.gov.ph/about-miagao/news/inauguration-ceremonies-held/",
+      "basis": "Named in the municipal oath-taking record for the July 2010–June 2013 term.",
+      "members": [
+        "Raul F. Facon",
+        "Jessica Torrecampo",
+        "Ma. Teresa M. Jambre",
+        "Ramon M. Nismal, Jr.",
+        "Eliezer P. Magallanes",
+        "Patricio N. Fio",
+        "Santos N. Niñonuevo",
+        "Suzita M. Go"
+      ]
+    },
+    {
+      "period": "2019–2022 · roster recorded January 2022",
+      "source": "https://www.miagao.gov.ph/wp-content/uploads/2023/10/MO2022-02.pdf",
+      "basis": "Names listed as present in the Sangguniang Bayan minutes for the January 10, 2022 session.",
+      "members": [
+        "Gemma Rei S. Nismal",
+        "Gemma C. Sucob-Nulada",
+        "Jose Angelo P. Molejona",
+        "Ma. Salve M. Napud-Pechayco",
+        "Serafin F. Monteclaro",
+        "Luningning M. Sollesta-Tuparan",
+        "Mario Thomas Nicolas P. Torrecampo",
+        "Japhet Grace G. Moleta"
+      ]
+    }
+  ],
+  "districtRepresentatives": [
+    {
+      "name": "Richard Garin",
+      "period": "16th Congress · 2013–2016",
+      "source": "https://en.wikipedia.org/wiki/16th_Congress_of_the_Philippines"
+    },
+    {
+      "name": "Richard Garin",
+      "period": "17th Congress · 2016–2019",
+      "source": "https://en.wikipedia.org/wiki/17th_Congress_of_the_Philippines"
+    },
+    {
+      "name": "Janette L. Garin",
+      "period": "18th Congress · 2019–2022",
+      "source": "https://en.wikipedia.org/wiki/18th_Congress_of_the_Philippines"
+    },
+    {
+      "name": "Janette L. Garin",
+      "period": "19th Congress · 2022–2025",
+      "source": "https://en.wikipedia.org/wiki/19th_Congress_of_the_Philippines"
+    },
+    {
+      "name": "Janette L. Garin",
+      "period": "20th Congress · 2025–2028",
+      "source": "https://www.congress.gov.ph/house-members/view/E032"
+    }
+  ],
+  "parsedProjectDocumentCandidates": [
+    {
+      "name": "Ethel B. Morales",
+      "role": "District Engineer",
+      "miagaoProjectTitles": 11
+    },
+    {
+      "name": "Ninfa M. Enriquez",
+      "role": "Assistant District Engineer",
+      "miagaoProjectTitles": 11
+    },
+    {
+      "name": "Ma. Victoria B. Labiscase",
+      "role": "Engineer",
+      "miagaoProjectTitles": 3
+    },
+    {
+      "name": "John Arthur E. Turano",
+      "role": "Engineer",
+      "miagaoProjectTitles": 1
+    },
+    { "name": "Jayson E. Vargas", "role": "Engineer", "miagaoProjectTitles": 1 }
+  ]
+}
