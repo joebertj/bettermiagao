@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { ArrowDownToLine, ExternalLink, Search } from 'lucide-react';
+import {
+  ArrowDownToLine,
+  ArrowDownWideNarrow,
+  ArrowUpNarrowWide,
+  ExternalLink,
+  Search,
+} from 'lucide-react';
 import records from '../data/miagao-projects.json';
 import { miagaoBarangays } from '../data/miagao-barangays';
 
@@ -38,6 +44,7 @@ export default function Projects() {
   const [category, setCategory] = useState('all');
   const [barangay, setBarangay] = useState('all');
   const [query, setQuery] = useState('');
+  const [amountOrder, setAmountOrder] = useState<'desc' | 'asc'>('desc');
   const [language, setLanguage] = useState<'en' | 'krj'>('en');
   const karayA = language === 'krj';
   const years = [
@@ -47,16 +54,22 @@ export default function Projects() {
     ...new Set(records.projects.map(project => project.category)),
   ].sort();
   const q = query.trim().toLowerCase();
-  const filtered = records.projects.filter(
-    project =>
-      (year === 'all' || project.year === Number(year)) &&
-      (category === 'all' || project.category === category) &&
-      (barangay === 'all' || titleMentions(project.name, barangay)) &&
-      (!q ||
-        `${project.name} ${project.source} ${project.category}`
-          .toLowerCase()
-          .includes(q))
-  );
+  const filtered = records.projects
+    .filter(
+      project =>
+        (year === 'all' || project.year === Number(year)) &&
+        (category === 'all' || project.category === category) &&
+        (barangay === 'all' || titleMentions(project.name, barangay)) &&
+        (!q ||
+          `${project.name} ${project.source} ${project.category}`
+            .toLowerCase()
+            .includes(q))
+    )
+    .sort((a, b) =>
+      amountOrder === 'desc'
+        ? b.amountPesos - a.amountPesos || a.name.localeCompare(b.name)
+        : a.amountPesos - b.amountPesos || a.name.localeCompare(b.name)
+    );
   const recent = records.projects.filter(
     project => project.year >= 2017 && project.year <= 2026
   );
@@ -141,7 +154,7 @@ export default function Projects() {
       >
         <article className="rounded-2xl bg-slate-950 p-6 text-white">
           <p className="text-sm text-slate-300">
-            Historic GAA lines · 2017–2025
+            Public budget rows · 2017–2026
           </p>
           <strong className="mt-2 block text-4xl">{recent.length}</strong>
           <p className="mt-2 text-sm text-slate-300">listed project rows</p>
@@ -173,8 +186,8 @@ export default function Projects() {
             Past listed allocations
           </h2>
           <p className="mb-5 mt-1 text-sm text-gray-600">
-            GAA lines, grouped by fiscal year. 2027 is shown separately as a
-            proposal.
+            2017–2025 rows are GAA lines; 2026 rows are House GAB amendments,
+            shown as a separate stage. 2027 is shown separately as a proposal.
           </p>
           <div className="space-y-3">
             {annual.map(item => (
@@ -364,7 +377,31 @@ export default function Projects() {
                 <th className="px-4 py-3">Year</th>
                 <th className="px-4 py-3">Category</th>
                 <th className="px-4 py-3">Project title</th>
-                <th className="px-4 py-3 text-right">Listed amount</th>
+                <th
+                  aria-sort={
+                    amountOrder === 'desc' ? 'descending' : 'ascending'
+                  }
+                  className="px-4 py-3 text-right"
+                >
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setAmountOrder(current =>
+                        current === 'desc' ? 'asc' : 'desc'
+                      )
+                    }
+                    className="inline-flex items-center justify-end gap-2 text-right font-bold hover:underline"
+                    aria-label={`Sort by listed amount, currently ${amountOrder === 'desc' ? 'highest first' : 'lowest first'}`}
+                    title="Toggle amount order"
+                  >
+                    Listed Amount
+                    {amountOrder === 'desc' ? (
+                      <ArrowDownWideNarrow size={16} aria-hidden="true" />
+                    ) : (
+                      <ArrowUpNarrowWide size={16} aria-hidden="true" />
+                    )}
+                  </button>
+                </th>
                 <th className="px-4 py-3">Source reference</th>
               </tr>
             </thead>
