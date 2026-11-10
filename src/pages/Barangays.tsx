@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Download, ExternalLink, Search } from 'lucide-react';
+import { Download, ExternalLink, Search, X } from 'lucide-react';
 import records from '../data/miagao-barangay-inventory.json';
 
 type HistoricalProfile = {
@@ -23,17 +23,23 @@ type BoundaryFeature = {
 function BarangayShape({
   name,
   geometry,
+  onClick,
 }: {
   name: string;
   geometry?: BarangayGeometry;
+  onClick: () => void;
 }) {
-  if (!geometry) {
+  if (!geometry)
     return (
-      <div className="flex h-24 w-28 items-center justify-center rounded-lg bg-slate-100 text-center text-xs text-slate-500">
+      <button
+        type="button"
+        disabled
+        className="flex h-24 w-28 shrink-0 items-center justify-center rounded-lg bg-slate-100 px-2 text-center text-xs text-slate-500"
+        aria-label={`${name} boundary unavailable`}
+      >
         Boundary unavailable
-      </div>
+      </button>
     );
-  }
   const polygons =
     geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
   const positions = polygons.flat(2);
@@ -60,23 +66,126 @@ function BarangayShape({
       .join(' ')
   );
   return (
-    <svg
-      viewBox="0 0 100 70"
-      role="img"
-      aria-label={`${name} barangay boundary`}
-      className="h-24 w-28 rounded-lg bg-blue-50 p-1"
+    <button
+      type="button"
+      onClick={onClick}
+      title={`Show ${name} within Miagao`}
+      className="group flex w-28 shrink-0 flex-col items-center gap-1 rounded-lg text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2"
+      aria-label={`Show ${name} boundary within Miagao`}
     >
-      {paths.map((path, index) => (
-        <path
-          key={index}
-          d={path}
-          fill="#dbeafe"
-          fillRule="evenodd"
-          stroke="#1e40af"
-          strokeWidth="1.1"
-          vectorEffect="non-scaling-stroke"
-        />
-      ))}
+      <svg
+        viewBox="0 0 100 70"
+        role="img"
+        aria-hidden="true"
+        className="h-24 w-28 rounded-lg bg-blue-50 p-1 group-hover:bg-blue-100"
+      >
+        {paths.map((path, index) => (
+          <path
+            key={index}
+            d={path}
+            fill="#dbeafe"
+            fillRule="evenodd"
+            stroke="#1e40af"
+            strokeWidth="1.1"
+            vectorEffect="non-scaling-stroke"
+          />
+        ))}
+      </svg>
+      <span className="text-center text-[11px] font-semibold leading-4 text-blue-800 underline decoration-blue-300 underline-offset-2 group-hover:text-blue-950">
+        View in Miagao
+      </span>
+    </button>
+  );
+}
+
+function geometryPolygons(geometry: BarangayGeometry) {
+  return geometry.type === 'Polygon'
+    ? [geometry.coordinates]
+    : geometry.coordinates;
+}
+
+function MiagaoBarangayMap({
+  name,
+  selectedPsgc,
+  geometries,
+}: {
+  name: string;
+  selectedPsgc: string;
+  geometries: Map<string, BarangayGeometry>;
+}) {
+  const entries = [...geometries.entries()];
+  const points = entries.flatMap(([, geometry]) =>
+    geometryPolygons(geometry).flat(2)
+  );
+  if (!points.length)
+    return (
+      <p className="p-6 text-sm text-slate-600">
+        Barangay boundaries are unavailable.
+      </p>
+    );
+
+  const minLon = Math.min(...points.map(point => point[0]));
+  const maxLon = Math.max(...points.map(point => point[0]));
+  const minLat = Math.min(...points.map(point => point[1]));
+  const maxLat = Math.max(...points.map(point => point[1]));
+  const centerLat = ((minLat + maxLat) / 2) * (Math.PI / 180);
+  const cosLat = Math.cos(centerLat);
+  const width = Math.max((maxLon - minLon) * cosLat, 0.00001);
+  const height = Math.max(maxLat - minLat, 0.00001);
+  const viewWidth = 900;
+  const viewHeight = 660;
+  const padding = 30;
+  const scale = Math.min(
+    (viewWidth - padding * 2) / width,
+    (viewHeight - padding * 2) / height
+  );
+  const offsetX = (viewWidth - width * scale) / 2;
+  const offsetY = (viewHeight - height * scale) / 2;
+  const project = ([longitude, latitude]: Coordinate): Coordinate => [
+    offsetX + (longitude - minLon) * cosLat * scale,
+    offsetY + (maxLat - latitude) * scale,
+  ];
+  const pathFor = (geometry: BarangayGeometry) =>
+    geometryPolygons(geometry)
+      .map(polygon =>
+        polygon
+          .map(
+            ring =>
+              ring
+                .map((point, index) => {
+                  const [x, y] = project(point);
+                  return `${index === 0 ? 'M' : 'L'}${x.toFixed(2)} ${y.toFixed(2)}`;
+                })
+                .join(' ') + ' Z'
+          )
+          .join(' ')
+      )
+      .join(' ');
+  const sorted = entries.sort(([a], [b]) =>
+    a === selectedPsgc ? 1 : b === selectedPsgc ? -1 : a.localeCompare(b)
+  );
+
+  return (
+    <svg
+      viewBox={`0 0 ${viewWidth} ${viewHeight}`}
+      role="img"
+      aria-label={`${name} highlighted within the Miagao municipal boundary`}
+      className="block max-h-[65vh] w-full rounded-xl bg-sky-50"
+    >
+      {sorted.map(([psgc, geometry]) => {
+        const selected = psgc === selectedPsgc;
+        return (
+          <path
+            key={psgc}
+            d={pathFor(geometry)}
+            fill={selected ? '#fbbf24' : '#dbeafe'}
+            fillRule="evenodd"
+            stroke={selected ? '#92400e' : '#1e40af'}
+            strokeWidth={selected ? 2.2 : 0.8}
+            vectorEffect="non-scaling-stroke"
+          />
+        );
+      })}
     </svg>
   );
 }
@@ -299,6 +408,10 @@ export default function Barangays() {
     };
   }, []);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [mapBarangay, setMapBarangay] = useState<{
+    psgc: string;
+    name: string;
+  } | null>(null);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(20);
   const profilesByBarangay = useMemo(
@@ -620,7 +733,13 @@ export default function Barangays() {
               className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
             >
               <div className="flex gap-4">
-                <BarangayShape name={row.name} geometry={boundary} />
+                <BarangayShape
+                  name={row.name}
+                  geometry={boundary}
+                  onClick={() =>
+                    setMapBarangay({ psgc: row.psgc, name: row.name })
+                  }
+                />
                 <div className="min-w-0 flex-1">
                   <h3 className="break-words text-lg font-bold text-slate-950">
                     {row.name}
@@ -787,6 +906,58 @@ export default function Barangays() {
         where a shared title mentions it and must not be added across rows as if
         each were a separate allocation.
       </p>
+      {mapBarangay && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-3 sm:p-6"
+          onMouseDown={event => {
+            if (event.target === event.currentTarget) setMapBarangay(null);
+          }}
+          onKeyDown={event => {
+            if (event.key === 'Escape') setMapBarangay(null);
+          }}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="barangay-map-title"
+            className="w-full max-w-4xl rounded-2xl bg-white p-4 shadow-2xl sm:p-6"
+          >
+            <div className="mb-3 flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wide text-blue-800">
+                  Miagao municipal boundary
+                </p>
+                <h2
+                  id="barangay-map-title"
+                  className="mt-1 text-xl font-bold text-slate-950 sm:text-2xl"
+                >
+                  {mapBarangay.name}
+                </h2>
+                <p className="mt-1 text-sm text-slate-600">
+                  Highlighted in gold within Miagao’s barangay boundary map.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setMapBarangay(null)}
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100"
+                aria-label="Close barangay map"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <MiagaoBarangayMap
+              name={mapBarangay.name}
+              selectedPsgc={mapBarangay.psgc}
+              geometries={boundaryByPsgc}
+            />
+            <p className="mt-3 text-xs leading-5 text-slate-500">
+              Boundary lines are indicative. Source: PSGC 3Q 2026 boundaries,
+              based on NAMRIA and PSA data through OCHA COD-AB.
+            </p>
+          </section>
+        </div>
+      )}
     </main>
   );
 }
