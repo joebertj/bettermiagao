@@ -10,9 +10,9 @@ The certificate was issued through Certbot's manual DNS challenge after the requ
 
 ## Deployment sequence
 
-1. One-time VM setup: clone `git@github.com:joebertj/bettermiagao.git` to `/home/joebert/bettermiagao`, install Node.js/npm, and install `bettermiagao-nginx.conf` in `/etc/nginx/conf.d/`. Run `sudo nginx -t` and reload Nginx after installing the site config.
+1. One-time VM setup: install Node.js/npm and install `bettermiagao-nginx.conf` in `/etc/nginx/conf.d/`. Run `sudo nginx -t` and reload Nginx after installing the site config. The deploy script clones the Git repository into the SSH account's home directory if needed.
 2. Commit and push the intended site version to `origin/main`.
-3. Put the VM SSH target in the local, Git-ignored `.env` file as `BETTERMIAGAO_SSH_TARGET=<user@host-or-ssh-alias>`, then run `bash ./deployment/deploy-bettermiagao.sh`.
+3. Set `BETTERMIAGAO_SSH_TARGET` in the local, Git-ignored `.env` file, then run `bash ./deployment/deploy-bettermiagao.sh`. No command-line target override is needed.
 
 The script checks that the local checkout is clean and matches `origin/main`, asks before deployment, then fetches that exact commit on the VM, builds it there, and syncs `dist/` to `/var/www/bettermiagao.org/`. It requires SSH access, Node.js/npm, rsync, and passwordless `sudo` for the web-root copy. It refuses to reset a dirty server checkout. Static-file deployments do not restart an app service or reload Nginx. Keep the `.env` file local; `.gitignore` excludes it.
 

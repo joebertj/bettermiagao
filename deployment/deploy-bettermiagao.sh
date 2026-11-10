@@ -2,14 +2,13 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ENV_SSH_TARGET=""
 if [[ -f "$REPO_ROOT/.env" ]]; then
-  set -a
-  # Local-only deployment settings; .env is ignored by Git.
-  source "$REPO_ROOT/.env"
-  set +a
+  # Read only the target setting; do not execute arbitrary .env contents.
+  ENV_SSH_TARGET="$(sed -n 's/^BETTERMIAGAO_SSH_TARGET=//p' "$REPO_ROOT/.env" | tail -n 1)"
 fi
-REMOTE_TARGET="${BETTERMIAGAO_SSH_TARGET:-}"
-REMOTE_REPO="${BETTERMIAGAO_REMOTE_REPO:-/home/joebert/bettermiagao}"
+REMOTE_TARGET="${BETTERMIAGAO_SSH_TARGET:-$ENV_SSH_TARGET}"
+REMOTE_REPO="${BETTERMIAGAO_REMOTE_REPO:-}"
 REMOTE_WEB_ROOT="/var/www/bettermiagao.org"
 BRANCH="${BETTERMIAGAO_BRANCH:-main}"
 
@@ -54,8 +53,11 @@ repo="$1"
 branch="$2"
 web_root="$3"
 expected_commit="$4"
+if [[ -z "$repo" ]]; then repo="$HOME/bettermiagao"; fi
 
-git -C "$repo" rev-parse --is-inside-work-tree >/dev/null
+if ! git -C "$repo" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  git clone --branch "$branch" git@github.com:joebertj/bettermiagao.git "$repo"
+fi
 if [[ -n "$(git -C "$repo" status --porcelain)" ]]; then
   echo "Refusing deployment: the server checkout has local changes." >&2
   exit 1
