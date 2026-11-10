@@ -712,6 +712,35 @@ export default function Barangays() {
           2023–2025 term and does not establish whether anyone changed office
           after that snapshot.
         </p>
+        <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-600">
+          <a
+            className="font-semibold text-blue-800 underline"
+            href={records.sources.psgcAndPopulation}
+            target="_blank"
+            rel="noreferrer"
+          >
+            PSA · PSGC and population reference{' '}
+            <ExternalLink size={12} className="inline" />
+          </a>
+          <a
+            className="font-semibold text-blue-800 underline"
+            href={captainRoster.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            DILG · dated roster source{' '}
+            <ExternalLink size={12} className="inline" />
+          </a>
+          <a
+            className="font-semibold text-blue-800 underline"
+            href={records.sources.historicalAndFy2027DpwhProjects}
+            target="_blank"
+            rel="noreferrer"
+          >
+            BetterGov · national project data{' '}
+            <ExternalLink size={12} className="inline" />
+          </a>
+        </p>
       </header>
 
       <section
@@ -1463,11 +1492,28 @@ export default function Barangays() {
         </div>
       </section>
       <p className="mt-4 text-xs leading-5 text-gray-500">
-        Population source: PSA 2024 POPCEN, checked through the PSGC
-        municipality record. MPB figures come from BetterGov’s title and
-        source-line map. Project amounts are attached to every named barangay
-        where a shared title mentions it and must not be added across rows as if
-        each were a separate allocation.
+        Population source:{' '}
+        <a
+          className="font-semibold text-blue-800 underline"
+          href={records.sources.psgcAndPopulation}
+          target="_blank"
+          rel="noreferrer"
+        >
+          PSA 2024 POPCEN, checked through the PSGC municipality record
+        </a>
+        . MPB figures come from{' '}
+        <a
+          className="font-semibold text-blue-800 underline"
+          href={records.sources.historicalAndFy2027DpwhProjects}
+          target="_blank"
+          rel="noreferrer"
+        >
+          BetterGov’s title and source-line map
+        </a>
+        . Project amounts are attached to every named barangay where a shared
+        title mentions it and must not be added across rows as if each were a
+        separate allocation. Local NTA, APP, and bid table rows link to their
+        municipal source spreadsheets above the table.
       </p>
       {mapBarangay && (
         <div

@@ -32,6 +32,102 @@ export default function About() {
           Similar titles are not automatically treated as the same physical
           project.
         </p>
+        <h2 className="pt-2 text-xl font-bold">Sources used on Barangays</h2>
+        <p className="leading-7 text-gray-700">
+          The barangay dashboard combines local records published by the
+          Municipality of Miagao with population and boundary references and
+          BetterGov national project records. The links below point to the
+          source material used for the displayed tables and charts.
+        </p>
+        <ul className="list-disc space-y-2 pl-5 leading-7 text-gray-700">
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://psa.gov.ph/classification/psgc/barangays/0603030000"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Philippine Statistics Authority · PSGC and 2024 population
+              reference
+            </a>
+          </li>
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://archive.org/download/20250914.dilg.barangay/official-list_06_2025-09-14.xlsx"
+              target="_blank"
+              rel="noreferrer"
+            >
+              DILG Barangay Information System · Region VI roster snapshot, 14
+              September 2025
+            </a>{' '}
+            — a dated roster for the 2023–2025 term, not a live current-office
+            register.
+          </li>
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://www.miagao.gov.ph/wp-content/uploads/2026/10/20NTAutilizationnewformat2026.xlsx"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Municipality of Miagao · 2026 Q3 20% NTA utilization schedule
+            </a>
+          </li>
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://www.miagao.gov.ph/wp-content/uploads/2026/06/CONSOLIDATED-APP-2026.xlsx"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Municipality of Miagao · 2026 Annual Procurement Plan
+            </a>
+          </li>
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://www.miagao.gov.ph/wp-content/uploads/2026/05/FDP-DILG-Compliance-1st-Quarter-2026-CivilGoods-and-Consulting-Services.xlsx"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Municipality of Miagao · 2026 Q1 civil-works bid results
+            </a>{' '}
+            and{' '}
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://www.miagao.gov.ph/wp-content/uploads/2026/10/FDP-DILG-Compliance-3rd-Quarter-2026-CivilGoods-and-Consulting-Services.xlsx"
+              target="_blank"
+              rel="noreferrer"
+            >
+              2026 Q3 civil-works bid results
+            </a>
+          </li>
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://research.bettergov.ph/static/nep-preview/integrated-project-data.json"
+              target="_blank"
+              rel="noreferrer"
+            >
+              BetterGov · DPWH historical and FY2027 project data
+            </a>{' '}
+            — barangay links are based on project title or source location
+            fields; shared projects can appear under multiple barangays.
+          </li>
+          <li>
+            Barangay boundary shapes:{' '}
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://github.com/faeldon/philippines-json-maps"
+              target="_blank"
+              rel="noreferrer"
+            >
+              PSGC 3Q 2026 boundary dataset
+            </a>
+            , based on NAMRIA and PSA data through OCHA COD-AB (CC BY-IGO).
+          </li>
+        </ul>
         <h2 className="pt-2 text-xl font-bold">People and roles</h2>
         <p className="leading-7 text-gray-700">
           Elected-office rosters are linked to official records where available.
