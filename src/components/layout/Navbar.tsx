@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 const links = [
   { href: '/projects', label: 'Projects' },
   { href: '/people', label: 'People & offices' },
+  { href: '/barangays', label: 'Barangays' },
   { href: '/about', label: 'About' },
 ];
 
