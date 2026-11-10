@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { ArrowDownToLine, ExternalLink, Search } from 'lucide-react';
+import { ArrowDownToLine, ExternalLink, Search, X } from 'lucide-react';
 
 type AppRow = {
   row: number;
@@ -152,37 +152,22 @@ function Pager({
   );
 }
 
-function SourceDetails({ rows }: { rows: AppRow[] }) {
-  return (
-    <details className="min-w-32 text-xs">
-      <summary className="cursor-pointer font-semibold text-blue-800 underline underline-offset-2">
-        {rows.length} supporting row{rows.length === 1 ? '' : 's'}
-      </summary>
-      <div className="mt-2 space-y-2 rounded-lg bg-slate-50 p-3 text-left">
-        {rows.map(row => (
-          <div
-            key={row.row}
-            className="border-b border-slate-200 pb-2 last:border-0 last:pb-0"
-          >
-            <p className="break-words font-medium text-slate-800">
-              {row.description || 'Unlabeled source row'}
-            </p>
-            <p className="mt-1 text-slate-600">
-              Source row {row.row} · estimate{' '}
-              {row.budgetPesos
-                ? peso.format(money(row.budgetPesos) ?? 0)
-                : 'not stated'}
-            </p>
-          </div>
-        ))}
-      </div>
-    </details>
-  );
-}
-
-function BreakdownCell({ rows }: { rows: AppRow[] }) {
+function BreakdownCell({
+  rows,
+  onOpen,
+}: {
+  rows: AppRow[];
+  onOpen: () => void;
+}) {
   return rows.length ? (
-    <SourceDetails rows={rows} />
+    <button
+      type="button"
+      onClick={onOpen}
+      className="inline-flex min-h-9 items-center rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-left text-xs font-bold text-blue-800 hover:border-blue-400 hover:bg-blue-100"
+      aria-label={`View ${rows.length} supporting APP rows`}
+    >
+      View {rows.length} line items
+    </button>
   ) : (
     <span className="text-slate-400">—</span>
   );
@@ -211,6 +196,10 @@ export default function AppPlan() {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(20);
+  const [selectedDetails, setSelectedDetails] = useState<{
+    parent: AppRow;
+    rows: AppRow[];
+  } | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -250,21 +239,16 @@ export default function AppPlan() {
     };
   }, []);
 
-  const normalizedQuery = query.trim().toLowerCase();
-  const visibleRows = useMemo(
-    () =>
-      rows.filter(
-        row =>
-          !normalizedQuery ||
-          [row.row, row.sectionOrProject, row.office, row.description, row.fund]
-            .join(' ')
-            .toLowerCase()
-            .includes(normalizedQuery)
-      ),
-    [rows, normalizedQuery]
-  );
-  const currentRows = visibleRows.slice(page * pageSize, (page + 1) * pageSize);
+  useEffect(() => {
+    if (!selectedDetails) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedDetails(null);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [selectedDetails]);
 
+  const normalizedQuery = query.trim().toLowerCase();
   const siblings = useMemo(
     () =>
       rows.filter(
@@ -291,21 +275,59 @@ export default function AppPlan() {
       value: money(row.budgetPesos) ?? 0,
     }));
 
-  const breakdownFor = (parent: AppRow) => {
-    if (!categoryPattern.test(parent.description ?? '')) return [];
-    const start = rows.findIndex(row => row.row === parent.row);
-    const children: AppRow[] = [];
-    for (const row of rows.slice(start + 1)) {
-      if (
-        row.office !== parent.office ||
-        row.sectionOrProject !== parent.sectionOrProject
-      )
-        break;
-      if (categoryPattern.test(row.description ?? '')) break;
-      children.push(row);
+  const breakdownFor = useCallback(
+    (parent: AppRow) => {
+      if (!categoryPattern.test(parent.description ?? '')) return [];
+      const start = rows.findIndex(row => row.row === parent.row);
+      const children: AppRow[] = [];
+      for (const row of rows.slice(start + 1)) {
+        if (
+          row.office !== parent.office ||
+          row.sectionOrProject !== parent.sectionOrProject
+        )
+          break;
+        if (categoryPattern.test(row.description ?? '')) break;
+        children.push(row);
+      }
+      return children;
+    },
+    [rows]
+  );
+
+  const rowMatches = useCallback(
+    (row: AppRow) =>
+      [row.row, row.sectionOrProject, row.office, row.description, row.fund]
+        .join(' ')
+        .toLowerCase()
+        .includes(normalizedQuery),
+    [normalizedQuery]
+  );
+  const nestedDetailIds = useMemo(() => {
+    const ids = new Set<number>();
+    for (const row of rows) {
+      if (categoryPattern.test(row.description ?? '')) {
+        for (const child of breakdownFor(row)) ids.add(child.row);
+      }
     }
-    return children;
-  };
+    return ids;
+  }, [rows, breakdownFor]);
+  const visibleRows = useMemo(
+    () =>
+      rows.filter(row => {
+        if (nestedDetailIds.has(row.row)) return false;
+        if (!normalizedQuery || rowMatches(row)) return true;
+        return (
+          categoryPattern.test(row.description ?? '') &&
+          breakdownFor(row).some(rowMatches)
+        );
+      }),
+    [rows, nestedDetailIds, normalizedQuery, rowMatches, breakdownFor]
+  );
+  const matchingSourceRows = useMemo(
+    () => rows.filter(row => !normalizedQuery || rowMatches(row)),
+    [rows, normalizedQuery, rowMatches]
+  );
+  const currentRows = visibleRows.slice(page * pageSize, (page + 1) * pageSize);
 
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
@@ -352,8 +374,9 @@ export default function AppPlan() {
                   FY2026 APP source rows
                 </h2>
                 <p className="text-sm text-slate-600">
-                  {rows.length.toLocaleString()} rows · lettered account
-                  headings can expand to show their detail lines.
+                  {visibleRows.length.toLocaleString()} displayed rows ·
+                  unlettered lines nested under lettered headings are in the
+                  drill-down. Exports retain matching source rows.
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -367,14 +390,14 @@ export default function AppPlan() {
                 </a>
                 <button
                   type="button"
-                  onClick={() => downloadRows(visibleRows, 'json')}
+                  onClick={() => downloadRows(matchingSourceRows, 'json')}
                   className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-blue-800 px-3 py-2 text-sm font-bold text-white hover:bg-blue-900"
                 >
                   <ArrowDownToLine size={15} /> JSON
                 </button>
                 <button
                   type="button"
-                  onClick={() => downloadRows(visibleRows, 'csv')}
+                  onClick={() => downloadRows(matchingSourceRows, 'csv')}
                   className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-blue-800 px-3 py-2 text-sm font-bold text-blue-800 hover:bg-blue-50"
                 >
                   <ArrowDownToLine size={15} /> CSV
@@ -449,7 +472,15 @@ export default function AppPlan() {
                             : '—'}
                         </Cell>
                         <Cell>
-                          <BreakdownCell rows={children} />
+                          <BreakdownCell
+                            rows={children}
+                            onOpen={() =>
+                              setSelectedDetails({
+                                parent: row,
+                                rows: children,
+                              })
+                            }
+                          />
                         </Cell>
                       </tr>
                     );
@@ -477,6 +508,86 @@ export default function AppPlan() {
                 setPage(0);
               }}
             />
+          </section>
+        </div>
+      )}
+      {selectedDetails && (
+        <div
+          className="fixed inset-0 z-[100] grid place-items-center bg-slate-950/60 p-3 sm:p-6"
+          role="presentation"
+          onMouseDown={event => {
+            if (event.target === event.currentTarget) setSelectedDetails(null);
+          }}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="app-detail-title"
+            className="flex max-h-[92dvh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+          >
+            <header className="flex items-start justify-between gap-4 border-b border-slate-200 p-5 sm:p-7">
+              <div className="min-w-0">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-blue-800">
+                  FY2026 APP · supporting lines
+                </p>
+                <h2
+                  id="app-detail-title"
+                  className="mt-2 break-words text-xl font-bold text-slate-950 sm:text-2xl"
+                >
+                  {selectedDetails.parent.description}
+                </h2>
+                <p className="mt-2 text-sm text-slate-600">
+                  {selectedDetails.parent.office || 'Office not stated'} ·{' '}
+                  {selectedDetails.parent.sectionOrProject ||
+                    'Project not stated'}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedDetails(null)}
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100"
+                aria-label="Close supporting rows"
+              >
+                <X size={18} />
+              </button>
+            </header>
+            <div className="overflow-y-auto p-4 sm:p-7">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm">
+                <strong className="text-slate-900">
+                  {selectedDetails.rows.length} supporting line items
+                </strong>
+                <span className="text-slate-600">
+                  Heading estimate:{' '}
+                  {selectedDetails.parent.budgetPesos
+                    ? peso.format(
+                        money(selectedDetails.parent.budgetPesos) ?? 0
+                      )
+                    : 'not stated'}
+                </span>
+              </div>
+              <div className="divide-y divide-slate-200 rounded-xl border border-slate-200">
+                {selectedDetails.rows.map(row => (
+                  <article
+                    key={row.row}
+                    className="grid gap-2 p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start sm:gap-6"
+                  >
+                    <div className="min-w-0">
+                      <p className="whitespace-pre-line break-words font-medium leading-6 text-slate-900">
+                        {row.description || 'Unlabeled source row'}
+                      </p>
+                      <p className="mt-1 text-xs text-slate-500">
+                        Source row {row.row} · {row.sourceSheet}
+                      </p>
+                    </div>
+                    <strong className="text-left tabular-nums text-slate-900 sm:text-right">
+                      {row.budgetPesos
+                        ? peso.format(money(row.budgetPesos) ?? 0)
+                        : 'Estimate not stated'}
+                    </strong>
+                  </article>
+                ))}
+              </div>
+            </div>
           </section>
         </div>
       )}
