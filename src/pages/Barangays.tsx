@@ -1,6 +1,94 @@
-import { Fragment, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Download, ExternalLink, Search } from 'lucide-react';
 import records from '../data/miagao-barangay-inventory.json';
+
+type HistoricalProfile = {
+  title: string;
+  publishedAt: string;
+  sourceUrl: string;
+  contentText: string;
+  historicalNote: string;
+};
+type Coordinate = [number, number];
+type PolygonRings = Coordinate[][];
+type BarangayGeometry =
+  | { type: 'Polygon'; coordinates: PolygonRings }
+  | { type: 'MultiPolygon'; coordinates: PolygonRings[] };
+type BoundaryFeature = {
+  type: 'Feature';
+  properties: { brgy_name?: string; psgc_10d?: string };
+  geometry: BarangayGeometry;
+};
+
+const boundaryQuery = new URLSearchParams({
+  where: "prov_name = 'Iloilo' AND city_name LIKE 'Miag%'",
+  outFields: 'brgy_name,psgc_10d',
+  returnGeometry: 'true',
+  outSR: '4326',
+  f: 'geojson',
+});
+const boundarySourceUrl = `https://portal.georisk.gov.ph/arcgis/rest/services/PSA/Barangay/MapServer/4/query?${boundaryQuery.toString()}`;
+
+function BarangayShape({
+  name,
+  geometry,
+}: {
+  name: string;
+  geometry?: BarangayGeometry;
+}) {
+  if (!geometry) {
+    return (
+      <div className="flex h-24 w-28 items-center justify-center rounded-lg bg-slate-100 text-center text-xs text-slate-500">
+        Boundary unavailable
+      </div>
+    );
+  }
+  const polygons =
+    geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
+  const positions = polygons.flat(2);
+  const xs = positions.map(point => point[0]);
+  const ys = positions.map(point => point[1]);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+  const width = maxX - minX || 1;
+  const height = maxY - minY || 1;
+  const paths = polygons.map(polygon =>
+    polygon
+      .map(
+        ring =>
+          ring
+            .map(([longitude, latitude], index) => {
+              const x = 4 + ((longitude - minX) / width) * 92;
+              const y = 4 + ((maxY - latitude) / height) * 62;
+              return `${index === 0 ? 'M' : 'L'}${x.toFixed(2)} ${y.toFixed(2)}`;
+            })
+            .join(' ') + ' Z'
+      )
+      .join(' ')
+  );
+  return (
+    <svg
+      viewBox="0 0 100 70"
+      role="img"
+      aria-label={`${name} barangay boundary`}
+      className="h-24 w-28 rounded-lg bg-blue-50 p-1"
+    >
+      {paths.map((path, index) => (
+        <path
+          key={index}
+          d={path}
+          fill="#dbeafe"
+          fillRule="evenodd"
+          stroke="#1e40af"
+          strokeWidth="1.1"
+          vectorEffect="non-scaling-stroke"
+        />
+      ))}
+    </svg>
+  );
+}
 
 type ProjectRecord = {
   year: number;
@@ -30,10 +118,30 @@ type BarangayRecord = {
     sourceLabel: string;
     status: string;
     source: string;
+    rosterTerm?: string;
+    dilgRosterAsOf?: string;
   };
 };
 
 const barangays = records.barangays as BarangayRecord[];
+const captainRoster = records.captainRoster as {
+  snapshotDate: string;
+  sourceUrl: string;
+  barangayRows: number;
+  captainRows: number;
+  officialPositionRows: number;
+  roleCounts: { role: string; count: number }[];
+  termNote: string;
+};
+function normalizePlace(value: string) {
+  return value
+    .toLocaleLowerCase()
+    .replace(/^brgy\.?\s*/, '')
+    .replace(/^barangay\s*/, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
 const peso = new Intl.NumberFormat('en-PH', {
   style: 'currency',
   currency: 'PHP',
@@ -77,13 +185,33 @@ function BarangayRankChart({
   );
 }
 
-function downloadRows(rows: BarangayRecord[], format: 'json' | 'csv') {
+function downloadRows(
+  rows: BarangayRecord[],
+  format: 'json' | 'csv',
+  historicalProfiles: HistoricalProfile[]
+) {
   const exportRows = rows.map(row => ({
     psgc: row.psgc,
     barangay: row.name,
     population2024: row.population2024,
     captain: row.captain?.name ?? '',
+    captainRosterTerm: row.captain?.rosterTerm ?? '',
+    captainRosterAsOf: row.captain?.asOf ?? '',
+    captainStatusNote: row.captain?.status ?? '',
+    captainSourceLabel: row.captain?.sourceLabel ?? '',
     captainSource: row.captain?.source ?? '',
+    archived2018Profile:
+      historicalProfiles.find(
+        profile => normalizePlace(profile.title) === normalizePlace(row.name)
+      )?.title ?? '',
+    archived2018ProfilePublishedAt:
+      historicalProfiles.find(
+        profile => normalizePlace(profile.title) === normalizePlace(row.name)
+      )?.publishedAt ?? '',
+    archived2018ProfileSource:
+      historicalProfiles.find(
+        profile => normalizePlace(profile.title) === normalizePlace(row.name)
+      )?.sourceUrl ?? '',
     fy2027MpbProjects: row.mpb.records
       .filter(project => project.year === 2027)
       .map(project => project.title)
@@ -119,9 +247,79 @@ function downloadRows(rows: BarangayRecord[], format: 'json' | 'csv') {
 
 export default function Barangays() {
   const [query, setQuery] = useState('');
+  const [historicalProfiles, setHistoricalProfiles] = useState<
+    HistoricalProfile[]
+  >([]);
+  const [boundaryByName, setBoundaryByName] = useState<
+    Map<string, BarangayGeometry>
+  >(new Map());
+  const [boundaryLoadState, setBoundaryLoadState] = useState<
+    'loading' | 'ready' | 'error'
+  >('loading');
+  useEffect(() => {
+    let active = true;
+    fetch(
+      `${import.meta.env.BASE_URL}data/miagao-disclosure/barangay-history.json`
+    )
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(payload => {
+        if (active && Array.isArray(payload.barangayProfiles2018)) {
+          setHistoricalProfiles(payload.barangayProfiles2018);
+        }
+      })
+      .catch(() => {
+        if (active) setHistoricalProfiles([]);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+  useEffect(() => {
+    let active = true;
+    fetch(boundarySourceUrl)
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then((payload: { features?: BoundaryFeature[] }) => {
+        const features = Array.isArray(payload.features)
+          ? payload.features
+          : [];
+        if (active) {
+          setBoundaryByName(
+            new Map(
+              features.map(feature => [
+                normalizePlace(feature.properties.brgy_name ?? ''),
+                feature.geometry,
+              ])
+            )
+          );
+          setBoundaryLoadState(features.length ? 'ready' : 'error');
+        }
+      })
+      .catch(() => {
+        if (active) setBoundaryLoadState('error');
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(20);
+  const profilesByBarangay = useMemo(
+    () =>
+      new Map(
+        historicalProfiles.map(profile => [
+          normalizePlace(profile.title),
+          profile,
+        ])
+      ),
+    [historicalProfiles]
+  );
   const filtered = useMemo(() => {
     const q = query.trim().toLocaleLowerCase();
     if (!q) return barangays;
@@ -131,12 +329,13 @@ export default function Barangays() {
         row.psgc,
         row.captain?.name ?? '',
         ...row.titleMatchedProjects.map(p => p.title),
+        profilesByBarangay.get(normalizePlace(row.name))?.contentText ?? '',
       ]
         .join(' ')
         .toLocaleLowerCase()
         .includes(q)
     );
-  }, [query]);
+  }, [query, profilesByBarangay]);
   const visibleRows = filtered.slice(page * pageSize, (page + 1) * pageSize);
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const firstRow = filtered.length ? page * pageSize + 1 : 0;
@@ -170,6 +369,11 @@ export default function Barangays() {
       value: row.population2024,
       display: row.population2024.toLocaleString(),
     }));
+  const rosterRoleRanks = captainRoster.roleCounts.map(row => ({
+    label: row.role,
+    value: row.count,
+    display: row.count.toLocaleString(),
+  }));
   const pagination = (
     <div className="flex flex-wrap items-center justify-between gap-3 py-3">
       <label className="flex items-center gap-2 text-sm text-gray-600">
@@ -229,15 +433,15 @@ export default function Barangays() {
           not confirm a project’s exact site.
         </p>
         <p className="mt-3 text-sm leading-6 text-gray-600">
-          The municipality’s published roster confirms the officials elected in
-          2023 but presents names in images. Names appear below only where a
-          dated text source identifies the captain. Blank entries mean “not yet
-          verified from an accessible text roster,” not that the barangay has no
-          captain.
+          The DILG Barangay Information System Region VI roster snapshot dated
+          14 September 2025 lists a Punong Barangay for all 119 Miagao
+          barangays. Its term field says 2023–2025; Republic Act 12326 moved the
+          next barangay election to November 2028. Later vacancies or
+          successions have not been independently checked.
         </p>
       </header>
 
-      <section className="mb-8 grid gap-3 sm:grid-cols-3">
+      <section className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl bg-slate-950 p-5 text-white">
           <strong className="block text-3xl">{barangays.length}</strong>
           <span className="text-sm text-slate-300">PSGC barangays</span>
@@ -261,10 +465,10 @@ export default function Barangays() {
         </div>
         <div className="rounded-xl border border-gray-200 bg-white p-5">
           <strong className="block text-3xl">
-            {barangays.filter(r => r.captain).length}
+            {captainRoster.captainRows}
           </strong>
           <span className="text-sm text-gray-600">
-            captains confirmed by a text source
+            DILG captain entries · {captainRoster.barangayRows} barangays
           </span>
         </div>
       </section>
@@ -282,15 +486,29 @@ export default function Barangays() {
           title="PSA 2024 population · largest barangays"
           rows={populationRanks}
         />
+        <BarangayRankChart
+          title="Positions listed in Miagao · DILG roster"
+          rows={rosterRoleRanks}
+        />
       </section>
 
       <section className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
-        <strong>Barangay captain roster:</strong> the municipal site’s “Know
-        Your Barangay Officials” post (January 2024) links event photos rather
-        than a searchable name list. The 2018 profile names are excluded as
-        current officials. The next barangay election is scheduled for November
-        2028 under Republic Act 12326.
+        <strong>Barangay captain roster:</strong> the DILG workbook contains{' '}
+        {captainRoster.officialPositionRows.toLocaleString()} position records
+        across {captainRoster.barangayRows} Miagao barangays, including{' '}
+        {captainRoster.captainRows} Punong Barangay entries. The workbook’s
+        stated term is 2023–2025; it is a dated roster snapshot, not a live
+        record of later vacancies or successions. Republic Act 12326 sets the
+        next barangay election in November 2028.
         <div className="mt-2 flex flex-wrap gap-4">
+          <a
+            className="inline-flex items-center gap-1 font-semibold underline"
+            href={captainRoster.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            DILG BIS Region VI workbook · 14 Sep 2025 <ExternalLink size={13} />
+          </a>
           <a
             className="inline-flex items-center gap-1 font-semibold underline"
             href={records.sources.barangayOfficialsRoster}
@@ -335,14 +553,14 @@ export default function Barangays() {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => downloadRows(filtered, 'json')}
+            onClick={() => downloadRows(filtered, 'json', historicalProfiles)}
             className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-blue-800 px-4 py-2 text-sm font-bold text-white hover:bg-blue-900"
           >
             <Download size={16} /> Export JSON
           </button>
           <button
             type="button"
-            onClick={() => downloadRows(filtered, 'csv')}
+            onClick={() => downloadRows(filtered, 'csv', historicalProfiles)}
             className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-blue-800 px-4 py-2 text-sm font-bold text-blue-800 hover:bg-blue-50"
           >
             <Download size={16} /> Export CSV
@@ -353,273 +571,219 @@ export default function Barangays() {
         </span>
       </div>
 
-      {pagination}
-      <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
-        <div className="grid gap-3 p-3 md:hidden">
-          {visibleRows.map(row => {
-            const currentMpb = row.mpb.records.filter(
-              project => project.year === 2027
-            );
-            const currentMpbAmount = currentMpb.reduce(
-              (sum, project) => sum + (project.amountPesos || 0),
-              0
-            );
-            const isOpen = expanded === row.psgc;
-            return (
-              <article
-                key={row.psgc}
-                className="rounded-lg border border-gray-200 p-3"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <h2 className="font-bold text-slate-950">{row.name}</h2>
-                  <button
-                    type="button"
-                    className="shrink-0 font-semibold text-blue-800 underline"
-                    onClick={() => setExpanded(isOpen ? null : row.psgc)}
-                  >
-                    {isOpen ? 'Hide' : 'Records'}
-                  </button>
-                </div>
-                <dl className="mt-2 grid grid-cols-2 gap-2 text-sm">
-                  <div>
-                    <dt className="text-xs text-gray-500">Population · 2024</dt>
-                    <dd>{row.population2024.toLocaleString()}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs text-gray-500">Punong Barangay</dt>
-                    <dd className="break-words">
-                      {row.captain?.name ?? 'Not yet verified'}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs text-gray-500">FY2027 MPB</dt>
-                    <dd>
-                      {currentMpb.length
-                        ? `${currentMpb.length} · ${peso.format(currentMpbAmount)}`
-                        : '—'}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs text-gray-500">
-                      DPWH title matches
-                    </dt>
-                    <dd>{row.titleMatchedProjects.length || '—'}</dd>
-                  </div>
-                </dl>
-                {isOpen && (
-                  <div className="mt-3 space-y-4 border-t border-gray-200 pt-3">
-                    <div>
-                      <h3 className="font-bold">FY2027 MPB records</h3>
-                      {currentMpb.length ? (
-                        currentMpb.map((project, index) => (
-                          <p
-                            key={`${project.source}-${index}`}
-                            className="mt-2 break-words text-sm"
-                          >
-                            {project.title} · {peso.format(project.amountPesos)}{' '}
-                            · {project.source}
-                          </p>
-                        ))
-                      ) : (
-                        <p className="mt-1 text-sm text-gray-600">
-                          No linked FY2027 MPB row.
-                        </p>
-                      )}
-                    </div>
-                    <div>
-                      <h3 className="font-bold">
-                        Historical and proposed DPWH title matches
-                      </h3>
-                      {row.titleMatchedProjects.length ? (
-                        row.titleMatchedProjects.map((project, index) => (
-                          <p
-                            key={`${project.source}-${index}`}
-                            className="mt-2 break-words text-sm"
-                          >
-                            {project.year} · {project.title} ·{' '}
-                            {peso.format(project.amountPesos)} ·{' '}
-                            {project.source}
-                          </p>
-                        ))
-                      ) : (
-                        <p className="mt-1 text-sm text-gray-600">
-                          No linked DPWH title match.
-                        </p>
-                      )}
-                    </div>
-                    {row.captain && (
-                      <p className="break-words text-xs text-gray-600">
-                        {row.captain.status} ({row.captain.asOf}) ·{' '}
-                        <a
-                          className="underline"
-                          href={row.captain.source}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {row.captain.sourceLabel}
-                        </a>
-                      </p>
-                    )}
-                  </div>
-                )}
-              </article>
-            );
-          })}
+      <section className="mb-3 flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-950">
+            Barangays · map and archive profiles
+          </h2>
+          <p className="mt-1 max-w-3xl text-sm leading-6 text-gray-600">
+            Each card shows the barangay boundary. Where the municipal 2018
+            archive has a matching profile, it is linked here; missing archive
+            profiles do not remove the map or barangay record.
+          </p>
         </div>
-        <div className="hidden md:block">
-          <table className="w-full table-fixed border-collapse text-left text-sm">
-            <thead className="bg-slate-950 text-white">
-              <tr>
-                <th className="w-[18%] break-words px-3 py-3">Barangay</th>
-                <th className="w-[10%] break-words px-3 py-3">
-                  Population · 2024
-                </th>
-                <th className="w-[18%] break-words px-3 py-3">
-                  Punong Barangay
-                </th>
-                <th className="w-[17%] break-words px-3 py-3">FY2027 MPB</th>
-                <th className="w-[20%] break-words px-3 py-3">
-                  Title-matched DPWH records
-                </th>
-                <th className="w-[17%] break-words px-3 py-3">Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {visibleRows.map(row => {
-                const currentMpb = row.mpb.records.filter(
-                  project => project.year === 2027
-                );
-                const currentMpbAmount = currentMpb.reduce(
-                  (sum, p) => sum + (p.amountPesos || 0),
-                  0
-                );
-                const isOpen = expanded === row.psgc;
-                return (
-                  <Fragment key={row.psgc}>
-                    <tr className="border-t border-gray-200 odd:bg-white even:bg-slate-50">
-                      <td className="break-words px-3 py-3 font-semibold text-slate-950">
-                        {row.name}
-                      </td>
-                      <td className="break-words px-3 py-3 tabular-nums">
+        <span className="text-xs text-gray-500">
+          {boundaryLoadState === 'ready'
+            ? `${boundaryByName.size} mapped shapes`
+            : boundaryLoadState === 'loading'
+              ? 'Loading barangay shapes…'
+              : 'Barangay shapes unavailable'}
+        </span>
+      </section>
+      <p className="mb-4 text-xs text-gray-500">
+        Boundary source:{' '}
+        <a
+          className="underline"
+          href="https://portal.georisk.gov.ph/arcgis/rest/services/PSA/Barangay/MapServer/4"
+          target="_blank"
+          rel="noreferrer"
+        >
+          PSA barangay boundaries, June 2016 snapshot
+        </a>
+        . The boundaries are indicative.
+      </p>
+      {pagination}
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {visibleRows.map(row => {
+          const currentMpb = row.mpb.records.filter(
+            project => project.year === 2027
+          );
+          const currentMpbAmount = currentMpb.reduce(
+            (sum, project) => sum + (project.amountPesos || 0),
+            0
+          );
+          const profile = profilesByBarangay.get(normalizePlace(row.name));
+          const isOpen = expanded === row.psgc;
+          const boundary = boundaryByName.get(normalizePlace(row.name));
+          const profileSummary =
+            profile?.contentText
+              .replace(/^Brief History\s*/i, '')
+              .slice(0, 360) ?? '';
+          return (
+            <article
+              key={row.psgc}
+              id={`barangay-${row.psgc}`}
+              className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+            >
+              <div className="flex gap-4">
+                <BarangayShape name={row.name} geometry={boundary} />
+                <div className="min-w-0 flex-1">
+                  <h3 className="break-words text-lg font-bold text-slate-950">
+                    {row.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-500">PSGC {row.psgc}</p>
+                  <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        Population · 2024
+                      </dt>
+                      <dd className="font-semibold">
                         {row.population2024.toLocaleString()}
-                      </td>
-                      <td className="break-words px-3 py-3">
-                        {row.captain ? (
-                          <span>{row.captain.name}</span>
-                        ) : (
-                          <span className="text-gray-500">
-                            Not yet verified
-                          </span>
-                        )}
-                      </td>
-                      <td className="break-words px-3 py-3 tabular-nums">
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        Captain · DILG 2025
+                      </dt>
+                      <dd className="break-words font-semibold">
+                        {row.captain?.name ?? 'Not listed'}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs text-gray-500">FY2027 MPB</dt>
+                      <dd>
                         {currentMpb.length
                           ? `${currentMpb.length} · ${peso.format(currentMpbAmount)}`
                           : '—'}
-                      </td>
-                      <td className="break-words px-3 py-3 tabular-nums">
-                        {row.titleMatchedProjects.length || '—'}
-                      </td>
-                      <td className="break-words px-3 py-3">
-                        <button
-                          className="font-semibold text-blue-800 underline"
-                          onClick={() => setExpanded(isOpen ? null : row.psgc)}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        DPWH title matches
+                      </dt>
+                      <dd>{row.titleMatchedProjects.length || '—'}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+              <div className="mt-4 rounded-lg bg-slate-50 p-3">
+                {profile ? (
+                  <>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="text-xs font-bold uppercase tracking-wide text-slate-600">
+                        2018 archive profile
+                      </span>
+                      <time
+                        className="text-xs text-slate-500"
+                        dateTime={profile.publishedAt}
+                      >
+                        {profile.publishedAt.slice(0, 10)}
+                      </time>
+                    </div>
+                    <p className="mt-2 text-sm leading-5 text-slate-700">
+                      {profileSummary}
+                      {profile.contentText.length > 360 ? '…' : ''}
+                    </p>
+                    <a
+                      className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-blue-800 underline"
+                      href={profile.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Open full archived profile <ExternalLink size={13} />
+                    </a>
+                  </>
+                ) : (
+                  <p className="text-sm text-slate-600">
+                    No matching profile page was found in the current 2018
+                    archive import. Barangay boundary is shown above.
+                  </p>
+                )}
+              </div>
+              <button
+                type="button"
+                className="mt-4 min-h-10 rounded-lg border border-blue-800 px-3 py-2 text-sm font-bold text-blue-800 hover:bg-blue-50"
+                onClick={() => setExpanded(isOpen ? null : row.psgc)}
+              >
+                {isOpen ? 'Hide linked records' : 'Show linked records'}
+              </button>
+              {isOpen && (
+                <div className="mt-4 space-y-4 border-t border-slate-200 pt-4">
+                  <section>
+                    <h4 className="font-bold text-slate-950">
+                      FY2027 MPB records
+                    </h4>
+                    {currentMpb.length ? (
+                      currentMpb.map((project, index) => (
+                        <div
+                          key={`${project.source}-${index}`}
+                          className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm"
                         >
-                          {isOpen ? 'Hide' : 'Show'} records
-                        </button>
-                      </td>
-                    </tr>
-                    {isOpen && (
-                      <tr className="border-t border-blue-100 bg-blue-50">
-                        <td colSpan={6} className="px-4 py-5">
-                          <div className="grid gap-6 lg:grid-cols-2">
-                            <div>
-                              <h2 className="font-bold text-slate-950">
-                                FY2027 MPB records
-                              </h2>
-                              {currentMpb.length ? (
-                                currentMpb.map((project, i) => (
-                                  <article
-                                    key={`${project.source}-${i}`}
-                                    className="mt-3 rounded-lg border border-blue-100 bg-white p-3"
-                                  >
-                                    <p className="font-semibold">
-                                      {project.title}
-                                    </p>
-                                    <p className="mt-1 text-sm">
-                                      {peso.format(project.amountPesos)} ·{' '}
-                                      {project.stage}
-                                    </p>
-                                    <p className="mt-1 text-xs text-gray-600">
-                                      {project.locationBasis};{' '}
-                                      {project.identityConfidence}
-                                    </p>
-                                    <p className="mt-1 text-xs text-gray-500">
-                                      {project.source}
-                                    </p>
-                                  </article>
-                                ))
-                              ) : (
-                                <p className="mt-2 text-sm text-gray-600">
-                                  No FY2027 MPB record linked by the current
-                                  source data.
-                                </p>
-                              )}
-                            </div>
-                            <div>
-                              <h2 className="font-bold text-slate-950">
-                                Historical and proposed DPWH title matches
-                              </h2>
-                              {row.titleMatchedProjects.length ? (
-                                row.titleMatchedProjects.map((project, i) => (
-                                  <article
-                                    key={`${project.source}-${i}`}
-                                    className="mt-3 rounded-lg border border-blue-100 bg-white p-3"
-                                  >
-                                    <p className="font-semibold">
-                                      {project.title}
-                                    </p>
-                                    <p className="mt-1 text-sm">
-                                      {project.year} · {project.category} ·{' '}
-                                      {peso.format(project.amountPesos)}
-                                    </p>
-                                    <p className="mt-1 text-xs text-gray-500">
-                                      {project.source}
-                                    </p>
-                                  </article>
-                                ))
-                              ) : (
-                                <p className="mt-2 text-sm text-gray-600">
-                                  No current title match. Projects named at
-                                  municipality or corridor level may not appear
-                                  under a barangay.
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          {row.captain && (
-                            <p className="mt-5 text-xs text-gray-600">
-                              {row.captain.status} ({row.captain.asOf}) Source:{' '}
-                              <a
-                                className="underline"
-                                href={row.captain.source}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                {row.captain.sourceLabel}
-                              </a>
-                              .
-                            </p>
-                          )}
-                        </td>
-                      </tr>
+                          <p className="font-semibold">{project.title}</p>
+                          <p className="mt-1">
+                            {peso.format(project.amountPesos)} · {project.stage}
+                          </p>
+                          <p className="mt-1 text-xs text-gray-600">
+                            {project.locationBasis};{' '}
+                            {project.identityConfidence}
+                          </p>
+                          <p className="mt-1 break-words text-xs text-gray-500">
+                            {project.source}
+                          </p>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="mt-1 text-sm text-gray-600">
+                        No FY2027 MPB record linked by the current source data.
+                      </p>
                     )}
-                  </Fragment>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                  </section>
+                  <section>
+                    <h4 className="font-bold text-slate-950">
+                      Historical and proposed DPWH title matches
+                    </h4>
+                    {row.titleMatchedProjects.length ? (
+                      row.titleMatchedProjects.map((project, index) => (
+                        <div
+                          key={`${project.source}-${index}`}
+                          className="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm"
+                        >
+                          <p className="font-semibold">{project.title}</p>
+                          <p className="mt-1">
+                            {project.year} · {project.category} ·{' '}
+                            {peso.format(project.amountPesos)}
+                          </p>
+                          <p className="mt-1 break-words text-xs text-gray-500">
+                            {project.source}
+                          </p>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="mt-1 text-sm text-gray-600">
+                        No current title match. Municipality-level or corridor
+                        projects may not appear under a barangay.
+                      </p>
+                    )}
+                  </section>
+                  {row.captain && (
+                    <p className="break-words text-xs leading-5 text-gray-600">
+                      {row.captain.status}{' '}
+                      <a
+                        className="font-semibold underline"
+                        href={row.captain.source}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {row.captain.sourceLabel}
+                      </a>
+                      .
+                    </p>
+                  )}
+                </div>
+              )}
+            </article>
+          );
+        })}
       </div>
       {pagination}
       <p className="mt-4 text-xs leading-5 text-gray-500">

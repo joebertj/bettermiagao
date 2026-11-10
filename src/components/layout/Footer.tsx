@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { mainNavigation } from '../../data/navigation';
 
 export default function Footer() {
   return (
@@ -11,19 +12,19 @@ export default function Footer() {
             official municipal government website.
           </p>
         </div>
-        <div className="flex flex-wrap gap-x-5 gap-y-2">
-          <Link
-            className="text-slate-200 underline hover:text-white"
-            to="/projects"
-          >
-            Projects
-          </Link>
-          <Link
-            className="text-slate-200 underline hover:text-white"
-            to="/people"
-          >
-            People & offices
-          </Link>
+        <nav
+          aria-label="Footer navigation"
+          className="flex flex-wrap gap-x-5 gap-y-2"
+        >
+          {mainNavigation.map(link => (
+            <Link
+              key={link.href}
+              className="text-slate-200 underline hover:text-white"
+              to={link.href}
+            >
+              {link.label}
+            </Link>
+          ))}
           <a
             className="text-slate-200 underline hover:text-white"
             href="https://www.miagao.gov.ph/"
@@ -32,7 +33,7 @@ export default function Footer() {
           >
             Official Miagao site
           </a>
-        </div>
+        </nav>
       </div>
     </footer>
   );

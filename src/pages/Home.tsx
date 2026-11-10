@@ -4,9 +4,12 @@ import {
   FileSearch,
   Landmark,
   MapPinned,
+  Map,
+  Wallet,
 } from 'lucide-react';
 import { Link } from 'react-router';
 import records from '../data/miagao-projects.json';
+import { mainNavigation } from '../data/navigation';
 
 const proposed = records.projects.filter(project => project.year === 2027);
 const recent = records.projects.filter(
@@ -134,55 +137,66 @@ export default function Home() {
             and uncertainty.
           </p>
         </div>
-        <div className="grid gap-5 md:grid-cols-3">
-          <Link
-            to="/projects"
-            className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-          >
-            <Building2 className="mb-6 text-blue-800" size={30} />
-            <h3 className="text-xl font-bold text-gray-950">
-              Projects & budgets
-            </h3>
-            <p className="mt-2 leading-6 text-gray-600">
-              Search historical DPWH GAA rows and FY2027 proposal lines whose
-              titles mention Miagao.
-            </p>
-            <span className="mt-5 inline-flex items-center gap-2 font-bold text-blue-800">
-              View project records <ArrowRight size={16} />
-            </span>
-          </Link>
-          <Link
-            to="/people"
-            className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-          >
-            <Landmark className="mb-6 text-blue-800" size={30} />
-            <h3 className="text-xl font-bold text-gray-950">
-              People & offices
-            </h3>
-            <p className="mt-2 leading-6 text-gray-600">
-              See municipal leadership, district representation, DPWH office
-              context, and extracted document signatories.
-            </p>
-            <span className="mt-5 inline-flex items-center gap-2 font-bold text-blue-800">
-              See officials and offices <ArrowRight size={16} />
-            </span>
-          </Link>
-          <Link
-            to="/about"
-            className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-          >
-            <FileSearch className="mb-6 text-blue-800" size={30} />
-            <h3 className="text-xl font-bold text-gray-950">
-              Sources & methods
-            </h3>
-            <p className="mt-2 leading-6 text-gray-600">
-              Learn how records are matched and what the project can and cannot
-              establish.
-            </p>
-            <span className="mt-5 inline-flex items-center gap-2 font-bold text-blue-800">
-              Read the notes <ArrowRight size={16} />
-            </span>
-          </Link>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {mainNavigation.map(item => {
+            const card = {
+              '/projects': {
+                icon: Building2,
+                title: 'Projects & budgets',
+                description:
+                  'Search historical DPWH GAA rows and FY2027 proposal lines whose titles mention Miagao.',
+                action: 'View project records',
+              },
+              '/people': {
+                icon: Landmark,
+                title: 'People & offices',
+                description:
+                  'See municipal leadership, district representation, DPWH office context, and extracted document signatories.',
+                action: 'See officials and offices',
+              },
+              '/barangays': {
+                icon: Map,
+                title: 'Barangays',
+                description:
+                  'Browse barangay profiles, mapped boundaries, local records, and linked projects.',
+                action: 'Browse barangays',
+              },
+              '/transparency': {
+                icon: Wallet,
+                title: 'Budget & procurement',
+                description:
+                  'Explore available budget, procurement, bidding, and expenditure records.',
+                action: 'View transparency records',
+              },
+              '/about': {
+                icon: FileSearch,
+                title: 'Sources & methods',
+                description:
+                  'Learn how records are matched and what the project can and cannot establish.',
+                action: 'Read the notes',
+              },
+            }[item.href];
+            if (!card) return null;
+            const Icon = card.icon;
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              >
+                <Icon className="mb-6 text-blue-800" size={30} />
+                <h3 className="text-xl font-bold text-gray-950">
+                  {card.title}
+                </h3>
+                <p className="mt-2 leading-6 text-gray-600">
+                  {card.description}
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 font-bold text-blue-800">
+                  {card.action} <ArrowRight size={16} />
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </section>
     </main>

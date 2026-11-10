@@ -3,6 +3,9 @@ import type { NavigationItem } from '../types';
 export const mainNavigation: NavigationItem[] = [
   { label: 'Projects', href: '/projects' },
   { label: 'People & offices', href: '/people' },
+  { label: 'Barangays', href: '/barangays' },
+  { label: 'Budget & procurement', href: '/transparency' },
+  { label: 'About', href: '/about' },
 ];
 
 export const footerNavigation = {
@@ -23,10 +26,7 @@ export const footerNavigation = {
     },
     {
       title: 'Explore',
-      links: [
-        { label: 'Projects', href: '/projects' },
-        { label: 'People & offices', href: '/people' },
-      ],
+      links: mainNavigation,
     },
     {
       title: 'Official sources',

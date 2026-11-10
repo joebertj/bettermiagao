@@ -2,24 +2,16 @@ import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { ArrowDownToLine, ExternalLink, Search } from 'lucide-react';
 
-type Tab = 'budget' | 'execution' | 'barangays' | 'bettergov';
+type Tab = 'budget' | 'execution' | 'bettergov';
 type RecordData = Record<string, unknown>;
 type Column = { label: string; align?: 'left' | 'right' };
 type DataRow = { id: string; cells: ReactNode[]; searchText?: string };
 type PageKey =
-  | 'offices'
-  | 'app'
-  | 'bids'
-  | 'sre'
-  | 'progress'
-  | 'crosswalk'
-  | 'profiles'
-  | 'research';
+  'offices' | 'app' | 'bids' | 'sre' | 'progress' | 'crosswalk' | 'research';
 
 const files: Record<Tab, string> = {
   budget: 'budget-app/manifest.json',
   execution: 'q1-execution.json',
-  barangays: 'barangay-history.json',
   bettergov: 'bettergov-project-and-place-records.json',
 };
 const basePath = `${import.meta.env.BASE_URL}data/miagao-disclosure/`;
@@ -357,7 +349,6 @@ export default function Transparency() {
     sre: 0,
     progress: 0,
     crosswalk: 0,
-    profiles: 0,
     research: 0,
   });
 
@@ -423,7 +414,6 @@ export default function Transparency() {
       sre: 0,
       progress: 0,
       crosswalk: 0,
-      profiles: 0,
       research: 0,
     });
 
@@ -431,8 +421,6 @@ export default function Transparency() {
   const bidRows = (data?.bidResultsQ1 as RecordData[] | undefined) ?? [];
   const sreRows = (data?.sreQ1Rows as RecordData[] | undefined) ?? [];
   const progressRows = (data?.q1ProgressRows as RecordData[] | undefined) ?? [];
-  const profileRows =
-    (data?.barangayProfiles2018 as RecordData[] | undefined) ?? [];
   const betterGovRows = (data?.records as RecordData[] | undefined) ?? [];
   const crosswalkRows =
     (data?.projectTrackingCases as RecordData[] | undefined) ?? [];
@@ -466,7 +454,6 @@ export default function Transparency() {
   ]);
   const visibleSre = filter(sreRows, ['particulars']);
   const visibleProgress = filter(progressRows, ['title', 'office', 'location']);
-  const visibleProfiles = filter(profileRows, ['title', 'contentText']);
   const visibleResearch = filter(betterGovRows, [
     'source',
     'recordType',
@@ -536,14 +523,6 @@ export default function Transparency() {
       value: amount(row.total) ?? 0,
     }))
     .map(row => ({ ...row, display: pesos(row.value) }));
-  const profileCoverage = [
-    {
-      label: 'Historical profiles available',
-      value: profileRows.length,
-      display: String(profileRows.length),
-    },
-    { label: 'Barangays in 2024 announcement', value: 119, display: '119' },
-  ];
   const sourceCounts = Object.entries(
     betterGovRows.reduce<Record<string, number>>((counts, row) => {
       const source = String(row.source ?? 'Unlabeled source');
@@ -621,25 +600,6 @@ export default function Transparency() {
       ],
     })
   );
-  const profileTableRows = pageRows('profiles', visibleProfiles).map(
-    (row, index) => ({
-      id: `profile-${row.title}-${index}`,
-      cells: [
-        display(row.title),
-        display(row.publishedAt).slice(0, 10),
-        display(row.contentText).slice(0, 900),
-        <a
-          key={`source-${index}`}
-          href={String(row.sourceUrl)}
-          target="_blank"
-          rel="noreferrer"
-          className="font-semibold text-blue-800 underline"
-        >
-          Official source
-        </a>,
-      ],
-    })
-  );
   const researchTableRows = pageRows('research', visibleResearch).map(
     (row, index) => ({
       id: `research-${row.source}-${index}`,
@@ -696,7 +656,6 @@ export default function Transparency() {
       >
         {navTab('budget', 'Budget & APP')}
         {navTab('execution', 'Bids & Q1 reports')}
-        {navTab('barangays', 'Barangay profiles')}
         {navTab('bettergov', 'BetterGov records')}
       </div>
 
@@ -992,60 +951,6 @@ export default function Transparency() {
               />
             </div>
             {pageControl('crosswalk', visibleCrosswalk)}
-          </section>
-        </div>
-      )}
-
-      {data && dataReady && tab === 'barangays' && (
-        <div className="space-y-6">
-          <Bars
-            title="Barangay profile pages in the archive"
-            rows={profileCoverage}
-          />
-          <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <h2 className="text-xl font-bold">
-                  Barangay profiles · 2018 archive
-                </h2>
-                <p className="text-sm text-slate-600">
-                  {profileRows.length} profile pages · official 2024 post
-                  announces 119 barangays
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <LinkButton href="https://www.miagao.gov.ph/about-miagao/barangay-map-information/">
-                  Official profile index
-                </LinkButton>
-                <LinkButton href="https://www.miagao.gov.ph/about-miagao/news/know-your-barangay-officials/">
-                  2024 officials post
-                </LinkButton>
-                <ExportButtons
-                  name="miagao-historical-barangay-profiles"
-                  rows={visibleProfiles}
-                />
-              </div>
-            </div>
-            <SearchBox
-              value={query}
-              onChange={value => {
-                setQuery(value);
-                resetPages();
-              }}
-              placeholder="Search profile name or text"
-            />
-            <div {...tableProps}>
-              <ResponsiveTable
-                columns={[
-                  { label: 'Barangay' },
-                  { label: 'Published' },
-                  { label: 'Profile text' },
-                  { label: 'Source' },
-                ]}
-                rows={profileTableRows}
-              />
-            </div>
-            {pageControl('profiles', visibleProfiles)}
           </section>
         </div>
       )}
