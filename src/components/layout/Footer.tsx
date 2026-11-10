@@ -17,13 +17,23 @@ export default function Footer() {
           className="flex flex-wrap gap-x-5 gap-y-2"
         >
           {mainNavigation.map(link => (
-            <Link
-              key={link.href}
-              className="text-slate-200 underline hover:text-white"
-              to={link.href}
-            >
-              {link.label}
-            </Link>
+            <div key={link.href} className="flex flex-col items-start gap-1">
+              <Link
+                className="text-slate-200 underline hover:text-white"
+                to={link.href}
+              >
+                {link.label}
+              </Link>
+              {link.children?.map(child => (
+                <Link
+                  key={child.href}
+                  className="pl-2 text-xs text-slate-300 underline decoration-slate-500 underline-offset-2 hover:text-white"
+                  to={child.href}
+                >
+                  {child.label}
+                </Link>
+              ))}
+            </div>
           ))}
           <a
             className="text-slate-200 underline hover:text-white"

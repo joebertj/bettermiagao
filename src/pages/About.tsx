@@ -17,11 +17,10 @@ export default function About() {
       <div className="mt-8 space-y-5 rounded-2xl border border-gray-200 bg-white p-6">
         <h2 className="text-xl font-bold">Project and budget records</h2>
         <p className="leading-7 text-gray-700">
-          The current projects dataset comes from ODV’s integrated DPWH project
-          data. The initial Miagao view selects rows whose titles contain
-          “Miagao” or “Miag-ao.” This method can miss projects described only by
-          barangay and can include long corridors whose full location needs
-          review.
+          The current projects dataset is based on BetterGov DPWH project data.
+          The initial Miagao view selects rows whose titles contain “Miagao” or
+          “Miag-ao.” This method can miss projects described only by barangay
+          and can include long corridors whose full location needs review.
         </p>
         <p className="leading-7 text-gray-700">
           FY2027 rows are from a House 3rd-reading bill extract. A proposal is

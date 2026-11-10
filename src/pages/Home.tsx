@@ -8,22 +8,7 @@ import {
   Wallet,
 } from 'lucide-react';
 import { Link } from 'react-router';
-import records from '../data/miagao-projects.json';
 import { mainNavigation } from '../data/navigation';
-
-const proposed = records.projects.filter(project => project.year === 2027);
-const recent = records.projects.filter(
-  project => project.year >= 2017 && project.year <= 2026
-);
-const proposedAmount = proposed.reduce(
-  (sum, project) => sum + project.amountPesos,
-  0
-);
-const peso = new Intl.NumberFormat('en-PH', {
-  style: 'currency',
-  currency: 'PHP',
-  maximumFractionDigits: 0,
-});
 
 export default function Home() {
   return (
@@ -46,11 +31,11 @@ export default function Home() {
               <MapPinned size={14} /> Miagao · Iloilo
             </p>
             <h1 className="max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
-              A clearer view of public decisions in Miagao.
+              Miagao’s local records, made easier to explore.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              Explore public project records, the officials and offices
-              connected to them, and the sources behind each entry.
+              Browse municipal budgets and procurement, barangay profiles, local
+              projects, and the people and offices connected to them.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -95,29 +80,27 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-              <FileSearch className="mb-4 text-amber-300" />
-              <strong className="block text-3xl">{recent.length}</strong>
+              <Map className="mb-4 text-amber-300" />
+              <strong className="block text-3xl">119</strong>
               <span className="mt-1 block text-sm text-slate-300">
-                GAA project rows · 2017–2026
+                barangays in Miagao
               </span>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-              <Landmark className="mb-4 text-amber-300" />
-              <strong className="block text-3xl">{proposed.length}</strong>
+              <FileSearch className="mb-4 text-amber-300" />
+              <strong className="block text-3xl">3,578</strong>
               <span className="mt-1 block text-sm text-slate-300">
-                FY2027 House proposal rows
+                rows in the 2026 municipal APP
               </span>
             </div>
             <div className="col-span-2 rounded-2xl bg-blue-700 p-5">
               <p className="text-sm font-medium text-blue-100">
-                FY2027 proposal amount in the title-matched rows
+                2026 municipal appropriations recorded
               </p>
-              <strong className="mt-1 block text-3xl">
-                {peso.format(proposedAmount)}
-              </strong>
+              <strong className="mt-1 block text-3xl">₱356.06 million</strong>
               <p className="mt-2 text-xs leading-5 text-blue-100">
-                House 3rd-reading extract · proposed allocation, not an enacted
-                budget.
+                Office and account-level totals; the source does not assign an
+                amount to every project title.
               </p>
             </div>
           </div>
@@ -142,10 +125,10 @@ export default function Home() {
             const card = {
               '/projects': {
                 icon: Building2,
-                title: 'Projects & budgets',
+                title: 'National',
                 description:
-                  'Search historical DPWH GAA rows and FY2027 proposal lines whose titles mention Miagao.',
-                action: 'View project records',
+                  'Review national DPWH GAA history and FY2027 House proposal lines that mention Miagao.',
+                action: 'View national projects',
               },
               '/people': {
                 icon: Landmark,
@@ -179,22 +162,36 @@ export default function Home() {
             if (!card) return null;
             const Icon = card.icon;
             return (
-              <Link
+              <article
                 key={item.href}
-                to={item.href}
-                className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
               >
-                <Icon className="mb-6 text-blue-800" size={30} />
-                <h3 className="text-xl font-bold text-gray-950">
-                  {card.title}
-                </h3>
-                <p className="mt-2 leading-6 text-gray-600">
-                  {card.description}
-                </p>
-                <span className="mt-5 inline-flex items-center gap-2 font-bold text-blue-800">
-                  {card.action} <ArrowRight size={16} />
-                </span>
-              </Link>
+                <Link to={item.href} className="group block">
+                  <Icon className="mb-6 text-blue-800" size={30} />
+                  <h3 className="text-xl font-bold text-gray-950">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 leading-6 text-gray-600">
+                    {card.description}
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-2 font-bold text-blue-800">
+                    {card.action} <ArrowRight size={16} />
+                  </span>
+                </Link>
+                {item.children?.length ? (
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t border-slate-100 pt-3">
+                    {item.children.map(child => (
+                      <Link
+                        key={child.href}
+                        to={child.href}
+                        className="text-sm font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 hover:text-blue-800"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
+              </article>
             );
           })}
         </div>

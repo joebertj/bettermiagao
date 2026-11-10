@@ -1,8 +1,8 @@
 {
   "title": "Publicly listed DPWH budget rows with Miagao title matches",
   "generatedAt": "2026-11-10",
-  "scope": "Rows from ODV integrated project data whose project title contains the locality name Miagao or Miag-ao after punctuation normalization. This title search can omit projects listed only by barangay or another locality and can include corridor or district-wide works whose full physical footprint needs confirmation. FY2026 rows come from the DPWH GAA Details Enrolled Copy and are enacted GAA lines.",
-  "sourceDataset": "ODV integrated-project-data.json + FY2026 DPWH GAA Details Enrolled Copy",
+  "scope": "Rows from BetterGov integrated project data whose project title contains the locality name Miagao or Miag-ao after punctuation normalization. This title search can omit projects listed only by barangay or another locality and can include corridor or district-wide works whose full physical footprint needs confirmation. FY2026 rows come from the DPWH GAA Details Enrolled Copy and are enacted GAA lines.",
+  "sourceDataset": "BetterGov integrated-project-data.json + FY2026 DPWH GAA Details Enrolled Copy",
   "locationReference": "PSGC names where titleBarangays is present; title mentions only, not surveyed project footprints",
   "sourceUrl": "https://research.bettergov.ph/static/nep-preview/integrated-project-data.json",
   "historicalSourceNote": "2017–2026 rows are GAA lines. FY2026 rows are from the DPWH GAA Details Enrolled Copy.",

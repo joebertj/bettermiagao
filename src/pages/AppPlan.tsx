@@ -307,17 +307,6 @@ export default function AppPlan() {
     return children;
   };
 
-  const internet = siblings.find(row => row.row === 92);
-  const internetDetails = internet ? breakdownFor(internet) : [];
-  const internetDetailTotal = internetDetails.reduce(
-    (sum, row) => sum + (money(row.budgetPesos) ?? 0),
-    0
-  );
-  const internetEstimate = internet ? (money(internet.budgetPesos) ?? 0) : 0;
-  const internetGap = internetEstimate - internetDetailTotal;
-  const rank =
-    categoryChart.findIndex(row => row.label === internet?.description) + 1;
-
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
       <header className="mb-6 max-w-4xl">
@@ -355,30 +344,6 @@ export default function AppPlan() {
               rows={categoryChart}
             />
           </div>
-
-          {internet && (
-            <section className="rounded-2xl border border-amber-300 bg-amber-50 p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-amber-900">
-                Source-row comparison
-              </p>
-              <h2 className="mt-1 text-xl font-bold text-slate-950">
-                Internet subscription · ₱678,451
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-slate-700">
-                This is {rank} of {siblings.length} lettered estimates in the
-                same Mayor’s Office section. Its following detail row lists{' '}
-                {peso.format(internetDetailTotal)} for an 11-month, 1 Gbps fiber
-                subscription. The APP rows leave a {peso.format(internetGap)}{' '}
-                difference between the category amount and its listed detail;
-                the workbook does not explain that difference.
-              </p>
-              <p className="mt-2 text-xs text-slate-600">
-                Source rows {internet.row}–
-                {internetDetails.map(row => row.row).join(', ')} · check the
-                original workbook before interpreting the difference.
-              </p>
-            </section>
-          )}
 
           <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">

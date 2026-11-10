@@ -183,11 +183,6 @@ export default function Ayuda() {
             <strong>₱90,000</strong> program line, with ₱36,000 incurred to
             date. This is not the value of household cash transfers.
           </p>
-          <p>
-            I did not find a named MAIFIP line in the collected disclosure rows.
-            It may be reported under a different label or in a file not yet
-            included here.
-          </p>
           <SourceLink href={`${official}/transparency/2026-full-disclosure/`}>
             2026 Full Disclosure index
           </SourceLink>

@@ -160,7 +160,7 @@ def main() -> None:
         )
 
     metadata = {
-        "source": "ODV connectivity-fmr-road.json",
+        "source": "BetterGov FMR project data",
         "stage": "FY2027 House General Appropriations Bill, 3rd-reading proposal",
         "coordinateMeaning": (
             "Straight connectors between printed FMR endpoints, clipped to "

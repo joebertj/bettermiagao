@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create the Miagao title-matched project snapshot from ODV's integrated data."""
+"""Create the Miagao title-matched project snapshot from BetterGov project data."""
 
 from __future__ import annotations
 
@@ -38,11 +38,11 @@ def title_barangays(title: str, barangays: list[str]) -> list[str]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("odv_json", type=Path, help="Path to integrated-project-data.json")
+    parser.add_argument("project_data_json", type=Path, help="Path to BetterGov project data JSON")
     parser.add_argument(
         "--psgc-jsonl",
         type=Path,
-        help="Optional ODV PSGC locations JSONL; used to tag exact Miagao barangay-name mentions",
+        help="Optional BetterGov PSGC locations JSONL; used to tag exact Miagao barangay-name mentions",
     )
     parser.add_argument(
         "--gaa-2026-parquet",
@@ -55,7 +55,7 @@ def main() -> None:
         default=Path(__file__).resolve().parents[1] / "src/data/miagao-projects.json",
     )
     args = parser.parse_args()
-    source = json.loads(args.odv_json.read_text(encoding="utf-8"))
+    source = json.loads(args.project_data_json.read_text(encoding="utf-8"))
     rows = [
         row
         for row in source.get("projects", [])
@@ -113,13 +113,13 @@ def main() -> None:
         "title": "Publicly listed DPWH budget rows with Miagao title matches",
         "generatedAt": "2026-11-10",
         "scope": (
-            "Rows from ODV integrated project data whose project title contains the locality name "
+            "Rows from BetterGov project data whose project title contains the locality name "
             "Miagao or Miag-ao after punctuation normalization. This title search can omit projects "
             "listed only by barangay or another locality and can include corridor or district-wide "
             "works whose full physical footprint needs confirmation. FY2026 rows come from the DPWH "
             "GAA Details Enrolled Copy and are enacted GAA lines."
         ),
-        "sourceDataset": "ODV integrated-project-data.json + FY2026 DPWH GAA Details Enrolled Copy",
+        "sourceDataset": "BetterGov DPWH project data + FY2026 DPWH GAA Details Enrolled Copy",
         "locationReference": "PSGC names where titleBarangays is present; title mentions only, not surveyed project footprints",
         "sourceUrl": "https://research.bettergov.ph/static/nep-preview/integrated-project-data.json",
         "historicalSourceNote": "2017–2026 rows are GAA lines. FY2026 rows are from the DPWH GAA Details Enrolled Copy.",

@@ -116,69 +116,69 @@ export default function Projects() {
 
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
-      <header className="mb-10 max-w-4xl">
+      <header className="mb-10 overflow-hidden rounded-3xl bg-slate-950 p-6 text-white shadow-sm sm:p-9">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-primary-700">
-            Miagao · Public records
+          <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-200">
+            Miagao · National funding
           </p>
           <button
             type="button"
             onClick={() => setLanguage(karayA ? 'en' : 'krj')}
-            className="rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-800 hover:bg-slate-100"
+            className="rounded-full border border-white/30 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10"
             aria-label="Switch page language"
           >
             {karayA ? 'English' : 'Kinaray-a'}
           </button>
         </div>
-        <h1 className="text-4xl font-bold tracking-tight text-gray-950 sm:text-5xl">
+        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
           {karayA
-            ? 'Mga proyekto para sa Miagao'
-            : 'Projects in the public budget'}
+            ? 'Pambansa nga mga proyekto sa Miagao'
+            : 'National projects named in Miagao'}
         </h1>
-        <p className="mt-4 text-lg leading-8 text-gray-700">
+        <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-300">
           {karayA
-            ? 'Pangita-a ang mga proyekto kang DPWH nga nagngaran kang Miagao, Iloilo.'
-            : 'A searchable record of national DPWH project lines whose published titles mention Miagao, Iloilo.'}
+            ? 'Mga rekord kang DPWH GAA kag FY2027 House proposal nga ang titulo nagngaran kang Miagao, Iloilo.'
+            : 'Explore historical DPWH GAA lines and the FY2027 House proposal records whose published titles mention Miagao, Iloilo.'}
         </p>
-        <p className="mt-3 text-sm leading-6 text-gray-600">
+        <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">
           This is a title-matched list. It can miss projects named only for a
           barangay or another locality, and some corridor works may extend
           beyond Miagao. Amounts are budget figures, not proof of spending or
           completion.
         </p>
+        <div
+          className="mt-8 grid gap-3 md:grid-cols-3"
+          aria-label="National project totals"
+        >
+          <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p className="text-sm text-slate-300">
+              Historic GAA lines · 2017–2026
+            </p>
+            <strong className="mt-2 block text-3xl">
+              {recent.length.toLocaleString()}
+            </strong>
+            <p className="mt-1 text-sm text-slate-300">listed project rows</p>
+          </article>
+          <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p className="text-sm text-slate-300">FY2027 House proposal</p>
+            <strong className="mt-2 block text-3xl">
+              {proposed.length.toLocaleString()}
+            </strong>
+            <p className="mt-1 text-sm text-slate-300">project rows</p>
+          </article>
+          <article className="rounded-2xl bg-blue-700 p-5">
+            <p className="text-sm text-blue-100">FY2027 proposed allocation</p>
+            <strong className="mt-2 block text-3xl">
+              {money.format(
+                proposed.reduce((sum, project) => sum + project.amountPesos, 0)
+              )}
+            </strong>
+            <p className="mt-1 text-sm text-blue-100">
+              House 3rd-reading extract · proposal, not enacted GAA
+            </p>
+          </article>
+        </div>
       </header>
-
-      <section
-        className="mb-10 grid gap-4 md:grid-cols-3"
-        aria-label="Project totals"
-      >
-        <article className="rounded-2xl bg-slate-950 p-6 text-white">
-          <p className="text-sm text-slate-300">
-            Historic GAA lines · 2017–2026
-          </p>
-          <strong className="mt-2 block text-4xl">{recent.length}</strong>
-          <p className="mt-2 text-sm text-slate-300">listed project rows</p>
-        </article>
-        <article className="rounded-2xl bg-blue-700 p-6 text-white">
-          <p className="text-sm text-blue-100">FY2027 House proposal</p>
-          <strong className="mt-2 block text-4xl">{proposed.length}</strong>
-          <p className="mt-2 text-sm text-blue-100">
-            rows ·{' '}
-            {money.format(
-              proposed.reduce((sum, project) => sum + project.amountPesos, 0)
-            )}
-          </p>
-        </article>
-        <article className="rounded-2xl border border-gray-200 bg-white p-6">
-          <p className="text-sm text-gray-600">All years in this extract</p>
-          <strong className="mt-2 block text-4xl text-gray-950">
-            {records.count}
-          </strong>
-          <p className="mt-2 text-sm text-gray-600">
-            title matched rows, 2017–2027
-          </p>
-        </article>
-      </section>
 
       <section className="mb-12 grid gap-8 lg:grid-cols-2">
         <div className="rounded-2xl border border-gray-200 bg-white p-6">
@@ -216,7 +216,8 @@ export default function Projects() {
             What appears in the 2027 proposal?
           </h2>
           <p className="mb-5 mt-1 text-sm text-gray-600">
-            Current House 3rd-reading extract, grouped by ODV category.
+            Current House 3rd-reading extract, grouped by BetterGov project
+            category.
           </p>
           <div className="space-y-5">
             {proposedTypes.map(item => (
@@ -453,7 +454,7 @@ export default function Projects() {
             target="_blank"
             rel="noreferrer"
           >
-            ODV source dataset <ExternalLink size={12} />
+            BetterGov project data <ExternalLink size={12} />
           </a>
         </p>
       </section>

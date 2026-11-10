@@ -166,8 +166,9 @@ export default function People() {
         </div>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-600">
           Miagao is part of Iloilo’s 1st Congressional District. Earlier entries
-          use the historical roster references recorded in ODV; the current
-          entry is checked against the House of Representatives directory.
+          use the cited historical roster references in BetterGov data; the
+          current entry is checked against the House of Representatives
+          directory.
         </p>
         <div className="mt-5 overflow-x-auto rounded-lg border border-gray-200">
           <table className="w-full min-w-[500px] border-collapse text-left text-sm">
@@ -255,8 +256,8 @@ export default function People() {
             </li>
             <li>
               Congressional roster history for the 16th–19th Congress is based
-              on ODV’s cited historical roster dataset; the 20th Congress
-              listing is checked against the House directory.
+              on cited historical roster data; the 20th Congress listing is
+              checked against the House directory.
             </li>
             <li>
               Engineer names come from automated text extraction of project
@@ -276,7 +277,7 @@ export default function People() {
               Municipal history
             </SourceLink>
             <SourceLink href={officials.sources.historicalCongressSources}>
-              ODV historical roster evidence
+              BetterGov historical roster references
             </SourceLink>
           </div>
         </article>
