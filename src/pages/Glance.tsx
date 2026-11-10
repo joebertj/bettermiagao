@@ -50,12 +50,68 @@ type TransportFeature = {
     | { type: 'Point'; coordinates: Position };
 };
 type Project = (typeof records.projects)[number];
+type LocalBarangay = {
+  psgc: string;
+  name: string;
+  ntaProjectRows: number;
+  ntaListedAmountPesos: number;
+  directBarangayRows: number;
+  directBarangayAmountPesos: number;
+  releasedDirectRows: number;
+  releasedDirectAmountPesos: number;
+  otherNtaRows: number;
+  appRows: number;
+  appPlannedAmountPesos: number;
+  civilWorksBidRows: number;
+};
+type LocalRecord = {
+  id: string;
+  stage: string;
+  year: number;
+  quarter?: number;
+  title: string;
+  location?: string;
+  sourceUrl?: string;
+  sourceDocument?: string;
+  sourceSheet?: string;
+  sourceRow?: number;
+  listedAmountPesos?: number;
+  plannedProcurementAmountPesos?: number;
+  approvedBudgetPesos?: number;
+  bidAmountPesos?: number;
+  reference?: string;
+  barangays: { psgc: string; name: string }[];
+};
+type LocalAllocationData = {
+  summary: {
+    ntaRows: number;
+    ntaListedAmountPesos: number;
+    ntaLocatedRows: number;
+    ntaLocatedAmountPesos: number;
+    ntaUnlocatedRows: number;
+    ntaUnlocatedAmountPesos: number;
+    directBarangayRows: number;
+    directBarangayAmountPesos: number;
+    releasedDirectRows: number;
+    releasedDirectAmountPesos: number;
+    appBarangayProjectRows: number;
+    appPlannedAmountPesos: number;
+    civilWorksBidRows: number;
+    unlocatedNtaRecords: LocalRecord[];
+  };
+  methodology: string[];
+  ntaRecords: LocalRecord[];
+  appRecords: LocalRecord[];
+  bidRecords: LocalRecord[];
+  barangays: LocalBarangay[];
+};
 type MapRow = {
   psgc: string;
   name: string;
   count: number;
   amount: number;
   mpbCount: number;
+  mpbProposalCount: number;
   geometry: Geometry;
   label: Position;
 };
@@ -64,7 +120,16 @@ type MapTooltip = { title: string; details: string[]; x: number; y: number };
 const mpbCounts = new Map(
   barangayInventory.barangays.map(row => [
     row.psgc,
-    row.mpb.buildingCountAllYears,
+    row.mpb.records.filter(record => record.year < 2027).length,
+  ])
+);
+const mpbProposalCounts = new Map(
+  barangayInventory.barangays.map(row => [
+    row.psgc,
+    row.mpb.records.filter(
+      record =>
+        record.year === 2027 || record.stage.toLowerCase().includes('hgab')
+    ).length,
   ])
 );
 const mpbRecordsByPsgc = new Map(
@@ -179,6 +244,14 @@ export default function Glance() {
     'loading' | 'ready' | 'error'
   >('loading');
   const [mapTooltip, setMapTooltip] = useState<MapTooltip | null>(null);
+  const [localData, setLocalData] = useState<LocalAllocationData | null>(null);
+  const [localDataState, setLocalDataState] = useState<
+    'loading' | 'ready' | 'error'
+  >('loading');
+  const [localCategory, setLocalCategory] = useState<'nta' | 'app' | 'bids'>(
+    'nta'
+  );
+  const [localPage, setLocalPage] = useState(1);
 
   const positionMapTooltip = (x: number, y: number) => ({
     x: Math.max(8, Math.min(x + 16, window.innerWidth - 348)),
@@ -226,6 +299,27 @@ export default function Glance() {
       })
       .catch(() => {
         if (active) setBoundaryState('error');
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    fetch(`${import.meta.env.BASE_URL}data/miagao-local-allocations.json`)
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json() as Promise<LocalAllocationData>;
+      })
+      .then(payload => {
+        if (active) {
+          setLocalData(payload);
+          setLocalDataState('ready');
+        }
+      })
+      .catch(() => {
+        if (active) setLocalDataState('error');
       });
     return () => {
       active = false;
@@ -290,6 +384,8 @@ export default function Glance() {
         count: 0,
         amount: 0,
         mpbCount: mpbCounts.get(feature.properties.psgc ?? '') ?? 0,
+        mpbProposalCount:
+          mpbProposalCounts.get(feature.properties.psgc ?? '') ?? 0,
         geometry: feature.geometry,
         label: featureLabel(feature.geometry),
       });
@@ -312,6 +408,39 @@ export default function Glance() {
   }, [features, selectedProjects]);
 
   const maximumAmount = Math.max(...rows.map(row => row.amount), 1);
+  const localByPsgc = new Map(
+    (localData?.barangays ?? []).map(row => [row.psgc, row])
+  );
+  const localMapRows = rows.map(row => ({
+    ...row,
+    local: localByPsgc.get(row.psgc),
+  }));
+  const localMaximum = Math.max(
+    1,
+    ...localMapRows.map(row => row.local?.ntaListedAmountPesos ?? 0)
+  );
+  const localRanking = localMapRows
+    .filter(row => (row.local?.ntaProjectRows ?? 0) > 0)
+    .sort(
+      (a, b) =>
+        (b.local?.ntaListedAmountPesos ?? 0) -
+          (a.local?.ntaListedAmountPesos ?? 0) || a.name.localeCompare(b.name)
+    );
+  const currentLocalRecords =
+    localCategory === 'nta'
+      ? (localData?.ntaRecords ?? [])
+      : localCategory === 'app'
+        ? (localData?.appRecords ?? [])
+        : (localData?.bidRecords ?? []);
+  const localPageSize = 10;
+  const localPageCount = Math.max(
+    1,
+    Math.ceil(currentLocalRecords.length / localPageSize)
+  );
+  const visibleLocalRecords = currentLocalRecords.slice(
+    (localPage - 1) * localPageSize,
+    localPage * localPageSize
+  );
   const ranked = [...rows]
     .filter(row => row.count > 0)
     .sort(
@@ -321,9 +450,15 @@ export default function Glance() {
   const representedRows = ranked.reduce((sum, row) => sum + row.count, 0);
   const assignedAmount = ranked.reduce((sum, row) => sum + row.amount, 0);
   const representedBarangays = ranked.length;
-  const mpbBarangays = rows.filter(row => row.mpbCount > 0);
-  const totalMpbRecords = mpbBarangays.reduce(
+  const mpbBarangays = rows.filter(
+    row => row.mpbCount + row.mpbProposalCount > 0
+  );
+  const totalHistoricalMpbRecords = mpbBarangays.reduce(
     (sum, row) => sum + row.mpbCount,
+    0
+  );
+  const totalProposalMpbRecords = mpbBarangays.reduce(
+    (sum, row) => sum + row.mpbProposalCount,
     0
   );
   const roadFeatures = transportFeatures.filter(
@@ -399,7 +534,8 @@ export default function Glance() {
     const height =
       Math.max(...projected.map(point => point[1])) -
       Math.min(...projected.map(point => point[1]));
-    return Math.min(8, width / (row.mpbCount * 1.55), height / 1.6);
+    const iconCount = row.mpbCount + row.mpbProposalCount;
+    return Math.min(14, width / (iconCount * 1.3), height / 1.35);
   };
   const transportLines = (feature: TransportFeature) => {
     if (feature.geometry.type === 'LineString')
@@ -427,15 +563,383 @@ export default function Glance() {
           Miagao · In a Glance
         </p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-          National DPWH projects named in barangay titles
+          Miagao projects and funding across barangays
         </h1>
         <p className="mt-4 text-lg leading-8 text-gray-700">
-          These are national DPWH project amounts in enacted GAA budgets and the
-          FY2027 House proposal. Miagao’s LGU does not set or allocate these
-          national amounts; they are separate from the municipality’s NTA/IRA.
-          The map groups amounts by the barangays named in project titles.
+          Explore municipal 20% NTA projects and procurement records alongside
+          national DPWH projects. The funding source and project stage are kept
+          separate: local NTA entries are not the same as procurement plans, bid
+          results, or national GAA and FY2027 House proposal amounts.
         </p>
       </header>
+
+      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-800">
+              Local funds · 2026 records
+            </p>
+            <h2 className="mt-1 text-2xl font-bold text-slate-950">
+              Local allocations and barangay-named projects
+            </h2>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-gray-700">
+              The first map shades projects in Miagao’s Q3 20% National Tax
+              Allotment (NTA) utilization schedule. Amber circles show separate
+              2026 procurement-plan entries; green squares show civil-works bid
+              records. Procurement and bid amounts are not added to the NTA map.
+              A marker means the source names the barangay, not that it gives
+              surveyed project coordinates.
+            </p>
+          </div>
+          <a
+            className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-800 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900"
+            href={`${import.meta.env.BASE_URL}data/miagao-local-allocations.json`}
+            download
+          >
+            Export local records JSON
+          </a>
+        </div>
+        {localDataState === 'loading' && (
+          <p className="rounded-lg bg-slate-50 p-4 text-sm text-gray-600">
+            Loading local allocation records…
+          </p>
+        )}
+        {localDataState === 'error' && (
+          <p className="rounded-lg bg-amber-50 p-4 text-sm text-amber-900">
+            Local allocation records could not be loaded.
+          </p>
+        )}
+        {localData && (
+          <>
+            <div className="mb-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+              {[
+                [
+                  'Q3 20% NTA listed amount',
+                  peso.format(localData.summary.ntaListedAmountPesos),
+                ],
+                [
+                  'NTA rows naming barangays',
+                  `${localData.summary.ntaLocatedRows} · ${peso.format(localData.summary.ntaLocatedAmountPesos)}`,
+                ],
+                [
+                  'Not assigned to a barangay',
+                  `${localData.summary.ntaUnlocatedRows} · ${peso.format(localData.summary.ntaUnlocatedAmountPesos)}`,
+                ],
+                [
+                  'Direct barangay assistance',
+                  `${localData.summary.directBarangayRows} · ${peso.format(localData.summary.directBarangayAmountPesos)}`,
+                ],
+                [
+                  'Released direct-assistance entries',
+                  `${localData.summary.releasedDirectRows} · ${peso.format(localData.summary.releasedDirectAmountPesos)}`,
+                ],
+              ].map(([label, value]) => (
+                <article
+                  key={label}
+                  className="rounded-xl border border-gray-200 p-3"
+                >
+                  <span className="block text-xs leading-5 text-gray-600">
+                    {label}
+                  </span>
+                  <strong className="mt-1 block text-lg tabular-nums text-slate-950">
+                    {value}
+                  </strong>
+                </article>
+              ))}
+            </div>
+            <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)]">
+              <div>
+                <div className="mb-3 flex flex-wrap items-center gap-3 text-xs text-gray-700">
+                  <span className="inline-flex items-center gap-1.5">
+                    <i className="h-3 w-3 rounded-sm bg-emerald-700" /> Q3 NTA
+                    amount
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <i className="h-3 w-3 rounded-full border-2 border-amber-600" />{' '}
+                    APP planned work
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <i className="h-3 w-3 bg-green-700" /> Civil-works bid
+                    record
+                  </span>
+                </div>
+                {boundaryState === 'ready' && (
+                  <svg
+                    viewBox={`0 0 ${mapWidth} ${mapHeight}`}
+                    role="img"
+                    aria-label="Miagao map shaded by Q3 2026 20 percent NTA listed amount per named barangay; separate symbols mark procurement-plan entries and civil-works bid records"
+                    className="block w-full rounded-xl bg-sky-50"
+                  >
+                    {localMapRows.map(row => {
+                      const local = row.local;
+                      const [x, y] = projectPoint(row.label);
+                      const appCount = local?.appRows ?? 0;
+                      const bidCount = local?.civilWorksBidRows ?? 0;
+                      return (
+                        <g key={`local-${row.psgc}`}>
+                          <path
+                            d={pathFor(row.geometry)}
+                            fill={amountColor(
+                              local?.ntaListedAmountPesos ?? 0,
+                              localMaximum
+                            )}
+                            fillRule="evenodd"
+                            stroke="#334155"
+                            strokeWidth="1"
+                            vectorEffect="non-scaling-stroke"
+                            tabIndex={0}
+                            aria-label={`${row.name}, ${local?.ntaProjectRows ?? 0} Q3 NTA rows, ${peso.format(local?.ntaListedAmountPesos ?? 0)}, ${appCount} APP rows, ${bidCount} bid rows`}
+                            onPointerEnter={event =>
+                              showMapTooltip(
+                                row.name,
+                                [
+                                  `Q3 20% NTA listed amount: ${peso.format(local?.ntaListedAmountPesos ?? 0)}`,
+                                  `${local?.ntaProjectRows ?? 0} NTA project rows`,
+                                  `${appCount} separate APP procurement-plan rows`,
+                                  `${bidCount} separate civil-works bid records`,
+                                ],
+                                event
+                              )
+                            }
+                            onPointerMove={moveMapTooltip}
+                            onPointerLeave={() => setMapTooltip(null)}
+                            onFocus={event =>
+                              showMapTooltip(
+                                row.name,
+                                [
+                                  `Q3 20% NTA listed amount: ${peso.format(local?.ntaListedAmountPesos ?? 0)}`,
+                                  `${local?.ntaProjectRows ?? 0} NTA project rows`,
+                                  `${appCount} separate APP procurement-plan rows`,
+                                  `${bidCount} separate civil-works bid records`,
+                                ],
+                                event
+                              )
+                            }
+                            onBlur={() => setMapTooltip(null)}
+                          />
+                          {(appCount > 0 || bidCount > 0) && (
+                            <g pointerEvents="none">
+                              {appCount > 0 && (
+                                <circle
+                                  cx={x - (bidCount ? 5 : 0)}
+                                  cy={y}
+                                  r="5"
+                                  fill="#fff"
+                                  stroke="#b45309"
+                                  strokeWidth="2.5"
+                                  vectorEffect="non-scaling-stroke"
+                                />
+                              )}
+                              {bidCount > 0 && (
+                                <rect
+                                  x={x + (appCount ? 1 : -3.5)}
+                                  y={y - 3.5}
+                                  width="7"
+                                  height="7"
+                                  fill="#15803d"
+                                  stroke="#fff"
+                                  strokeWidth="1"
+                                  vectorEffect="non-scaling-stroke"
+                                />
+                              )}
+                            </g>
+                          )}
+                          {(local?.ntaProjectRows ?? 0) > 0 && (
+                            <text
+                              x={x}
+                              y={y + 13}
+                              textAnchor="middle"
+                              fontSize="15"
+                              fontWeight="700"
+                              pointerEvents="none"
+                              fill="#0f172a"
+                              stroke="#fff"
+                              strokeWidth="3"
+                              paintOrder="stroke"
+                            >
+                              {local?.ntaProjectRows}
+                            </text>
+                          )}
+                        </g>
+                      );
+                    })}
+                  </svg>
+                )}
+                {boundaryState !== 'ready' && (
+                  <p className="py-12 text-center text-sm text-gray-600">
+                    Loading barangay boundaries…
+                  </p>
+                )}
+              </div>
+              <div>
+                <h3 className="mb-3 text-base font-bold text-slate-900">
+                  Barangays with the largest listed NTA amounts
+                </h3>
+                <div className="space-y-3">
+                  {localRanking.slice(0, 10).map(row => {
+                    const amount = row.local?.ntaListedAmountPesos ?? 0;
+                    return (
+                      <div key={`rank-${row.psgc}`}>
+                        <div className="mb-1 flex justify-between gap-2 text-xs">
+                          <span className="font-medium text-slate-800">
+                            {row.name}
+                          </span>
+                          <span className="tabular-nums text-slate-700">
+                            {peso.format(amount)}
+                          </span>
+                        </div>
+                        <div className="h-2.5 rounded-full bg-slate-100">
+                          <div
+                            className="h-2.5 rounded-full bg-emerald-700"
+                            style={{
+                              width: `${Math.max(2, (amount / localMaximum) * 100)}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="mt-5 grid grid-cols-2 gap-2 text-xs">
+                  <article className="rounded-lg bg-amber-50 p-3">
+                    <span className="block text-amber-900">
+                      APP planned project rows
+                    </span>
+                    <strong className="mt-1 block text-base text-slate-950">
+                      {localData.summary.appBarangayProjectRows} ·{' '}
+                      {peso.format(localData.summary.appPlannedAmountPesos)}
+                    </strong>
+                  </article>
+                  <article className="rounded-lg bg-green-50 p-3">
+                    <span className="block text-green-900">
+                      Civil-works bid records
+                    </span>
+                    <strong className="mt-1 block text-base text-slate-950">
+                      {localData.summary.civilWorksBidRows} · Q1 + Q3
+                    </strong>
+                  </article>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 border-t border-gray-200 pt-5">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                <div
+                  className="flex flex-wrap gap-2"
+                  role="group"
+                  aria-label="Choose local project record type"
+                >
+                  {(
+                    [
+                      ['nta', 'NTA utilization'],
+                      ['app', 'Procurement plan'],
+                      ['bids', 'Bid results'],
+                    ] as const
+                  ).map(([key, label]) => (
+                    <button
+                      key={key}
+                      type="button"
+                      className={`min-h-10 rounded-lg border px-3 text-sm font-semibold ${localCategory === key ? 'border-blue-800 bg-blue-800 text-white' : 'border-gray-300 bg-white text-slate-800'}`}
+                      onClick={() => {
+                        setLocalCategory(key);
+                        setLocalPage(1);
+                      }}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <span className="text-xs text-gray-600">
+                  {currentLocalRecords.length.toLocaleString('en-PH')} records ·
+                  10 per page
+                </span>
+              </div>
+              <div className="space-y-2">
+                {visibleLocalRecords.map(record => (
+                  <article
+                    key={record.id}
+                    className="grid gap-2 rounded-lg border border-gray-200 p-3 text-sm sm:grid-cols-[minmax(0,1fr)_auto]"
+                  >
+                    <div className="min-w-0">
+                      <h4 className="break-words font-semibold leading-5 text-slate-900">
+                        {record.title}
+                      </h4>
+                      <p className="mt-1 break-words text-xs leading-5 text-gray-600">
+                        {record.stage} ·{' '}
+                        {record.quarter
+                          ? `2026 Q${record.quarter}`
+                          : record.year}{' '}
+                        ·{' '}
+                        {record.barangays.map(item => item.name).join(', ') ||
+                          'No barangay match'}
+                        {record.reference ? ` · Ref ${record.reference}` : ''}
+                      </p>
+                      {record.location && (
+                        <p className="break-words text-xs text-gray-600">
+                          Listed location: {record.location}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-end justify-between gap-3 sm:flex-col sm:items-end">
+                      <strong className="whitespace-nowrap tabular-nums text-slate-900">
+                        {peso.format(
+                          record.listedAmountPesos ??
+                            record.plannedProcurementAmountPesos ??
+                            record.approvedBudgetPesos ??
+                            record.bidAmountPesos ??
+                            0
+                        )}
+                      </strong>
+                      {record.sourceUrl && (
+                        <a
+                          className="text-xs font-semibold text-blue-800 underline"
+                          href={record.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Source · row {record.sourceRow ?? '—'} ↗
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                ))}
+                {!visibleLocalRecords.length && (
+                  <p className="rounded-lg bg-slate-50 p-4 text-sm text-gray-600">
+                    No rows in this record group.
+                  </p>
+                )}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <button
+                  className="min-h-10 rounded-lg border border-gray-300 px-3 text-sm font-semibold disabled:opacity-40"
+                  type="button"
+                  disabled={localPage <= 1}
+                  onClick={() => setLocalPage(page => Math.max(1, page - 1))}
+                >
+                  Previous
+                </button>
+                <span className="text-sm tabular-nums text-gray-700">
+                  Page {localPage} of {localPageCount}
+                </span>
+                <button
+                  className="min-h-10 rounded-lg border border-gray-300 px-3 text-sm font-semibold disabled:opacity-40"
+                  type="button"
+                  disabled={localPage >= localPageCount}
+                  onClick={() =>
+                    setLocalPage(page => Math.min(localPageCount, page + 1))
+                  }
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+            <p className="mt-5 text-xs leading-5 text-gray-600">
+              {localData.methodology.join(' ')} The published annual budget
+              workbook is account/office-level rather than a project-by-project
+              barangay schedule, so it is not used to shade the map.
+            </p>
+          </>
+        )}
+      </section>
 
       <section
         className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
@@ -647,29 +1151,55 @@ export default function Glance() {
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-slate-950">
-              MPB project records by barangay · GAA history + FY2027 proposal
+              MPBs, irrigation, and flood-control sites
             </h2>
             <p className="mt-1 text-sm text-gray-600">
-              Each house marks one MPB project record. FY2027 House proposals
-              are outlined; enacted GAA records are filled.
+              MPBs lead the map: each house marks one project record. Filled
+              houses are enacted GAA records; outlined houses are FY2027
+              proposals. Purple diamonds mark geolocated DPWH flood-control
+              records.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             <article className="rounded-xl border border-gray-200 bg-white px-4 py-3">
               <span className="block text-xs text-gray-600">
-                Mapped MPB records
+                Historical GAA MPB records
               </span>
               <strong className="mt-1 block text-xl tabular-nums text-slate-950">
-                {totalMpbRecords.toLocaleString('en-PH')}
+                {totalHistoricalMpbRecords.toLocaleString('en-PH')}
               </strong>
             </article>
             <article className="rounded-xl border border-gray-200 bg-white px-4 py-3">
               <span className="block text-xs text-gray-600">
-                Barangays with records
+                FY2027 HGAB MPB proposals
+              </span>
+              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+                {totalProposalMpbRecords.toLocaleString('en-PH')}
+              </strong>
+            </article>
+            <article className="rounded-xl border border-gray-200 bg-white px-4 py-3">
+              <span className="block text-xs text-gray-600">
+                Barangays with MPB records
               </span>
               <strong className="mt-1 block text-xl tabular-nums text-slate-950">
                 {mpbBarangays.length.toLocaleString('en-PH')} /{' '}
                 {features.length || 119}
+              </strong>
+            </article>
+            <article className="rounded-xl border border-gray-200 bg-white px-4 py-3">
+              <span className="block text-xs text-gray-600">
+                Mapped DPWH flood-control records
+              </span>
+              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+                {floodControlFeatures.length}
+              </strong>
+            </article>
+            <article className="rounded-xl border border-gray-200 bg-white px-4 py-3">
+              <span className="block text-xs text-gray-600">
+                Miagao NIA sites in available FY2027 location data
+              </span>
+              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+                0
               </strong>
             </article>
           </div>
@@ -702,36 +1232,53 @@ export default function Glance() {
             </svg>
             Outline · FY2027 House proposal
           </span>
+          <span className="inline-flex items-center gap-2">
+            <svg viewBox="0 0 12 12" aria-hidden="true" className="h-4 w-4">
+              <path d="M6 0.8 11.2 6 6 11.2 0.8 6Z" fill="#7c3aed" />
+            </svg>
+            Filled purple · completed DPWH flood-control contract
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <svg viewBox="0 0 12 12" aria-hidden="true" className="h-4 w-4">
+              <path
+                d="M6 0.8 11.2 6 6 11.2 0.8 6Z"
+                fill="white"
+                stroke="#7c3aed"
+                strokeWidth="1.5"
+              />
+            </svg>
+            Outlined purple · FY2027 proposal location
+          </span>
         </div>
         {boundaryState === 'ready' && (
           <svg
             viewBox={`0 0 ${mapWidth} ${mapHeight}`}
             role="img"
-            aria-label="Map of Miagao barangays with one house icon for each mapped historical multi-purpose building project record"
+            aria-label="Map of Miagao with GAA and FY2027 MPB project records by barangay and geolocated DPWH flood-control sites"
             className="block w-full rounded-xl bg-sky-50"
           >
             {rows.map(row => {
               const [labelX, labelY] = projectPoint(row.label);
+              const iconCount = row.mpbCount + row.mpbProposalCount;
               const iconSize = houseSizeFor(row);
               const step = iconSize * 1.25;
               return (
                 <g key={row.psgc}>
                   <path
                     d={pathFor(row.geometry)}
-                    fill={row.mpbCount ? '#dbeafe' : '#f1f5f9'}
+                    fill={iconCount ? '#dbeafe' : '#f1f5f9'}
                     fillRule="evenodd"
                     stroke="#1e3a8a"
                     strokeWidth="1.2"
                     vectorEffect="non-scaling-stroke"
                     tabIndex={0}
-                    aria-label={`${row.name}: ${row.mpbCount ? `${row.mpbCount} mapped historical MPB records` : 'no mapped historical MPB records'}`}
+                    aria-label={`${row.name}: ${row.mpbCount} historical GAA MPB records, ${row.mpbProposalCount} FY2027 HGAB MPB proposals`}
                     onPointerEnter={event =>
                       showMapTooltip(
                         row.name,
                         [
-                          row.mpbCount
-                            ? `${row.mpbCount.toLocaleString('en-PH')} mapped historical MPB ${row.mpbCount === 1 ? 'record' : 'records'}`
-                            : 'No mapped historical MPB records',
+                          `${row.mpbCount.toLocaleString('en-PH')} historical GAA MPB ${row.mpbCount === 1 ? 'record' : 'records'}`,
+                          `${row.mpbProposalCount.toLocaleString('en-PH')} FY2027 HGAB MPB ${row.mpbProposalCount === 1 ? 'proposal' : 'proposals'}`,
                         ],
                         event
                       )
@@ -742,18 +1289,25 @@ export default function Glance() {
                       showMapTooltip(
                         row.name,
                         [
-                          row.mpbCount
-                            ? `${row.mpbCount.toLocaleString('en-PH')} mapped historical MPB ${row.mpbCount === 1 ? 'record' : 'records'}`
-                            : 'No mapped historical MPB records',
+                          `${row.mpbCount.toLocaleString('en-PH')} historical GAA MPB ${row.mpbCount === 1 ? 'record' : 'records'}`,
+                          `${row.mpbProposalCount.toLocaleString('en-PH')} FY2027 HGAB MPB ${row.mpbProposalCount === 1 ? 'proposal' : 'proposals'}`,
                         ],
                         event
                       )
                     }
                     onBlur={() => setMapTooltip(null)}
                   ></path>
-                  {Array.from({ length: row.mpbCount }, (_, index) => {
-                    const x = labelX + (index - (row.mpbCount - 1) / 2) * step;
-                    const record = mpbRecordsByPsgc.get(row.psgc)?.[index];
+                  {Array.from({ length: iconCount }, (_, index) => {
+                    const x = labelX + (index - (iconCount - 1) / 2) * step;
+                    const allRecords = mpbRecordsByPsgc.get(row.psgc) ?? [];
+                    const record = [
+                      ...allRecords.filter(item => item.year < 2027),
+                      ...allRecords.filter(
+                        item =>
+                          item.year === 2027 ||
+                          item.stage.toLowerCase().includes('hgab')
+                      ),
+                    ][index];
                     const isFy2027Proposal =
                       record?.year === 2027 ||
                       record?.stage.toLocaleLowerCase().includes('hgab');
@@ -802,16 +1356,77 @@ export default function Glance() {
                 </g>
               );
             })}
+            {floodControlFeatures.map((feature, index) => {
+              if (feature.geometry.type !== 'Point') return null;
+              const [x, y] = projectPoint(feature.geometry.coordinates);
+              const isFy2027Proposal = feature.properties.fundingYear === 2027;
+              const details = [
+                ...(feature.properties.fundingYear
+                  ? [`Funding year: ${feature.properties.fundingYear}`]
+                  : []),
+                ...(feature.properties.completionYear
+                  ? [`Completed: ${feature.properties.completionYear}`]
+                  : []),
+                ...(feature.properties.contractCost
+                  ? [
+                      `Contract cost: ${peso.format(feature.properties.contractCost)}`,
+                    ]
+                  : []),
+                ...(feature.properties.contractId
+                  ? [`Contract: ${feature.properties.contractId}`]
+                  : []),
+                ...(feature.properties.workType
+                  ? [`Work type: ${feature.properties.workType}`]
+                  : []),
+                ...(feature.properties.withinMunicipalBoundary === false
+                  ? ['Recorded point is outside mapped Miagao boundaries']
+                  : []),
+              ];
+              return (
+                <path
+                  key={`flood-control-${feature.properties.projectId ?? index}`}
+                  d={`M${x} ${y - 6} L${x + 6} ${y} L${x} ${y + 6} L${x - 6} ${y} Z`}
+                  fill={isFy2027Proposal ? 'white' : '#7c3aed'}
+                  stroke={
+                    feature.properties.withinMunicipalBoundary === false
+                      ? '#dc2626'
+                      : '#7c3aed'
+                  }
+                  strokeWidth="2"
+                  vectorEffect="non-scaling-stroke"
+                  tabIndex={0}
+                  aria-label={`${feature.properties.name || 'DPWH flood-control project'}, ${details.join(', ')}`}
+                  onPointerEnter={event =>
+                    showMapTooltip(
+                      feature.properties.name || 'DPWH flood-control project',
+                      details,
+                      event
+                    )
+                  }
+                  onPointerMove={moveMapTooltip}
+                  onPointerLeave={() => setMapTooltip(null)}
+                  onFocus={event =>
+                    showMapTooltip(
+                      feature.properties.name || 'DPWH flood-control project',
+                      details,
+                      event
+                    )
+                  }
+                  onBlur={() => setMapTooltip(null)}
+                />
+              );
+            })}
           </svg>
         )}
         <p className="mt-4 text-xs leading-5 text-gray-600">
-          The count uses BetterGov’s Miagao MPB records for FY2015–FY2027 and
-          the barangay assignments in the current inventory (
-          {barangayInventory.generatedAt}). It includes FY2027 House Bill
-          proposals. A marker represents a project record, not confirmation that
-          a building was completed or still exists; mapped sites are based on a
-          barangay named in the title or a source-listed coordinate. Icon size
-          scales down to fit narrow barangay shapes.
+          The MPB figures separate enacted GAA records through 2026 from FY2027
+          House proposal records. A house marks one project record, not
+          confirmation that a building was completed or still exists; mapped
+          sites use a barangay named in the title or a source-listed coordinate.
+          House icons are enlarged and scaled to fit the barangay shape. Purple
+          diamonds mark DPWH flood-control points; red outlines indicate
+          recorded points outside the barangay-boundary union. Available FY2027
+          NIA geolocation data has no Miagao-matched project row.
         </p>
       </section>
 
@@ -1131,143 +1746,6 @@ export default function Glance() {
           alignment. One Miagao FMR proposal without an endpoint pair is not
           plotted. Budget title matches do not provide surveyed coordinates for
           individual DPWH road or bridge allocations.
-        </p>
-      </section>
-      <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 className="text-xl font-bold text-slate-950">
-              Irrigation and flood-control sites
-            </h2>
-            <p className="mt-1 text-sm text-gray-600">
-              Solid purple diamonds mark geolocated historical completed DPWH
-              flood-control contracts. Outlined purple marks indicate proposed
-              FY2027 project locations when available.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <article className="rounded-xl border border-gray-200 px-4 py-3">
-              <span className="block text-xs text-gray-600">
-                Geolocated flood-control contracts
-              </span>
-              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
-                {floodControlFeatures.length}
-              </strong>
-            </article>
-            <article className="rounded-xl border border-gray-200 px-4 py-3">
-              <span className="block text-xs text-gray-600">
-                Miagao NIA rows in available FY2027 location data
-              </span>
-              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
-                0
-              </strong>
-            </article>
-          </div>
-        </div>
-        {transportState === 'loading' && (
-          <p className="py-16 text-center text-sm text-gray-600">
-            Loading irrigation and flood-control locations…
-          </p>
-        )}
-        {transportState === 'error' && (
-          <p className="py-16 text-center text-sm text-red-700">
-            Flood-control locations could not be loaded.
-          </p>
-        )}
-        {transportState === 'ready' && boundaryState === 'ready' && (
-          <svg
-            viewBox={`0 0 ${mapWidth} ${mapHeight}`}
-            role="img"
-            aria-label="Miagao barangays with geolocated DPWH flood-control contract sites; no Miagao NIA site is present in available FY2027 geolocation data"
-            className="block w-full rounded-xl bg-sky-50"
-          >
-            {rows.map(row => (
-              <path
-                key={row.psgc}
-                d={pathFor(row.geometry)}
-                fill="#f8fafc"
-                fillRule="evenodd"
-                stroke="#94a3b8"
-                strokeWidth="1"
-                vectorEffect="non-scaling-stroke"
-                pointerEvents="none"
-              />
-            ))}
-            {floodControlFeatures.map((feature, index) => {
-              if (feature.geometry.type !== 'Point') return null;
-              const [x, y] = projectPoint(feature.geometry.coordinates);
-              const isFy2027Proposal = feature.properties.fundingYear === 2027;
-              const details = [
-                ...(feature.properties.fundingYear
-                  ? [`Funding year: ${feature.properties.fundingYear}`]
-                  : []),
-                ...(feature.properties.completionYear
-                  ? [`Completed: ${feature.properties.completionYear}`]
-                  : []),
-                ...(feature.properties.contractCost
-                  ? [
-                      `Contract cost: ${peso.format(feature.properties.contractCost)}`,
-                    ]
-                  : []),
-                ...(feature.properties.contractId
-                  ? [`Contract: ${feature.properties.contractId}`]
-                  : []),
-                ...(feature.properties.workType
-                  ? [`Work type: ${feature.properties.workType}`]
-                  : []),
-                ...(feature.properties.withinMunicipalBoundary === false
-                  ? [
-                      'Recorded point is outside mapped Miagao barangay boundaries',
-                    ]
-                  : []),
-              ];
-              return (
-                <path
-                  key={`flood-control-${feature.properties.projectId ?? index}`}
-                  d={`M${x} ${y - 6} L${x + 6} ${y} L${x} ${y + 6} L${x - 6} ${y} Z`}
-                  fill={isFy2027Proposal ? 'none' : '#7c3aed'}
-                  stroke={
-                    feature.properties.withinMunicipalBoundary === false
-                      ? '#dc2626'
-                      : '#7c3aed'
-                  }
-                  strokeWidth={
-                    feature.properties.withinMunicipalBoundary === false
-                      ? '2.5'
-                      : '2'
-                  }
-                  vectorEffect="non-scaling-stroke"
-                  tabIndex={0}
-                  aria-label={`${feature.properties.name || 'DPWH flood-control project'}, ${details.join(', ')}`}
-                  onPointerEnter={event =>
-                    showMapTooltip(
-                      feature.properties.name || 'DPWH flood-control project',
-                      details,
-                      event
-                    )
-                  }
-                  onPointerMove={moveMapTooltip}
-                  onPointerLeave={() => setMapTooltip(null)}
-                  onFocus={event =>
-                    showMapTooltip(
-                      feature.properties.name || 'DPWH flood-control project',
-                      details,
-                      event
-                    )
-                  }
-                  onBlur={() => setMapTooltip(null)}
-                />
-              );
-            })}
-          </svg>
-        )}
-        <p className="mt-4 text-xs leading-5 text-gray-600">
-          Flood-control points use recorded contract coordinates; red outlines
-          identify a point outside the barangay-boundary union. The available
-          2027 NIA project and PSGC geolocation files contain no Miagao-matched
-          project rows, so no irrigation marker is drawn. PSGC matches elsewhere
-          in the file identify administrative places, not surveyed project
-          coordinates.
         </p>
       </section>
       {mapTooltip && (
