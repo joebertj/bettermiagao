@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 from pathlib import Path
 
 
@@ -44,9 +45,9 @@ def main() -> None:
         help="Optional ODV PSGC locations JSONL; used to tag exact Miagao barangay-name mentions",
     )
     parser.add_argument(
-        "--amendments-2026-json",
+        "--gaa-2026-parquet",
         type=Path,
-        help="Optional ODV FY2026 House GAB DPWH amendment data; retained as a distinct budget stage",
+        help="Optional DPWH FY2026 GAA enrolled-copy line dataset; filtered by title",
     )
     parser.add_argument(
         "--output",
@@ -60,14 +61,26 @@ def main() -> None:
         for row in source.get("projects", [])
         if "miagao" in normalized(str(row.get("name", "")))
     ]
-    if args.amendments_2026_json:
-        amendments = json.loads(args.amendments_2026_json.read_text(encoding="utf-8"))
-        for amendment in amendments.get("projects", []):
-            title = amendment.get("display_name") or amendment.get("revised_name") or amendment.get("name", "")
-            if "miagao" not in normalized(str(title)):
+    if args.gaa_2026_parquet:
+        parquet_path = str(args.gaa_2026_parquet.resolve()).replace("'", "''")
+        sql = f"""
+            SELECT fiscal_year, line_id, gaa_title, gaa_office, region, gaa_php
+            FROM read_parquet('{parquet_path}')
+            WHERE fiscal_year = 2026
+              AND (gaa_title ILIKE '%miagao%' OR gaa_title ILIKE '%miag-ao%')
+            ORDER BY gaa_title, line_id
+        """
+        result = subprocess.run(
+            ["duckdb", "-json", "-c", sql],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        for line in json.loads(result.stdout):
+            title = str(line.get("gaa_title") or "").strip()
+            if "miagao" not in normalized(title):
                 continue
-            description = str(amendment.get("description") or "")
-            category_text = f"{title} {description}".lower()
+            category_text = title.lower()
             if "bridge" in category_text:
                 category = "Bridge"
             elif "road" in category_text:
@@ -76,24 +89,16 @@ def main() -> None:
                 category = "Building / facility"
             else:
                 category = "DPWH project"
-            original = amendment.get("original_amount") or 0
-            change = amendment.get("increase") or 0
             rows.append({
                 "year": 2026,
-                "stage": "FY2026 House GAB amendment",
+                "stage": "GAA",
                 "category": category,
-                "name": str(title).strip(),
-                "amountPesos": amendment.get("final_amount"),
-                "source": (
-                    f"FY2026 House GAB amendments · {amendment.get('source_sheet') or 'DPWH schedule'} · "
-                    f"{amendment.get('id') or 'source project row'} · original ₱{original:,.0f}; "
-                    f"change ₱{change:,.0f}"
-                ),
-                "sourceRecordId": amendment.get("id"),
-                "sourceDescription": description,
-                "originalAmountPesos": original,
-                "increasePesos": change,
-                "sourceSheet": amendment.get("source_sheet"),
+                "name": title,
+                "amountPesos": line.get("gaa_php"),
+                "source": f"FY2026 GAA DPWH Details Enrolled Copy · line {line.get('line_id')}",
+                "sourceRecordId": line.get("line_id"),
+                "office": line.get("gaa_office"),
+                "region": line.get("region"),
             })
     if args.psgc_jsonl:
         locations = [json.loads(line) for line in args.psgc_jsonl.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -111,14 +116,13 @@ def main() -> None:
             "Rows from ODV integrated project data whose project title contains the locality name "
             "Miagao or Miag-ao after punctuation normalization. This title search can omit projects "
             "listed only by barangay or another locality and can include corridor or district-wide "
-            "works whose full physical footprint needs confirmation. FY2026 House GAB amendment rows "
-            "are included as a separate stage and are not labeled as enacted GAA lines."
+            "works whose full physical footprint needs confirmation. FY2026 rows come from the DPWH "
+            "GAA Details Enrolled Copy and are enacted GAA lines."
         ),
-        "sourceDataset": "ODV integrated-project-data.json + budget_amendments_2026.json",
+        "sourceDataset": "ODV integrated-project-data.json + FY2026 DPWH GAA Details Enrolled Copy",
         "locationReference": "PSGC names where titleBarangays is present; title mentions only, not surveyed project footprints",
         "sourceUrl": "https://research.bettergov.ph/static/nep-preview/integrated-project-data.json",
-        "additionalSourceUrl": "https://research.bettergov.ph/static/data/budget_amendments_2026.json",
-        "historicalSourceNote": "2017–2025 rows are GAA lines. 2026 rows are House GAB amendment records from the DPWH amendment schedule; they are shown separately by stage.",
+        "historicalSourceNote": "2017–2026 rows are GAA lines. FY2026 rows are from the DPWH GAA Details Enrolled Copy.",
         "proposalNote": (
             "FY2027 records are from the House General Appropriations Bill, 3rd-reading extract. "
             "They are proposals, not enacted appropriations or verified completed work."

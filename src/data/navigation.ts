@@ -2,6 +2,7 @@ import type { NavigationItem } from '../types';
 
 export const mainNavigation: NavigationItem[] = [
   { label: 'Projects', href: '/projects' },
+  { label: 'In a Glance', href: '/glance' },
   { label: 'People & offices', href: '/people' },
   { label: 'Barangays', href: '/barangays' },
   { label: 'Budget & procurement', href: '/transparency' },

@@ -154,7 +154,7 @@ export default function Projects() {
       >
         <article className="rounded-2xl bg-slate-950 p-6 text-white">
           <p className="text-sm text-slate-300">
-            Public budget rows · 2017–2026
+            Historic GAA lines · 2017–2026
           </p>
           <strong className="mt-2 block text-4xl">{recent.length}</strong>
           <p className="mt-2 text-sm text-slate-300">listed project rows</p>
@@ -186,8 +186,8 @@ export default function Projects() {
             Past listed allocations
           </h2>
           <p className="mb-5 mt-1 text-sm text-gray-600">
-            2017–2025 rows are GAA lines; 2026 rows are House GAB amendments,
-            shown as a separate stage. 2027 is shown separately as a proposal.
+            GAA lines, grouped by fiscal year. 2027 is shown separately as a
+            House proposal.
           </p>
           <div className="space-y-3">
             {annual.map(item => (
@@ -314,7 +314,7 @@ export default function Projects() {
             <ArrowDownToLine size={16} /> Export filtered JSON
           </button>
         </div>
-        <div className="mb-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <label className="relative">
             <span className="sr-only">Search projects</span>
             <Search className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
@@ -367,6 +367,19 @@ export default function Projects() {
               {miagaoBarangays.map(value => (
                 <option key={value}>{value}</option>
               ))}
+            </select>
+          </label>
+          <label>
+            <span className="sr-only">Sort by listed amount</span>
+            <select
+              className="h-11 w-full rounded-lg border border-gray-300 px-3"
+              value={amountOrder}
+              onChange={event =>
+                setAmountOrder(event.target.value as 'desc' | 'asc')
+              }
+            >
+              <option value="desc">Listed amount · highest first</option>
+              <option value="asc">Listed amount · lowest first</option>
             </select>
           </label>
         </div>

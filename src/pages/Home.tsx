@@ -98,7 +98,7 @@ export default function Home() {
               <FileSearch className="mb-4 text-amber-300" />
               <strong className="block text-3xl">{recent.length}</strong>
               <span className="mt-1 block text-sm text-slate-300">
-                Budget rows · 2017–2026
+                GAA project rows · 2017–2026
               </span>
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
