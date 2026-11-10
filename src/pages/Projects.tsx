@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { ArrowDownToLine, ExternalLink, Search } from 'lucide-react';
 import records from '../data/miagao-projects.json';
 import { miagaoBarangays } from '../data/miagao-barangays';
@@ -46,19 +46,17 @@ export default function Projects() {
   const categories = [
     ...new Set(records.projects.map(project => project.category)),
   ].sort();
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return records.projects.filter(
-      project =>
-        (year === 'all' || project.year === Number(year)) &&
-        (category === 'all' || project.category === category) &&
-        (barangay === 'all' || titleMentions(project.name, barangay)) &&
-        (!q ||
-          `${project.name} ${project.source} ${project.category}`
-            .toLowerCase()
-            .includes(q))
-    );
-  }, [year, category, barangay, query]);
+  const q = query.trim().toLowerCase();
+  const filtered = records.projects.filter(
+    project =>
+      (year === 'all' || project.year === Number(year)) &&
+      (category === 'all' || project.category === category) &&
+      (barangay === 'all' || titleMentions(project.name, barangay)) &&
+      (!q ||
+        `${project.name} ${project.source} ${project.category}`
+          .toLowerCase()
+          .includes(q))
+  );
   const recent = records.projects.filter(
     project => project.year >= 2017 && project.year <= 2026
   );
