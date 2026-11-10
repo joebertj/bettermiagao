@@ -941,55 +941,69 @@ export default function Glance() {
         )}
       </section>
 
-      <section
-        className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
-        aria-label="Map scope"
-      >
-        <label>
-          <span className="mb-1 block text-sm font-semibold text-slate-700">
-            Budget period
-          </span>
-          <select
-            className="h-12 w-full rounded-lg border border-gray-300 bg-white px-3"
-            value={period}
-            onChange={event => setPeriod(event.target.value as typeof period)}
-          >
-            <option value="hgab">FY2027 HGAB proposal</option>
-            <option value="gaa">FY2017–2026 GAA</option>
-            <option value="all">GAA + FY2027 HGAB</option>
-          </select>
-        </label>
-        <article className="rounded-xl border border-gray-200 bg-white p-4">
-          <span className="block text-sm text-gray-600">
-            National DPWH project rows matched by title
-          </span>
-          <strong className="mt-1 block text-2xl tabular-nums text-slate-950">
-            {representedRows.toLocaleString('en-PH')}
-          </strong>
-        </article>
-        <article className="rounded-xl border border-gray-200 bg-white p-4">
-          <span className="block text-sm text-gray-600">Barangays named</span>
-          <strong className="mt-1 block text-2xl tabular-nums text-slate-950">
-            {representedBarangays.toLocaleString('en-PH')} /{' '}
-            {features.length || 119}
-          </strong>
-        </article>
-        <article className="rounded-xl border border-gray-200 bg-white p-4">
-          <span className="block text-sm text-gray-600">
-            Title-assigned national DPWH amount
-          </span>
-          <strong className="mt-1 block text-2xl tabular-nums text-slate-950">
-            {peso.format(assignedAmount)}
-          </strong>
-        </article>
-      </section>
-
-      <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-blue-800">
+              National funds · GAA history + FY2027 proposal
+            </p>
+            <h2 className="mt-1 text-2xl font-bold text-slate-950">
+              National DPWH projects named in barangays
+            </h2>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-gray-700">
+              These are national appropriations, not funds allocated or
+              controlled by Miagao’s LGU. Barangay assignment is inferred from
+              project titles; shared titles are divided evenly for display.
+              FY2027 amounts are House proposals, not enacted GAA.
+            </p>
+          </div>
+        </div>
+        <div className="mb-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <label className="rounded-xl border border-gray-200 p-3">
+            <span className="mb-1 block text-xs font-semibold text-slate-700">
+              Budget period
+            </span>
+            <select
+              className="h-10 w-full rounded-lg border border-gray-300 bg-white px-3 text-sm"
+              value={period}
+              onChange={event => setPeriod(event.target.value as typeof period)}
+            >
+              <option value="hgab">FY2027 HGAB proposal</option>
+              <option value="gaa">FY2017–2026 GAA</option>
+              <option value="all">GAA + FY2027 HGAB</option>
+            </select>
+          </label>
+          <article className="rounded-xl border border-gray-200 p-3">
+            <span className="block text-xs leading-5 text-gray-600">
+              DPWH project rows matched by title
+            </span>
+            <strong className="mt-1 block text-lg tabular-nums text-slate-950">
+              {representedRows.toLocaleString('en-PH')}
+            </strong>
+          </article>
+          <article className="rounded-xl border border-gray-200 p-3">
+            <span className="block text-xs leading-5 text-gray-600">
+              Barangays with named projects
+            </span>
+            <strong className="mt-1 block text-lg tabular-nums text-slate-950">
+              {representedBarangays.toLocaleString('en-PH')} /{' '}
+              {features.length || 119}
+            </strong>
+          </article>
+          <article className="rounded-xl border border-gray-200 p-3">
+            <span className="block text-xs leading-5 text-gray-600">
+              Title-assigned national DPWH amount
+            </span>
+            <strong className="mt-1 block text-lg tabular-nums text-slate-950">
+              {peso.format(assignedAmount)}
+            </strong>
+          </article>
+        </div>
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="text-xl font-bold text-slate-950">
-              National DPWH amounts by title-named barangay
-            </h2>
+            <h3 className="text-base font-bold text-slate-950">
+              Barangay map · title-matched project amounts
+            </h3>
             <p className="mt-1 text-sm text-gray-600">
               Darker blue means a larger title-assigned amount. Numbers show
               national project-row counts.
@@ -1150,8 +1164,11 @@ export default function Glance() {
       <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-orange-800">
+              National projects · MPB + flood control
+            </p>
             <h2 className="text-xl font-bold text-slate-950">
-              MPBs, irrigation, and flood-control sites
+              MPBs, irrigation, and flood-control sites by barangay
             </h2>
             <p className="mt-1 text-sm text-gray-600">
               MPBs lead the map: each house marks one project record. Filled

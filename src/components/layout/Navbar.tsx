@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { mainNavigation } from '../../data/navigation';
 
 export default function Navbar() {
@@ -22,17 +22,42 @@ export default function Navbar() {
           </span>
         </Link>
         <div className="hidden items-center gap-7 md:flex">
-          {mainNavigation.map(link => (
-            <NavLink
-              key={link.href}
-              to={link.href}
-              className={({ isActive }) =>
-                `text-sm font-semibold ${isActive ? 'text-blue-800' : 'text-gray-700 hover:text-blue-800'}`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+          {mainNavigation.map(link =>
+            link.children ? (
+              <details key={link.href} className="group relative">
+                <summary className="flex cursor-pointer list-none items-center gap-1 text-sm font-semibold text-gray-700 hover:text-blue-800">
+                  {link.label} <ChevronDown size={14} />
+                </summary>
+                <div className="absolute left-0 top-full z-50 mt-2 min-w-48 rounded-xl border border-gray-200 bg-white p-2 shadow-lg">
+                  <NavLink
+                    to={link.href}
+                    className="block rounded-lg px-3 py-2 text-sm font-semibold text-gray-800 hover:bg-slate-50"
+                  >
+                    Overview
+                  </NavLink>
+                  {link.children.map(child => (
+                    <NavLink
+                      key={child.href}
+                      to={child.href}
+                      className="block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-slate-50 hover:text-blue-800"
+                    >
+                      {child.label}
+                    </NavLink>
+                  ))}
+                </div>
+              </details>
+            ) : (
+              <NavLink
+                key={link.href}
+                to={link.href}
+                className={({ isActive }) =>
+                  `text-sm font-semibold ${isActive ? 'text-blue-800' : 'text-gray-700 hover:text-blue-800'}`
+                }
+              >
+                {link.label}
+              </NavLink>
+            )
+          )}
         </div>
         <button
           onClick={() => setOpen(!open)}
@@ -45,14 +70,25 @@ export default function Navbar() {
       {open && (
         <div className="space-y-1 border-t border-gray-200 bg-white px-4 py-3 md:hidden">
           {mainNavigation.map(link => (
-            <NavLink
-              key={link.href}
-              to={link.href}
-              onClick={() => setOpen(false)}
-              className="block rounded px-3 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-100"
-            >
-              {link.label}
-            </NavLink>
+            <div key={link.href}>
+              <NavLink
+                to={link.href}
+                onClick={() => setOpen(false)}
+                className="block rounded px-3 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-100"
+              >
+                {link.label}
+              </NavLink>
+              {link.children?.map(child => (
+                <NavLink
+                  key={child.href}
+                  to={child.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded py-2 pl-7 text-sm text-gray-600 hover:bg-gray-100 hover:text-blue-800"
+                >
+                  {child.label}
+                </NavLink>
+              ))}
+            </div>
           ))}
         </div>
       )}

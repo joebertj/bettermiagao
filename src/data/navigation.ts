@@ -5,7 +5,14 @@ export const mainNavigation: NavigationItem[] = [
   { label: 'In a Glance', href: '/glance' },
   { label: 'People & offices', href: '/people' },
   { label: 'Barangays', href: '/barangays' },
-  { label: 'Budget & procurement', href: '/transparency' },
+  {
+    label: 'Budget & procurement',
+    href: '/transparency',
+    children: [
+      { label: 'Annual Procurement Plan (APP)', href: '/app' },
+      { label: 'Ayuda', href: '/ayuda' },
+    ],
+  },
   { label: 'About', href: '/about' },
 ];
 

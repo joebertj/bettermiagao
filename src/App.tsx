@@ -8,6 +8,8 @@ import People from './pages/People';
 import About from './pages/About';
 import Barangays from './pages/Barangays';
 import Transparency from './pages/Transparency';
+import Ayuda from './pages/Ayuda';
+import AppPlan from './pages/AppPlan';
 import Glance from './pages/Glance';
 
 export default function App() {
@@ -23,6 +25,8 @@ export default function App() {
           <Route path="/people" element={<People />} />
           <Route path="/barangays" element={<Barangays />} />
           <Route path="/transparency" element={<Transparency />} />
+          <Route path="/ayuda" element={<Ayuda />} />
+          <Route path="/app" element={<AppPlan />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Home />} />
         </Routes>

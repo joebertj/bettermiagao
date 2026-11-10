@@ -222,6 +222,57 @@ type BarangayRecord = {
     dilgRosterAsOf?: string;
   };
 };
+type LocalProjectRecord = {
+  id: string;
+  stage: string;
+  year: number;
+  quarter?: number;
+  title: string;
+  location?: string;
+  sourceUrl?: string;
+  sourceDocument?: string;
+  sourceSheet?: string;
+  sourceRow?: number;
+  listedAmountPesos?: number;
+  assignedAmountForBarangayPesos?: number;
+  plannedProcurementAmountPesos?: number;
+  plannedAmountShareForBarangayPesos?: number;
+  approvedBudgetPesos?: number;
+  bidAmountPesos?: number;
+  reference?: string;
+  remarks?: string;
+};
+type LocalBarangayRecord = {
+  psgc: string;
+  name: string;
+  ntaProjectRows: number;
+  ntaListedAmountPesos: number;
+  directBarangayRows: number;
+  directBarangayAmountPesos: number;
+  releasedDirectRows: number;
+  releasedDirectAmountPesos: number;
+  otherNtaRows: number;
+  appRows: number;
+  appPlannedAmountPesos: number;
+  civilWorksBidRows: number;
+  ntaRecords: LocalProjectRecord[];
+  appRecords: LocalProjectRecord[];
+  bidRecords: LocalProjectRecord[];
+};
+type LocalAllocationData = {
+  sources: { label: string; url: string; period: string; type: string }[];
+  summary: {
+    ntaListedAmountPesos: number;
+    ntaLocatedRows: number;
+    ntaLocatedAmountPesos: number;
+    ntaUnlocatedRows: number;
+    ntaUnlocatedAmountPesos: number;
+    appBarangayProjectRows: number;
+    appPlannedAmountPesos: number;
+    civilWorksBidRows: number;
+  };
+  barangays: LocalBarangayRecord[];
+};
 
 const barangays = records.barangays as BarangayRecord[];
 const captainRoster = records.captainRoster as {
@@ -345,11 +396,69 @@ function downloadRows(
   URL.revokeObjectURL(href);
 }
 
+function downloadLocalBarangayRows(
+  rows: LocalBarangayRecord[],
+  format: 'json' | 'csv'
+) {
+  const exportRows = rows.map(row => ({
+    psgc: row.psgc,
+    barangay: row.name,
+    q3_2026_nta_listed_amount_pesos: row.ntaListedAmountPesos,
+    q3_2026_nta_project_rows: row.ntaProjectRows,
+    direct_barangay_assistance_pesos: row.directBarangayAmountPesos,
+    direct_barangay_assistance_rows: row.directBarangayRows,
+    released_direct_assistance_pesos: row.releasedDirectAmountPesos,
+    released_direct_assistance_rows: row.releasedDirectRows,
+    app_planned_amount_pesos: row.appPlannedAmountPesos,
+    app_project_rows: row.appRows,
+    civil_works_bid_records: row.civilWorksBidRows,
+    nta_source_rows: row.ntaRecords
+      .map(
+        record =>
+          `${record.title} [${record.sourceDocument}, row ${record.sourceRow}] ${record.sourceUrl}`
+      )
+      .join(' | '),
+    app_source_rows: row.appRecords
+      .map(
+        record =>
+          `${record.title} [${record.sourceDocument}, row ${record.sourceRow}] ${record.sourceUrl}`
+      )
+      .join(' | '),
+    bid_source_rows: row.bidRecords
+      .map(
+        record =>
+          `${record.title} [${record.reference}; ${record.sourceDocument}, row ${record.sourceRow}] ${record.sourceUrl}`
+      )
+      .join(' | '),
+  }));
+  const csv = [
+    Object.keys(exportRows[0] ?? {}).join(','),
+    ...exportRows.map(row =>
+      Object.values(row)
+        .map(value => `"${String(value).replaceAll('"', '""')}"`)
+        .join(',')
+    ),
+  ].join('\r\n');
+  const href = URL.createObjectURL(
+    new Blob([format === 'json' ? JSON.stringify(exportRows, null, 2) : csv], {
+      type: format === 'json' ? 'application/json' : 'text/csv;charset=utf-8',
+    })
+  );
+  const anchor = document.createElement('a');
+  anchor.href = href;
+  anchor.download = `miagao-local-allocations-by-barangay.${format}`;
+  anchor.click();
+  URL.revokeObjectURL(href);
+}
+
 export default function Barangays() {
   const [query, setQuery] = useState('');
   const [historicalProfiles, setHistoricalProfiles] = useState<
     HistoricalProfile[]
   >([]);
+  const [localAllocationData, setLocalAllocationData] =
+    useState<LocalAllocationData | null>(null);
+  const [localTablePage, setLocalTablePage] = useState(0);
   const [boundaryByPsgc, setBoundaryByPsgc] = useState<
     Map<string, BarangayGeometry>
   >(new Map());
@@ -372,6 +481,23 @@ export default function Barangays() {
       })
       .catch(() => {
         if (active) setHistoricalProfiles([]);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+  useEffect(() => {
+    let active = true;
+    fetch(`${import.meta.env.BASE_URL}data/miagao-local-allocations.json`)
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json() as Promise<LocalAllocationData>;
+      })
+      .then(payload => {
+        if (active) setLocalAllocationData(payload);
+      })
+      .catch(() => {
+        if (active) setLocalAllocationData(null);
       });
     return () => {
       active = false;
@@ -424,6 +550,13 @@ export default function Barangays() {
       ),
     [historicalProfiles]
   );
+  const localByPsgc = useMemo(
+    () =>
+      new Map(
+        (localAllocationData?.barangays ?? []).map(row => [row.psgc, row])
+      ),
+    [localAllocationData]
+  );
   const filtered = useMemo(() => {
     const q = query.trim().toLocaleLowerCase();
     if (!q) return barangays;
@@ -433,13 +566,20 @@ export default function Barangays() {
         row.psgc,
         row.captain?.name ?? '',
         ...row.titleMatchedProjects.map(p => p.title),
+        ...(localByPsgc.get(row.psgc)
+          ? [
+              ...localByPsgc.get(row.psgc)!.ntaRecords.map(item => item.title),
+              ...localByPsgc.get(row.psgc)!.appRecords.map(item => item.title),
+              ...localByPsgc.get(row.psgc)!.bidRecords.map(item => item.title),
+            ]
+          : []),
         profilesByBarangay.get(normalizePlace(row.name))?.contentText ?? '',
       ]
         .join(' ')
         .toLocaleLowerCase()
         .includes(q)
     );
-  }, [query, profilesByBarangay]);
+  }, [query, profilesByBarangay, localByPsgc]);
   const visibleRows = filtered.slice(page * pageSize, (page + 1) * pageSize);
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const firstRow = filtered.length ? page * pageSize + 1 : 0;
@@ -465,6 +605,35 @@ export default function Barangays() {
     .sort((a, b) => b.value - a.value || a.label.localeCompare(b.label))
     .slice(0, 8)
     .map(row => ({ ...row, display: `${row.value} rows` }));
+  const localNtaRanks = [...(localAllocationData?.barangays ?? [])]
+    .filter(row => row.ntaListedAmountPesos > 0)
+    .sort(
+      (a, b) =>
+        b.ntaListedAmountPesos - a.ntaListedAmountPesos ||
+        a.name.localeCompare(b.name)
+    )
+    .slice(0, 8)
+    .map(row => ({
+      label: row.name,
+      value: row.ntaListedAmountPesos,
+      display: peso.format(row.ntaListedAmountPesos),
+    }));
+  const visibleLocalTableRows = [...(localAllocationData?.barangays ?? [])]
+    .filter(row => filtered.some(barangay => barangay.psgc === row.psgc))
+    .sort(
+      (a, b) =>
+        b.ntaListedAmountPesos - a.ntaListedAmountPesos ||
+        a.name.localeCompare(b.name)
+    );
+  const localTablePageSize = 20;
+  const localTablePageCount = Math.max(
+    1,
+    Math.ceil(visibleLocalTableRows.length / localTablePageSize)
+  );
+  const currentLocalTableRows = visibleLocalTableRows.slice(
+    localTablePage * localTablePageSize,
+    (localTablePage + 1) * localTablePageSize
+  );
   const populationRanks = [...barangays]
     .sort((a, b) => b.population2024 - a.population2024)
     .slice(0, 8)
@@ -594,6 +763,12 @@ export default function Barangays() {
           title="Positions listed in Miagao · DILG roster"
           rows={rosterRoleRanks}
         />
+        {localAllocationData && (
+          <BarangayRankChart
+            title="2026 Q3 20% NTA · highest barangay-named amounts"
+            rows={localNtaRanks}
+          />
+        )}
       </section>
 
       <section className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
@@ -651,6 +826,7 @@ export default function Barangays() {
             onChange={event => {
               setQuery(event.target.value);
               setPage(0);
+              setLocalTablePage(0);
             }}
             placeholder="Search barangay, captain, or project"
           />
@@ -675,6 +851,214 @@ export default function Barangays() {
           {filtered.length} of {barangays.length}
         </span>
       </div>
+
+      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-bold text-slate-950">
+              Local allocations and project records · by barangay
+            </h2>
+            <p className="mt-1 max-w-4xl text-sm leading-6 text-gray-600">
+              Q3 2026 20% NTA schedule amounts are listed project costs, not
+              necessarily expenditures. Annual procurement-plan amounts and bid
+              results are shown separately and are not added to NTA totals.
+              Search above also filters this table by matching project title.
+            </p>
+          </div>
+          {localAllocationData && (
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  downloadLocalBarangayRows(visibleLocalTableRows, 'json')
+                }
+                className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-blue-800 px-3 py-2 text-xs font-bold text-white hover:bg-blue-900"
+              >
+                <Download size={15} /> Export local JSON
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  downloadLocalBarangayRows(visibleLocalTableRows, 'csv')
+                }
+                className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-blue-800 px-3 py-2 text-xs font-bold text-blue-800 hover:bg-blue-50"
+              >
+                <Download size={15} /> Export local CSV
+              </button>
+            </div>
+          )}
+        </div>
+        {!localAllocationData ? (
+          <p className="rounded-lg bg-slate-50 p-4 text-sm text-gray-600">
+            Local allocation data could not be loaded.
+          </p>
+        ) : (
+          <>
+            <div className="mb-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+              <article className="rounded-lg bg-emerald-50 p-3">
+                <span className="block text-xs text-emerald-900">
+                  All Q3 20% NTA schedule entries
+                </span>
+                <strong className="mt-1 block text-lg tabular-nums text-slate-950">
+                  {peso.format(
+                    localAllocationData.summary.ntaListedAmountPesos
+                  )}
+                </strong>
+              </article>
+              <article className="rounded-lg bg-blue-50 p-3">
+                <span className="block text-xs text-blue-900">
+                  Barangay-named NTA entries
+                </span>
+                <strong className="mt-1 block text-lg tabular-nums text-slate-950">
+                  {peso.format(
+                    localAllocationData.summary.ntaLocatedAmountPesos
+                  )}{' '}
+                  · {localAllocationData.summary.ntaLocatedRows} rows
+                </strong>
+              </article>
+              <article className="rounded-lg bg-amber-50 p-3">
+                <span className="block text-xs text-amber-900">
+                  APP planned projects naming barangays
+                </span>
+                <strong className="mt-1 block text-lg tabular-nums text-slate-950">
+                  {peso.format(
+                    localAllocationData.summary.appPlannedAmountPesos
+                  )}{' '}
+                  · {localAllocationData.summary.appBarangayProjectRows} rows
+                </strong>
+              </article>
+              <article className="rounded-lg bg-green-50 p-3">
+                <span className="block text-xs text-green-900">
+                  Civil-works bid records
+                </span>
+                <strong className="mt-1 block text-lg tabular-nums text-slate-950">
+                  {localAllocationData.summary.civilWorksBidRows} · Q1 and Q3
+                </strong>
+              </article>
+            </div>
+            <div className="w-full">
+              <table className="w-full table-fixed border-collapse text-left text-[11px] leading-4 sm:text-xs">
+                <colgroup>
+                  <col className="w-[25%]" />
+                  <col className="w-[23%]" />
+                  <col className="w-[22%]" />
+                  <col className="w-[19%]" />
+                  <col className="w-[11%]" />
+                </colgroup>
+                <thead>
+                  <tr className="bg-slate-900 text-white">
+                    <th className="break-words p-2 font-semibold">Barangay</th>
+                    <th className="break-words p-2 text-right font-semibold">
+                      Q3 NTA listed amount · rows
+                    </th>
+                    <th className="break-words p-2 text-right font-semibold">
+                      Direct assistance · rows
+                    </th>
+                    <th className="break-words p-2 text-right font-semibold">
+                      APP planned amount · rows
+                    </th>
+                    <th className="break-words p-2 text-right font-semibold">
+                      Bid records
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentLocalTableRows.map(row => (
+                    <tr key={row.psgc} className="border-b border-slate-200">
+                      <td className="break-words p-2 font-semibold">
+                        <a
+                          className="text-blue-800 underline underline-offset-2"
+                          href={`#barangay-${row.psgc}`}
+                        >
+                          {row.name}
+                        </a>
+                      </td>
+                      <td className="break-words p-2 text-right tabular-nums">
+                        {row.ntaProjectRows
+                          ? `${peso.format(row.ntaListedAmountPesos)} · ${row.ntaProjectRows}`
+                          : '—'}
+                      </td>
+                      <td className="break-words p-2 text-right tabular-nums">
+                        {row.directBarangayRows
+                          ? `${peso.format(row.directBarangayAmountPesos)} · ${row.directBarangayRows} (${row.releasedDirectRows} released)`
+                          : '—'}
+                      </td>
+                      <td className="break-words p-2 text-right tabular-nums">
+                        {row.appRows
+                          ? `${peso.format(row.appPlannedAmountPesos)} · ${row.appRows}`
+                          : '—'}
+                      </td>
+                      <td className="break-words p-2 text-right tabular-nums">
+                        {row.civilWorksBidRows || '—'}
+                      </td>
+                    </tr>
+                  ))}
+                  {!currentLocalTableRows.length && (
+                    <tr>
+                      <td colSpan={5} className="p-4 text-center text-gray-600">
+                        No barangay matches the current search.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+              <span className="text-xs text-gray-600">
+                {visibleLocalTableRows.length} barangays · Page{' '}
+                {localTablePage + 1} of {localTablePageCount} · 20 per page
+              </span>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  disabled={localTablePage === 0}
+                  onClick={() =>
+                    setLocalTablePage(value => Math.max(0, value - 1))
+                  }
+                  className="rounded-lg border border-gray-300 px-3 py-2 text-xs font-semibold disabled:opacity-40"
+                >
+                  Previous
+                </button>
+                <button
+                  type="button"
+                  disabled={localTablePage + 1 >= localTablePageCount}
+                  onClick={() =>
+                    setLocalTablePage(value =>
+                      Math.min(localTablePageCount - 1, value + 1)
+                    )
+                  }
+                  className="rounded-lg border border-gray-300 px-3 py-2 text-xs font-semibold disabled:opacity-40"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-600">
+              {localAllocationData.sources.map(source => (
+                <a
+                  key={source.label}
+                  className="font-semibold text-blue-800 underline"
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {source.label} ↗
+                </a>
+              ))}
+            </div>
+            <p className="mt-3 text-xs leading-5 text-gray-500">
+              The remaining {localAllocationData.summary.ntaUnlocatedRows} Q3
+              NTA entries (
+              {peso.format(localAllocationData.summary.ntaUnlocatedAmountPesos)}
+              ) do not name a specific barangay and are excluded from barangay
+              totals. Multi-barangay projects are equally split for this table;
+              this is a display estimate, not an official barangay allocation.
+              APP and bid rows are procurement-stage records, not additional
+              funding.
+            </p>
+          </>
+        )}
+      </section>
 
       <section className="mb-3 flex flex-wrap items-end justify-between gap-3">
         <div>
@@ -715,6 +1099,7 @@ export default function Barangays() {
           const currentMpb = row.mpb.records.filter(
             project => project.year === 2027
           );
+          const localStats = localByPsgc.get(row.psgc);
           const currentMpbAmount = currentMpb.reduce(
             (sum, project) => sum + (project.amountPesos || 0),
             0
@@ -775,6 +1160,27 @@ export default function Barangays() {
                         DPWH title matches
                       </dt>
                       <dd>{row.titleMatchedProjects.length || '—'}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        2026 Q3 · 20% NTA
+                      </dt>
+                      <dd>
+                        {localStats?.ntaProjectRows
+                          ? `${peso.format(localStats.ntaListedAmountPesos)} · ${localStats.ntaProjectRows} rows`
+                          : '—'}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs text-gray-500">
+                        APP plans · bid records
+                      </dt>
+                      <dd>
+                        {localStats &&
+                        (localStats.appRows || localStats.civilWorksBidRows)
+                          ? `${localStats.appRows} · ${localStats.civilWorksBidRows}`
+                          : '—'}
+                      </dd>
                     </div>
                   </dl>
                 </div>
@@ -848,6 +1254,109 @@ export default function Barangays() {
                     ) : (
                       <p className="mt-1 text-sm text-gray-600">
                         No FY2027 MPB record linked by the current source data.
+                      </p>
+                    )}
+                  </section>
+                  <section>
+                    <h4 className="font-bold text-slate-950">
+                      Local NTA, procurement, and bid records · 2026
+                    </h4>
+                    {localStats &&
+                    (localStats.ntaRecords.length ||
+                      localStats.appRecords.length ||
+                      localStats.bidRecords.length) ? (
+                      <div className="mt-2 space-y-3">
+                        {localStats.ntaRecords.map(record => (
+                          <div
+                            key={record.id}
+                            className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm"
+                          >
+                            <p className="font-semibold">{record.title}</p>
+                            <p className="mt-1">
+                              Q3 20% NTA schedule · listed project cost{' '}
+                              {peso.format(
+                                record.assignedAmountForBarangayPesos ??
+                                  record.listedAmountPesos ??
+                                  0
+                              )}
+                            </p>
+                            {record.remarks && (
+                              <p className="mt-1 text-xs text-gray-600">
+                                Status / remarks: {record.remarks}
+                              </p>
+                            )}
+                            {record.sourceUrl && (
+                              <a
+                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
+                                href={record.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Source · {record.sourceDocument}, row{' '}
+                                {record.sourceRow} <ExternalLink size={12} />
+                              </a>
+                            )}
+                          </div>
+                        ))}
+                        {localStats.appRecords.map(record => (
+                          <div
+                            key={record.id}
+                            className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm"
+                          >
+                            <p className="font-semibold">{record.title}</p>
+                            <p className="mt-1">
+                              Annual Procurement Plan · planned amount{' '}
+                              {peso.format(
+                                record.plannedProcurementAmountPesos ?? 0
+                              )}
+                            </p>
+                            {record.sourceUrl && (
+                              <a
+                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
+                                href={record.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Source · {record.sourceDocument}, row{' '}
+                                {record.sourceRow} <ExternalLink size={12} />
+                              </a>
+                            )}
+                          </div>
+                        ))}
+                        {localStats.bidRecords.map(record => (
+                          <div
+                            key={record.id}
+                            className="rounded-lg border border-green-200 bg-green-50 p-3 text-sm"
+                          >
+                            <p className="font-semibold">{record.title}</p>
+                            <p className="mt-1">
+                              Civil-works bid result · Ref{' '}
+                              {record.reference || '—'}
+                            </p>
+                            <p className="mt-1 text-xs text-gray-700">
+                              Approved budget{' '}
+                              {peso.format(record.approvedBudgetPesos ?? 0)}
+                              {record.bidAmountPesos != null &&
+                                ` · Bid ${peso.format(record.bidAmountPesos)}`}
+                            </p>
+                            {record.sourceUrl && (
+                              <a
+                                className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-blue-800 underline"
+                                href={record.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Source · {record.sourceDocument}, row{' '}
+                                {record.sourceRow} <ExternalLink size={12} />
+                              </a>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="mt-1 text-sm text-gray-600">
+                        No barangay-named NTA, APP, or civil-works bid record in
+                        the current 2026 source files.
                       </p>
                     )}
                   </section>
