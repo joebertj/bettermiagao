@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { Download, ExternalLink, Search } from 'lucide-react';
 import records from '../data/miagao-barangay-inventory.json';
 
@@ -40,14 +40,42 @@ const peso = new Intl.NumberFormat('en-PH', {
   maximumFractionDigits: 0,
 });
 
-function downloadJson(rows: BarangayRecord[]) {
-  const blob = new Blob([JSON.stringify(rows, null, 2)], {
-    type: 'application/json',
-  });
+function downloadRows(rows: BarangayRecord[], format: 'json' | 'csv') {
+  const exportRows = rows.map(row => ({
+    psgc: row.psgc,
+    barangay: row.name,
+    population2024: row.population2024,
+    captain: row.captain?.name ?? '',
+    captainSource: row.captain?.source ?? '',
+    fy2027MpbProjects: row.mpb.records
+      .filter(project => project.year === 2027)
+      .map(project => project.title)
+      .join(' | '),
+    fy2027MpbAllocationPesos: row.mpb.records
+      .filter(project => project.year === 2027)
+      .reduce((sum, project) => sum + project.amountPesos, 0),
+    titleMatchedDpwhProjects: row.titleMatchedProjects
+      .map(project => project.title)
+      .join(' | '),
+  }));
+  const csv = [
+    Object.keys(exportRows[0] ?? {}).join(','),
+    ...exportRows.map(row =>
+      Object.values(row)
+        .map(value => `"${String(value).replaceAll('"', '""')}"`)
+        .join(',')
+    ),
+  ].join('\r\n');
+  const blob = new Blob(
+    [format === 'json' ? JSON.stringify(exportRows, null, 2) : csv],
+    {
+      type: format === 'json' ? 'application/json' : 'text/csv;charset=utf-8',
+    }
+  );
   const href = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
   anchor.href = href;
-  anchor.download = 'miagao-barangays.json';
+  anchor.download = `miagao-barangays.${format}`;
   anchor.click();
   URL.revokeObjectURL(href);
 }
@@ -55,6 +83,8 @@ function downloadJson(rows: BarangayRecord[]) {
 export default function Barangays() {
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(20);
   const filtered = useMemo(() => {
     const q = query.trim().toLocaleLowerCase();
     if (!q) return barangays;
@@ -70,6 +100,53 @@ export default function Barangays() {
         .includes(q)
     );
   }, [query]);
+  const visibleRows = filtered.slice(page * pageSize, (page + 1) * pageSize);
+  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const firstRow = filtered.length ? page * pageSize + 1 : 0;
+  const lastRow = Math.min(filtered.length, (page + 1) * pageSize);
+  const pagination = (
+    <div className="flex flex-wrap items-center justify-between gap-3 py-3">
+      <label className="flex items-center gap-2 text-sm text-gray-600">
+        Rows per page
+        <select
+          value={pageSize}
+          onChange={event => {
+            setPageSize(Number(event.target.value));
+            setPage(0);
+          }}
+          className="rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900"
+        >
+          {[10, 20, 50].map(size => (
+            <option key={size} value={size}>
+              {size}
+            </option>
+          ))}
+        </select>
+      </label>
+      <span className="text-sm text-gray-600">
+        {firstRow}–{lastRow} of {filtered.length} · Page {page + 1} of{' '}
+        {pageCount}
+      </span>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          disabled={page === 0}
+          onClick={() => setPage(Math.max(0, page - 1))}
+          className="rounded-lg border border-gray-300 px-3 py-2 text-sm disabled:opacity-40"
+        >
+          Previous
+        </button>
+        <button
+          type="button"
+          disabled={page + 1 >= pageCount}
+          onClick={() => setPage(Math.min(pageCount - 1, page + 1))}
+          className="rounded-lg border border-gray-300 px-3 py-2 text-sm disabled:opacity-40"
+        >
+          Next
+        </button>
+      </div>
+    </div>
+  );
 
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
@@ -167,37 +244,167 @@ export default function Barangays() {
           <input
             className="w-full border-0 bg-transparent text-sm outline-none"
             value={query}
-            onChange={event => setQuery(event.target.value)}
+            onChange={event => {
+              setQuery(event.target.value);
+              setPage(0);
+            }}
             placeholder="Search barangay, captain, or project"
           />
         </label>
-        <button
-          type="button"
-          onClick={() => downloadJson(filtered)}
-          className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-blue-800 px-4 py-2 text-sm font-bold text-white hover:bg-blue-900"
-        >
-          <Download size={16} /> Export visible rows
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => downloadRows(filtered, 'json')}
+            className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-blue-800 px-4 py-2 text-sm font-bold text-white hover:bg-blue-900"
+          >
+            <Download size={16} /> Export JSON
+          </button>
+          <button
+            type="button"
+            onClick={() => downloadRows(filtered, 'csv')}
+            className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-blue-800 px-4 py-2 text-sm font-bold text-blue-800 hover:bg-blue-50"
+          >
+            <Download size={16} /> Export CSV
+          </button>
+        </div>
         <span className="text-sm text-gray-600">
           {filtered.length} of {barangays.length}
         </span>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[900px] border-collapse text-left text-sm">
+      {pagination}
+      <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div className="grid gap-3 p-3 md:hidden">
+          {visibleRows.map(row => {
+            const currentMpb = row.mpb.records.filter(
+              project => project.year === 2027
+            );
+            const currentMpbAmount = currentMpb.reduce(
+              (sum, project) => sum + (project.amountPesos || 0),
+              0
+            );
+            const isOpen = expanded === row.psgc;
+            return (
+              <article
+                key={row.psgc}
+                className="rounded-lg border border-gray-200 p-3"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <h2 className="font-bold text-slate-950">{row.name}</h2>
+                  <button
+                    type="button"
+                    className="shrink-0 font-semibold text-blue-800 underline"
+                    onClick={() => setExpanded(isOpen ? null : row.psgc)}
+                  >
+                    {isOpen ? 'Hide' : 'Records'}
+                  </button>
+                </div>
+                <dl className="mt-2 grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <dt className="text-xs text-gray-500">Population · 2024</dt>
+                    <dd>{row.population2024.toLocaleString()}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-gray-500">Punong Barangay</dt>
+                    <dd className="break-words">
+                      {row.captain?.name ?? 'Not yet verified'}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-gray-500">FY2027 MPB</dt>
+                    <dd>
+                      {currentMpb.length
+                        ? `${currentMpb.length} · ${peso.format(currentMpbAmount)}`
+                        : '—'}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-gray-500">
+                      DPWH title matches
+                    </dt>
+                    <dd>{row.titleMatchedProjects.length || '—'}</dd>
+                  </div>
+                </dl>
+                {isOpen && (
+                  <div className="mt-3 space-y-4 border-t border-gray-200 pt-3">
+                    <div>
+                      <h3 className="font-bold">FY2027 MPB records</h3>
+                      {currentMpb.length ? (
+                        currentMpb.map((project, index) => (
+                          <p
+                            key={`${project.source}-${index}`}
+                            className="mt-2 break-words text-sm"
+                          >
+                            {project.title} · {peso.format(project.amountPesos)}{' '}
+                            · {project.source}
+                          </p>
+                        ))
+                      ) : (
+                        <p className="mt-1 text-sm text-gray-600">
+                          No linked FY2027 MPB row.
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <h3 className="font-bold">
+                        Historical and proposed DPWH title matches
+                      </h3>
+                      {row.titleMatchedProjects.length ? (
+                        row.titleMatchedProjects.map((project, index) => (
+                          <p
+                            key={`${project.source}-${index}`}
+                            className="mt-2 break-words text-sm"
+                          >
+                            {project.year} · {project.title} ·{' '}
+                            {peso.format(project.amountPesos)} ·{' '}
+                            {project.source}
+                          </p>
+                        ))
+                      ) : (
+                        <p className="mt-1 text-sm text-gray-600">
+                          No linked DPWH title match.
+                        </p>
+                      )}
+                    </div>
+                    {row.captain && (
+                      <p className="break-words text-xs text-gray-600">
+                        {row.captain.status} ({row.captain.asOf}) ·{' '}
+                        <a
+                          className="underline"
+                          href={row.captain.source}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {row.captain.sourceLabel}
+                        </a>
+                      </p>
+                    )}
+                  </div>
+                )}
+              </article>
+            );
+          })}
+        </div>
+        <div className="hidden md:block">
+          <table className="w-full table-fixed border-collapse text-left text-sm">
             <thead className="bg-slate-950 text-white">
               <tr>
-                <th className="px-4 py-3">Barangay</th>
-                <th className="px-4 py-3">Population · 2024</th>
-                <th className="px-4 py-3">Punong Barangay</th>
-                <th className="px-4 py-3">FY2027 MPB</th>
-                <th className="px-4 py-3">Title-matched DPWH records</th>
-                <th className="px-4 py-3">Details</th>
+                <th className="w-[18%] break-words px-3 py-3">Barangay</th>
+                <th className="w-[10%] break-words px-3 py-3">
+                  Population · 2024
+                </th>
+                <th className="w-[18%] break-words px-3 py-3">
+                  Punong Barangay
+                </th>
+                <th className="w-[17%] break-words px-3 py-3">FY2027 MPB</th>
+                <th className="w-[20%] break-words px-3 py-3">
+                  Title-matched DPWH records
+                </th>
+                <th className="w-[17%] break-words px-3 py-3">Details</th>
               </tr>
             </thead>
             <tbody>
-              {filtered.map(row => {
+              {visibleRows.map(row => {
                 const currentMpb = row.mpb.records.filter(
                   project => project.year === 2027
                 );
@@ -207,18 +414,15 @@ export default function Barangays() {
                 );
                 const isOpen = expanded === row.psgc;
                 return (
-                  <>
-                    <tr
-                      key={row.psgc}
-                      className="border-t border-gray-200 odd:bg-white even:bg-slate-50"
-                    >
-                      <td className="px-4 py-3 font-semibold text-slate-950">
+                  <Fragment key={row.psgc}>
+                    <tr className="border-t border-gray-200 odd:bg-white even:bg-slate-50">
+                      <td className="break-words px-3 py-3 font-semibold text-slate-950">
                         {row.name}
                       </td>
-                      <td className="px-4 py-3 tabular-nums">
+                      <td className="break-words px-3 py-3 tabular-nums">
                         {row.population2024.toLocaleString()}
                       </td>
-                      <td className="px-4 py-3">
+                      <td className="break-words px-3 py-3">
                         {row.captain ? (
                           <span>{row.captain.name}</span>
                         ) : (
@@ -227,15 +431,15 @@ export default function Barangays() {
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-3 tabular-nums">
+                      <td className="break-words px-3 py-3 tabular-nums">
                         {currentMpb.length
                           ? `${currentMpb.length} · ${peso.format(currentMpbAmount)}`
                           : '—'}
                       </td>
-                      <td className="px-4 py-3 tabular-nums">
+                      <td className="break-words px-3 py-3 tabular-nums">
                         {row.titleMatchedProjects.length || '—'}
                       </td>
-                      <td className="px-4 py-3">
+                      <td className="break-words px-3 py-3">
                         <button
                           className="font-semibold text-blue-800 underline"
                           onClick={() => setExpanded(isOpen ? null : row.psgc)}
@@ -245,10 +449,7 @@ export default function Barangays() {
                       </td>
                     </tr>
                     {isOpen && (
-                      <tr
-                        key={`${row.psgc}-details`}
-                        className="border-t border-blue-100 bg-blue-50"
-                      >
+                      <tr className="border-t border-blue-100 bg-blue-50">
                         <td colSpan={6} className="px-4 py-5">
                           <div className="grid gap-6 lg:grid-cols-2">
                             <div>
@@ -332,13 +533,14 @@ export default function Barangays() {
                         </td>
                       </tr>
                     )}
-                  </>
+                  </Fragment>
                 );
               })}
             </tbody>
           </table>
         </div>
       </div>
+      {pagination}
       <p className="mt-4 text-xs leading-5 text-gray-500">
         Population source: PSA 2024 POPCEN, checked through the PSGC
         municipality record. MPB figures come from BetterGov’s title and
