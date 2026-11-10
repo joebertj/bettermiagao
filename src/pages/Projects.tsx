@@ -7,7 +7,6 @@ import {
   Search,
 } from 'lucide-react';
 import records from '../data/miagao-projects.json';
-import barangayInventory from '../data/miagao-barangay-inventory.json';
 import { miagaoBarangays } from '../data/miagao-barangays';
 import Glance from './Glance';
 
@@ -40,54 +39,6 @@ const money = new Intl.NumberFormat('en-PH', {
   currency: 'PHP',
   maximumFractionDigits: 0,
 });
-
-function NationalBarangayBars({
-  title,
-  rows,
-  formatter,
-}: {
-  title: string;
-  rows: { name: string; value: number }[];
-  formatter: (value: number) => string;
-}) {
-  const maximum = Math.max(1, ...rows.map(row => row.value));
-  return (
-    <article className="rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
-      <h3 className="text-lg font-bold text-slate-950">{title}</h3>
-      <div className="mt-4 space-y-3">
-        {rows.map((row, index) => (
-          <div
-            key={row.name}
-            className="grid grid-cols-[1.5rem_minmax(0,1fr)_auto] items-center gap-2 text-sm"
-          >
-            <span className="text-xs font-semibold text-slate-500">
-              {index + 1}
-            </span>
-            <div className="min-w-0">
-              <div className="mb-1 truncate font-medium text-slate-800">
-                {row.name}
-              </div>
-              <div className="h-2.5 rounded-full bg-slate-100">
-                <div
-                  className="h-2.5 rounded-full bg-blue-700"
-                  style={{
-                    width: Math.max(2, (row.value / maximum) * 100) + '%',
-                  }}
-                />
-              </div>
-            </div>
-            <strong className="pl-1 text-right text-xs tabular-nums text-slate-800">
-              {formatter(row.value)}
-            </strong>
-          </div>
-        ))}
-        {!rows.length && (
-          <p className="text-sm text-gray-600">No matching records.</p>
-        )}
-      </div>
-    </article>
-  );
-}
 
 export default function Projects() {
   const [year, setYear] = useState('all');
@@ -151,32 +102,6 @@ export default function Projects() {
     }))
     .filter(item => item.count)
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
-  const hgabMpbByBarangay = barangayInventory.barangays
-    .map(row => ({
-      name: row.name,
-      value: row.mpb.records
-        .filter(project => project.year === 2027)
-        .reduce((sum, project) => sum + (project.amountPesos || 0), 0),
-    }))
-    .filter(row => row.value > 0)
-    .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name))
-    .slice(0, 8);
-  const hgabDpwhByBarangay = barangayInventory.barangays
-    .map(row => ({
-      name: row.name,
-      value: row.titleMatchedProjects.filter(project => project.year === 2027)
-        .length,
-    }))
-    .filter(row => row.value > 0)
-    .sort((a, b) => b.value - a.value || a.name.localeCompare(b.name))
-    .slice(0, 8);
-  const barangaysWithNationalDpwh = barangayInventory.barangays.filter(
-    row => row.titleMatchedProjects.length > 0
-  ).length;
-  const barangaysWithHgabMpb = barangayInventory.barangays.filter(row =>
-    row.mpb.records.some(project => project.year === 2027)
-  ).length;
-
   const exportRows = () => {
     const blob = new Blob([JSON.stringify(filtered, null, 2)], {
       type: 'application/json',
@@ -255,6 +180,22 @@ export default function Projects() {
         </div>
       </header>
 
+      <section className="mb-4" aria-labelledby="national-dashboard-title">
+        <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-800">
+          National records · dashboard
+        </p>
+        <h2
+          id="national-dashboard-title"
+          className="mt-1 text-2xl font-bold text-slate-950"
+        >
+          Historical funding and FY2027 proposal
+        </h2>
+        <p className="mt-2 max-w-4xl text-sm leading-6 text-gray-600">
+          The figures summarize title-matched national records. The barangay
+          maps and allocation views below provide the geographic breakdown.
+        </p>
+      </section>
+
       <section className="mb-12 grid gap-8 lg:grid-cols-2">
         <div className="rounded-2xl border border-gray-200 bg-white p-6">
           <h2 className="text-xl font-bold text-gray-950">
@@ -326,48 +267,6 @@ export default function Projects() {
         </div>
       </section>
 
-      <section className="mb-12" aria-labelledby="national-barangay-title">
-        <div className="rounded-2xl bg-slate-950 px-6 py-5 text-white sm:px-8">
-          <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-200">
-            National records · separate from Miagao local funds
-          </p>
-          <h2 id="national-barangay-title" className="mt-2 text-2xl font-bold">
-            National project matches by barangay
-          </h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-300">
-            These DPWH GAA and FY2027 House proposal records are linked by
-            project titles or source-listed locations. They are national
-            appropriations, not allocations controlled by the municipal LGU; a
-            title match does not establish the exact project footprint.
-          </p>
-        </div>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          <article className="rounded-xl bg-blue-800 p-5 text-white">
-            <strong className="block text-3xl">
-              {barangaysWithNationalDpwh}
-            </strong>
-            <span className="text-sm text-blue-100">
-              barangays with a national DPWH match
-            </span>
-          </article>
-          <article className="rounded-xl bg-amber-400 p-5 text-slate-950">
-            <strong className="block text-3xl">{barangaysWithHgabMpb}</strong>
-            <span className="text-sm">barangays with an FY2027 MPB record</span>
-          </article>
-        </div>
-        <div className="mt-4 grid gap-4 lg:grid-cols-2">
-          <NationalBarangayBars
-            title="FY2027 MPB allocations · by named barangay"
-            rows={hgabMpbByBarangay}
-            formatter={value => money.format(value)}
-          />
-          <NationalBarangayBars
-            title="FY2027 DPWH project-title matches · by barangay"
-            rows={hgabDpwhByBarangay}
-            formatter={value => value + ' rows'}
-          />
-        </div>
-      </section>
       <Glance nationalOnly />
 
       <section

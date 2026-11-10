@@ -693,6 +693,72 @@ export default function Barangays() {
         </p>
       </header>
 
+      <section
+        className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5"
+        aria-label="Local barangay statistics"
+      >
+        <div className="rounded-xl bg-slate-950 p-5 text-white">
+          <strong className="block text-3xl">{barangays.length}</strong>
+          <span className="text-sm text-slate-300">PSGC barangays</span>
+        </div>
+        <div className="rounded-xl border border-gray-200 bg-white p-5">
+          <strong className="block text-3xl">
+            {captainRoster.captainRows}
+          </strong>
+          <span className="text-sm text-gray-600">
+            DILG captain entries · 2025 snapshot
+          </span>
+        </div>
+        {localAllocationData && (
+          <>
+            <div className="rounded-xl bg-emerald-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.ntaLocatedRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-emerald-950">
+                barangay-named Q3 20% NTA rows
+              </span>
+            </div>
+            <div className="rounded-xl bg-amber-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.appBarangayProjectRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-amber-950">
+                APP rows naming barangays
+              </span>
+            </div>
+            <div className="rounded-xl bg-green-50 p-5">
+              <strong className="block text-3xl">
+                {localAllocationData.summary.civilWorksBidRows.toLocaleString()}
+              </strong>
+              <span className="text-sm text-green-950">
+                local civil-works bid records
+              </span>
+            </div>
+          </>
+        )}
+      </section>
+
+      <section
+        className="mb-8 grid gap-4 lg:grid-cols-2"
+        aria-label="Local barangay charts"
+      >
+        <BarangayRankChart
+          title="PSA 2024 population · largest barangays"
+          rows={populationRanks}
+        />
+        <BarangayRankChart
+          title="Positions listed in Miagao · DILG roster"
+          rows={rosterRoleRanks}
+        />
+        {localAllocationData && (
+          <BarangayRankChart
+            title="2026 Q3 20% NTA · highest barangay-named amounts"
+            rows={localNtaRanks}
+          />
+        )}
+      </section>
+
       <div className="mb-4 flex flex-wrap items-center gap-3">
         <label className="flex min-w-64 flex-1 items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2">
           <Search size={17} className="text-gray-500" />
@@ -1204,72 +1270,6 @@ export default function Barangays() {
               funding.
             </p>
           </>
-        )}
-      </section>
-
-      <section
-        className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5"
-        aria-label="Local barangay statistics"
-      >
-        <div className="rounded-xl bg-slate-950 p-5 text-white">
-          <strong className="block text-3xl">{barangays.length}</strong>
-          <span className="text-sm text-slate-300">PSGC barangays</span>
-        </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-5">
-          <strong className="block text-3xl">
-            {captainRoster.captainRows}
-          </strong>
-          <span className="text-sm text-gray-600">
-            DILG captain entries · 2025 snapshot
-          </span>
-        </div>
-        {localAllocationData && (
-          <>
-            <div className="rounded-xl bg-emerald-50 p-5">
-              <strong className="block text-3xl">
-                {localAllocationData.summary.ntaLocatedRows.toLocaleString()}
-              </strong>
-              <span className="text-sm text-emerald-950">
-                barangay-named Q3 20% NTA rows
-              </span>
-            </div>
-            <div className="rounded-xl bg-amber-50 p-5">
-              <strong className="block text-3xl">
-                {localAllocationData.summary.appBarangayProjectRows.toLocaleString()}
-              </strong>
-              <span className="text-sm text-amber-950">
-                APP rows naming barangays
-              </span>
-            </div>
-            <div className="rounded-xl bg-green-50 p-5">
-              <strong className="block text-3xl">
-                {localAllocationData.summary.civilWorksBidRows.toLocaleString()}
-              </strong>
-              <span className="text-sm text-green-950">
-                local civil-works bid records
-              </span>
-            </div>
-          </>
-        )}
-      </section>
-
-      <section
-        className="mb-8 grid gap-4 lg:grid-cols-2"
-        aria-label="Local barangay charts"
-      >
-        <BarangayRankChart
-          title="PSA 2024 population · largest barangays"
-          rows={populationRanks}
-        />
-        <BarangayRankChart
-          title="Positions listed in Miagao · DILG roster"
-          rows={rosterRoleRanks}
-        />
-        {localAllocationData && (
-          <BarangayRankChart
-            title="2026 Q3 20% NTA · highest barangay-named amounts"
-            rows={localNtaRanks}
-          />
         )}
       </section>
 

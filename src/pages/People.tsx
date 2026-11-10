@@ -1,6 +1,7 @@
 import { ExternalLink } from 'lucide-react';
 import type { ReactNode } from 'react';
 import officials from '../data/miagao-officials.json';
+import barangayInventory from '../data/miagao-barangay-inventory.json';
 
 function SourceLink({
   href,
@@ -119,6 +120,64 @@ export default function People() {
             roster checked {officials.asOf}.
           </p>
         </div>
+      </section>
+
+      <section className="mb-12 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-widest text-blue-800">
+              Barangay officials · dated roster
+            </p>
+            <h2 className="mt-2 text-2xl font-bold text-slate-950">
+              Punong Barangays · all 119 barangays
+            </h2>
+          </div>
+          <SourceLink href={barangayInventory.captainRoster.sourceUrl}>
+            DILG Region VI roster · 14 Sep 2025
+          </SourceLink>
+        </div>
+        <p className="mt-3 max-w-4xl text-sm leading-6 text-gray-600">
+          The DILG Barangay Information System workbook snapshot lists 119
+          Punong Barangays for the 2023–2025 term. It is a dated roster, not a
+          live register; later vacancies or successions are not verified here.
+          Names are shown as recorded in that source.
+        </p>
+        <div className="mt-5 rounded-lg border border-gray-200">
+          <table className="w-full border-collapse text-left text-sm">
+            <thead className="bg-slate-950 text-white">
+              <tr>
+                <th scope="col" className="px-4 py-3">
+                  Barangay
+                </th>
+                <th scope="col" className="px-4 py-3">
+                  Punong Barangay in the snapshot
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {barangayInventory.barangays.map(row => (
+                <tr
+                  key={row.psgc}
+                  className="border-t border-gray-200 odd:bg-white even:bg-slate-50"
+                >
+                  <th
+                    scope="row"
+                    className="whitespace-nowrap px-4 py-2.5 font-semibold text-slate-900"
+                  >
+                    {row.name}
+                  </th>
+                  <td className="px-4 py-2.5 text-gray-800">
+                    {row.captain?.name ?? 'Not listed in the snapshot'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 text-xs text-gray-500">
+          Source rows: {barangayInventory.captainRoster.captainRows} · snapshot
+          date {barangayInventory.captainRoster.snapshotDate}
+        </p>
       </section>
 
       <section className="mb-12 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
