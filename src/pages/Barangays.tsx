@@ -433,11 +433,11 @@ export default function Barangays() {
           not confirm a project’s exact site.
         </p>
         <p className="mt-3 text-sm leading-6 text-gray-600">
-          The DILG Barangay Information System Region VI roster snapshot dated
-          14 September 2025 lists a Punong Barangay for all 119 Miagao
-          barangays. Its term field says 2023–2025; Republic Act 12326 moved the
-          next barangay election to November 2028. Later vacancies or
-          successions have not been independently checked.
+          The DILG Barangay Information System Region VI workbook provides a
+          complete dated baseline: 119 Punong Barangay entries for Miagao’s 119
+          barangays, in a snapshot dated 14 September 2025. It records the
+          2023–2025 term and does not establish whether anyone changed office
+          after that snapshot.
         </p>
       </header>
 
@@ -493,13 +493,14 @@ export default function Barangays() {
       </section>
 
       <section className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
-        <strong>Barangay captain roster:</strong> the DILG workbook contains{' '}
-        {captainRoster.officialPositionRows.toLocaleString()} position records
-        across {captainRoster.barangayRows} Miagao barangays, including{' '}
-        {captainRoster.captainRows} Punong Barangay entries. The workbook’s
-        stated term is 2023–2025; it is a dated roster snapshot, not a live
-        record of later vacancies or successions. Republic Act 12326 sets the
-        next barangay election in November 2028.
+        <strong>Barangay captain roster:</strong> the DILG workbook lists{' '}
+        {captainRoster.captainRows} Punong Barangay entries across all{' '}
+        {captainRoster.barangayRows} Miagao barangays, within{' '}
+        {captainRoster.officialPositionRows.toLocaleString()} total position
+        records. This is a complete dated baseline from 14 September 2025 for
+        the stated 2023–2025 term; it does not establish whether anyone changed
+        office after the snapshot. Republic Act 12326 moved the next barangay
+        election to November 2028.
         <div className="mt-2 flex flex-wrap gap-4">
           <a
             className="inline-flex items-center gap-1 font-semibold underline"
