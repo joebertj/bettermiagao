@@ -10,9 +10,10 @@ The certificate was issued through Certbot's manual DNS challenge after the requ
 
 ## Deployment sequence
 
-1. Build the app locally with `npm ci && npm run build`.
-2. Copy `dist/` to `/var/www/bettermiagao.org/` on the VM.
-3. Install `bettermiagao-nginx-acme.conf` as an HTTP-only Nginx server block for both names, then test and reload Nginx.
-4. Install `bettermiagao-nginx.conf` in `/etc/nginx/conf.d/`, then run `sudo nginx -t` and reload Nginx. The config can use the already-issued certificate paths above.
+1. One-time VM setup: clone `git@github.com:joebertj/bettermiagao.git` to `/home/joebert/bettermiagao`, install Node.js/npm, and install `bettermiagao-nginx.conf` in `/etc/nginx/conf.d/`. Run `sudo nginx -t` and reload Nginx after installing the site config.
+2. Commit and push the intended site version to `origin/main`.
+3. Put the VM SSH target in the local, Git-ignored `.env` file as `BETTERMIAGAO_SSH_TARGET=<user@host-or-ssh-alias>`, then run `bash ./deployment/deploy-bettermiagao.sh`.
+
+The script checks that the local checkout is clean and matches `origin/main`, asks before deployment, then fetches that exact commit on the VM, builds it there, and syncs `dist/` to `/var/www/bettermiagao.org/`. It requires SSH access, Node.js/npm, rsync, and passwordless `sudo` for the web-root copy. It refuses to reset a dirty server checkout. Static-file deployments do not restart an app service or reload Nginx. Keep the `.env` file local; `.gitignore` excludes it.
 
 The final config uses SPA fallback (`try_files $uri $uri/ /index.html`) so direct navigation to `/projects`, `/people`, and `/about` works. Keep the new `server_name` separate from the existing BetterGov domains. The certificate was issued on the VM; this document does not activate the site or alter Nginx.

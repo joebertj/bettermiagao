@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+if [[ -f "$REPO_ROOT/.env" ]]; then
+  set -a
+  # Local-only deployment settings; .env is ignored by Git.
+  source "$REPO_ROOT/.env"
+  set +a
+fi
+REMOTE_TARGET="${BETTERMIAGAO_SSH_TARGET:-}"
+REMOTE_REPO="${BETTERMIAGAO_REMOTE_REPO:-/home/joebert/bettermiagao}"
+REMOTE_WEB_ROOT="/var/www/bettermiagao.org"
+BRANCH="${BETTERMIAGAO_BRANCH:-main}"
+
+if [[ -z "$REMOTE_TARGET" ]]; then
+  echo "Set BETTERMIAGAO_SSH_TARGET in the local .env file (user@host or an SSH alias)." >&2
+  echo "Example: BETTERMIAGAO_SSH_TARGET=deploy@host bash deployment/deploy-bettermiagao.sh" >&2
+  exit 2
+fi
+
+for command in git ssh; do
+  command -v "$command" >/dev/null 2>&1 || {
+    echo "Required command not found: $command" >&2
+    exit 2
+  }
+done
+
+if [[ -n "$(git -C "$REPO_ROOT" status --porcelain)" ]]; then
+  echo "Refusing deployment: commit and push the Better Miagao changes first." >&2
+  exit 1
+fi
+
+git -C "$REPO_ROOT" fetch origin "$BRANCH"
+LOCAL_COMMIT="$(git -C "$REPO_ROOT" rev-parse HEAD)"
+REMOTE_COMMIT="$(git -C "$REPO_ROOT" rev-parse "origin/$BRANCH")"
+if [[ "$LOCAL_COMMIT" != "$REMOTE_COMMIT" ]]; then
+  echo "Refusing deployment: local HEAD must match origin/$BRANCH." >&2
+  echo "Local:  $LOCAL_COMMIT" >&2
+  echo "Origin: $REMOTE_COMMIT" >&2
+  exit 1
+fi
+
+echo "Target commit: $REMOTE_COMMIT"
+read -r -p "Deploy origin/$BRANCH to Better Miagao? [y/N] " CONFIRM
+[[ "$CONFIRM" == "y" || "$CONFIRM" == "Y" ]] || {
+  echo "Deployment cancelled."
+  exit 0
+}
+
+ssh "$REMOTE_TARGET" bash -s -- "$REMOTE_REPO" "$BRANCH" "$REMOTE_WEB_ROOT" "$REMOTE_COMMIT" <<'REMOTE_SCRIPT'
+set -euo pipefail
+repo="$1"
+branch="$2"
+web_root="$3"
+expected_commit="$4"
+
+git -C "$repo" rev-parse --is-inside-work-tree >/dev/null
+if [[ -n "$(git -C "$repo" status --porcelain)" ]]; then
+  echo "Refusing deployment: the server checkout has local changes." >&2
+  exit 1
+fi
+
+git -C "$repo" fetch origin "$branch"
+commit="$(git -C "$repo" rev-parse FETCH_HEAD)"
+if [[ "$commit" != "$expected_commit" ]]; then
+  echo "Refusing deployment: origin/$branch changed after the local check." >&2
+  exit 1
+fi
+git -C "$repo" reset --hard "$commit"
+cd "$repo"
+npm ci
+npm run build
+[[ -s dist/index.html ]]
+sudo install -d -m 0755 "$web_root"
+sudo rsync --archive --delete dist/ "$web_root/"
+sudo test -s "$web_root/index.html"
+echo "Deployed $commit to $web_root"
+REMOTE_SCRIPT
+
+echo "Deployment complete. Static files changed; Nginx does not need a reload."
