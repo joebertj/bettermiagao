@@ -22,7 +22,7 @@ type Feature = {
 type TransportFeature = {
   type: 'Feature';
   properties: {
-    kind: 'road' | 'bridge' | 'floodControl';
+    kind: 'road' | 'bridge' | 'floodControl' | 'fmrProposal';
     name?: string | null;
     roadName?: string | null;
     roadId?: string | null;
@@ -38,6 +38,11 @@ type TransportFeature = {
     roadClass?: string | null;
     condition?: string | null;
     lengthM?: number | null;
+    amountPesos?: number | null;
+    stage?: string | null;
+    sourcePage?: number | null;
+    sourceRowId?: string | null;
+    displayNote?: string | null;
   };
   geometry:
     | { type: 'LineString'; coordinates: Position[] }
@@ -229,17 +234,28 @@ export default function Glance() {
 
   useEffect(() => {
     let active = true;
-    fetch(
-      `${import.meta.env.BASE_URL}data/miagao-dpwh-transport-network.geojson`
-    )
-      .then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
+    Promise.all([
+      fetch(
+        `${import.meta.env.BASE_URL}data/miagao-dpwh-transport-network.geojson`
+      ),
+      fetch(`${import.meta.env.BASE_URL}data/miagao-fmr-proposals.geojson`),
+    ])
+      .then(async ([transportResponse, fmrResponse]) => {
+        if (!transportResponse.ok) {
+          throw new Error(`DPWH map HTTP ${transportResponse.status}`);
+        }
+        if (!fmrResponse.ok)
+          throw new Error(`FMR map HTTP ${fmrResponse.status}`);
+        return Promise.all([transportResponse.json(), fmrResponse.json()]);
       })
-      .then(payload => {
-        const loaded = Array.isArray(payload.features)
-          ? (payload.features as TransportFeature[])
+      .then(([transportPayload, fmrPayload]) => {
+        const transportRows = Array.isArray(transportPayload.features)
+          ? (transportPayload.features as TransportFeature[])
           : [];
+        const fmrRows = Array.isArray(fmrPayload.features)
+          ? (fmrPayload.features as TransportFeature[])
+          : [];
+        const loaded = [...transportRows, ...fmrRows];
         if (active) {
           setTransportFeatures(loaded);
           setTransportState(loaded.length ? 'ready' : 'error');
@@ -319,9 +335,16 @@ export default function Glance() {
   const floodControlFeatures = transportFeatures.filter(
     feature => feature.properties.kind === 'floodControl'
   );
+  const fmrProposalFeatures = transportFeatures.filter(
+    feature => feature.properties.kind === 'fmrProposal'
+  );
   const conditionCounts = transportFeatures.reduce<Record<string, number>>(
     (counts, feature) => {
-      if (feature.properties.kind === 'floodControl') return counts;
+      if (
+        feature.properties.kind === 'floodControl' ||
+        feature.properties.kind === 'fmrProposal'
+      )
+        return counts;
       const condition = feature.properties.condition?.trim() || 'No condition';
       counts[condition] = (counts[condition] ?? 0) + 1;
       return counts;
@@ -796,7 +819,7 @@ export default function Glance() {
         <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-slate-950">
-              DPWH roads, bridges, and completed flood-control projects
+              DPWH roads, bridges, and FY2027 FMR proposals
             </h2>
             <p className="mt-1 text-sm text-gray-600">
               Good is green, fair is amber, poor or bad is red, and no
@@ -819,20 +842,24 @@ export default function Glance() {
               </span>
             ))}
             <span className="inline-flex items-center gap-1.5">
-              <svg
-                viewBox="0 0 12 12"
-                aria-hidden="true"
-                className="h-3.5 w-3.5"
-              >
+              <svg viewBox="0 0 34 12" aria-hidden="true" className="h-3 w-9">
                 <path
-                  d="M6 0.8 11.2 6 6 11.2 .8 6Z"
-                  fill="#7c3aed"
+                  d="M2 6H32"
+                  fill="none"
                   stroke="#fff"
-                  strokeWidth="1"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M2 6H32"
+                  fill="none"
+                  stroke="#2563eb"
+                  strokeWidth="4"
+                  strokeDasharray="5 3"
+                  strokeLinecap="round"
                 />
               </svg>
-              Completed flood-control contract · red outline = point outside
-              boundary
+              FY2027 proposed FMR · outline is a straight endpoint connector
             </span>
           </div>
         </div>
@@ -851,10 +878,10 @@ export default function Glance() {
           </article>
           <article className="rounded-xl border border-gray-200 px-4 py-3">
             <span className="block text-xs text-gray-600">
-              Completed flood-control contracts
+              FY2027 FMR with endpoint coordinates
             </span>
             <strong className="mt-1 block text-xl tabular-nums text-slate-950">
-              {floodControlFeatures.length}
+              {fmrProposalFeatures.length}
             </strong>
           </article>
           {Object.entries(conditionCounts).map(([condition, count]) => (
@@ -883,7 +910,7 @@ export default function Glance() {
           <svg
             viewBox={`0 0 ${mapWidth} ${mapHeight}`}
             role="img"
-            aria-label="Map of Miagao DPWH roads and bridges colored by recorded condition, with historical flood-control contract locations"
+            aria-label="Map of Miagao DPWH roads and bridges colored by recorded condition, with outlined FY2027 FMR proposal endpoint connectors"
             className="block w-full rounded-xl bg-sky-50"
           >
             {rows.map(row => (
@@ -965,6 +992,65 @@ export default function Glance() {
                 onBlur={() => setMapTooltip(null)}
               ></path>
             ))}
+            {fmrProposalFeatures.map((feature, index) => (
+              <g
+                key={`fmr-proposal-${feature.properties.projectId ?? index}`}
+                tabIndex={0}
+                role="img"
+                aria-label={`${feature.properties.name || 'FY2027 FMR proposal'}, ${peso.format(feature.properties.amountPesos ?? 0)}, ${feature.properties.displayNote || ''}`}
+                onPointerEnter={event =>
+                  showMapTooltip(
+                    feature.properties.name || 'FY2027 FMR proposal',
+                    [
+                      `FY2027 House proposal · ${peso.format(feature.properties.amountPesos ?? 0)}`,
+                      ...(feature.properties.sourcePage
+                        ? [`Source PDF page: ${feature.properties.sourcePage}`]
+                        : []),
+                      feature.properties.displayNote ||
+                        'Straight connector between printed endpoints; not a surveyed alignment.',
+                    ],
+                    event
+                  )
+                }
+                onPointerMove={moveMapTooltip}
+                onPointerLeave={() => setMapTooltip(null)}
+                onFocus={event =>
+                  showMapTooltip(
+                    feature.properties.name || 'FY2027 FMR proposal',
+                    [
+                      `FY2027 House proposal · ${peso.format(feature.properties.amountPesos ?? 0)}`,
+                      ...(feature.properties.sourcePage
+                        ? [`Source PDF page: ${feature.properties.sourcePage}`]
+                        : []),
+                      feature.properties.displayNote ||
+                        'Straight connector between printed endpoints; not a surveyed alignment.',
+                    ],
+                    event
+                  )
+                }
+                onBlur={() => setMapTooltip(null)}
+              >
+                <path
+                  d={transportPath(feature)}
+                  fill="none"
+                  stroke="#fff"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+                <path
+                  d={transportPath(feature)}
+                  fill="none"
+                  stroke="#2563eb"
+                  strokeWidth="4"
+                  strokeDasharray="7 4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </g>
+            ))}
             {bridgeFeatures.map((feature, index) => {
               if (feature.geometry.type !== 'Point') return null;
               const [x, y] = projectPoint(feature.geometry.coordinates);
@@ -1032,54 +1118,131 @@ export default function Glance() {
                 ></circle>
               );
             })}
+          </svg>
+        )}
+        <p className="mt-4 text-xs leading-5 text-gray-600">
+          Uses offline DPWH ArcGIS snapshots: road condition as of January 2026,
+          bridge inventory as of July 2026. Road segments are clipped to the
+          boundary union; bridges are included when their recorded point falls
+          within it. Conditions describe source snapshots, not current field
+          inspections. Roads marked “No Assessment” are gray. FY2027 FMR marks
+          use printed endpoints and a straight connector, clipped to Miagao
+          boundaries for display; they do not show the actual surveyed project
+          alignment. One Miagao FMR proposal without an endpoint pair is not
+          plotted. Budget title matches do not provide surveyed coordinates for
+          individual DPWH road or bridge allocations.
+        </p>
+      </section>
+      <section className="mt-8 rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-slate-950">
+              Irrigation and flood-control sites
+            </h2>
+            <p className="mt-1 text-sm text-gray-600">
+              Solid purple diamonds mark geolocated historical completed DPWH
+              flood-control contracts. Outlined purple marks indicate proposed
+              FY2027 project locations when available.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <article className="rounded-xl border border-gray-200 px-4 py-3">
+              <span className="block text-xs text-gray-600">
+                Geolocated flood-control contracts
+              </span>
+              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+                {floodControlFeatures.length}
+              </strong>
+            </article>
+            <article className="rounded-xl border border-gray-200 px-4 py-3">
+              <span className="block text-xs text-gray-600">
+                Miagao NIA rows in available FY2027 location data
+              </span>
+              <strong className="mt-1 block text-xl tabular-nums text-slate-950">
+                0
+              </strong>
+            </article>
+          </div>
+        </div>
+        {transportState === 'loading' && (
+          <p className="py-16 text-center text-sm text-gray-600">
+            Loading irrigation and flood-control locations…
+          </p>
+        )}
+        {transportState === 'error' && (
+          <p className="py-16 text-center text-sm text-red-700">
+            Flood-control locations could not be loaded.
+          </p>
+        )}
+        {transportState === 'ready' && boundaryState === 'ready' && (
+          <svg
+            viewBox={`0 0 ${mapWidth} ${mapHeight}`}
+            role="img"
+            aria-label="Miagao barangays with geolocated DPWH flood-control contract sites; no Miagao NIA site is present in available FY2027 geolocation data"
+            className="block w-full rounded-xl bg-sky-50"
+          >
+            {rows.map(row => (
+              <path
+                key={row.psgc}
+                d={pathFor(row.geometry)}
+                fill="#f8fafc"
+                fillRule="evenodd"
+                stroke="#94a3b8"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+                pointerEvents="none"
+              />
+            ))}
             {floodControlFeatures.map((feature, index) => {
               if (feature.geometry.type !== 'Point') return null;
               const [x, y] = projectPoint(feature.geometry.coordinates);
+              const isFy2027Proposal = feature.properties.fundingYear === 2027;
+              const details = [
+                ...(feature.properties.fundingYear
+                  ? [`Funding year: ${feature.properties.fundingYear}`]
+                  : []),
+                ...(feature.properties.completionYear
+                  ? [`Completed: ${feature.properties.completionYear}`]
+                  : []),
+                ...(feature.properties.contractCost
+                  ? [
+                      `Contract cost: ${peso.format(feature.properties.contractCost)}`,
+                    ]
+                  : []),
+                ...(feature.properties.contractId
+                  ? [`Contract: ${feature.properties.contractId}`]
+                  : []),
+                ...(feature.properties.workType
+                  ? [`Work type: ${feature.properties.workType}`]
+                  : []),
+                ...(feature.properties.withinMunicipalBoundary === false
+                  ? [
+                      'Recorded point is outside mapped Miagao barangay boundaries',
+                    ]
+                  : []),
+              ];
               return (
                 <path
                   key={`flood-control-${feature.properties.projectId ?? index}`}
                   d={`M${x} ${y - 6} L${x + 6} ${y} L${x} ${y + 6} L${x - 6} ${y} Z`}
-                  fill="#7c3aed"
+                  fill={isFy2027Proposal ? 'none' : '#7c3aed'}
                   stroke={
                     feature.properties.withinMunicipalBoundary === false
                       ? '#dc2626'
-                      : '#fff'
+                      : '#7c3aed'
                   }
                   strokeWidth={
                     feature.properties.withinMunicipalBoundary === false
                       ? '2.5'
-                      : '1.5'
+                      : '2'
                   }
                   vectorEffect="non-scaling-stroke"
                   tabIndex={0}
-                  aria-label={`${feature.properties.name || 'DPWH flood-control project'}${feature.properties.fundingYear ? `, funding year ${feature.properties.fundingYear}` : ''}${feature.properties.contractCost ? `, contract cost ${peso.format(feature.properties.contractCost)}` : ''}`}
+                  aria-label={`${feature.properties.name || 'DPWH flood-control project'}, ${details.join(', ')}`}
                   onPointerEnter={event =>
                     showMapTooltip(
                       feature.properties.name || 'DPWH flood-control project',
-                      [
-                        ...(feature.properties.fundingYear
-                          ? [`Funding year: ${feature.properties.fundingYear}`]
-                          : []),
-                        ...(feature.properties.completionYear
-                          ? [`Completed: ${feature.properties.completionYear}`]
-                          : []),
-                        ...(feature.properties.contractCost
-                          ? [
-                              `Contract cost: ${peso.format(feature.properties.contractCost)}`,
-                            ]
-                          : []),
-                        ...(feature.properties.contractId
-                          ? [`Contract: ${feature.properties.contractId}`]
-                          : []),
-                        ...(feature.properties.workType
-                          ? [`Work type: ${feature.properties.workType}`]
-                          : []),
-                        ...(feature.properties.withinMunicipalBoundary === false
-                          ? [
-                              'Recorded point is outside mapped Miagao barangay boundaries',
-                            ]
-                          : []),
-                      ],
+                      details,
                       event
                     )
                   }
@@ -1088,50 +1251,23 @@ export default function Glance() {
                   onFocus={event =>
                     showMapTooltip(
                       feature.properties.name || 'DPWH flood-control project',
-                      [
-                        ...(feature.properties.fundingYear
-                          ? [`Funding year: ${feature.properties.fundingYear}`]
-                          : []),
-                        ...(feature.properties.completionYear
-                          ? [`Completed: ${feature.properties.completionYear}`]
-                          : []),
-                        ...(feature.properties.contractCost
-                          ? [
-                              `Contract cost: ${peso.format(feature.properties.contractCost)}`,
-                            ]
-                          : []),
-                        ...(feature.properties.contractId
-                          ? [`Contract: ${feature.properties.contractId}`]
-                          : []),
-                        ...(feature.properties.workType
-                          ? [`Work type: ${feature.properties.workType}`]
-                          : []),
-                        ...(feature.properties.withinMunicipalBoundary === false
-                          ? [
-                              'Recorded point is outside mapped Miagao barangay boundaries',
-                            ]
-                          : []),
-                      ],
+                      details,
                       event
                     )
                   }
                   onBlur={() => setMapTooltip(null)}
-                ></path>
+                />
               );
             })}
           </svg>
         )}
         <p className="mt-4 text-xs leading-5 text-gray-600">
-          Uses offline DPWH ArcGIS snapshots: road condition as of January 2026,
-          bridge inventory as of July 2026, and completed flood-control contract
-          records. Flood-control diamonds use recorded project coordinates, not
-          title-based geocoding. Red outlines mark points outside the mapped
-          barangay boundaries; their recorded coordinates are shown without
-          snapping. Hover for project, funding year, completion year, contract
-          cost, and work type. Road segments are clipped to the boundary union;
-          bridges are included when their recorded point falls within it.
-          Conditions describe source snapshots, not current field inspections.
-          Roads marked “No Assessment” are gray.
+          Flood-control points use recorded contract coordinates; red outlines
+          identify a point outside the barangay-boundary union. The available
+          2027 NIA project and PSGC geolocation files contain no Miagao-matched
+          project rows, so no irrigation marker is drawn. PSGC matches elsewhere
+          in the file identify administrative places, not surveyed project
+          coordinates.
         </p>
       </section>
       {mapTooltip && (
