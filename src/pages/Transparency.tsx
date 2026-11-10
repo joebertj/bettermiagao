@@ -2,16 +2,25 @@ import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { ArrowDownToLine, ExternalLink, Search } from 'lucide-react';
 
-type Tab = 'budget' | 'execution' | 'bettergov';
+type Tab = 'budget' | 'execution' | 'q2' | 'q3' | 'bettergov';
 type RecordData = Record<string, unknown>;
 type Column = { label: string; align?: 'left' | 'right' };
 type DataRow = { id: string; cells: ReactNode[]; searchText?: string };
 type PageKey =
-  'offices' | 'app' | 'bids' | 'sre' | 'progress' | 'crosswalk' | 'research';
+  | 'offices'
+  | 'app'
+  | 'bids'
+  | 'sre'
+  | 'progress'
+  | 'crosswalk'
+  | 'research'
+  | 'fullDisclosure';
 
 const files: Record<Tab, string> = {
   budget: 'budget-app/manifest.json',
   execution: 'q1-execution.json',
+  q2: 'full-disclosure-q2.json',
+  q3: 'full-disclosure-q3.json',
   bettergov: 'bettergov-project-and-place-records.json',
 };
 const basePath = `${import.meta.env.BASE_URL}data/miagao-disclosure/`;
@@ -350,6 +359,7 @@ export default function Transparency() {
     progress: 0,
     crosswalk: 0,
     research: 0,
+    fullDisclosure: 0,
   });
 
   useEffect(() => {
@@ -415,6 +425,7 @@ export default function Transparency() {
       progress: 0,
       crosswalk: 0,
       research: 0,
+      fullDisclosure: 0,
     });
 
   const appRows = (data?.appRows as RecordData[] | undefined) ?? [];
@@ -422,6 +433,9 @@ export default function Transparency() {
   const sreRows = (data?.sreQ1Rows as RecordData[] | undefined) ?? [];
   const progressRows = (data?.q1ProgressRows as RecordData[] | undefined) ?? [];
   const betterGovRows = (data?.records as RecordData[] | undefined) ?? [];
+  const fullDisclosureRows = (data?.rows as RecordData[] | undefined) ?? [];
+  const fullDisclosureSources =
+    (data?.sources as RecordData[] | undefined) ?? [];
   const crosswalkRows =
     (data?.projectTrackingCases as RecordData[] | undefined) ?? [];
   const officeRows =
@@ -463,6 +477,15 @@ export default function Transparency() {
     'category',
     'sourceReference',
   ]);
+  const visibleFullDisclosure = fullDisclosureRows.filter(
+    row =>
+      !searchText ||
+      [row.documentType, row.worksheet, row.sourceRow, row.searchText]
+        .map(value => String(value ?? ''))
+        .join(' ')
+        .toLowerCase()
+        .includes(searchText)
+  );
   const visibleCrosswalk = filter(crosswalkRows, [
     'projectTitle',
     'procurementPlan',
@@ -615,6 +638,32 @@ export default function Transparency() {
       ],
     })
   );
+  const fullDisclosureTableRows = pageRows(
+    'fullDisclosure',
+    visibleFullDisclosure
+  ).map((row, index) => {
+    const values = (row.values as Record<string, unknown> | undefined) ?? {};
+    const valueText = Object.entries(values)
+      .map(([column, value]) => `${column}: ${String(value)}`)
+      .join(' · ');
+    return {
+      id: `fd-${row.documentType}-${row.worksheet}-${row.sourceRow}-${index}`,
+      cells: [
+        display(row.documentType),
+        display(row.worksheet),
+        display(row.sourceRow),
+        valueText,
+      ],
+    };
+  });
+  const fullDisclosureChart = fullDisclosureSources
+    .filter(source => source.status === 'parsed')
+    .map(source => ({
+      label: String(source.documentType),
+      value: Number(source.rowCount) || 0,
+      display: `${Number(source.rowCount) || 0} rows`,
+    }))
+    .sort((a, b) => b.value - a.value);
 
   const tableProps = { className: 'mt-4' };
   const navTab = (key: Tab, label: string) => (
@@ -656,6 +705,8 @@ export default function Transparency() {
       >
         {navTab('budget', 'Budget & APP')}
         {navTab('execution', 'Bids & Q1 reports')}
+        {navTab('q2', 'Q2 Full Disclosure')}
+        {navTab('q3', 'Q3 Full Disclosure')}
         {navTab('bettergov', 'BetterGov records')}
       </div>
 
@@ -951,6 +1002,120 @@ export default function Transparency() {
               />
             </div>
             {pageControl('crosswalk', visibleCrosswalk)}
+          </section>
+        </div>
+      )}
+
+      {data && dataReady && (tab === 'q2' || tab === 'q3') && (
+        <div className="space-y-6">
+          <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold">
+                  FY2026 {tab.toUpperCase()} Full Disclosure
+                </h2>
+                <p className="mt-1 text-sm text-slate-600">
+                  {
+                    fullDisclosureSources.filter(
+                      source => source.status === 'parsed'
+                    ).length
+                  }{' '}
+                  of {fullDisclosureSources.length} linked workbooks parsed ·{' '}
+                  {fullDisclosureRows.length.toLocaleString()} extracted
+                  spreadsheet rows
+                </p>
+                <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+                  Source cells are preserved with worksheet and row references.
+                  Fund utilization and financial statements are aggregate
+                  disclosure forms; they do not by themselves identify
+                  project-level expenditures. Q2 project-progress rows are
+                  omitted because the municipality's Q2 page currently links its
+                  Q1 workbook.
+                </p>
+              </div>
+              <ExportButtons
+                name={`miagao-fy2026-${tab}-full-disclosure`}
+                rows={visibleFullDisclosure}
+              />
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <LinkButton href="https://www.miagao.gov.ph/transparency/2026-full-disclosure/">
+                Official 2026 Full Disclosure page
+              </LinkButton>
+              {tab === 'q3' && (
+                <LinkButton href="https://www.miagao.gov.ph/transparency/consolidated-report-2026-3rd-quarter/">
+                  Q3 project progress source
+                </LinkButton>
+              )}
+            </div>
+          </section>
+          <section className="grid gap-4 lg:grid-cols-2">
+            <Bars
+              title={`${tab.toUpperCase()} extracted rows by disclosure form`}
+              rows={fullDisclosureChart}
+            />
+            <div className="rounded-xl bg-slate-50 p-4">
+              <h3 className="mb-3 text-sm font-bold text-slate-800">
+                Official workbooks
+              </h3>
+              <ul className="space-y-2 text-sm">
+                {fullDisclosureSources.map((source, index) => (
+                  <li
+                    key={`${source.documentType}-${index}`}
+                    className="flex flex-wrap items-start justify-between gap-2 border-b border-slate-200 pb-2 last:border-0"
+                  >
+                    <a
+                      className="min-w-0 flex-1 break-words text-blue-800 underline"
+                      href={String(source.sourceUrl)}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {display(source.documentType)}
+                    </a>
+                    <span className="shrink-0 text-xs text-slate-600">
+                      {source.status === 'parsed'
+                        ? `${display(source.rowCount)} rows`
+                        : String(source.status)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+          <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 className="text-xl font-bold">Extracted source rows</h2>
+                <p className="text-sm text-slate-600">
+                  {visibleFullDisclosure.length.toLocaleString()} rows · source
+                  cell coordinates retained
+                </p>
+              </div>
+              <ExportButtons
+                name={`miagao-fy2026-${tab}-rows`}
+                rows={visibleFullDisclosure}
+              />
+            </div>
+            <SearchBox
+              value={query}
+              onChange={value => {
+                setQuery(value);
+                resetPages();
+              }}
+              placeholder="Search disclosure type, worksheet, or row contents"
+            />
+            <div {...tableProps}>
+              <ResponsiveTable
+                columns={[
+                  { label: 'Disclosure form' },
+                  { label: 'Worksheet' },
+                  { label: 'Source row' },
+                  { label: 'Extracted cells' },
+                ]}
+                rows={fullDisclosureTableRows}
+              />
+            </div>
+            {pageControl('fullDisclosure', visibleFullDisclosure)}
           </section>
         </div>
       )}

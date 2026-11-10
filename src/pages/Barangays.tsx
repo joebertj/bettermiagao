@@ -16,18 +16,9 @@ type BarangayGeometry =
   | { type: 'MultiPolygon'; coordinates: PolygonRings[] };
 type BoundaryFeature = {
   type: 'Feature';
-  properties: { brgy_name?: string; psgc_10d?: string };
+  properties: { brgy_name?: string; psgc?: string };
   geometry: BarangayGeometry;
 };
-
-const boundaryQuery = new URLSearchParams({
-  where: "prov_name = 'Iloilo' AND city_name LIKE 'Miag%'",
-  outFields: 'brgy_name,psgc_10d',
-  returnGeometry: 'true',
-  outSR: '4326',
-  f: 'geojson',
-});
-const boundarySourceUrl = `https://portal.georisk.gov.ph/arcgis/rest/services/PSA/Barangay/MapServer/4/query?${boundaryQuery.toString()}`;
 
 function BarangayShape({
   name,
@@ -250,7 +241,7 @@ export default function Barangays() {
   const [historicalProfiles, setHistoricalProfiles] = useState<
     HistoricalProfile[]
   >([]);
-  const [boundaryByName, setBoundaryByName] = useState<
+  const [boundaryByPsgc, setBoundaryByPsgc] = useState<
     Map<string, BarangayGeometry>
   >(new Map());
   const [boundaryLoadState, setBoundaryLoadState] = useState<
@@ -279,7 +270,7 @@ export default function Barangays() {
   }, []);
   useEffect(() => {
     let active = true;
-    fetch(boundarySourceUrl)
+    fetch(`${import.meta.env.BASE_URL}data/miagao-barangay-boundaries.geojson`)
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json();
@@ -289,10 +280,10 @@ export default function Barangays() {
           ? payload.features
           : [];
         if (active) {
-          setBoundaryByName(
+          setBoundaryByPsgc(
             new Map(
               features.map(feature => [
-                normalizePlace(feature.properties.brgy_name ?? ''),
+                feature.properties.psgc ?? '',
                 feature.geometry,
               ])
             )
@@ -585,7 +576,7 @@ export default function Barangays() {
         </div>
         <span className="text-xs text-gray-500">
           {boundaryLoadState === 'ready'
-            ? `${boundaryByName.size} mapped shapes`
+            ? `${boundaryByPsgc.size} mapped shapes`
             : boundaryLoadState === 'loading'
               ? 'Loading barangay shapes…'
               : 'Barangay shapes unavailable'}
@@ -595,13 +586,15 @@ export default function Barangays() {
         Boundary source:{' '}
         <a
           className="underline"
-          href="https://portal.georisk.gov.ph/arcgis/rest/services/PSA/Barangay/MapServer/4"
+          href="https://github.com/faeldon/philippines-json-maps"
           target="_blank"
           rel="noreferrer"
         >
-          PSA barangay boundaries, June 2016 snapshot
+          PSGC 3Q 2026 barangay boundaries
         </a>
-        . The boundaries are indicative.
+        . Underlying source: NAMRIA and PSA through OCHA's COD-AB (CC BY-IGO).
+        Boundary lines are indicative; barangay codes join the shapes to this
+        page's records.
       </p>
       {pagination}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -615,7 +608,7 @@ export default function Barangays() {
           );
           const profile = profilesByBarangay.get(normalizePlace(row.name));
           const isOpen = expanded === row.psgc;
-          const boundary = boundaryByName.get(normalizePlace(row.name));
+          const boundary = boundaryByPsgc.get(row.psgc);
           const profileSummary =
             profile?.contentText
               .replace(/^Brief History\s*/i, '')
