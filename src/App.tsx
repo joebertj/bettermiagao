@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import People from './pages/People';
 import About from './pages/About';
 import Barangays from './pages/Barangays';
+import Transparency from './pages/Transparency';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/people" element={<People />} />
           <Route path="/barangays" element={<Barangays />} />
+          <Route path="/transparency" element={<Transparency />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Home />} />
         </Routes>

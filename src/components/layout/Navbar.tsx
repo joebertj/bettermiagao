@@ -6,6 +6,7 @@ const links = [
   { href: '/projects', label: 'Projects' },
   { href: '/people', label: 'People & offices' },
   { href: '/barangays', label: 'Barangays' },
+  { href: '/transparency', label: 'Budget & procurement' },
   { href: '/about', label: 'About' },
 ];
 
