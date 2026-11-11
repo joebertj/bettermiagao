@@ -37,6 +37,22 @@ export default function Footer() {
           ))}
           <a
             className="text-slate-200 underline hover:text-white"
+            href="https://lgu.bettergov.ph"
+            target="_blank"
+            rel="noreferrer"
+          >
+            BetterGov LGU
+          </a>
+          <a
+            className="text-slate-200 underline hover:text-white"
+            href="https://budget.bettergov.ph"
+            target="_blank"
+            rel="noreferrer"
+          >
+            BetterGov Budget
+          </a>
+          <a
+            className="text-slate-200 underline hover:text-white"
             href="https://www.miagao.gov.ph/"
             target="_blank"
             rel="noreferrer"

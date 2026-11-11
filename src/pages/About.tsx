@@ -116,6 +116,28 @@ export default function About() {
             fields; shared projects can appear under multiple barangays.
           </li>
           <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://lgu.bettergov.ph"
+              target="_blank"
+              rel="noreferrer"
+            >
+              BetterGov LGU platform
+            </a>{' '}
+            — local-government information and services.
+          </li>
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://budget.bettergov.ph"
+              target="_blank"
+              rel="noreferrer"
+            >
+              BetterGov Budget platform
+            </a>{' '}
+            — budget data and analysis.
+          </li>
+          <li>
             Barangay boundary shapes:{' '}
             <a
               className="font-semibold text-blue-800 underline"
