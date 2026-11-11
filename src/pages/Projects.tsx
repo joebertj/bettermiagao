@@ -179,6 +179,14 @@ export default function Projects() {
           </article>
         </div>
       </header>
+      <aside className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
+        The newer NIA FY2027 location workbook adds PSGC administrative
+        references for many projects, but it has no surveyed route geometry or
+        project lengths. It is not merged into this DPWH project map; plotting
+        those references as irrigation alignments would overstate their
+        precision. FY2027 FMR map marks show printed endpoint coordinates and a
+        dashed locator connector, not a surveyed road alignment.
+      </aside>
 
       <section className="mb-4" aria-labelledby="national-dashboard-title">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-800">

@@ -158,16 +158,51 @@ def main() -> None:
                 "geometry": geometry,
             }
         )
+        # Keep the source coordinates visible as points. The connector is only
+        # a locator between printed endpoints and must not read as a surveyed
+        # project alignment.
+        endpoints = [route_parts[0][0], route_parts[-1][-1]]
+        for endpoint_name, point in zip(("Printed start", "Printed end"), endpoints):
+            if not in_boundary(point, boundaries):
+                continue
+            features.append(
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "kind": "fmrEndpoint",
+                        "name": row["title"],
+                        "projectId": row.get("id"),
+                        "amountPesos": row.get("amountPesos"),
+                        "fundingYear": 2027,
+                        "stage": "HGAB 3rd reading proposal",
+                        "sourcePage": row.get("sourcePage"),
+                        "sourceRowId": row.get("id"),
+                        "endpointLabel": endpoint_name,
+                        "coordinateBasis": row.get("coordinateBasis"),
+                        "displayNote": (
+                            f"{endpoint_name} coordinate printed in the source; "
+                            "not a surveyed project alignment."
+                        ),
+                    },
+                    "geometry": {"type": "Point", "coordinates": point},
+                }
+            )
 
     metadata = {
         "source": "BetterGov FMR project data",
         "stage": "FY2027 House General Appropriations Bill, 3rd-reading proposal",
         "coordinateMeaning": (
-            "Straight connectors between printed FMR endpoints, clipped to "
-            "Miagao barangay boundaries for display; not surveyed alignments."
+            "Dashed straight connectors between printed FMR endpoints, clipped "
+            "to Miagao barangay boundaries for display; endpoint points show "
+            "printed coordinates. Neither is a surveyed alignment."
         ),
         "candidateRows": len(candidates),
-        "mappedRows": len(features),
+        "mappedRows": sum(
+            feature["properties"]["kind"] == "fmrProposal" for feature in features
+        ),
+        "endpointFeatures": sum(
+            feature["properties"]["kind"] == "fmrEndpoint" for feature in features
+        ),
         "skippedRowsWithoutEndpointCoordinates": skipped_without_coordinates,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

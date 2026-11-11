@@ -22,7 +22,7 @@ type Feature = {
 type TransportFeature = {
   type: 'Feature';
   properties: {
-    kind: 'road' | 'bridge' | 'floodControl' | 'fmrProposal';
+    kind: 'road' | 'bridge' | 'floodControl' | 'fmrProposal' | 'fmrEndpoint';
     name?: string | null;
     roadName?: string | null;
     roadId?: string | null;
@@ -43,6 +43,7 @@ type TransportFeature = {
     sourcePage?: number | null;
     sourceRowId?: string | null;
     displayNote?: string | null;
+    endpointLabel?: string | null;
   };
   geometry:
     | { type: 'LineString'; coordinates: Position[] }
@@ -479,11 +480,15 @@ export default function Glance({
   const fmrProposalFeatures = transportFeatures.filter(
     feature => feature.properties.kind === 'fmrProposal'
   );
+  const fmrEndpointFeatures = transportFeatures.filter(
+    feature => feature.properties.kind === 'fmrEndpoint'
+  );
   const conditionCounts = transportFeatures.reduce<Record<string, number>>(
     (counts, feature) => {
       if (
         feature.properties.kind === 'floodControl' ||
-        feature.properties.kind === 'fmrProposal'
+        feature.properties.kind === 'fmrProposal' ||
+        feature.properties.kind === 'fmrEndpoint'
       )
         return counts;
       const condition = feature.properties.condition?.trim() || 'No condition';
@@ -1516,7 +1521,8 @@ export default function Glance({
                   strokeLinecap="round"
                 />
               </svg>
-              FY2027 proposed FMR · outline is a straight endpoint connector
+              FY2027 proposed FMR · dashed connector; amber dots are printed
+              endpoints
             </span>
           </div>
         </div>
@@ -1708,6 +1714,28 @@ export default function Glance({
                 />
               </g>
             ))}
+            {fmrEndpointFeatures.map((feature, index) => {
+              if (feature.geometry.type !== 'Point') return null;
+              const [x, y] = projectPoint(feature.geometry.coordinates);
+              const label = `${feature.properties.endpointLabel || 'Printed endpoint'} · ${feature.properties.name || 'FY2027 FMR proposal'}`;
+              return (
+                <circle
+                  key={`fmr-endpoint-${feature.properties.projectId ?? index}-${feature.properties.endpointLabel ?? index}`}
+                  cx={x}
+                  cy={y}
+                  r="4.5"
+                  fill="#f59e0b"
+                  stroke="#fff"
+                  strokeWidth="1.5"
+                  vectorEffect="non-scaling-stroke"
+                  tabIndex={0}
+                  role="img"
+                  aria-label={`${label}. ${feature.properties.displayNote || ''}`}
+                >
+                  <title>{label}</title>
+                </circle>
+              );
+            })}
             {bridgeFeatures.map((feature, index) => {
               if (feature.geometry.type !== 'Point') return null;
               const [x, y] = projectPoint(feature.geometry.coordinates);
@@ -1784,10 +1812,11 @@ export default function Glance({
           within it. Conditions describe source snapshots, not current field
           inspections. Roads marked “No Assessment” are gray. FY2027 FMR marks
           use printed endpoints and a straight connector, clipped to Miagao
-          boundaries for display; they do not show the actual surveyed project
-          alignment. One Miagao FMR proposal without an endpoint pair is not
-          plotted. Budget title matches do not provide surveyed coordinates for
-          individual DPWH road or bridge allocations.
+          boundaries for display; amber dots mark the printed coordinates.
+          Neither is a surveyed project alignment. One Miagao FMR proposal
+          without an endpoint pair is not plotted. Budget title matches do not
+          provide surveyed coordinates for individual DPWH road or bridge
+          allocations.
         </p>
       </section>
       {nationalOnly && mapTooltip && (
