@@ -11,6 +11,7 @@ import Transparency from './pages/Transparency';
 import Ayuda from './pages/Ayuda';
 import AppPlan from './pages/AppPlan';
 import Glance from './pages/Glance';
+import Budget from './pages/Budget';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/budget" element={<Budget />} />
           <Route path="/glance" element={<Glance />} />
           <Route path="/people" element={<People />} />
           <Route path="/barangays" element={<Barangays />} />

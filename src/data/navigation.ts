@@ -12,7 +12,11 @@ export const mainNavigation: NavigationItem[] = [
   },
   { label: 'People & offices', href: '/people' },
   { label: 'Barangays', href: '/barangays' },
-  { label: 'National', href: '/projects' },
+  {
+    label: 'National',
+    href: '/projects',
+    children: [{ label: 'FY2027 budget comparison', href: '/budget' }],
+  },
   { label: 'About', href: '/about' },
 ];
 

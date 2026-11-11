@@ -39,7 +39,7 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/transparency"
+                to="/budget"
                 className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950 hover:bg-amber-300"
               >
                 Explore budget <ArrowRight size={17} />
@@ -148,7 +148,7 @@ export default function Home() {
                 icon: Wallet,
                 title: 'Budget & procurement',
                 description:
-                  'Explore available budget, procurement, bidding, and expenditure records.',
+                  'Explore the municipal budget, procurement, bidding, and expenditure records.',
                 action: 'View transparency records',
               },
               '/about': {
