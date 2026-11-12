@@ -7,6 +7,7 @@ import {
   Search,
 } from 'lucide-react';
 import records from '../data/miagao-projects.json';
+import niaRecords from '../data/miagao-nia-projects.json';
 import { miagaoBarangays } from '../data/miagao-barangays';
 import Glance from './Glance';
 
@@ -179,13 +180,69 @@ export default function Projects() {
           </article>
         </div>
       </header>
+      <section
+        className="mb-8 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 sm:p-6"
+        aria-labelledby="nia-projects-title"
+      >
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.14em] text-emerald-900">
+              FY2027 · NIA irrigation
+            </p>
+            <h2
+              id="nia-projects-title"
+              className="mt-1 text-xl font-bold text-slate-950"
+            >
+              {karayA
+                ? 'NIA nga mga proyekto nga gin-usisa para sa Miagao'
+                : 'NIA projects checked for Miagao'}
+            </h2>
+          </div>
+          <span className="rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-emerald-950">
+            {niaRecords.matchedRows} matched rows
+          </span>
+        </div>
+        <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-800">
+          The FY2027 NIA House Bill location workbook contains{' '}
+          {niaRecords.sourceRowsReviewed.toLocaleString()} project rows. None
+          match Miagao’s municipality PSGC ({niaRecords.miagaoMunicipalityPsgc})
+          or name Miagao/Miag-ao in the project or locality fields. The workbook
+          provides administrative references, not surveyed coordinates or
+          irrigation-route alignments.
+        </p>
+        <p className="mt-2 text-sm leading-6 text-slate-700">
+          No matching NIA row was found in this source. That result does not
+          establish that no NIA activity or irrigation asset exists in Miagao;
+          records with missing or different locality references may not match.
+        </p>
+        <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <a
+            className="font-semibold text-emerald-900 underline decoration-emerald-500 underline-offset-2 hover:text-emerald-700"
+            href={niaRecords.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Search the NIA line-item cross-check
+            <ExternalLink className="ml-1 inline h-3.5 w-3.5" />
+          </a>
+          <a
+            className="font-semibold text-emerald-900 underline decoration-emerald-500 underline-offset-2 hover:text-emerald-700"
+            href="/data/miagao-nia-projects.json"
+            download
+          >
+            Download Miagao match summary
+          </a>
+        </p>
+        <p className="mt-2 text-xs leading-5 text-slate-600">
+          Source workbook: {niaRecords.sourceWorkbook}. Matching uses the
+          administrative PSGC code and locality-name variants; the rows remain
+          separate from the DPWH title-matched list below.
+        </p>
+      </section>
+
       <aside className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-950">
-        The newer NIA FY2027 location workbook adds PSGC administrative
-        references for many projects, but it has no surveyed route geometry or
-        project lengths. It is not merged into this DPWH project map; plotting
-        those references as irrigation alignments would overstate their
-        precision. FY2027 FMR map marks show printed endpoint coordinates and a
-        dashed locator connector, not a surveyed road alignment.
+        FY2027 FMR map marks show printed endpoint coordinates and a dashed
+        locator connector, not a surveyed road alignment.
       </aside>
 
       <section className="mb-4" aria-labelledby="national-dashboard-title">

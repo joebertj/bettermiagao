@@ -1,0 +1,13 @@
+{
+  "title": "FY2027 NIA House Bill projects checked for Miagao",
+  "sourceWorkbook": "2026-11-10--with geolocation_bettergov-house-bill-2027-nia-projects.xlsx",
+  "sourceStage": "FY2027 House Bill",
+  "sourceRowsReviewed": 1013,
+  "miagaoMunicipalityPsgc": "0603030000",
+  "miagaoMunicipality": "Miagao",
+  "province": "Iloilo",
+  "matchedRows": 0,
+  "projects": [],
+  "method": "Reviewed all FY2027 NIA location-workbook rows. Matched the municipality PSGC reference for Miagao (0603030000) and checked project, municipality and province fields for Miagao/Miag-ao name variants. No rows matched. Administrative PSGC references are not surveyed project coordinates or route alignments.",
+  "sourceUrl": "https://research.bettergov.ph/static/nep-preview/connectivity.html#nia-cross-source"
+}
