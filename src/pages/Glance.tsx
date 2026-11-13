@@ -220,10 +220,6 @@ function amountColor(amount: number, maximum: number) {
   return '#dbeafe';
 }
 
-function colorText(amount: number, maximum: number) {
-  return amount / maximum >= 0.55 ? '#ffffff' : '#0f172a';
-}
-
 function conditionColor(condition?: string | null) {
   const value = condition?.trim().toLocaleLowerCase();
   if (value === 'good') return '#15803d';
@@ -1055,8 +1051,8 @@ export default function Glance({
               Barangay map · title-matched project amounts
             </h3>
             <p className="mt-1 text-sm text-gray-600">
-              Darker blue means a larger title-assigned amount. Numbers show
-              national project-row counts.
+              Darker blue means a larger title-assigned amount. Each project
+              icon represents one national project row.
             </p>
           </div>
           <div
@@ -1074,6 +1070,18 @@ export default function Glance({
               )
             )}
             <span>Higher</span>
+            <span className="ml-2 inline-flex items-center gap-1.5">
+              <svg aria-hidden="true" viewBox="0 0 12 14" className="h-3.5 w-3">
+                <path d="M2 1.5h5l3 3v8H2z" fill="#0f172a" />
+                <path
+                  d="M7 1.5v3h3M4 7h4M4 9h4"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth=".8"
+                />
+              </svg>
+              One project row
+            </span>
           </div>
         </div>
         {boundaryState === 'loading' && (
@@ -1134,26 +1142,36 @@ export default function Glance({
                     onBlur={() => setMapTooltip(null)}
                   ></path>
                   {row.count > 0 && (
-                    <text
-                      x={labelX}
-                      y={labelY}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      fontSize="19"
-                      fontWeight="700"
-                      pointerEvents="none"
-                      fill={colorText(row.amount, maximumAmount)}
-                      stroke={
-                        row.amount / maximumAmount >= 0.55
-                          ? '#172554'
-                          : '#ffffff'
-                      }
-                      strokeWidth="3"
-                      paintOrder="stroke"
+                    <g
                       aria-hidden="true"
+                      pointerEvents="none"
+                      transform={`translate(${labelX},${labelY})`}
                     >
-                      {row.count}
-                    </text>
+                      {Array.from({ length: row.count }, (_, index) => {
+                        const x = (index - (row.count - 1) / 2) * 10;
+                        return (
+                          <g
+                            key={`project-row-${row.psgc}-${index}`}
+                            transform={`translate(${x},0)`}
+                          >
+                            <path
+                              d="M-4 -6h5l3 3v9h-8z"
+                              fill="#0f172a"
+                              stroke="white"
+                              strokeWidth="1"
+                              vectorEffect="non-scaling-stroke"
+                            />
+                            <path
+                              d="M1 -6v3h3M-2 0h4M-2 2h4"
+                              fill="none"
+                              stroke="white"
+                              strokeWidth=".8"
+                              vectorEffect="non-scaling-stroke"
+                            />
+                          </g>
+                        );
+                      })}
+                    </g>
                   )}
                 </g>
               );
