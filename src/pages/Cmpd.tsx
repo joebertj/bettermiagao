@@ -45,8 +45,18 @@ function seriesStats(series: CmpdMaterialSeries) {
   const inliers = values.filter(
     value => value >= lowerFence && value <= upperFence
   );
+  const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+  const standardDeviation =
+    values.length > 1
+      ? Math.sqrt(
+          values.reduce((sum, value) => sum + (value - mean) ** 2, 0) /
+            (values.length - 1)
+        )
+      : 0;
   return {
     values,
+    mean,
+    standardDeviation,
     min: values[0],
     max: values[values.length - 1],
     q1,
@@ -68,16 +78,36 @@ function impliedUnitPrice(item: AppMaterialItem) {
   return item.totalPesos / item.quantity;
 }
 
+function rangeAssessment(item: AppMaterialItem) {
+  const price = impliedUnitPrice(item);
+  const comparisons = matchingSeries(item)
+    .filter(series => item.appUnit === series.unit)
+    .map(series => {
+      const stats = seriesStats(series);
+      return {
+        within: price >= stats.min && price <= stats.max,
+        standardDeviations: stats.standardDeviation
+          ? Math.abs(price - stats.mean) / stats.standardDeviation
+          : 0,
+      };
+    });
+  const within = comparisons.some(comparison => comparison.within);
+  const closest = comparisons.sort(
+    (a, b) => a.standardDeviations - b.standardDeviations
+  )[0];
+  return {
+    within,
+    standardDeviations: closest?.standardDeviations ?? null,
+    severity: within
+      ? 'within'
+      : (closest?.standardDeviations ?? 0) >= 2
+        ? 'red'
+        : 'amber',
+  } as const;
+}
+
 function fallsWithinObservedRange(item: AppMaterialItem) {
-  const unitMatches = matchingSeries(item).some(series => {
-    const stat = seriesStats(series);
-    return (
-      item.appUnit === series.unit &&
-      impliedUnitPrice(item) >= stat.min &&
-      impliedUnitPrice(item) <= stat.max
-    );
-  });
-  return unitMatches;
+  return rangeAssessment(item).within;
 }
 
 function referenceLabel(item: AppMaterialItem) {
@@ -97,14 +127,15 @@ function BoxPlot({
   appItems: AppMaterialItem[];
 }) {
   const stats = seriesStats(series);
-  const markers = appItems.map(item => ({
-    item,
-    price: impliedUnitPrice(item),
-    within:
-      item.appUnit === series.unit &&
-      impliedUnitPrice(item) >= stats.min &&
-      impliedUnitPrice(item) <= stats.max,
-  }));
+  const markers = appItems.map(item => {
+    const price = impliedUnitPrice(item);
+    const within =
+      item.appUnit === series.unit && price >= stats.min && price <= stats.max;
+    const standardDeviations = stats.standardDeviation
+      ? Math.abs(price - stats.mean) / stats.standardDeviation
+      : 0;
+    return { item, price, within, standardDeviations };
+  });
   const axisMax =
     Math.max(stats.max, ...markers.map(marker => marker.price), 1) * 1.06;
   const logMax = Math.log1p(axisMax);
@@ -191,7 +222,11 @@ function BoxPlot({
           ))}
           {markers.map((marker, index) => {
             const y = 17 + (index % 3) * 10;
-            const color = marker.within ? '#15803d' : '#b42318';
+            const color = marker.within
+              ? '#15803d'
+              : marker.standardDeviations >= 2
+                ? '#b42318'
+                : '#b7791f';
             return (
               <g key={marker.item.id}>
                 <path
@@ -200,7 +235,7 @@ function BoxPlot({
                   stroke="white"
                   strokeWidth="1"
                   tabIndex={0}
-                  aria-label={`APP row ${marker.item.appRow}: ${money.format(marker.price)} per ${marker.item.appUnit}; ${marker.within ? 'within' : 'outside'} observed CMPD range`}
+                  aria-label={`APP row ${marker.item.appRow}: ${money.format(marker.price)} per ${marker.item.appUnit}; ${marker.within ? 'within' : `outside observed CMPD range by ${marker.standardDeviations.toFixed(1)} standard deviations`}`}
                 >
                   <title>{`APP row ${marker.item.appRow}: ${money.format(marker.price)} per ${marker.item.appUnit}`}</title>
                 </path>
@@ -254,8 +289,9 @@ function BoxPlot({
       </div>
       <p className="mt-1 text-xs text-slate-500">
         Blue box: middle half of office prices; center line: median; whiskers:
-        1.5×IQR. Amber dots: office-price outliers. Green/red diamonds: Miagao
-        APP unit amounts inside/outside the observed min–max range.
+        1.5×IQR. Amber dots: office-price outliers. Green diamonds: Miagao APP
+        amounts inside the observed range; amber/red diamonds: outside the range
+        by less than 2 SD / at least 2 SD.
       </p>
     </figure>
   );
@@ -285,7 +321,10 @@ export default function Cmpd() {
           with quality, delivery, taxes, timing and package scope. Green rows
           mean only that the implied APP amount falls inside the observed Region
           VI price range for a selected same-unit CMPD item; verify
-          specifications before comparing.
+          specifications before comparing. Outside-range amounts are amber when
+          less than 2 sample standard deviations from the CMPD office-price mean
+          and red at 2 SD or more. This is a review-priority screen, not a
+          statistical finding.
         </AnalysisDisclaimer>
       </div>
 
@@ -318,8 +357,9 @@ export default function Cmpd() {
             </h2>
             <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-600">
               Unit amounts are derived as APP line budget ÷ stated quantity.
-              Each green row is within the observed minimum–maximum of its
-              selected Region VI CMPD material series.
+              Green rows are within the observed minimum–maximum. Outside-range
+              rows are amber when less than 2 sample standard deviations from
+              the comparator mean and red at 2 SD or more.
             </p>
           </div>
           <a
@@ -346,14 +386,16 @@ export default function Cmpd() {
             </thead>
             <tbody>
               {appMaterialItems.map(item => {
-                const within = fallsWithinObservedRange(item);
+                const assessment = rangeAssessment(item);
+                const within = assessment.within;
+                const rowTone =
+                  assessment.severity === 'within'
+                    ? 'bg-emerald-50'
+                    : assessment.severity === 'red'
+                      ? 'bg-red-50'
+                      : 'bg-amber-50';
                 return (
-                  <tr
-                    key={item.id}
-                    className={
-                      within ? 'bg-emerald-50' : 'bg-white even:bg-slate-50'
-                    }
-                  >
+                  <tr key={item.id} className={rowTone}>
                     <th
                       scope="row"
                       className="p-3 align-top font-semibold text-slate-900"
@@ -391,8 +433,11 @@ export default function Cmpd() {
                           <Award size={16} aria-hidden="true" /> Within range
                         </span>
                       ) : (
-                        <span className="text-xs font-semibold text-slate-600">
-                          Outside observed range
+                        <span
+                          className={`text-xs font-bold ${assessment.severity === 'red' ? 'text-red-800' : 'text-amber-900'}`}
+                        >
+                          Outside range ·{' '}
+                          {assessment.standardDeviations?.toFixed(1)} SD
                         </span>
                       )}
                     </td>
@@ -439,8 +484,12 @@ export default function Cmpd() {
               APP amount within observed range
             </span>
             <span>
+              <i className="mr-1 inline-block h-3 w-3 rotate-45 bg-amber-700 align-[-2px]" />
+              Outside range, &lt;2 SD
+            </span>
+            <span>
               <i className="mr-1 inline-block h-3 w-3 rotate-45 bg-red-700 align-[-2px]" />
-              APP amount outside observed range
+              Outside range, ≥2 SD
             </span>
             <span>
               <i className="mr-1 inline-block h-3 w-3 rounded-full bg-amber-700 align-[-2px]" />

@@ -51,7 +51,7 @@ export default function Navbar() {
             link.children ? (
               <details
                 key={link.href}
-                ref={link.href === '/projects' ? budgetMenu : undefined}
+                ref={link.href === '/transparency' ? budgetMenu : undefined}
                 className="group relative"
               >
                 <summary className="flex cursor-pointer list-none items-center gap-1 text-sm font-semibold text-gray-700 hover:text-blue-800">

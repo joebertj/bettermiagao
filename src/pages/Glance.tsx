@@ -606,8 +606,9 @@ export default function Glance({
               Allotment (NTA) utilization schedule. Amber circles show separate
               2026 procurement-plan entries; green squares show civil-works bid
               records. Procurement and bid amounts are not added to the NTA map.
-              A marker means the source names the barangay, not that it gives
-              surveyed project coordinates.
+              Each page icon represents one NTA row. A marker means the source
+              names the barangay, not that it gives surveyed project
+              coordinates.
             </p>
           </div>
           <a
@@ -681,12 +682,28 @@ export default function Glance({
                     <i className="h-3 w-3 bg-green-700" /> Civil-works bid
                     record
                   </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 12 14"
+                      className="h-3.5 w-3"
+                    >
+                      <path d="M2 1.5h5l3 3v8H2z" fill="#0f172a" />
+                      <path
+                        d="M7 1.5v3h3M4 7h4M4 9h4"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth=".8"
+                      />
+                    </svg>
+                    NTA project row
+                  </span>
                 </div>
                 {boundaryState === 'ready' && (
                   <svg
                     viewBox={`0 0 ${mapWidth} ${mapHeight}`}
                     role="img"
-                    aria-label="Miagao map shaded by Q3 2026 20 percent NTA listed amount per named barangay; separate symbols mark procurement-plan entries and civil-works bid records"
+                    aria-label="Miagao map shaded by Q3 2026 20 percent NTA listed amount per named barangay; page icons represent NTA rows; separate symbols mark procurement-plan entries and civil-works bid records"
                     className="block w-full rounded-xl bg-sky-50"
                   >
                     {localMapRows.map(row => {
@@ -763,21 +780,33 @@ export default function Glance({
                               )}
                             </g>
                           )}
-                          {(local?.ntaProjectRows ?? 0) > 0 && (
-                            <text
-                              x={x}
-                              y={y + 13}
-                              textAnchor="middle"
-                              fontSize="15"
-                              fontWeight="700"
-                              pointerEvents="none"
-                              fill="#0f172a"
-                              stroke="#fff"
-                              strokeWidth="3"
-                              paintOrder="stroke"
-                            >
-                              {local?.ntaProjectRows}
-                            </text>
+                          {Array.from(
+                            { length: local?.ntaProjectRows ?? 0 },
+                            (_, index) => {
+                              const count = local?.ntaProjectRows ?? 0;
+                              const iconX = x + (index - (count - 1) / 2) * 9;
+                              return (
+                                <g
+                                  key={`nta-row-${row.psgc}-${index}`}
+                                  transform={`translate(${iconX},${y + 11})`}
+                                  pointerEvents="none"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    d="M-3.5 -5h4l3 3v7h-7z"
+                                    fill="#0f172a"
+                                    stroke="white"
+                                    strokeWidth="1"
+                                  />
+                                  <path
+                                    d="M.5 -5v3h3M-1.5 0h4M-1.5 2h4"
+                                    fill="none"
+                                    stroke="white"
+                                    strokeWidth=".7"
+                                  />
+                                </g>
+                              );
+                            }
                           )}
                         </g>
                       );
@@ -1819,7 +1848,7 @@ export default function Glance({
           allocations.
         </p>
       </section>
-      {nationalOnly && mapTooltip && (
+      {mapTooltip && (
         <div
           role="tooltip"
           className="pointer-events-none fixed z-50 w-[min(340px,calc(100vw-16px))] rounded-xl border border-slate-300 bg-white p-4 text-[15px] leading-6 text-slate-800 shadow-xl"
