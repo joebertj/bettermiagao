@@ -41,22 +41,39 @@ type HistoricalIndex = {
 const indexUrl = `${import.meta.env.BASE_URL}data/miagao-historical-index.json`;
 const pageSize = 25;
 
+function isInvitationToBid(row: HistoricalRow) {
+  const sourcePageUrl = (row.sourcePageUrl ?? '').toLocaleLowerCase();
+  const sourceTitle = row.sourceTitle.toLocaleLowerCase();
+  return (
+    sourcePageUrl.includes('invitation-to-bid') ||
+    sourceTitle.includes('invitation to bid') ||
+    sourceTitle.includes('invitation-to-bid')
+  );
+}
+
 const categories = [
   {
     id: 'invitation-to-bid',
     label: 'Invitation to bid',
-    matches: (row: HistoricalRow) =>
-      `${row.sourcePageUrl ?? ''} ${row.sourceTitle}`
-        .toLocaleLowerCase()
-        .includes('invitation to bid') ||
-      (row.sourcePageUrl ?? '')
-        .toLocaleLowerCase()
-        .includes('invitation-to-bid'),
+    matches: isInvitationToBid,
   },
   {
     id: 'full-disclosure',
     label: 'Full disclosure',
-    matches: () => true,
+    matches: (row: HistoricalRow) =>
+      !isInvitationToBid(row) &&
+      `${row.sourcePageUrl ?? ''} ${row.sourceTitle}`
+        .toLocaleLowerCase()
+        .includes('full disclosure'),
+  },
+  {
+    id: 'other',
+    label: 'Other',
+    matches: (row: HistoricalRow) =>
+      !isInvitationToBid(row) &&
+      !`${row.sourcePageUrl ?? ''} ${row.sourceTitle}`
+        .toLocaleLowerCase()
+        .includes('full disclosure'),
   },
 ] as const;
 
