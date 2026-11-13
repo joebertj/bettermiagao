@@ -123,6 +123,67 @@ export default function People() {
       </section>
 
       <section className="mb-12 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
+        <p className="text-sm font-bold uppercase tracking-widest text-blue-800">
+          Procurement roles · document signatories
+        </p>
+        <h2 className="mt-2 text-2xl font-bold text-slate-950">
+          Bids and Awards Committee names in published records
+        </h2>
+        <p className="mt-3 max-w-4xl text-sm leading-6 text-gray-600">
+          These names and roles were read from cited invitation and bid-result
+          documents. They identify signatories in those records and do not
+          establish current appointments.
+        </p>
+        <div className="mt-5 overflow-x-auto rounded-lg border border-gray-200">
+          <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+            <thead className="bg-slate-950 text-white">
+              <tr>
+                <th scope="col" className="px-4 py-3">
+                  Name
+                </th>
+                <th scope="col" className="px-4 py-3">
+                  Role in record
+                </th>
+                <th scope="col" className="px-4 py-3">
+                  Record period
+                </th>
+                <th scope="col" className="px-4 py-3">
+                  Sources
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {officials.procurementOfficeholders.map(person => (
+                <tr
+                  key={`${person.name}-${person.role}`}
+                  className="border-t border-gray-200 odd:bg-white even:bg-slate-50"
+                >
+                  <th
+                    scope="row"
+                    className="px-4 py-3 font-semibold text-slate-900"
+                  >
+                    {person.name}
+                  </th>
+                  <td className="px-4 py-3 text-gray-800">{person.role}</td>
+                  <td className="px-4 py-3 text-gray-700">{person.period}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex flex-wrap gap-x-3 gap-y-1">
+                      <SourceLink href={person.source}>
+                        Source document
+                      </SourceLink>
+                      <SourceLink href={person.sourcePage}>
+                        Source page
+                      </SourceLink>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mb-12 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-blue-800">

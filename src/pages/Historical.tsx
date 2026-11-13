@@ -41,41 +41,143 @@ type HistoricalIndex = {
 const indexUrl = `${import.meta.env.BASE_URL}data/miagao-historical-index.json`;
 const pageSize = 25;
 
+const disclosureTypes = [
+  {
+    id: 'bid-out',
+    label: 'Bid-out: civil works, goods and services',
+    matches: (text: string) => /bid[- ]results|bid[- ]out/.test(text),
+  },
+  {
+    id: 'human-resource-complement',
+    label: 'Human resource complement',
+    matches: (text: string) =>
+      /human[- ]resource|manpower[- ]complement/.test(text),
+  },
+  {
+    id: 'ldrrmf-utilization',
+    label: 'Local disaster risk reduction and management fund utilization',
+    matches: (text: string) => /ldrr?m[f]?|disaster[- ]risk/.test(text),
+  },
+  {
+    id: 'cash-flows',
+    label: 'Consolidated statement of cash flows',
+    matches: (text: string) => /cash[- ]flow/.test(text),
+  },
+  {
+    id: 'sef-utilization',
+    label: 'Report of SEF utilization',
+    matches: (text: string) =>
+      /sef[- ]utilization|special[- ]education[- ]fund/.test(text),
+  },
+  {
+    id: 'receipts-expenditures',
+    label: 'Statement of receipts and expenditures',
+    matches: (text: string) => /receipts[- ]and[- ]expenditures/.test(text),
+  },
+  {
+    id: 'supplemental-procurement-plan',
+    label: 'Supplemental procurement plan',
+    matches: (text: string) =>
+      /supplemental[ .-]+(procurement[ .-]+plan|ppmp)/.test(text),
+  },
+  {
+    id: 'quarterly-government-projects',
+    label:
+      'Consolidated quarterly report on government projects, programs or activities',
+    matches: (text: string) =>
+      /quarterly.*(government[- ]projects?|programs?|activities)/.test(text),
+  },
+  {
+    id: 'debt-service',
+    label: 'Statement of debt service',
+    matches: (text: string) =>
+      /debt[- ]services?|indebtedness[- ]payments/.test(text),
+  },
+  {
+    id: 'unliquidated-cash-advances',
+    label: 'Unliquidated cash advances',
+    matches: (text: string) =>
+      /unliqu(?:id|ad)ated[- ](?:(?:cash|ca)[- ]?)?advances?|unliqu(?:id|ad)ated[- ]ca[- ]/.test(
+        text
+      ),
+  },
+  {
+    id: 'trust-fund-utilization',
+    label: 'Trust fund utilization',
+    matches: (text: string) => /trust[- ]fund[- ]utilization/.test(text),
+  },
+  {
+    id: 'ira-utilization',
+    label: '20% component of the IRA utilization',
+    matches: (text: string) =>
+      /20[- ](ira|%|percent)|20%.*utilization/.test(text),
+  },
+] as const;
+
+type DisclosureType = (typeof disclosureTypes)[number]['id'];
+type RecordCategory =
+  'invitation-to-bid' | 'other' | 'full-disclosure' | DisclosureType;
+
+function rowSourceText(row: HistoricalRow) {
+  return [
+    row.sourceTitle,
+    row.sourceFileName,
+    row.documentUrl,
+    ...row.sourceReferences.flatMap(reference => [
+      reference.documentUrl,
+      reference.sourceTitle,
+    ]),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLocaleLowerCase()
+    .replaceAll('_', '-')
+    .replaceAll('%20', ' ');
+}
+
+function rowDisclosureType(row: HistoricalRow): DisclosureType | undefined {
+  const text = rowSourceText(row);
+  return disclosureTypes.find(type => type.matches(text))?.id;
+}
+
+function documentFilename(row: HistoricalRow) {
+  const url =
+    row.documentUrl ??
+    row.sourceReferences.find(reference => reference.documentUrl)?.documentUrl;
+  if (!url) return row.sourceFileName;
+  try {
+    return decodeURIComponent(
+      new URL(url).pathname.split('/').at(-1) ?? row.sourceFileName
+    );
+  } catch {
+    return row.sourceFileName;
+  }
+}
+
 function isInvitationToBid(row: HistoricalRow) {
-  const sourcePageUrl = (row.sourcePageUrl ?? '').toLocaleLowerCase();
-  const sourceTitle = row.sourceTitle.toLocaleLowerCase();
+  const text =
+    `${rowSourceText(row)} ${row.sourcePageUrl ?? ''}`.toLocaleLowerCase();
   return (
-    sourcePageUrl.includes('invitation-to-bid') ||
-    sourceTitle.includes('invitation to bid') ||
-    sourceTitle.includes('invitation-to-bid')
+    text.includes('invitation to bid') || text.includes('invitation-to-bid')
   );
 }
 
-const categories = [
-  {
-    id: 'invitation-to-bid',
-    label: 'Invitation to bid',
-    matches: isInvitationToBid,
-  },
-  {
-    id: 'full-disclosure',
-    label: 'Full disclosure',
-    matches: (row: HistoricalRow) =>
+function isFullDisclosure(row: HistoricalRow) {
+  return `${row.sourcePageUrl ?? ''} ${row.sourceTitle}`
+    .toLocaleLowerCase()
+    .includes('full disclosure');
+}
+
+function categoryMatches(row: HistoricalRow, category: RecordCategory) {
+  if (category === 'invitation-to-bid') return isInvitationToBid(row);
+  if (category === 'full-disclosure') return isFullDisclosure(row);
+  if (category === 'other')
+    return (
       !isInvitationToBid(row) &&
-      `${row.sourcePageUrl ?? ''} ${row.sourceTitle}`
-        .toLocaleLowerCase()
-        .includes('full disclosure'),
-  },
-  {
-    id: 'other',
-    label: 'Other',
-    matches: (row: HistoricalRow) =>
-      !isInvitationToBid(row) &&
-      !`${row.sourcePageUrl ?? ''} ${row.sourceTitle}`
-        .toLocaleLowerCase()
-        .includes('full disclosure'),
-  },
-] as const;
+      (!isFullDisclosure(row) || !rowDisclosureType(row))
+    );
+  return isFullDisclosure(row) && rowDisclosureType(row) === category;
+}
 
 function displayDate(value: string | null) {
   if (!value) return '—';
@@ -106,7 +208,7 @@ export default function Historical() {
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [category, setCategory] = useState<string>(categories[0].id);
+  const [category, setCategory] = useState<RecordCategory>('invitation-to-bid');
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -132,9 +234,8 @@ export default function Historical() {
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase();
-    const selectedCategory = categories.find(item => item.id === category);
     return (data?.rows ?? []).filter(row => {
-      const categoryMatches = selectedCategory?.matches(row) ?? true;
+      const matchesCategory = categoryMatches(row, category);
       const statusMatches =
         statusFilter === 'all' || row.parseStatus === statusFilter;
       const queryMatches =
@@ -142,6 +243,7 @@ export default function Historical() {
         [
           row.sourceTitle,
           row.sourceFileName,
+          documentFilename(row),
           row.extractedText,
           row.sourcePageUrl,
         ]
@@ -149,15 +251,22 @@ export default function Historical() {
           .join(' ')
           .toLocaleLowerCase()
           .includes(needle);
-      return categoryMatches && statusMatches && queryMatches;
+      return matchesCategory && statusMatches && queryMatches;
     });
   }, [category, data, query, statusFilter]);
   const categoryCounts = useMemo(
     () =>
       Object.fromEntries(
-        categories.map(item => [
-          item.id,
-          (data?.rows ?? []).filter(row => item.matches(row)).length,
+        (
+          [
+            'invitation-to-bid',
+            'full-disclosure',
+            'other',
+            ...disclosureTypes.map(type => type.id),
+          ] as RecordCategory[]
+        ).map(id => [
+          id,
+          (data?.rows ?? []).filter(row => categoryMatches(row, id)).length,
         ])
       ),
     [data]
@@ -211,8 +320,14 @@ export default function Historical() {
       )}
 
       <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
-        <div className="mb-5 flex flex-wrap gap-2" aria-label="Record category">
-          {categories.map(item => (
+        <div
+          className="mb-5 flex flex-wrap items-end gap-2"
+          aria-label="Record category"
+        >
+          {[
+            { id: 'invitation-to-bid' as const, label: 'Invitation to bid' },
+            { id: 'other' as const, label: 'Other / unclassified' },
+          ].map(item => (
             <button
               key={item.id}
               type="button"
@@ -230,6 +345,33 @@ export default function Historical() {
               {item.label} ({categoryCounts[item.id] ?? 0})
             </button>
           ))}
+          <label className="text-sm font-semibold text-slate-800">
+            Full disclosure documents
+            <select
+              value={
+                category === 'full-disclosure' ||
+                disclosureTypes.some(type => type.id === category)
+                  ? category
+                  : ''
+              }
+              onChange={event => {
+                if (event.target.value)
+                  setCategory(event.target.value as RecordCategory);
+                setPage(1);
+              }}
+              className="ml-2 min-h-10 rounded-lg border border-gray-300 bg-white px-3 text-sm font-normal"
+            >
+              <option value="">Choose a document type…</option>
+              <option value="full-disclosure">
+                All document types ({categoryCounts['full-disclosure'] ?? 0})
+              </option>
+              {disclosureTypes.map(type => (
+                <option key={type.id} value={type.id}>
+                  {type.label} ({categoryCounts[type.id] ?? 0})
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
         <div className="mb-4 flex flex-wrap items-end gap-3">
           <label className="min-w-64 flex-1 text-sm font-semibold text-slate-800">
@@ -303,8 +445,8 @@ export default function Historical() {
                         {displayDate(row.publishedAt)}
                       </td>
                       <td className="max-w-xs px-3 py-4">
-                        <strong className="block text-slate-900">
-                          {row.sourceTitle}
+                        <strong className="block break-words text-slate-900">
+                          {documentFilename(row)}
                         </strong>
                         <span className="mt-1 block break-all text-xs text-gray-500">
                           {row.sourceFileName}

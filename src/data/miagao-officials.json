@@ -114,6 +114,29 @@
       ]
     }
   ],
+  "procurementOfficeholders": [
+    {
+      "name": "Sherwin Keith M. Faina",
+      "role": "Bids and Awards Committee Chairperson",
+      "period": "2018 invitation to bid",
+      "source": "https://www.miagao.gov.ph/wp-content/uploads/2018/09/Section-1-Invitation-to-Bid-menro-shredder-machine-rebid-3-1080x1458.jpg",
+      "sourcePage": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-one-1-unit-brand-new-trailer-mounted-shredder-machine-for-shredding-biodegradable-compostable-waste-and-mrf-operations-miagao-iloilo/"
+    },
+    {
+      "name": "Bianca P. Parnesio, CPA",
+      "role": "Bids and Awards Committee Chairperson",
+      "period": "2026 Q2 and Q3 bid results",
+      "source": "https://www.miagao.gov.ph/wp-content/uploads/2026/10/FDP-DILG-Compliance-3rd-Quarter-2026-CivilGoods-and-Consulting-Services.xlsx",
+      "sourcePage": "https://www.miagao.gov.ph/transparency/2026-full-disclosure/"
+    },
+    {
+      "name": "Maricar D. Niolar",
+      "role": "Bids and Awards Committee Secretariat Head",
+      "period": "2026 Q2 and Q3 bid results",
+      "source": "https://www.miagao.gov.ph/wp-content/uploads/2026/10/FDP-DILG-Compliance-3rd-Quarter-2026-CivilGoods-and-Consulting-Services.xlsx",
+      "sourcePage": "https://www.miagao.gov.ph/transparency/2026-full-disclosure/"
+    }
+  ],
   "districtRepresentatives": [
     {
       "name": "Richard Garin",
