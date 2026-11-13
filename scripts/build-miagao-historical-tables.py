@@ -110,7 +110,9 @@ def normalize_person_name(name: str) -> str:
             continue
         prefix, core, suffix = match.groups()
         lower = core.lower().rstrip(".")
-        if re.fullmatch(r"(?:[A-Z]\.){1,4}[A-Z]?\.?", core):
+        if lower in {"m.d", "md"}:
+            fixed = "M.D."
+        elif re.fullmatch(r"(?:[A-Z]\.){1,4}[A-Z]?\.?", core):
             fixed = core.upper()
         elif lower in {"jr", "sr"}:
             fixed = lower.capitalize() + ("." if core.endswith(".") else "")
@@ -121,7 +123,11 @@ def normalize_person_name(name: str) -> str:
         else:
             fixed = core.lower().capitalize()
         normalized.append(prefix + fixed + suffix)
-    return " ".join(normalized)
+    result = " ".join(normalized)
+    identity = re.sub(r"[^a-z]", "", result.lower())
+    if identity in {"macarionnapulanmd", "macarionnapulan"}:
+        return "Macario N. Napulan, M.D."
+    return result
 
 
 def extract_signatories(table_pages: list[dict]):

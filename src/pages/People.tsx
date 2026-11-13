@@ -12,19 +12,48 @@ type ParsedSignatory = {
   pageNumber: number;
   evidence: string;
   documentUrl: string;
+  sourcePageUrl: string | null;
   sourceTitle: string;
   category: string;
 };
 type ParsedSignatoryDocument = {
   documentUrl: string;
   sourceTitle: string | null;
+  sourcePageUrl: string | null;
   originalLabel: string;
   normalizedCategoryLabel: string;
   signatories?: Omit<
     ParsedSignatory,
-    'documentUrl' | 'sourceTitle' | 'category'
+    'documentUrl' | 'sourcePageUrl' | 'sourceTitle' | 'category'
   >[];
 };
+type RoleSource = { label: string; href: string };
+type PublishedRoleRow = {
+  name: string;
+  role: string;
+  periods: Set<string>;
+  sources: Map<string, RoleSource>;
+};
+
+function canonicalPersonName(name: string) {
+  const cleaned = name
+    .replace(/^(?:HON\.?|DR\.?|ATTY\.?)\s+/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const identity = cleaned.toLocaleLowerCase().replace(/[^a-z]/g, '');
+  if (identity === 'macarionnapulanmd' || identity === 'macarionnapulan') {
+    return 'Macario N. Napulan, M.D.';
+  }
+  return cleaned;
+}
+
+function canonicalRole(role: string) {
+  if (/^lce$/i.test(role.trim())) return 'Local Chief Executive';
+  if (/bids and awards committee chair(?:man|person)/i.test(role)) {
+    return 'Bids and Awards Committee Chairperson';
+  }
+  return role.trim();
+}
 
 function SourceLink({
   href,
@@ -46,60 +75,6 @@ function SourceLink({
   );
 }
 
-function MunicipalSignatoryRecords({
-  people,
-}: {
-  people: { name: string; records: ParsedSignatory[] }[];
-}) {
-  if (!people.length) return null;
-
-  return (
-    <div className="mt-5">
-      <h3 className="text-lg font-bold text-slate-950">
-        Dated municipal disclosure signatories
-      </h3>
-      <p className="mt-2 text-sm leading-6 text-gray-600">
-        Names and positions are dated to the reporting period when available, or
-        the publication date. Each entry records a position shown in a document,
-        not a full term of service.
-      </p>
-      <div className="mt-4 grid gap-3 md:grid-cols-2">
-        {people.map(person => (
-          <article
-            key={person.name}
-            className="rounded-lg bg-slate-50 px-4 py-3"
-          >
-            <p className="font-semibold text-gray-950">{person.name}</p>
-            <ul className="mt-2 space-y-2">
-              {person.records.map((record, index) => (
-                <li
-                  key={`${record.documentUrl}-${record.pageNumber}-${index}`}
-                  className="border-t border-gray-200 pt-2"
-                >
-                  <p className="text-sm text-gray-700">{record.position}</p>
-                  <p className="text-xs text-gray-500">
-                    Recorded {record.recordedDate ?? 'date unavailable'} · page{' '}
-                    {record.pageNumber}
-                  </p>
-                  <p className="text-xs text-gray-500">{record.sourceTitle}</p>
-                  <SourceLink href={record.documentUrl}>
-                    Source document
-                  </SourceLink>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
-      <p className="mt-3 text-xs leading-5 text-gray-500">
-        Names, signatures, and positions are machine-extracted and may contain
-        OCR or layout errors. Check each linked document before relying on a
-        record.
-      </p>
-    </div>
-  );
-}
-
 export default function People() {
   const [parsedSignatories, setParsedSignatories] = useState<ParsedSignatory[]>(
     []
@@ -113,6 +88,7 @@ export default function People() {
           (document.signatories ?? []).map(person => ({
             ...person,
             documentUrl: document.documentUrl,
+            sourcePageUrl: document.sourcePageUrl,
             sourceTitle: document.sourceTitle || document.originalLabel,
             category: document.normalizedCategoryLabel,
           }))
@@ -122,19 +98,69 @@ export default function People() {
       .catch(() => setParsedSignatories([]));
   }, []);
 
-  const signatoriesByPerson = new Map<
-    string,
-    { name: string; records: ParsedSignatory[] }
-  >();
-  parsedSignatories.forEach(person => {
-    const key = person.name.toLocaleLowerCase();
-    const group = signatoriesByPerson.get(key) ?? {
-      name: person.name,
-      records: [],
+  const publishedRoleRows = new Map<string, PublishedRoleRow>();
+  const addPublishedRole = (
+    name: string,
+    role: string,
+    period: string,
+    sources: RoleSource[]
+  ) => {
+    const normalizedName = canonicalPersonName(name);
+    const normalizedRole = canonicalRole(role);
+    const key = `${normalizedName.toLocaleLowerCase()}|${normalizedRole.toLocaleLowerCase()}`;
+    const row = publishedRoleRows.get(key) ?? {
+      name: normalizedName,
+      role: normalizedRole,
+      periods: new Set<string>(),
+      sources: new Map<string, RoleSource>(),
     };
-    group.records.push(person);
-    signatoriesByPerson.set(key, group);
+    if (period) row.periods.add(period);
+    sources.forEach(source => row.sources.set(source.href, source));
+    publishedRoleRows.set(key, row);
+  };
+
+  officials.procurementOfficeholders.forEach(person => {
+    addPublishedRole(person.name, person.role, person.period, [
+      { label: 'Source document', href: person.source },
+      { label: 'Source page', href: person.sourcePage },
+    ]);
   });
+  parsedSignatories.forEach(person => {
+    addPublishedRole(
+      person.name,
+      person.position,
+      person.recordedDate ?? 'Date unavailable',
+      [
+        {
+          label: `Source document · ${person.sourceTitle}`,
+          href: person.documentUrl,
+        },
+        ...(person.sourcePageUrl
+          ? [{ label: 'Source page', href: person.sourcePageUrl }]
+          : []),
+      ]
+    );
+  });
+  officials.parsedProjectDocumentCandidates.forEach(person => {
+    addPublishedRole(
+      person.name,
+      person.role,
+      `${person.miagaoProjectTitles} project document titles`,
+      [
+        {
+          label: 'Parsed project documents',
+          href: officials.sources.parsedDocumentData,
+        },
+        {
+          label: 'DPWH procurement record',
+          href: officials.sources.districtOffice,
+        },
+      ]
+    );
+  });
+  const sortedPublishedRoleRows = Array.from(publishedRoleRows.values()).sort(
+    (a, b) => a.name.localeCompare(b.name) || a.role.localeCompare(b.role)
+  );
 
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
@@ -265,7 +291,7 @@ export default function People() {
               </tr>
             </thead>
             <tbody>
-              {officials.procurementOfficeholders.map(person => (
+              {sortedPublishedRoleRows.map((person, index) => (
                 <tr
                   key={`${person.name}-${person.role}`}
                   className="border-t border-gray-200 odd:bg-white even:bg-slate-50"
@@ -277,15 +303,31 @@ export default function People() {
                     {person.name}
                   </th>
                   <td className="px-4 py-3 text-gray-800">{person.role}</td>
-                  <td className="px-4 py-3 text-gray-700">{person.period}</td>
+                  <td className="px-4 py-3 text-gray-700">
+                    {Array.from(person.periods).join(' · ')}
+                  </td>
                   <td className="px-4 py-3">
-                    <div className="flex flex-wrap gap-x-3 gap-y-1">
-                      <SourceLink href={person.source}>
-                        Source document
-                      </SourceLink>
-                      <SourceLink href={person.sourcePage}>
-                        Source page
-                      </SourceLink>
+                    <button
+                      type="button"
+                      popoverTarget={`role-sources-${index}`}
+                      className="cursor-pointer whitespace-nowrap font-semibold text-blue-800 underline decoration-blue-300 underline-offset-2"
+                    >
+                      Sources ({person.sources.size})
+                    </button>
+                    <div
+                      id={`role-sources-${index}`}
+                      popover="auto"
+                      className="m-0 w-80 rounded-lg border border-gray-200 bg-white p-4 text-sm shadow-xl"
+                    >
+                      <ul className="space-y-2">
+                        {Array.from(person.sources.values()).map(source => (
+                          <li key={source.href}>
+                            <SourceLink href={source.href}>
+                              {source.label}
+                            </SourceLink>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </td>
                 </tr>
@@ -293,43 +335,10 @@ export default function People() {
             </tbody>
           </table>
         </div>
-        <MunicipalSignatoryRecords
-          people={Array.from(signatoriesByPerson.values())}
-        />
-        <h3 className="mt-6 text-lg font-bold text-slate-950">
-          DPWH project-document role candidates
-        </h3>
-        <p className="mt-1 text-sm leading-6 text-gray-600">
-          Iloilo 1st District Engineering Office personnel found in published
-          project documents whose titles mention Miagao.
-        </p>
-        <div className="mt-3 grid gap-3 md:grid-cols-2">
-          {officials.parsedProjectDocumentCandidates.map(person => (
-            <article
-              key={person.name}
-              className="flex items-center justify-between gap-4 rounded-lg bg-slate-50 px-4 py-3"
-            >
-              <div>
-                <p className="font-semibold text-gray-950">{person.name}</p>
-                <p className="text-sm text-gray-600">{person.role}</p>
-              </div>
-              <span className="whitespace-nowrap text-right text-sm text-gray-600">
-                {person.miagaoProjectTitles} document titles
-              </span>
-            </article>
-          ))}
-        </div>
-        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          <SourceLink href={officials.sources.districtOffice}>
-            DPWH procurement record
-          </SourceLink>
-          <SourceLink href={officials.sources.parsedDocumentData}>
-            Parsed-document data
-          </SourceLink>
-        </div>
         <p className="mt-3 text-xs leading-5 text-gray-500">
           Document-extracted names and roles are candidates, not a verified
-          current staff list. OCR and parsing can misread the source.
+          current staff list. Dates identify the source record, not a full term;
+          OCR and parsing can misread names and roles.
         </p>
       </section>
 
