@@ -7,6 +7,8 @@ export const mainNavigation: NavigationItem[] = [
     href: '/transparency',
     children: [
       { label: 'Annual Procurement Plan (APP)', href: '/app' },
+      { label: 'Bids & implementation', href: '/bids' },
+      { label: 'CMPD reference prices', href: '/cmpd' },
       { label: 'Ayuda', href: '/ayuda' },
     ],
   },

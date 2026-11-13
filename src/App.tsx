@@ -12,6 +12,8 @@ import Ayuda from './pages/Ayuda';
 import AppPlan from './pages/AppPlan';
 import Glance from './pages/Glance';
 import Budget from './pages/Budget';
+import Cmpd from './pages/Cmpd';
+import Bids from './pages/Bids';
 
 export default function App() {
   return (
@@ -29,6 +31,8 @@ export default function App() {
           <Route path="/transparency" element={<Transparency />} />
           <Route path="/ayuda" element={<Ayuda />} />
           <Route path="/app" element={<AppPlan />} />
+          <Route path="/cmpd" element={<Cmpd />} />
+          <Route path="/bids" element={<Bids />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Home />} />
         </Routes>
