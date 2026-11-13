@@ -41,6 +41,25 @@ type HistoricalIndex = {
 const indexUrl = `${import.meta.env.BASE_URL}data/miagao-historical-index.json`;
 const pageSize = 25;
 
+const categories = [
+  {
+    id: 'invitation-to-bid',
+    label: 'Invitation to bid',
+    matches: (row: HistoricalRow) =>
+      `${row.sourcePageUrl ?? ''} ${row.sourceTitle}`
+        .toLocaleLowerCase()
+        .includes('invitation to bid') ||
+      (row.sourcePageUrl ?? '')
+        .toLocaleLowerCase()
+        .includes('invitation-to-bid'),
+  },
+  {
+    id: 'full-disclosure',
+    label: 'Full disclosure',
+    matches: () => true,
+  },
+] as const;
+
 function displayDate(value: string | null) {
   if (!value) return '—';
   const date = new Date(value);
@@ -70,6 +89,7 @@ export default function Historical() {
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [category, setCategory] = useState<string>(categories[0].id);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -95,7 +115,9 @@ export default function Historical() {
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase();
+    const selectedCategory = categories.find(item => item.id === category);
     return (data?.rows ?? []).filter(row => {
+      const categoryMatches = selectedCategory?.matches(row) ?? true;
       const statusMatches =
         statusFilter === 'all' || row.parseStatus === statusFilter;
       const queryMatches =
@@ -110,9 +132,19 @@ export default function Historical() {
           .join(' ')
           .toLocaleLowerCase()
           .includes(needle);
-      return statusMatches && queryMatches;
+      return categoryMatches && statusMatches && queryMatches;
     });
-  }, [data, query, statusFilter]);
+  }, [category, data, query, statusFilter]);
+  const categoryCounts = useMemo(
+    () =>
+      Object.fromEntries(
+        categories.map(item => [
+          item.id,
+          (data?.rows ?? []).filter(row => item.matches(row)).length,
+        ])
+      ),
+    [data]
+  );
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const visible = filtered.slice((page - 1) * pageSize, page * pageSize);
 
@@ -162,6 +194,26 @@ export default function Historical() {
       )}
 
       <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">
+        <div className="mb-5 flex flex-wrap gap-2" aria-label="Record category">
+          {categories.map(item => (
+            <button
+              key={item.id}
+              type="button"
+              aria-pressed={category === item.id}
+              onClick={() => {
+                setCategory(item.id);
+                setPage(1);
+              }}
+              className={`min-h-10 rounded-lg border px-4 text-sm font-semibold ${
+                category === item.id
+                  ? 'border-slate-950 bg-slate-950 text-white'
+                  : 'border-gray-300 bg-white text-slate-800'
+              }`}
+            >
+              {item.label} ({categoryCounts[item.id] ?? 0})
+            </button>
+          ))}
+        </div>
         <div className="mb-4 flex flex-wrap items-end gap-3">
           <label className="min-w-64 flex-1 text-sm font-semibold text-slate-800">
             Search title, filename, or extracted text

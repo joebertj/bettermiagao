@@ -132,6 +132,16 @@ function sourceHref(url: string | undefined, page: number | null) {
   return `${url}#page=${page}`;
 }
 
+function apiRecordHref(url: string) {
+  try {
+    const recordUrl = new URL(url);
+    const apiOrigin = new URL(API).origin;
+    return `${apiOrigin}${recordUrl.pathname}${recordUrl.search}${recordUrl.hash}`;
+  } catch {
+    return url;
+  }
+}
+
 async function readEnvelope(
   dataset: Dataset,
   term: string,
@@ -707,7 +717,7 @@ export default function Budget() {
                           <span className="block">{row.group_label}</span>
                           <a
                             className="mt-1 inline-block font-semibold text-blue-800 underline"
-                            href={row.api_url}
+                            href={apiRecordHref(row.api_url)}
                             target="_blank"
                             rel="noreferrer"
                           >
