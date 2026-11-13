@@ -28,11 +28,11 @@ const peso = new Intl.NumberFormat('en-PH', {
 });
 
 function money(raw: string | null | undefined) {
-  const value = Number(
-    String(raw ?? '')
-      .replace(/[₱,\s]/g, '')
-      .replace(/^P/i, '')
-  );
+  const cleaned = String(raw ?? '')
+    .replace(/[₱,\s]/g, '')
+    .replace(/^P/i, '');
+  if (!cleaned) return null;
+  const value = Number(cleaned);
   return Number.isFinite(value) ? value : null;
 }
 
@@ -247,6 +247,26 @@ export default function AppPlan() {
     document.addEventListener('keydown', closeOnEscape);
     return () => document.removeEventListener('keydown', closeOnEscape);
   }, [selectedDetails]);
+
+  const selectedDetailSummary = selectedDetails
+    ? (() => {
+        const values = selectedDetails.rows.map(row => money(row.budgetPesos));
+        const priced = values.filter(
+          (value): value is number => value !== null
+        );
+        const parentEstimate = money(selectedDetails.parent.budgetPesos);
+        return {
+          total: priced.reduce((sum, value) => sum + value, 0),
+          pricedCount: priced.length,
+          missingCount: values.length - priced.length,
+          parentEstimate,
+          difference:
+            values.length === priced.length && parentEstimate !== null
+              ? priced.reduce((sum, value) => sum + value, 0) - parentEstimate
+              : null,
+        };
+      })()
+    : null;
 
   const normalizedQuery = query.trim().toLowerCase();
   const siblings = useMemo(
@@ -552,18 +572,30 @@ export default function AppPlan() {
               </button>
             </header>
             <div className="overflow-y-auto p-4 sm:p-7">
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm">
+              <div className="mb-4 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm">
                 <strong className="text-slate-900">
                   {selectedDetails.rows.length} supporting line items
                 </strong>
-                <span className="text-slate-600">
-                  Heading estimate:{' '}
-                  {selectedDetails.parent.budgetPesos
-                    ? peso.format(
-                        money(selectedDetails.parent.budgetPesos) ?? 0
-                      )
-                    : 'not stated'}
-                </span>
+                <div className="mt-2 grid gap-1 text-slate-700 sm:grid-cols-2">
+                  <span>
+                    Heading estimate:{' '}
+                    {selectedDetailSummary?.parentEstimate === null
+                      ? 'not stated'
+                      : peso.format(selectedDetailSummary?.parentEstimate ?? 0)}
+                  </span>
+                  <span>
+                    Sum of stated line estimates:{' '}
+                    {peso.format(selectedDetailSummary?.total ?? 0)}
+                    {selectedDetailSummary?.missingCount ? ' (partial)' : ''}
+                  </span>
+                </div>
+                <p className="mt-2 text-xs text-slate-600">
+                  {selectedDetailSummary?.difference === null
+                    ? `Cannot fully compare: ${selectedDetailSummary?.missingCount ?? 0} line estimate(s) or the heading estimate are missing.`
+                    : Math.abs(selectedDetailSummary?.difference ?? 0) < 0.005
+                      ? 'The line estimates match the heading estimate.'
+                      : `The line estimates are ${peso.format(Math.abs(selectedDetailSummary?.difference ?? 0))} ${(selectedDetailSummary?.difference ?? 0) > 0 ? 'above' : 'below'} the heading estimate.`}
+                </p>
               </div>
               <div className="divide-y divide-slate-200 rounded-xl border border-slate-200">
                 {selectedDetails.rows.map(row => (

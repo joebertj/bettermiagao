@@ -45,23 +45,16 @@ function seriesStats(series: CmpdMaterialSeries) {
   const inliers = values.filter(
     value => value >= lowerFence && value <= upperFence
   );
-  const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
-  const standardDeviation =
-    values.length > 1
-      ? Math.sqrt(
-          values.reduce((sum, value) => sum + (value - mean) ** 2, 0) /
-            (values.length - 1)
-        )
-      : 0;
   return {
     values,
-    mean,
-    standardDeviation,
     min: values[0],
     max: values[values.length - 1],
     q1,
     median,
     q3,
+    iqr,
+    lowerFence,
+    upperFence,
     lowWhisker: inliers[0],
     highWhisker: inliers[inliers.length - 1],
     outliers: values.filter(value => value < lowerFence || value > upperFence),
@@ -86,23 +79,16 @@ function rangeAssessment(item: AppMaterialItem) {
       const stats = seriesStats(series);
       return {
         within: price >= stats.min && price <= stats.max,
-        standardDeviations: stats.standardDeviation
-          ? Math.abs(price - stats.mean) / stats.standardDeviation
-          : 0,
+        iqrDistance: stats.iqr ? Math.abs(price - stats.median) / stats.iqr : 0,
+        beyondIqrFence: price < stats.lowerFence || price > stats.upperFence,
       };
     });
   const within = comparisons.some(comparison => comparison.within);
-  const closest = comparisons.sort(
-    (a, b) => a.standardDeviations - b.standardDeviations
-  )[0];
+  const closest = comparisons.sort((a, b) => a.iqrDistance - b.iqrDistance)[0];
   return {
     within,
-    standardDeviations: closest?.standardDeviations ?? null,
-    severity: within
-      ? 'within'
-      : (closest?.standardDeviations ?? 0) >= 2
-        ? 'red'
-        : 'amber',
+    iqrDistance: closest?.iqrDistance ?? null,
+    severity: within ? 'within' : closest?.beyondIqrFence ? 'red' : 'amber',
   } as const;
 }
 
@@ -131,10 +117,11 @@ function BoxPlot({
     const price = impliedUnitPrice(item);
     const within =
       item.appUnit === series.unit && price >= stats.min && price <= stats.max;
-    const standardDeviations = stats.standardDeviation
-      ? Math.abs(price - stats.mean) / stats.standardDeviation
+    const iqrDistance = stats.iqr
+      ? Math.abs(price - stats.median) / stats.iqr
       : 0;
-    return { item, price, within, standardDeviations };
+    const beyondIqrFence = price < stats.lowerFence || price > stats.upperFence;
+    return { item, price, within, iqrDistance, beyondIqrFence };
   });
   const axisMax =
     Math.max(stats.max, ...markers.map(marker => marker.price), 1) * 1.06;
@@ -224,7 +211,7 @@ function BoxPlot({
             const y = 17 + (index % 3) * 10;
             const color = marker.within
               ? '#15803d'
-              : marker.standardDeviations >= 2
+              : marker.beyondIqrFence
                 ? '#b42318'
                 : '#b7791f';
             return (
@@ -235,7 +222,7 @@ function BoxPlot({
                   stroke="white"
                   strokeWidth="1"
                   tabIndex={0}
-                  aria-label={`APP row ${marker.item.appRow}: ${money.format(marker.price)} per ${marker.item.appUnit}; ${marker.within ? 'within' : `outside observed CMPD range by ${marker.standardDeviations.toFixed(1)} standard deviations`}`}
+                  aria-label={`APP row ${marker.item.appRow}: ${money.format(marker.price)} per ${marker.item.appUnit}; ${marker.within ? 'within' : `outside observed CMPD range, ${marker.iqrDistance.toFixed(1)} IQR from the median`}`}
                 >
                   <title>{`APP row ${marker.item.appRow}: ${money.format(marker.price)} per ${marker.item.appUnit}`}</title>
                 </path>
@@ -291,7 +278,7 @@ function BoxPlot({
         Blue box: middle half of office prices; center line: median; whiskers:
         1.5×IQR. Amber dots: office-price outliers. Green diamonds: Miagao APP
         amounts inside the observed range; amber/red diamonds: outside the range
-        by less than 2 SD / at least 2 SD.
+        but within / beyond the 1.5×IQR fences.
       </p>
     </figure>
   );
@@ -321,10 +308,10 @@ export default function Cmpd() {
           with quality, delivery, taxes, timing and package scope. Green rows
           mean only that the implied APP amount falls inside the observed Region
           VI price range for a selected same-unit CMPD item; verify
-          specifications before comparing. Outside-range amounts are amber when
-          less than 2 sample standard deviations from the CMPD office-price mean
-          and red at 2 SD or more. This is a review-priority screen, not a
-          statistical finding.
+          specifications before comparing. Outside-range amounts are colored
+          using the CMPD distribution's 1.5×IQR fences. The displayed distance
+          is measured in IQRs from the median. This is a review-priority screen,
+          not a statistical finding.
         </AnalysisDisclaimer>
       </div>
 
@@ -358,8 +345,8 @@ export default function Cmpd() {
             <p className="mt-1 max-w-4xl text-sm leading-6 text-slate-600">
               Unit amounts are derived as APP line budget ÷ stated quantity.
               Green rows are within the observed minimum–maximum. Outside-range
-              rows are amber when less than 2 sample standard deviations from
-              the comparator mean and red at 2 SD or more.
+              rows are compared with the comparator's 1.5×IQR fences and
+              measured in IQRs from its median.
             </p>
           </div>
           <a
@@ -436,8 +423,8 @@ export default function Cmpd() {
                         <span
                           className={`text-xs font-bold ${assessment.severity === 'red' ? 'text-red-800' : 'text-amber-900'}`}
                         >
-                          Outside range ·{' '}
-                          {assessment.standardDeviations?.toFixed(1)} SD
+                          Outside range · {assessment.iqrDistance?.toFixed(1)}{' '}
+                          IQR
                         </span>
                       )}
                     </td>
@@ -485,11 +472,11 @@ export default function Cmpd() {
             </span>
             <span>
               <i className="mr-1 inline-block h-3 w-3 rotate-45 bg-amber-700 align-[-2px]" />
-              Outside range, &lt;2 SD
+              Outside range, within 1.5×IQR fences
             </span>
             <span>
               <i className="mr-1 inline-block h-3 w-3 rotate-45 bg-red-700 align-[-2px]" />
-              Outside range, ≥2 SD
+              Outside range, beyond 1.5×IQR fences
             </span>
             <span>
               <i className="mr-1 inline-block h-3 w-3 rounded-full bg-amber-700 align-[-2px]" />
