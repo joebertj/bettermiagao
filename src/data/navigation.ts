@@ -3,7 +3,7 @@ import type { NavigationItem } from '../types';
 export const mainNavigation: NavigationItem[] = [
   { label: 'In a Glance', href: '/glance' },
   {
-    label: 'Budget & procurement',
+    label: 'Local Projects',
     href: '/transparency',
     children: [
       { label: 'Annual Procurement Plan (APP)', href: '/app' },

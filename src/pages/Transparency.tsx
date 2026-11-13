@@ -378,9 +378,9 @@ export default function Transparency() {
         };
         const shards = await Promise.all(
           manifest.appRowShards.map(async shard => {
-            const url = shard.url.startsWith('/')
-              ? shard.url
-              : `${basePath}${shard.url}`;
+            // Manifest shard URLs are root-relative, so preserve the Vite base
+            // path when the app is hosted below the domain root.
+            const url = `${import.meta.env.BASE_URL}${shard.url.replace(/^\/+/, '')}`;
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return response.json() as Promise<{ rows: RecordData[] }>;

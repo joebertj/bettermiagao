@@ -62,7 +62,7 @@ export default function Navbar() {
                     to={link.href}
                     className="block rounded-lg px-3 py-2 text-sm font-semibold text-gray-800 hover:bg-slate-50"
                   >
-                    National projects
+                    Local projects
                   </NavLink>
                   {link.children.map(child => (
                     <NavLink
