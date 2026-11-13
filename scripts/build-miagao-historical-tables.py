@@ -96,6 +96,32 @@ ROLE_HINT = re.compile(
     r"prepared by|noted by|certified correct)\b",
     re.I,
 )
+NAME_PARTICLE = {"da", "das", "de", "del", "della", "dela", "di", "dos", "la", "van", "von", "y"}
+
+
+def normalize_person_name(name: str) -> str:
+    """Normalize OCR casing while preserving initials and common suffixes."""
+    tokens = re.findall(r"[^\s]+", name.strip())
+    normalized = []
+    for index, token in enumerate(tokens):
+        match = re.match(r"^([^A-Za-zÀ-ÖØ-öø-ÿ]*)(.*?)([^A-Za-zÀ-ÖØ-öø-ÿ]*)$", token)
+        if not match:
+            normalized.append(token)
+            continue
+        prefix, core, suffix = match.groups()
+        lower = core.lower().rstrip(".")
+        if re.fullmatch(r"(?:[A-Z]\.){1,4}[A-Z]?\.?", core):
+            fixed = core.upper()
+        elif lower in {"jr", "sr"}:
+            fixed = lower.capitalize() + ("." if core.endswith(".") else "")
+        elif lower in {"ii", "iii", "iv"}:
+            fixed = lower.upper()
+        elif index and lower in NAME_PARTICLE:
+            fixed = lower
+        else:
+            fixed = core.lower().capitalize()
+        normalized.append(prefix + fixed + suffix)
+    return " ".join(normalized)
 
 
 def extract_signatories(table_pages: list[dict]):
@@ -133,6 +159,7 @@ def extract_signatories(table_pages: list[dict]):
             for cell_index, name, name_row_index, inline_role in name_candidates:
                 name = re.sub(r"\s+", " ", name).strip(" :;,-")
                 name = re.sub(r"^(?:HON\.?|DR\.?|ATTY\.?)\s+", "", name, flags=re.I)
+                name = normalize_person_name(name)
                 if not re.search(r"[A-Za-z]{2,}.*\s+[A-Za-z]{2,}", name) or ROLE_HINT.search(name):
                     continue
                 role = inline_role

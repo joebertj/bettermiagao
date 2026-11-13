@@ -46,6 +46,60 @@ function SourceLink({
   );
 }
 
+function MunicipalSignatoryRecords({
+  people,
+}: {
+  people: { name: string; records: ParsedSignatory[] }[];
+}) {
+  if (!people.length) return null;
+
+  return (
+    <div className="mt-5">
+      <h3 className="text-lg font-bold text-slate-950">
+        Dated municipal disclosure signatories
+      </h3>
+      <p className="mt-2 text-sm leading-6 text-gray-600">
+        Names and positions are dated to the reporting period when available, or
+        the publication date. Each entry records a position shown in a document,
+        not a full term of service.
+      </p>
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        {people.map(person => (
+          <article
+            key={person.name}
+            className="rounded-lg bg-slate-50 px-4 py-3"
+          >
+            <p className="font-semibold text-gray-950">{person.name}</p>
+            <ul className="mt-2 space-y-2">
+              {person.records.map((record, index) => (
+                <li
+                  key={`${record.documentUrl}-${record.pageNumber}-${index}`}
+                  className="border-t border-gray-200 pt-2"
+                >
+                  <p className="text-sm text-gray-700">{record.position}</p>
+                  <p className="text-xs text-gray-500">
+                    Recorded {record.recordedDate ?? 'date unavailable'} · page{' '}
+                    {record.pageNumber}
+                  </p>
+                  <p className="text-xs text-gray-500">{record.sourceTitle}</p>
+                  <SourceLink href={record.documentUrl}>
+                    Source document
+                  </SourceLink>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+      <p className="mt-3 text-xs leading-5 text-gray-500">
+        Names, signatures, and positions are machine-extracted and may contain
+        OCR or layout errors. Check each linked document before relying on a
+        record.
+      </p>
+    </div>
+  );
+}
+
 export default function People() {
   const [parsedSignatories, setParsedSignatories] = useState<ParsedSignatory[]>(
     []
@@ -103,58 +157,6 @@ export default function People() {
           approval.
         </p>
       </header>
-
-      {parsedSignatories.length > 0 && (
-        <section className="mb-12 rounded-2xl border border-gray-200 bg-white p-6">
-          <p className="text-sm font-bold uppercase tracking-widest text-blue-800">
-            Municipal records · dated signatories
-          </p>
-          <h2 className="mt-2 text-2xl font-bold text-slate-950">
-            Names and positions recorded in disclosures
-          </h2>
-          <p className="mt-3 max-w-4xl text-sm leading-6 text-gray-600">
-            These candidates were extracted from signed municipal documents. The
-            date is the document’s reporting period when available, or its
-            publication date. It records when the position appears in a source,
-            not the person’s full term of service.
-          </p>
-          <div className="mt-5 grid gap-3 md:grid-cols-2">
-            {Array.from(signatoriesByPerson.values()).map(person => (
-              <article
-                key={person.name}
-                className="rounded-lg bg-slate-50 px-4 py-3"
-              >
-                <p className="font-semibold text-gray-950">{person.name}</p>
-                <ul className="mt-2 space-y-2">
-                  {person.records.map((record, index) => (
-                    <li
-                      key={`${record.documentUrl}-${record.pageNumber}-${index}`}
-                      className="border-t border-gray-200 pt-2"
-                    >
-                      <p className="text-sm text-gray-700">{record.position}</p>
-                      <p className="text-xs text-gray-500">
-                        Recorded {record.recordedDate ?? 'date unavailable'} ·
-                        page {record.pageNumber}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {record.sourceTitle}
-                      </p>
-                      <SourceLink href={record.documentUrl}>
-                        Source document
-                      </SourceLink>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-          <p className="mt-4 text-xs leading-5 text-gray-500">
-            Names, signatures, and positions are machine-extracted and may
-            contain OCR or layout errors. Check each linked document before
-            relying on a record.
-          </p>
-        </section>
-      )}
 
       <section className="mb-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="rounded-2xl bg-slate-950 p-6 text-white">
@@ -237,12 +239,12 @@ export default function People() {
           Procurement roles · document signatories
         </p>
         <h2 className="mt-2 text-2xl font-bold text-slate-950">
-          Bids and Awards Committee names in published records
+          Names in published records
         </h2>
         <p className="mt-3 max-w-4xl text-sm leading-6 text-gray-600">
-          These names and roles were read from cited invitation and bid-result
-          documents. They identify signatories in those records and do not
-          establish current appointments.
+          Published municipal and DPWH records identify people alongside
+          procurement and administrative roles. These dated source appearances
+          do not establish current appointments or responsibility for a project.
         </p>
         <div className="mt-5 overflow-x-auto rounded-lg border border-gray-200">
           <table className="w-full min-w-[640px] border-collapse text-left text-sm">
@@ -291,6 +293,44 @@ export default function People() {
             </tbody>
           </table>
         </div>
+        <MunicipalSignatoryRecords
+          people={Array.from(signatoriesByPerson.values())}
+        />
+        <h3 className="mt-6 text-lg font-bold text-slate-950">
+          DPWH project-document role candidates
+        </h3>
+        <p className="mt-1 text-sm leading-6 text-gray-600">
+          Iloilo 1st District Engineering Office personnel found in published
+          project documents whose titles mention Miagao.
+        </p>
+        <div className="mt-3 grid gap-3 md:grid-cols-2">
+          {officials.parsedProjectDocumentCandidates.map(person => (
+            <article
+              key={person.name}
+              className="flex items-center justify-between gap-4 rounded-lg bg-slate-50 px-4 py-3"
+            >
+              <div>
+                <p className="font-semibold text-gray-950">{person.name}</p>
+                <p className="text-sm text-gray-600">{person.role}</p>
+              </div>
+              <span className="whitespace-nowrap text-right text-sm text-gray-600">
+                {person.miagaoProjectTitles} document titles
+              </span>
+            </article>
+          ))}
+        </div>
+        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <SourceLink href={officials.sources.districtOffice}>
+            DPWH procurement record
+          </SourceLink>
+          <SourceLink href={officials.sources.parsedDocumentData}>
+            Parsed-document data
+          </SourceLink>
+        </div>
+        <p className="mt-3 text-xs leading-5 text-gray-500">
+          Document-extracted names and roles are candidates, not a verified
+          current staff list. OCR and parsing can misread the source.
+        </p>
       </section>
 
       <section className="mb-12 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
@@ -435,90 +475,44 @@ export default function People() {
         </div>
       </section>
 
-      <section className="mb-12 grid gap-8 lg:grid-cols-2">
-        <article className="rounded-2xl border border-gray-200 bg-white p-6">
-          <p className="text-sm font-bold uppercase tracking-widest text-blue-800">
-            DPWH · Iloilo 1st District Engineering Office
-          </p>
-          <h2 className="mt-2 text-2xl font-bold text-slate-950">
-            Project office and parsed signatories
-          </h2>
-          <p className="mt-3 text-sm leading-6 text-gray-600">
-            The office name appears on DPWH procurement records for projects in
-            Miagao and surrounding municipalities. The names below were
-            extracted from Senate-provided project documents whose titles
-            mention Miagao.
-          </p>
-          <div className="mt-5 space-y-3">
-            {officials.parsedProjectDocumentCandidates.map(person => (
-              <div
-                key={person.name}
-                className="flex items-center justify-between gap-4 rounded-lg bg-slate-50 px-4 py-3"
-              >
-                <div>
-                  <p className="font-semibold text-gray-950">{person.name}</p>
-                  <p className="text-sm text-gray-600">{person.role}</p>
-                </div>
-                <span className="whitespace-nowrap text-right text-sm text-gray-600">
-                  {person.miagaoProjectTitles} document titles
-                </span>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            <SourceLink href={officials.sources.districtOffice}>
-              DPWH procurement record
-            </SourceLink>
-            <SourceLink href={officials.sources.parsedDocumentData}>
-              Parsed-document data
-            </SourceLink>
-          </div>
-          <p className="mt-4 text-xs leading-5 text-gray-500">
-            Document-extracted role candidates are not a verified current staff
-            list. A signature or parsed role does not establish that an
-            individual sponsored or approved a project.
-          </p>
-        </article>
-
-        <article className="rounded-2xl bg-amber-50 p-6">
-          <p className="text-sm font-bold uppercase tracking-widest text-amber-900">
-            How to read this page
-          </p>
-          <h2 className="mt-2 text-2xl font-bold text-slate-950">
-            Records have different strengths
-          </h2>
-          <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-6 text-gray-700">
-            <li>
-              Current elected-official information comes from the Municipality
-              of Miagao’s published roster.
-            </li>
-            <li>
-              Congressional roster history for the 16th–19th Congress is based
-              on cited historical roster data; the 20th Congress listing is
-              checked against the House directory.
-            </li>
-            <li>
-              Engineer names come from automated text extraction of project
-              documents. OCR and parsing can misread names and role labels.
-            </li>
-            <li>
-              “Project title mentions Miagao” is not a complete geographic
-              boundary check. Some roads or river works may cross municipal
-              boundaries.
-            </li>
-          </ul>
-          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            <SourceLink href={officials.sources.municipalOfficials}>
-              Municipal roster
-            </SourceLink>
-            <SourceLink href={officials.sources.municipalHistory}>
-              Municipal history
-            </SourceLink>
-            <SourceLink href={officials.sources.historicalCongressSources}>
-              BetterGov historical roster references
-            </SourceLink>
-          </div>
-        </article>
+      <section className="mb-12 rounded-2xl bg-amber-50 p-6">
+        <p className="text-sm font-bold uppercase tracking-widest text-amber-900">
+          How to read this page
+        </p>
+        <h2 className="mt-2 text-2xl font-bold text-slate-950">
+          Records have different strengths
+        </h2>
+        <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-6 text-gray-700">
+          <li>
+            Current elected-official information comes from the Municipality of
+            Miagao’s published roster.
+          </li>
+          <li>
+            Congressional roster history for the 16th–19th Congress is based on
+            cited historical roster data; the 20th Congress listing is checked
+            against the House directory.
+          </li>
+          <li>
+            Engineer names come from automated text extraction of project
+            documents. OCR and parsing can misread names and role labels.
+          </li>
+          <li>
+            “Project title mentions Miagao” is not a complete geographic
+            boundary check. Some roads or river works may cross municipal
+            boundaries.
+          </li>
+        </ul>
+        <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <SourceLink href={officials.sources.municipalOfficials}>
+            Municipal roster
+          </SourceLink>
+          <SourceLink href={officials.sources.municipalHistory}>
+            Municipal history
+          </SourceLink>
+          <SourceLink href={officials.sources.historicalCongressSources}>
+            BetterGov historical roster references
+          </SourceLink>
+        </div>
       </section>
     </main>
   );
