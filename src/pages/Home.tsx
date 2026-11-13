@@ -39,16 +39,16 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/glance"
+                to="/transparency"
                 className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-amber-400 px-5 py-3 font-bold text-slate-950 hover:bg-amber-300"
               >
-                In a Glance <ArrowRight size={17} />
+                Local <ArrowRight size={17} />
               </Link>
               <Link
-                to="/app"
+                to="/projects"
                 className="inline-flex min-h-12 items-center rounded-lg border border-white/30 px-5 py-3 font-semibold text-white hover:bg-white/10"
               >
-                Annual Procurement Plan (APP)
+                National
               </Link>
             </div>
             <p className="mt-6 max-w-2xl text-xs leading-5 text-slate-400">
