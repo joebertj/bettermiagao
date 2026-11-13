@@ -5,18 +5,23 @@ import { mainNavigation } from '../../data/navigation';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const budgetMenu = useRef<HTMLDetailsElement>(null);
+  const dropdownMenus = useRef(new Map<string, HTMLDetailsElement>());
   const location = useLocation();
 
   useEffect(() => {
+    const closeMenus = () => {
+      dropdownMenus.current.forEach(menu => {
+        menu.open = false;
+      });
+    };
     const closeOnOutsideClick = (event: PointerEvent) => {
-      const menu = budgetMenu.current;
-      if (menu?.open && !menu.contains(event.target as Node)) menu.open = false;
+      const clickedInsideMenu = [...dropdownMenus.current.values()].some(
+        menu => menu.open && menu.contains(event.target as Node)
+      );
+      if (!clickedInsideMenu) closeMenus();
     };
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && budgetMenu.current?.open) {
-        budgetMenu.current.open = false;
-      }
+      if (event.key === 'Escape') closeMenus();
     };
     document.addEventListener('pointerdown', closeOnOutsideClick);
     document.addEventListener('keydown', closeOnEscape);
@@ -27,7 +32,9 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (budgetMenu.current) budgetMenu.current.open = false;
+    dropdownMenus.current.forEach(menu => {
+      menu.open = false;
+    });
   }, [location.pathname]);
 
   return (
@@ -51,7 +58,16 @@ export default function Navbar() {
             link.children ? (
               <details
                 key={link.href}
-                ref={link.href === '/transparency' ? budgetMenu : undefined}
+                ref={menu => {
+                  if (menu) dropdownMenus.current.set(link.href, menu);
+                  else dropdownMenus.current.delete(link.href);
+                }}
+                onToggle={event => {
+                  if (!event.currentTarget.open) return;
+                  dropdownMenus.current.forEach((menu, href) => {
+                    if (href !== link.href) menu.open = false;
+                  });
+                }}
                 className="group relative"
               >
                 <summary className="flex cursor-pointer list-none items-center gap-1 text-sm font-semibold text-gray-700 hover:text-blue-800">
@@ -62,7 +78,9 @@ export default function Navbar() {
                     to={link.href}
                     className="block rounded-lg px-3 py-2 text-sm font-semibold text-gray-800 hover:bg-slate-50"
                   >
-                    Local projects
+                    {link.href === '/transparency'
+                      ? 'Local projects'
+                      : 'National projects'}
                   </NavLink>
                   {link.children.map(child => (
                     <NavLink
