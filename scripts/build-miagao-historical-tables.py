@@ -69,12 +69,121 @@ def parsed_table_rows(text: str, max_rows: int = 900):
             if not normalized:
                 continue
             cells = [cell.strip() for cell in re.split(r"\s{2,}", line.strip()) if cell.strip()]
-            rows.append({"cells": cells or [normalized], "text": normalized})
+            cells = cells or [normalized]
+            row = {"cells": cells, "text": normalized}
+            second_cell_is_value = len(cells) == 2 and bool(
+                re.fullmatch(
+                    r"(?:₱\s*)?[-–—]?(?:\d[\d,]*(?:\.\d+)?%?|n/?a|none)",
+                    cells[1],
+                    re.I,
+                )
+            )
+            if len(cells) == 2 and second_cell_is_value:
+                row.update({"item": cells[0], "value": cells[1]})
+            rows.append(row)
             if len(rows) >= max_rows:
                 break
         if rows:
             pages.append({"pageNumber": page_number, "rows": rows})
     return pages
+
+
+SIGNATURE_MARKER = re.compile(r"\(?\s*s\s*\.?\s*g\s*\.?\s*d\s*\.?\s*\)?", re.I)
+ROLE_HINT = re.compile(
+    r"\b(mayor|accountant|chair(?:man|person)|secretary|engineer|officer|"
+    r"treasurer|administrator|clerk|lce|chief|head|department|division|"
+    r"budget|assessor|civil registrar|planning|general services|approved by|"
+    r"prepared by|noted by|certified correct)\b",
+    re.I,
+)
+
+
+def extract_signatories(table_pages: list[dict]):
+    """Capture signed names with nearby position labels as dated document evidence."""
+    signatories = []
+    seen = set()
+    for page in table_pages:
+        rows = page["rows"]
+        for row_index, row in enumerate(rows):
+            cells = row.get("cells") or [row["text"]]
+            marker_cells = [
+                (cell_index, cell)
+                for cell_index, cell in enumerate(cells)
+                if SIGNATURE_MARKER.search(cell)
+            ]
+            if not marker_cells:
+                continue
+
+            name_candidates = []
+            for cell_index, cell in marker_cells:
+                # A signature marker and name may share a cell, or be on the next row.
+                inline = SIGNATURE_MARKER.sub(" ", cell).strip(" :;,-")
+                if inline:
+                    role_match = ROLE_HINT.search(inline)
+                    inline_role = inline[role_match.start():].strip(" :;,-") if role_match else None
+                    inline_name = inline[:role_match.start()].strip(" :;,-") if role_match else inline
+                    name_candidates.append((cell_index, inline_name, row_index, inline_role))
+                elif row_index + 1 < len(rows):
+                    next_cells = rows[row_index + 1].get("cells") or [rows[row_index + 1]["text"]]
+                    if cell_index < len(next_cells):
+                        name_candidates.append((cell_index, next_cells[cell_index], row_index + 1, None))
+                    elif len(marker_cells) == 1 and next_cells:
+                        name_candidates.append((0, " ".join(next_cells), row_index + 1, None))
+
+            for cell_index, name, name_row_index, inline_role in name_candidates:
+                name = re.sub(r"\s+", " ", name).strip(" :;,-")
+                name = re.sub(r"^(?:HON\.?|DR\.?|ATTY\.?)\s+", "", name, flags=re.I)
+                if not re.search(r"[A-Za-z]{2,}.*\s+[A-Za-z]{2,}", name) or ROLE_HINT.search(name):
+                    continue
+                role = inline_role
+                if not role and name_row_index == row_index and cell_index + 1 < len(cells):
+                    same_row_role = cells[cell_index + 1]
+                    if ROLE_HINT.search(same_row_role):
+                        role = same_row_role
+                if not role and name_row_index + 1 < len(rows):
+                    role_cells = rows[name_row_index + 1].get("cells") or [rows[name_row_index + 1]["text"]]
+                    if cell_index < len(role_cells):
+                        role = role_cells[cell_index]
+                    elif len(role_cells) == 1:
+                        role = role_cells[0]
+                role = re.sub(r"\s+", " ", role or "").strip(" :;,-")
+                if not role or not ROLE_HINT.search(role):
+                    continue
+                key = (page["pageNumber"], name.casefold(), role.casefold())
+                if key in seen:
+                    continue
+                seen.add(key)
+                signatories.append({
+                    "name": name,
+                    "position": role,
+                    "pageNumber": page["pageNumber"],
+                    "evidence": "Signature marker and adjacent printed name and position",
+                })
+    return signatories
+
+
+def pretty_payload(payload: dict) -> str:
+    """Keep cell arrays compact while formatting the surrounding JSON."""
+    lines = json.dumps(payload, ensure_ascii=False, indent=2).splitlines()
+    output = []
+    index = 0
+    while index < len(lines):
+        line = lines[index]
+        if '"cells": [' not in line or not line.rstrip().endswith("["):
+            output.append(line)
+            index += 1
+            continue
+        indent = line[: len(line) - len(line.lstrip())]
+        prefix = line[: line.index("[")]
+        index += 1
+        cell_lines = []
+        while index < len(lines) and lines[index].strip() not in {"]", "],"}:
+            cell_lines.append(lines[index].strip())
+            index += 1
+        cells = json.loads("[" + "".join(cell_lines) + "]")
+        output.append(prefix + json.dumps(cells, ensure_ascii=False, separators=(", ", ": ")) + ("," if lines[index].strip().endswith("],") else ""))
+        index += 1
+    return "\n".join(output) + "\n"
 
 
 def reporting_period(text: str) -> str | None:
@@ -171,6 +280,14 @@ def main():
                 heading = cleaned[:240]
                 break
         table_pages = parsed_table_rows(raw_text)
+        signatories = extract_signatories(table_pages)
+        signatory_date = reporting_period(raw_text)
+        signatory_date_basis = "document reporting period" if signatory_date else "source publication date"
+        if not signatory_date:
+            signatory_date = (document.get("publishedAt") or "")[:10] or None
+        for person in signatories:
+            person["recordedDate"] = signatory_date
+            person["dateBasis"] = signatory_date_basis if signatory_date else None
         output_docs.append({
             **{key: value for key, value in document.items() if key != "sourceArchivePath"},
             "normalizedCategory": category_id,
@@ -181,6 +298,7 @@ def main():
             "extractionStatus": status,
             "pageCount": len(table_pages),
             "tablePages": table_pages,
+            "signatories": signatories,
         })
 
     output_docs.sort(key=lambda item: (item["normalizedCategoryLabel"], item.get("publishedAt") or "", item["originalLabel"].lower()))
@@ -190,7 +308,7 @@ def main():
         "disclaimer": "Extracted cells are comparison aids. PDF text spacing and custom fonts can misalign or garble values; verify all values in the linked original.",
         "documents": output_docs,
     }
-    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+    OUTPUT.write_text(pretty_payload(payload), encoding="utf-8")
     counts = {}
     for item in output_docs:
         counts[item["normalizedCategoryLabel"]] = counts.get(item["normalizedCategoryLabel"], 0) + 1

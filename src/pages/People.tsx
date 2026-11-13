@@ -1,7 +1,30 @@
 import { ExternalLink } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import officials from '../data/miagao-officials.json';
 import barangayInventory from '../data/miagao-barangay-inventory.json';
+
+type ParsedSignatory = {
+  name: string;
+  position: string;
+  recordedDate: string | null;
+  dateBasis: string | null;
+  pageNumber: number;
+  evidence: string;
+  documentUrl: string;
+  sourceTitle: string;
+  category: string;
+};
+type ParsedSignatoryDocument = {
+  documentUrl: string;
+  sourceTitle: string | null;
+  originalLabel: string;
+  normalizedCategoryLabel: string;
+  signatories?: Omit<
+    ParsedSignatory,
+    'documentUrl' | 'sourceTitle' | 'category'
+  >[];
+};
 
 function SourceLink({
   href,
@@ -24,6 +47,41 @@ function SourceLink({
 }
 
 export default function People() {
+  const [parsedSignatories, setParsedSignatories] = useState<ParsedSignatory[]>(
+    []
+  );
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}data/miagao-historical-tables.json`)
+      .then(response => (response.ok ? response.json() : null))
+      .then((payload: { documents?: ParsedSignatoryDocument[] } | null) => {
+        const records = (payload?.documents ?? []).flatMap(document =>
+          (document.signatories ?? []).map(person => ({
+            ...person,
+            documentUrl: document.documentUrl,
+            sourceTitle: document.sourceTitle || document.originalLabel,
+            category: document.normalizedCategoryLabel,
+          }))
+        );
+        setParsedSignatories(records);
+      })
+      .catch(() => setParsedSignatories([]));
+  }, []);
+
+  const signatoriesByPerson = new Map<
+    string,
+    { name: string; records: ParsedSignatory[] }
+  >();
+  parsedSignatories.forEach(person => {
+    const key = person.name.toLocaleLowerCase();
+    const group = signatoriesByPerson.get(key) ?? {
+      name: person.name,
+      records: [],
+    };
+    group.records.push(person);
+    signatoriesByPerson.set(key, group);
+  });
+
   return (
     <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6 lg:px-8">
       <header className="mb-10 max-w-4xl">
@@ -45,6 +103,58 @@ export default function People() {
           approval.
         </p>
       </header>
+
+      {parsedSignatories.length > 0 && (
+        <section className="mb-12 rounded-2xl border border-gray-200 bg-white p-6">
+          <p className="text-sm font-bold uppercase tracking-widest text-blue-800">
+            Municipal records · dated signatories
+          </p>
+          <h2 className="mt-2 text-2xl font-bold text-slate-950">
+            Names and positions recorded in disclosures
+          </h2>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-gray-600">
+            These candidates were extracted from signed municipal documents. The
+            date is the document’s reporting period when available, or its
+            publication date. It records when the position appears in a source,
+            not the person’s full term of service.
+          </p>
+          <div className="mt-5 grid gap-3 md:grid-cols-2">
+            {Array.from(signatoriesByPerson.values()).map(person => (
+              <article
+                key={person.name}
+                className="rounded-lg bg-slate-50 px-4 py-3"
+              >
+                <p className="font-semibold text-gray-950">{person.name}</p>
+                <ul className="mt-2 space-y-2">
+                  {person.records.map((record, index) => (
+                    <li
+                      key={`${record.documentUrl}-${record.pageNumber}-${index}`}
+                      className="border-t border-gray-200 pt-2"
+                    >
+                      <p className="text-sm text-gray-700">{record.position}</p>
+                      <p className="text-xs text-gray-500">
+                        Recorded {record.recordedDate ?? 'date unavailable'} ·
+                        page {record.pageNumber}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {record.sourceTitle}
+                      </p>
+                      <SourceLink href={record.documentUrl}>
+                        Source document
+                      </SourceLink>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <p className="mt-4 text-xs leading-5 text-gray-500">
+            Names, signatures, and positions are machine-extracted and may
+            contain OCR or layout errors. Check each linked document before
+            relying on a record.
+          </p>
+        </section>
+      )}
 
       <section className="mb-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="rounded-2xl bg-slate-950 p-6 text-white">

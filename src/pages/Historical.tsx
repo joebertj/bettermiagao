@@ -22,7 +22,12 @@ type HistoricalRow = {
   extractedText: string;
 };
 
-type ParsedTableRow = { cells: string[]; text: string };
+type ParsedTableRow = {
+  cells: string[];
+  text: string;
+  item?: string;
+  value?: string;
+};
 type ParsedDocument = {
   documentUrl: string;
   sourcePageUrl: string | null;
@@ -540,8 +545,9 @@ export default function Historical() {
                                       <tr>
                                         <th className="px-2 py-1.5">Page</th>
                                         <th className="px-2 py-1.5">
-                                          Extracted cells
+                                          Item / extracted cells
                                         </th>
+                                        <th className="px-2 py-1.5">Value</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -555,7 +561,11 @@ export default function Historical() {
                                               {page.pageNumber}
                                             </td>
                                             <td className="px-2 py-1.5 font-mono text-gray-800">
-                                              {row.cells.join('  |  ')}
+                                              {row.item ??
+                                                row.cells.join('  |  ')}
+                                            </td>
+                                            <td className="px-2 py-1.5 font-mono text-gray-800">
+                                              {row.value ?? ''}
                                             </td>
                                           </tr>
                                         ))
