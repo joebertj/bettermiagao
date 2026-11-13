@@ -512,7 +512,7 @@ export default function Barangays() {
     name: string;
   } | null>(null);
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(21);
   const profilesByBarangay = useMemo(
     () =>
       new Map(
@@ -610,7 +610,7 @@ export default function Barangays() {
           }}
           className="rounded-md border border-gray-300 bg-white px-2 py-1 text-gray-900"
         >
-          {[10, 20, 50].map(size => (
+          {[10, 20, 21, 50].map(size => (
             <option key={size} value={size}>
               {size}
             </option>

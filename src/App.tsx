@@ -14,6 +14,7 @@ import Glance from './pages/Glance';
 import Budget from './pages/Budget';
 import Cmpd from './pages/Cmpd';
 import Bids from './pages/Bids';
+import Historical from './pages/Historical';
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/app" element={<AppPlan />} />
           <Route path="/cmpd" element={<Cmpd />} />
           <Route path="/bids" element={<Bids />} />
+          <Route path="/historical" element={<Historical />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Home />} />
         </Routes>

@@ -10,6 +10,7 @@ export const mainNavigation: NavigationItem[] = [
       { label: 'Bids & implementation', href: '/bids' },
       { label: 'CMPD reference prices', href: '/cmpd' },
       { label: 'Ayuda', href: '/ayuda' },
+      { label: 'Historical records', href: '/historical' },
     ],
   },
   { label: 'People & offices', href: '/people' },
