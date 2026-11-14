@@ -208,7 +208,10 @@ export default function Historical() {
 
   useEffect(() => {
     let active = true;
-    Promise.all([fetch(indexUrl), fetch(tablesUrl)])
+    Promise.all([
+      fetch(indexUrl, { cache: 'no-store' }),
+      fetch(tablesUrl, { cache: 'no-store' }),
+    ])
       .then(async ([indexResponse, tablesResponse]) => {
         if (!indexResponse.ok)
           throw new Error(`Index HTTP ${indexResponse.status}`);
@@ -233,6 +236,30 @@ export default function Historical() {
       });
     return () => {
       active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    const refreshInterval = window.setInterval(async () => {
+      try {
+        const response = await fetch(`${indexUrl}?refresh=${Date.now()}`, {
+          cache: 'no-store',
+        });
+        if (!response.ok) return;
+        const index = (await response.json()) as HistoricalIndex;
+        if (active) {
+          setData(index);
+          setError('');
+        }
+      } catch {
+        // Keep the latest successful snapshot visible if a refresh is missed.
+      }
+    }, 15_000);
+
+    return () => {
+      active = false;
+      window.clearInterval(refreshInterval);
     };
   }, []);
 
@@ -338,6 +365,10 @@ export default function Historical() {
           Search the available extracted pages and open the original documents
           or the Miagao source pages. OCR text is a transcription aid and may
           need review against the source scan.
+        </p>
+        <p className="mt-3 text-sm text-slate-400">
+          Parsed records refresh automatically while new documents are being
+          processed.
         </p>
       </header>
 
