@@ -64,6 +64,10 @@ type HistoricalIndex = {
     sourceDocuments: number;
     parserCandidateDocuments: number;
     completedDocuments: number;
+    pdfCandidateDocuments: number;
+    pdfCompletedDocuments: number;
+    jpegCandidateDocuments: number;
+    jpegCompletedDocuments: number;
     unsupportedDocuments: number;
     ocrPageRows: number;
     nativeTextDocuments: number;
@@ -376,29 +380,41 @@ export default function Historical() {
 
       {data && (
         <section
-          className="mb-2 grid gap-3 sm:grid-cols-2 xl:grid-cols-7"
+          className="mb-2 grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
           aria-label="Parser coverage"
         >
           {[
-            ['Source files', data.summary.sourceDocuments],
-            ['PDF/JPEG candidates', data.summary.parserCandidateDocuments],
-            ['Parsed files', data.summary.completedDocuments],
-            ['OCR page records', data.summary.ocrPageRows],
-            ['Pending', data.summary.pendingDocuments],
-            ['Other file types', data.summary.unsupportedDocuments],
-            [
-              'Errors / skipped',
-              data.summary.errorDocuments +
+            { label: 'Source files', value: data.summary.sourceDocuments },
+            {
+              label: 'PDF parsed / candidates',
+              value: `${data.summary.pdfCompletedDocuments} / ${data.summary.pdfCandidateDocuments}`,
+            },
+            {
+              label: 'JPEG parsed / candidates',
+              value: `${data.summary.jpegCompletedDocuments} / ${data.summary.jpegCandidateDocuments}`,
+            },
+            { label: 'OCR page records', value: data.summary.ocrPageRows },
+            { label: 'Pending', value: data.summary.pendingDocuments },
+            {
+              label: 'Non-PDF/JPEG files',
+              value: data.summary.unsupportedDocuments,
+            },
+            {
+              label: 'Errors / skipped',
+              value:
+                data.summary.errorDocuments +
                 data.summary.intentionallySkippedDocuments,
-            ],
-          ].map(([label, value]) => (
+            },
+          ].map(({ label, value }) => (
             <article
               key={label}
               className="rounded-xl border border-gray-200 bg-white p-4"
             >
               <span className="block text-sm text-gray-600">{label}</span>
               <strong className="mt-1 block text-2xl tabular-nums text-slate-950">
-                {Number(value).toLocaleString('en-PH')}
+                {typeof value === 'number'
+                  ? value.toLocaleString('en-PH')
+                  : value}
               </strong>
             </article>
           ))}
@@ -406,9 +422,11 @@ export default function Historical() {
       )}
       {data && tables && (
         <p className="mb-6 text-sm text-slate-600">
-          Structured tables are extracted from {tables.documents.length} parsed
-          files. They are included in “Parsed files”; OCR page records count
-          pages, so these figures overlap and should not be added together.
+          These totals count file formats; categories such as “Invitation to
+          bid” count subject areas, so the categories can include PDF/JPEG files
+          and overlap with other totals. Structured tables are extracted from{' '}
+          {tables.documents.length} parsed files and are included in “Parsed
+          files”; OCR page records count pages, not files.
         </p>
       )}
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-13T13:50:05+00:00",
+  "generatedAt": "2026-11-14T14:24:21+00:00",
   "method": "Ghostscript txtwrite with spacing-based row and cell extraction",
   "disclaimer": "Extracted cells are comparison aids. PDF text spacing and custom fonts can misalign or garble values; verify all values in the linked original.",
   "documents": [
@@ -18,7 +18,11 @@
           "publishedAt": "2019-04-05T05:43:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "20-IRA-UTILIZATION.pdf"
+          "fileName": "20-IRA-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceDate": "2019-04-05T05:43:41",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/20-IRA-UTILIZATION-2.pdf",
@@ -688,6 +692,37 @@
       "signatories": []
     },
     {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/20-IRA-UTILIZATION-1.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+      "sourceTitle": "2019 Full Disclosure",
+      "sourceFileName": "20-IRA-UTILIZATION-1.pdf",
+      "publishedAt": "2020-01-06T19:52:15",
+      "originalLabel": "20-IRA-UTILIZATION-1.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/20-IRA-UTILIZATION-1.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceTitle": "2019 Full Disclosure",
+          "publishedAt": "2020-01-06T19:52:15",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "20-IRA-UTILIZATION-1.pdf"
+        }
+      ],
+      "documentSha256": "9bb2c08f1eb6d3bc95b15b396803508770b75b0d89c24c0dc93039c7634231d3",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "Tesseract OCR",
+      "normalizedCategory": "ira-utilization",
+      "normalizedCategoryLabel": "20% component of the IRA utilization",
+      "categoryBasis": "source filename",
+      "parsedTitle": null,
+      "reportingPeriod": null,
+      "extractionStatus": "no_text",
+      "pageCount": 0,
+      "tablePages": [],
+      "signatories": []
+    },
+    {
       "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/20-IRA-UTILIZATION-3.pdf",
       "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
       "sourceTitle": "2019 Full Disclosure",
@@ -702,7 +737,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "20-IRA-UTILIZATION-3.pdf"
+          "fileName": "20-IRA-UTILIZATION-3.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/20-IRA-UTILIZATION.pdf",
@@ -1391,7 +1430,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "20-IRA-UTILIZATION-4.pdf"
+          "fileName": "20-IRA-UTILIZATION-4.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "4cbe7976166569f5d3d86e4c35b13a968081d825fa2fafd3dd5bf641a37fa01e",
@@ -2050,6 +2093,77 @@
       "signatories": []
     },
     {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/08/20-IRA-UTILIZATION.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+      "sourceTitle": "2020 Full Disclosure",
+      "sourceFileName": "20-IRA-UTILIZATION.pdf",
+      "publishedAt": "2020-07-28T19:55:25",
+      "originalLabel": "20-IRA-UTILIZATION.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/08/20-IRA-UTILIZATION.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceTitle": "2020 Full Disclosure",
+          "publishedAt": "2020-07-28T19:55:25",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "20-IRA-UTILIZATION.pdf"
+        }
+      ],
+      "documentSha256": "dc33010960977b531ee3048ae7a925ad9c564c9ec09434e9aa1ec0481a145e43",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "Tesseract OCR",
+      "normalizedCategory": "ira-utilization",
+      "normalizedCategoryLabel": "20% component of the IRA utilization",
+      "categoryBasis": "source filename",
+      "parsedTitle": null,
+      "reportingPeriod": null,
+      "extractionStatus": "no_text",
+      "pageCount": 0,
+      "tablePages": [],
+      "signatories": []
+    },
+    {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/20-IRA-UTILIZATION.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2021-full-disclosure/",
+      "sourceTitle": "2021 Full Disclosure",
+      "sourceFileName": "20-IRA-UTILIZATION.pdf",
+      "publishedAt": "2021-11-20T16:00:03",
+      "originalLabel": "20-IRA-UTILIZATION.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/20-IRA-UTILIZATION.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2021-full-disclosure/",
+          "sourceTitle": "2021 Full Disclosure",
+          "publishedAt": "2021-11-20T16:00:03",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "20-IRA-UTILIZATION.pdf"
+        },
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/20-IRA-UTILIZATION.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceTitle": "2020 Full Disclosure",
+          "publishedAt": "2020-07-28T19:55:25",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "20-IRA-UTILIZATION.pdf"
+        }
+      ],
+      "documentSha256": "69153c114e4ead27bb9626e365d17f1c7518ec6db81400b1ae92836960707991",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "Tesseract OCR",
+      "normalizedCategory": "ira-utilization",
+      "normalizedCategoryLabel": "20% component of the IRA utilization",
+      "categoryBasis": "source filename",
+      "parsedTitle": null,
+      "reportingPeriod": null,
+      "extractionStatus": "no_text",
+      "pageCount": 0,
+      "tablePages": [],
+      "signatories": []
+    },
+    {
       "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf",
       "sourcePageUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
       "sourceTitle": "FULL DISCLOSURE FOR CY 2019",
@@ -2064,7 +2178,11 @@
           "publishedAt": "2019-04-05T05:43:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceDate": "2019-04-05T05:43:41",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf",
@@ -2073,7 +2191,11 @@
           "publishedAt": "2019-04-03T08:17:42",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/bid-results/bid-result-on-goods/",
+          "sourceDate": "2019-04-03T08:17:42",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/BID-RESULTS-ON-GOODS.pdf",
@@ -2188,7 +2310,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-1.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "fdfca6e6f4ebc82e54eb5fac4aa7816221cdb4f12240f5b3a3f581583a46d749",
@@ -2294,7 +2420,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/BID-RESULTS-ON-GOODS-and-CIVIL-WORKS-1st-Qtr.-2019.xlsx-Civil-Works-Bid-Out.pdf",
@@ -2418,7 +2548,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "64dbc94ad944d1e85828bde5f841fb5499cfb1a73aa8e6bf3f7061226300097d",
@@ -2554,7 +2688,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-1.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "09de72b53d6df87b8d193338f281573e6705f8c388955d4fde1786e4b63130c9",
@@ -2804,7 +2942,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-2.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-2.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "40324a3ea0a5fd411a619b85bfa86192534e6c9f8011a8e8fbdd3309269b1c62",
@@ -3277,7 +3419,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "47d76a67f763057f01e0b944a86b1ca97e6f54773cd318a3b1ca0a4221d02795",
@@ -3569,7 +3715,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-CIVIL-WORKS-2ND-Q.2020.pdf"
+          "fileName": "BID-RESULTS-CIVIL-WORKS-2ND-Q.2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "a5a4108bf035e46c24483a00fe99859020e69326233fc4f1855810e4576d5cd2",
@@ -3785,7 +3935,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-CIVIL-WORKS-AND-GOODS-BID-OUT-2ND-Q.2020.pdf"
+          "fileName": "BID-RESULTS-CIVIL-WORKS-AND-GOODS-BID-OUT-2ND-Q.2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "95dd3e433c3bcb7aa62bf6df4c91a4a66620a51a65d875cd08f800f103a06f56",
@@ -3918,7 +4072,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES-B.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES-B.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "34b4f9c2e5604cc75197b32d9b2a2d51f367447b6b6e5422c690e3a4175f21a6",
@@ -4028,7 +4186,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "371a380f529093f577ffc45d6d848a6eb94e49ef863fe7fae4d0e0cf32afc0f8",
@@ -4332,7 +4494,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "CASH-FLOW-AS-OF-JUNE-2019.pdf"
+          "fileName": "CASH-FLOW-AS-OF-JUNE-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "70c6add1d44888bab230b6e41d09605cecac2ad5ce7c8110037dda6372dc597e",
@@ -4716,7 +4882,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "CASH-FLOW-AS-OF-MARCH-2019.pdf"
+          "fileName": "CASH-FLOW-AS-OF-MARCH-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/Cash-Flow-as-of-March-31-2019.xlsx-Sheet2.pdf",
@@ -5118,7 +5288,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "CASH-FLOW.pdf"
+          "fileName": "CASH-FLOW.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "6e3279f47e1d4acc1b297b45e961749ada128d7f2f429e4089f1621778f15833",
@@ -5502,7 +5676,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW-1.pdf"
+          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "8937023603fe095fd297064ac9082d89f5b971f45b8a9c54c16565c271d823b1",
@@ -5855,7 +6033,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW.pdf"
+          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "f7615f6a1f1fa8cea1a0d821ff015b4c4ff1d2e692fbd34cb42ed39c18ffa856",
@@ -6218,7 +6400,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW.pdf"
+          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "84773e2779a6194a717d470adfbee9051322a49c0e9c6412f092dbdd010713d7",
@@ -6581,7 +6767,11 @@
           "publishedAt": "2020-12-23T07:07:00",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Cash-Flow-Statement-as-of-Sept.-30-2020.pdf"
+          "fileName": "Cash-Flow-Statement-as-of-Sept.-30-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/financial-statements/statement-of-cash-flow/26947/",
+          "sourceDate": "2020-12-23T07:07:00",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "b7c46f675f59c5faa9d199c15807f1d131e743b911087a140e9e9d6afb967116",
@@ -6944,7 +7134,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION-1.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "748e605d30e659584819948204908ee52dfb570b03db8d7358c2d536794765be",
@@ -7553,7 +7747,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "303a45fda4694830b8fc40ed1186dc938b555f9a2c6e914973e0d0e617fbe101",
@@ -8230,7 +8428,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "6ede319a10ac3f37d17041b52b62a99532316fa769b9d1449709a4604cc5dc7f",
@@ -8956,7 +9158,11 @@
           "publishedAt": "2020-12-23T07:32:36",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TF-Utilization-Sept.-30-2020.pdf"
+          "fileName": "TF-Utilization-Sept.-30-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/tf-utilization-sept-30-2020/",
+          "sourceDate": "2020-12-23T07:32:36",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/TF-Utilization-Sept.-30-2020.pdf",
@@ -8965,7 +9171,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TF-Utilization-Sept.-30-2020.pdf"
+          "fileName": "TF-Utilization-Sept.-30-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "5f4b31d49ccd4ff2950628c21876a84bfc045acf33eb995fe1ba3b2686a43d3e",
@@ -9805,7 +10015,11 @@
           "publishedAt": "2019-04-05T05:43:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf"
+          "fileName": "MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceDate": "2019-04-05T05:43:41",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf",
@@ -9814,7 +10028,11 @@
           "publishedAt": "2019-04-03T02:54:56",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf"
+          "fileName": "MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/manpower-complement/manpower-complement-as-of-march-2019/",
+          "sourceDate": "2019-04-03T02:54:56",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/MANPOWER-COMPLEMENT.pdf",
@@ -9944,7 +10162,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "HUMAN-RESOURCE-COMPLEMENT-1.pdf"
+          "fileName": "HUMAN-RESOURCE-COMPLEMENT-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "93013447dc0c0be2454d4af55483660fcb6ac6ecd6ede8e03d6f14674efaad05",
@@ -10152,7 +10374,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "MANPOWER-COMPLEMENT-1.pdf"
+          "fileName": "MANPOWER-COMPLEMENT-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "3cffab7ecca033b53f1ee3ef9ca4e0381a547e2cdb6349a785ae0f72561aab79",
@@ -10273,7 +10499,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "MANPOWER-COMPLEMENT-2.pdf"
+          "fileName": "MANPOWER-COMPLEMENT-2.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "6bd46f1cb2be22c4ea42f0c0f79e106527bc307de2843791ed42f5544a3e5c32",
@@ -10399,7 +10629,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "HUMAN-RESOURCE-COMPLEMENT.pdf"
+          "fileName": "HUMAN-RESOURCE-COMPLEMENT.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "24819637c72d9a0b41e2010c9ef2f43c2628165df00233d86cab5c374a5b03d6",
@@ -10607,7 +10841,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "HUMAN-RESOURCE-COMPLEMENT.pdf"
+          "fileName": "HUMAN-RESOURCE-COMPLEMENT.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "2f35f643a3d060ff03c39719f6ce9b70e1ddb5939b136ec87e8c7a5878dc698f",
@@ -10815,7 +11053,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LDRMMF-UTILIZATION-AS-OF-SEPTEMBER-2019.pdf"
+          "fileName": "LDRMMF-UTILIZATION-AS-OF-SEPTEMBER-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "c1e8b703564d06bb8bde478c9c8466d36ee2488ab91a19ac6332f75beb739c4a",
@@ -11180,7 +11422,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LDRMMF-UTILIZATION.pdf"
+          "fileName": "LDRMMF-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "9355ac0e867c9ec162fc0ed3e47d3dff6f5066c57c86e26678a647ce0c5bc207",
@@ -11524,6 +11770,316 @@
       "signatories": []
     },
     {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/LDRRMF-UTILIZATION-AS-OF-MARCH-2019.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+      "sourceTitle": "2019 Full Disclosure",
+      "sourceFileName": "LDRRMF-UTILIZATION-AS-OF-MARCH-2019.pdf",
+      "publishedAt": "2020-01-06T19:52:15",
+      "originalLabel": "LDRRMF-UTILIZATION-AS-OF-MARCH-2019.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/LDRRMF-UTILIZATION-AS-OF-MARCH-2019.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceTitle": "2019 Full Disclosure",
+          "publishedAt": "2020-01-06T19:52:15",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "LDRRMF-UTILIZATION-AS-OF-MARCH-2019.pdf"
+        },
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/LDRRMF-Utilization-March-2019.xlsx-Sheet7-1.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceTitle": "FULL DISCLOSURE FOR CY 2019",
+          "publishedAt": "2019-04-05T05:43:41",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "LDRRMF-Utilization-March-2019.xlsx-Sheet7-1.pdf"
+        },
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/LDRRMF-Utilization-March-2019.xlsx-Sheet7-1.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/financial-statements/ldrrmf-fund-utilization/ldrrmf-utilization-as-of-march-2019/",
+          "sourceTitle": "LDRRMF Utilization as of March 2019",
+          "publishedAt": "2019-04-03T02:10:41",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "LDRRMF-Utilization-March-2019.xlsx-Sheet7-1.pdf"
+        }
+      ],
+      "documentSha256": "51fb3f1ddb572b5fc29b935c46b255ee866dd4fbcd48c96f529cfd01da73a058",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "PyMuPDF native text + Tesseract OCR",
+      "normalizedCategory": "ldrrmf-utilization",
+      "normalizedCategoryLabel": "Local disaster risk reduction and management fund utilization",
+      "categoryBasis": "source filename",
+      "parsedTitle": null,
+      "reportingPeriod": null,
+      "extractionStatus": "text_extracted",
+      "pageCount": 3,
+      "tablePages": [
+        {
+          "pageNumber": 1,
+          "rows": [
+            {
+              "cells": [
+                "WÄÆÅ½ÆÆ Å½Å¶ eÆÅÅ¯ÅÇÄÆÅÅ½Å¶ Å½Ä¨",
+                "ÅÆÄÆÆÄÆ WÅÆÅ¬ WÄÄÆµÄÆÅÅ½Å¶ ÄÅ¶Ä AÄÅ¶ÄÅÄÅµÄÅ¶Æ &ÆµÅ¶Ä"
+              ],
+              "text": "WÄÆÅ½ÆÆ Å½Å¶ eÆÅÅ¯ÅÇÄÆÅÅ½Å¶ Å½Ä¨ ÅÆÄÆÆÄÆ WÅÆÅ¬ WÄÄÆµÄÆÅÅ½Å¶ ÄÅ¶Ä AÄÅ¶ÄÅÄÅµÄÅ¶Æ &ÆµÅ¶Ä"
+            },
+            {
+              "cells": ["&Å½Æ ÆÅÄ wÄÄÆÍ AÄÆÄÅ Ï®Ï¬Ï­Ïµ"],
+              "text": "&Å½Æ ÆÅÄ wÄÄÆÍ AÄÆÄÅ Ï®Ï¬Ï­Ïµ"
+            },
+            {
+              "cells": ["TÆÅ½ÇÅÅ¶ÄÄÍ¬ ÅÆÇÍ¬AÆµÅ¶ÅÄÅÆÄÅ¯ÅÆÇÍ", "A/ ' HÍ />H/>H"],
+              "text": "TÆÅ½ÇÅÅ¶ÄÄÍ¬ ÅÆÇÍ¬AÆµÅ¶ÅÄÅÆÄÅ¯ÅÆÇÍ A/ ' HÍ />H/>H"
+            },
+            {
+              "cells": ["> WWA&", "B WWA& &ÆÅ½Åµ Å½ÆÅÄÆ", "&ÆÅ½Åµ HÆÅÄÆ"],
+              "text": "> WWA& B WWA& &ÆÅ½Åµ Å½ÆÅÄÆ &ÆÅ½Åµ HÆÅÄÆ"
+            },
+            {
+              "cells": [
+                "VÆµÅÄÅ¬ WÄÆÆÅ½Å¶ÆÄ Í¾VW&Í¿AÅÆÅÅÄÆÅÅ½Å¶ &ÆµÅ¶Ä",
+                ">'eÆ",
+                "^Å½ÆµÆÄÄÆ"
+              ],
+              "text": "VÆµÅÄÅ¬ WÄÆÆÅ½Å¶ÆÄ Í¾VW&Í¿AÅÆÅÅÄÆÅÅ½Å¶ &ÆµÅ¶Ä >'eÆ ^Å½ÆµÆÄÄÆ"
+            },
+            {
+              "cells": ["3ARTICULARS", "7OTAL"],
+              "text": "3ARTICULARS 7OTAL"
+            },
+            {
+              "cells": ["Ï¯Ï¬Ð¹", "Ï³Ï¬Ð¹"],
+              "text": "Ï¯Ï¬Ð¹ Ï³Ï¬Ð¹"
+            },
+            {
+              "cells": ["$", "6OURCES OF )UNDS"],
+              "text": "$ 6OURCES OF )UNDS"
+            },
+            {
+              "cells": [
+                "Í¾ Ï®ÍÏ´Ï¯Ï´ÍÏ°Ï±Ï¯ÍÏ¬Ï¬Í¿",
+                "Í¾",
+                "Ï²ÍÏ²Ï®Ï¯ÍÏ¬Ï±Ï³ÍÏ¬Ï¬Í¿",
+                "Ï¬",
+                "Ï¬",
+                "ÏµÍÏ°Ï²Ï­ÍÏ±Ï­Ï¬ÍÏ¬Ï¬"
+              ],
+              "text": "Í¾ Ï®ÍÏ´Ï¯Ï´ÍÏ°Ï±Ï¯ÍÏ¬Ï¬Í¿ Í¾ Ï²ÍÏ²Ï®Ï¯ÍÏ¬Ï±Ï³ÍÏ¬Ï¬Í¿ Ï¬ Ï¬ ÏµÍÏ°Ï²Ï­ÍÏ±Ï­Ï¬ÍÏ¬Ï¬"
+            },
+            {
+              "cells": ["&URRENT $PPROPRIATION"],
+              "text": "&URRENT $PPROPRIATION"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï±ÍÏ³Ï±Ï´ÍÏ¬Ï­Ï­ÍÏ¬Ï²Í¿",
+                "Ï±ÍÏ³Ï±Ï´ÍÏ¬Ï­Ï­ÍÏ¬Ï²"
+              ],
+              "text": "Í¾ Ï±ÍÏ³Ï±Ï´ÍÏ¬Ï­Ï­ÍÏ¬Ï²Í¿ Ï±ÍÏ³Ï±Ï´ÍÏ¬Ï­Ï­ÍÏ¬Ï²"
+            },
+            {
+              "cells": ["&ONTINUING $PPROPRIATIONS"],
+              "text": "&ONTINUING $PPROPRIATIONS"
+            },
+            {
+              "cells": ["3REVIOUS \\EAR S $PPROP", "7RANSFERRED TO"],
+              "text": "3REVIOUS \\EAR S $PPROP 7RANSFERRED TO"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "ÏµÍÏ®Ï²Ï°ÍÏ¬Ï°Ï°ÍÏ­Ï¬Í¿",
+                "ÏµÍÏ®Ï²Ï°ÍÏ¬Ï°Ï°ÍÏ­Ï¬"
+              ],
+              "text": "Í¾ ÏµÍÏ®Ï²Ï°ÍÏ¬Ï°Ï°ÍÏ­Ï¬Í¿ ÏµÍÏ®Ï²Ï°ÍÏ¬Ï°Ï°ÍÏ­Ï¬"
+            },
+            {
+              "cells": ["6PECIAL 7RUST )UND"],
+              "text": "6PECIAL 7RUST )UND"
+            },
+            {
+              "cells": ["Í¾", "Ï­ÍÏ­Ï°Ï¯ÍÏ²Ï°Ï®ÍÏ³Ï­Í¿"],
+              "text": "Í¾ Ï­ÍÏ­Ï°Ï¯ÍÏ²Ï°Ï®ÍÏ³Ï­Í¿"
+            },
+            {
+              "cells": ["Í¾", "Ï±Ï¬Ï¬ÍÏµÏ³ÏµÍÏ¯Ï®Í¿"],
+              "text": "Í¾ Ï±Ï¬Ï¬ÍÏµÏ³ÏµÍÏ¯Ï®Í¿"
+            },
+            {
+              "cells": ["Í¾", "Ï³Ï²Ï­ÍÏ¬Ï®Ï¯ÍÏ¯Ï°Í¿"],
+              "text": "Í¾ Ï³Ï²Ï­ÍÏ¬Ï®Ï¯ÍÏ¯Ï°Í¿"
+            },
+            {
+              "cells": ["Í¾", "Ï¯ÍÏ³Ï²Ï¯ÍÏ´Ï¬Ï­ÍÏ­Ï´Í¿"],
+              "text": "Í¾ Ï¯ÍÏ³Ï²Ï¯ÍÏ´Ï¬Ï­ÍÏ­Ï´Í¿"
+            },
+            {
+              "cells": ["Í¾", "Ï¯ÍÏ¬ÏµÏ°ÍÏ±ÏµÏ³ÍÏ±Ï±Í¿"],
+              "text": "Í¾ Ï¯ÍÏ¬ÏµÏ°ÍÏ±ÏµÏ³ÍÏ±Ï±Í¿"
+            },
+            {
+              "cells": ["Í¾", "ÏµÍÏ®Ï²Ï°ÍÏ¬Ï°Ï°ÍÏ­Ï¬Í¿", "Ï¬ÍÏ¬Ï¬"],
+              "text": "Í¾ ÏµÍÏ®Ï²Ï°ÍÏ¬Ï°Ï°ÍÏ­Ï¬Í¿ Ï¬ÍÏ¬Ï¬"
+            },
+            {
+              "cells": ["7RANSFERS *RANTS"],
+              "text": "7RANSFERS *RANTS"
+            },
+            {
+              "cells": ["7OTAL )UNDS $VAILABLE"],
+              "text": "7OTAL )UNDS $VAILABLE"
+            }
+          ]
+        },
+        {
+          "pageNumber": 3,
+          "rows": [
+            {
+              "cells": ["Í¾", "Í²à´®à´®Í¿", "Í¾", "Í²à´®à´®Í¿"],
+              "text": "Í¾ Í²à´®à´®Í¿ Í¾ Í²à´®à´®Í¿"
+            },
+            {
+              "cells": ["%", "8TILI]ATION"],
+              "text": "% 8TILI]ATION"
+            },
+            {
+              "cells": ["Í¾", "Ï®Ï°ÍÏ­Ï­Ï±ÍÏ¬Ï¬Í¿", "Í¾", "Ï®Ï°ÍÏ­Ï­Ï±ÍÏ¬Ï¬Í¿"],
+              "text": "Í¾ Ï®Ï°ÍÏ­Ï­Ï±ÍÏ¬Ï¬Í¿ Í¾ Ï®Ï°ÍÏ­Ï­Ï±ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["2FFICE 6UPPLIES"],
+              "text": "2FFICE 6UPPLIES"
+            },
+            {
+              "cells": ["Í¾", "ÏµÍÏ­Ï±Ï®ÍÏ°Ï³Í¿", "Í¾", "ÏµÍÏ­Ï±Ï®ÍÏ°Ï³Í¿"],
+              "text": "Í¾ ÏµÍÏ­Ï±Ï®ÍÏ°Ï³Í¿ Í¾ ÏµÍÏ­Ï±Ï®ÍÏ°Ï³Í¿"
+            },
+            {
+              "cells": [",NSURANCE ([PENSES"],
+              "text": ",NSURANCE ([PENSES"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯Ï³Ï¯ÍÏ±ÏµÏ´ÍÏ®Ï±Í¿",
+                "Í¾",
+                "Ï¯Ï³Ï¯ÍÏ±ÏµÏ´ÍÏ®Ï±Í¿"
+              ],
+              "text": "Í¾ Ï¯Ï³Ï¯ÍÏ±ÏµÏ´ÍÏ®Ï±Í¿ Í¾ Ï¯Ï³Ï¯ÍÏ±ÏµÏ´ÍÏ®Ï±Í¿"
+            },
+            {
+              "cells": ["2THER 0AINTENANCE AND 2PERATING ([PENSES"],
+              "text": "2THER 0AINTENANCE AND 2PERATING ([PENSES"
+            },
+            {
+              "cells": ["Í¾", "Ï²ÍÏ¯Ï³ÏµÍÏ­ÏµÍ¿"],
+              "text": "Í¾ Ï²ÍÏ¯Ï³ÏµÍÏ­ÏµÍ¿"
+            },
+            {
+              "cells": [",NTERNET 6UBSCRIPTION ([PENSES"],
+              "text": ",NTERNET 6UBSCRIPTION ([PENSES"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï²Ï­ÍÏ¬Ï°Ï°ÍÏ®Ï¬Í¿",
+                "Í¾",
+                "Ï­Ï²Ï­ÍÏ¬Ï°Ï°ÍÏ®Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï­Ï²Ï­ÍÏ¬Ï°Ï°ÍÏ®Ï¬Í¿ Í¾ Ï­Ï²Ï­ÍÏ¬Ï°Ï°ÍÏ®Ï¬Í¿"
+            },
+            {
+              "cells": [")UEL", "2IL AND /UBRICANTS"],
+              "text": ")UEL 2IL AND /UBRICANTS"
+            },
+            {
+              "cells": ["Í¾", "Ï³Ï®ÍÏ­ÏµÏ¯ÍÏ±Ï¬Í¿", "Í¾", "Ï³Ï®ÍÏ­ÏµÏ¯ÍÏ±Ï¬Í¿"],
+              "text": "Í¾ Ï³Ï®ÍÏ­ÏµÏ¯ÍÏ±Ï¬Í¿ Í¾ Ï³Ï®ÍÏ­ÏµÏ¯ÍÏ±Ï¬Í¿"
+            },
+            {
+              "cells": ["5EPAIR AND 0AINTENANCE", "7RANSPORTATION (QUIPMENT"],
+              "text": "5EPAIR AND 0AINTENANCE 7RANSPORTATION (QUIPMENT"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­ÏµÏµÍÏ­Ï°Ï¬ÍÏ¬Ï¬Í¿",
+                "Í¾",
+                "Ï­ÏµÏµÍÏ­Ï°Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï­ÏµÏµÍÏ­Ï°Ï¬ÍÏ¬Ï¬Í¿ Í¾ Ï­ÏµÏµÍÏ­Ï°Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["5EPRESENTATION ([PENSES"],
+              "text": "5EPRESENTATION ([PENSES"
+            },
+            {
+              "cells": ["Í¾", "Ï­Ï®ÍÏ²Ï¬Ï¬ÍÏ¬Ï¬Í¿", "Í¾", "Ï­Ï®ÍÏ²Ï¬Ï¬ÍÏ¬Ï¬Í¿"],
+              "text": "Í¾ Ï­Ï®ÍÏ²Ï¬Ï¬ÍÏ¬Ï¬Í¿ Í¾ Ï­Ï®ÍÏ²Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["2THER 6UPPLIES ([PENSES"],
+              "text": "2THER 6UPPLIES ([PENSES"
+            },
+            {
+              "cells": ["Í¾", "Ï±Ï¬ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿", "Í¾", "Ï±Ï¬ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"],
+              "text": "Í¾ Ï±Ï¬ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Í¾ Ï±Ï¬ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["&ONSTRUCTION OF WATERWA\\S 6\\STEM", "%RG\\", "2NOP"],
+              "text": "&ONSTRUCTION OF WATERWA\\S 6\\STEM %RG\\ 2NOP"
+            },
+            {
+              "cells": [
+                "aÅ½ÆÄÅ¯ eÆÅÅ¯ÅÇÄÆÅÅ½Å¶",
+                "Í¾",
+                "Í²à´®à´®Í¿",
+                "Í¾",
+                "ÏµÏ¬Ï´ÍÏ®Ï®Ï®ÍÏ²Ï­Í¿",
+                "Í¾",
+                "ÏµÏ¬Ï­ÍÏ´Ï°Ï¯ÍÏ°Ï®Í¿"
+              ],
+              "text": "aÅ½ÆÄÅ¯ eÆÅÅ¯ÅÇÄÆÅÅ½Å¶ Í¾ Í²à´®à´®Í¿ Í¾ ÏµÏ¬Ï´ÍÏ®Ï®Ï®ÍÏ²Ï­Í¿ Í¾ ÏµÏ¬Ï­ÍÏ´Ï°Ï¯ÍÏ°Ï®Í¿"
+            },
+            {
+              "cells": ["8NUTILI]ED %ALANCE"],
+              "text": "8NUTILI]ED %ALANCE"
+            }
+          ]
+        },
+        {
+          "pageNumber": 6,
+          "rows": [
+            {
+              "cells": [
+                ", HEREB\\ CERTIF\\ THAT , HAVE REVIEWED THE CONTENTS AND HEREB\\ ATTEST TO THE VERACIT\\ AND"
+              ],
+              "text": ", HEREB\\ CERTIF\\ THAT , HAVE REVIEWED THE CONTENTS AND HEREB\\ ATTEST TO THE VERACIT\\ AND"
+            },
+            {
+              "cells": [
+                "CORRECTNESS OF THE DATA OR INFORMATION CONTAINED IN THIS DOCUMENT"
+              ],
+              "text": "CORRECTNESS OF THE DATA OR INFORMATION CONTAINED IN THIS DOCUMENT"
+            },
+            {
+              "cells": ["A w> B", "aÍ ^ Wp/"],
+              "text": "A w> B aÍ ^ Wp/"
+            },
+            {
+              "cells": ["AÆµÅ¶ÅÄÅÆÄÅ¯", "ÄÄÅ½ÆµÅ¶ÆÄÅ¶Æ"],
+              "text": "AÆµÅ¶ÅÄÅÆÄÅ¯ ÄÄÅ½ÆµÅ¶ÆÄÅ¶Æ"
+            }
+          ]
+        }
+      ],
+      "signatories": []
+    },
+    {
       "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF-1.pdf",
       "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
       "sourceTitle": "2019 Full Disclosure",
@@ -11538,7 +12094,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF-1.pdf"
+          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "211bfde2f57b9b5f6978019ab386830fdb3de2def5e0599b9359e0842d00b123",
@@ -11874,7 +12434,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF.pdf"
+          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "3c4bb269219bb2e0e5af042ca544bea810ad0ba024dc9f48827c431b51a6c897",
@@ -12122,7 +12686,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF.pdf"
+          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "b38d9d8b15761789d1a3729b379748c0514f9f17a86979cc6362079ac41aa970",
@@ -12452,6 +13020,867 @@
       ]
     },
     {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/LDRRM-Fund-Utilization-Sept.-30-2020-1.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/ldrrm-fund-utilization-sept-30-2020/",
+      "sourceTitle": "LDRRM-Fund Utilization Sept 30 2020",
+      "sourceFileName": "LDRRM-Fund-Utilization-Sept.-30-2020-1.pdf",
+      "publishedAt": "2020-12-23T07:29:11",
+      "originalLabel": "LDRRM-Fund-Utilization-Sept.-30-2020-1.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/LDRRM-Fund-Utilization-Sept.-30-2020-1.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/ldrrm-fund-utilization-sept-30-2020/",
+          "sourceTitle": "LDRRM-Fund Utilization Sept 30 2020",
+          "publishedAt": "2020-12-23T07:29:11",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "LDRRM-Fund-Utilization-Sept.-30-2020-1.pdf"
+        }
+      ],
+      "documentSha256": "02bb2b6f184bcd78e808e4a0b27e06de14336938c1199d1c809bda0eac7c5e3d",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "PyMuPDF native text + Tesseract OCR",
+      "normalizedCategory": "ldrrmf-utilization",
+      "normalizedCategoryLabel": "Local disaster risk reduction and management fund utilization",
+      "categoryBasis": "document heading",
+      "parsedTitle": "FDP Form 8- Local Disaster Risk Reduction and Management Fund Utilization",
+      "reportingPeriod": "For the Month of September 2020",
+      "extractionStatus": "text_extracted",
+      "pageCount": 1,
+      "tablePages": [
+        {
+          "pageNumber": 1,
+          "rows": [
+            {
+              "cells": [
+                "FDP Form 8- Local Disaster Risk Reduction and Management Fund Utilization"
+              ],
+              "text": "FDP Form 8- Local Disaster Risk Reduction and Management Fund Utilization"
+            },
+            {
+              "cells": ["(Commission on Audit)"],
+              "text": "(Commission on Audit)"
+            },
+            {
+              "cells": [
+                "LOCAL DISASTER RISK REDUCTION AND MANAGEMENT FUND UTILIZATION"
+              ],
+              "text": "LOCAL DISASTER RISK REDUCTION AND MANAGEMENT FUND UTILIZATION"
+            },
+            {
+              "cells": ["For the Month of September 2020"],
+              "text": "For the Month of September 2020"
+            },
+            {
+              "cells": ["MUNICIPALITY OF MIAGAO, ILOILO"],
+              "text": "MUNICIPALITY OF MIAGAO, ILOILO"
+            },
+            {
+              "cells": ["Province/City/Municipality:", "MIAGAO, ILOILO"],
+              "text": "Province/City/Municipality: MIAGAO, ILOILO"
+            },
+            {
+              "cells": ["LDRRMF"],
+              "text": "LDRRMF"
+            },
+            {
+              "cells": [
+                "Particulars",
+                "Quick Response (QRF)",
+                "Mitigation Fund"
+              ],
+              "text": "Particulars Quick Response (QRF) Mitigation Fund"
+            },
+            {
+              "cells": ["30%", "70%"],
+              "text": "30% 70%",
+              "item": "30%",
+              "value": "70%"
+            },
+            {
+              "cells": ["A.", "Sources of Funds:"],
+              "text": "A. Sources of Funds:"
+            },
+            {
+              "cells": [
+                "Current Appropriation",
+                "3,162,000.00",
+                "7,378,000.00"
+              ],
+              "text": "Current Appropriation 3,162,000.00 7,378,000.00"
+            },
+            {
+              "cells": ["Continuing Appropriations", "0", "6,347,085.06"],
+              "text": "Continuing Appropriations 0 6,347,085.06"
+            },
+            {
+              "cells": ["Previous year's Approp. Transferred to"],
+              "text": "Previous year's Approp. Transferred to"
+            },
+            {
+              "cells": ["Special Trust Fund", "11,663,760.76"],
+              "text": "Special Trust Fund 11,663,760.76",
+              "item": "Special Trust Fund",
+              "value": "11,663,760.76"
+            },
+            {
+              "cells": ["2015", "493,562.20"],
+              "text": "2015 493,562.20",
+              "item": "2015",
+              "value": "493,562.20"
+            },
+            {
+              "cells": ["2016", "494,413.31"],
+              "text": "2016 494,413.31",
+              "item": "2016",
+              "value": "494,413.31"
+            },
+            {
+              "cells": ["2017", "3,219,536.18"],
+              "text": "2017 3,219,536.18",
+              "item": "2017",
+              "value": "3,219,536.18"
+            },
+            {
+              "cells": ["2018", "3,533,929.80"],
+              "text": "2018 3,533,929.80",
+              "item": "2018",
+              "value": "3,533,929.80"
+            },
+            {
+              "cells": ["2019", "3,922,319.27"],
+              "text": "2019 3,922,319.27",
+              "item": "2019",
+              "value": "3,922,319.27"
+            },
+            {
+              "cells": ["11,663,760.76"],
+              "text": "11,663,760.76"
+            },
+            {
+              "cells": ["Transfers/Grants"],
+              "text": "Transfers/Grants"
+            },
+            {
+              "cells": [
+                "Total Funds Available",
+                "3,162,000.00",
+                "25,388,845.82"
+              ],
+              "text": "Total Funds Available 3,162,000.00 25,388,845.82"
+            },
+            {
+              "cells": ["B. Utilization"],
+              "text": "B. Utilization"
+            },
+            {
+              "cells": ["Quick Response Fund Expenses"],
+              "text": "Quick Response Fund Expenses"
+            },
+            {
+              "cells": ["Welfare Goods Expenses", "838,200.00"],
+              "text": "Welfare Goods Expenses 838,200.00",
+              "item": "Welfare Goods Expenses",
+              "value": "838,200.00"
+            },
+            {
+              "cells": [
+                "Medical, Dental and Laboratory Supplies Expenses",
+                "285,210.00"
+              ],
+              "text": "Medical, Dental and Laboratory Supplies Expenses 285,210.00",
+              "item": "Medical, Dental and Laboratory Supplies Expenses",
+              "value": "285,210.00"
+            },
+            {
+              "cells": [
+                "Other Maintenance and Operating Expenses",
+                "1,342,814.00"
+              ],
+              "text": "Other Maintenance and Operating Expenses 1,342,814.00",
+              "item": "Other Maintenance and Operating Expenses",
+              "value": "1,342,814.00"
+            },
+            {
+              "cells": ["Fuel, Oil and Lubricants Expenses", "4,738.70"],
+              "text": "Fuel, Oil and Lubricants Expenses 4,738.70",
+              "item": "Fuel, Oil and Lubricants Expenses",
+              "value": "4,738.70"
+            },
+            {
+              "cells": [
+                "Agricultrual and Marine Supplies Expenses",
+                "57,800.00"
+              ],
+              "text": "Agricultrual and Marine Supplies Expenses 57,800.00",
+              "item": "Agricultrual and Marine Supplies Expenses",
+              "value": "57,800.00"
+            },
+            {
+              "cells": ["Other Supplies and Materials Expenses", "231,027.00"],
+              "text": "Other Supplies and Materials Expenses 231,027.00",
+              "item": "Other Supplies and Materials Expenses",
+              "value": "231,027.00"
+            },
+            {
+              "cells": ["Drugs and Medicines Expenses", "7,000.00"],
+              "text": "Drugs and Medicines Expenses 7,000.00",
+              "item": "Drugs and Medicines Expenses",
+              "value": "7,000.00"
+            },
+            {
+              "cells": ["Insurance Expenses", "11,802.45"],
+              "text": "Insurance Expenses 11,802.45",
+              "item": "Insurance Expenses",
+              "value": "11,802.45"
+            },
+            {
+              "cells": [
+                "Other Maintenance and Operating Expenses",
+                "821,760.32"
+              ],
+              "text": "Other Maintenance and Operating Expenses 821,760.32",
+              "item": "Other Maintenance and Operating Expenses",
+              "value": "821,760.32"
+            },
+            {
+              "cells": ["Fuel, Oil and Lubricants", "43,791.50"],
+              "text": "Fuel, Oil and Lubricants 43,791.50",
+              "item": "Fuel, Oil and Lubricants",
+              "value": "43,791.50"
+            },
+            {
+              "cells": ["Construction of Flood Control Systems", "485,000.00"],
+              "text": "Construction of Flood Control Systems 485,000.00",
+              "item": "Construction of Flood Control Systems",
+              "value": "485,000.00"
+            },
+            {
+              "cells": [
+                "Operation of 24/7 Emergency Response center",
+                "809,750.00"
+              ],
+              "text": "Operation of 24/7 Emergency Response center 809,750.00",
+              "item": "Operation of 24/7 Emergency Response center",
+              "value": "809,750.00"
+            },
+            {
+              "cells": ["Data Banking", "344,636.88"],
+              "text": "Data Banking 344,636.88",
+              "item": "Data Banking",
+              "value": "344,636.88"
+            },
+            {
+              "cells": ["Wages- Security Guards", "287,152.00"],
+              "text": "Wages- Security Guards 287,152.00",
+              "item": "Wages- Security Guards",
+              "value": "287,152.00"
+            },
+            {
+              "cells": ["Hiring of tricycle", "133,000.00"],
+              "text": "Hiring of tricycle 133,000.00",
+              "item": "Hiring of tricycle",
+              "value": "133,000.00"
+            },
+            {
+              "cells": ["Hiring of Jeepney", "512,000.00"],
+              "text": "Hiring of Jeepney 512,000.00",
+              "item": "Hiring of Jeepney",
+              "value": "512,000.00"
+            },
+            {
+              "cells": ["Communication expenses (celphone load)", "27,169.00"],
+              "text": "Communication expenses (celphone load) 27,169.00",
+              "item": "Communication expenses (celphone load)",
+              "value": "27,169.00"
+            },
+            {
+              "cells": ["Disaster response uniforms", "28,800.00"],
+              "text": "Disaster response uniforms 28,800.00",
+              "item": "Disaster response uniforms",
+              "value": "28,800.00"
+            },
+            {
+              "cells": ["Office Supplies Expenses", "51,888.75"],
+              "text": "Office Supplies Expenses 51,888.75",
+              "item": "Office Supplies Expenses",
+              "value": "51,888.75"
+            },
+            {
+              "cells": ["Financial Assistance to BHERT", "831,000.00"],
+              "text": "Financial Assistance to BHERT 831,000.00",
+              "item": "Financial Assistance to BHERT",
+              "value": "831,000.00"
+            },
+            {
+              "cells": [
+                "Meals for OFW & LSI (quarantine facilities)",
+                "500,000.00"
+              ],
+              "text": "Meals for OFW & LSI (quarantine facilities) 500,000.00",
+              "item": "Meals for OFW & LSI (quarantine facilities)",
+              "value": "500,000.00"
+            },
+            {
+              "cells": ["Total Utilization", "2,766,789.70", "4,887,750.90"],
+              "text": "Total Utilization 2,766,789.70 4,887,750.90"
+            },
+            {
+              "cells": ["Unutilized Balance", "395,210.30", "20,501,094.92"],
+              "text": "Unutilized Balance 395,210.30 20,501,094.92"
+            },
+            {
+              "cells": [
+                "We hereby certify that we have reviewed the contents and hereby attest to the veracity and correctness of the data or inform contained in this document."
+              ],
+              "text": "We hereby certify that we have reviewed the contents and hereby attest to the veracity and correctness of the data or inform contained in this document."
+            },
+            {
+              "cells": ["(Sgd.)"],
+              "text": "(Sgd.)"
+            },
+            {
+              "cells": ["MAYLENE T. SERVIDAD"],
+              "text": "MAYLENE T. SERVIDAD"
+            },
+            {
+              "cells": ["Municipal Accountant"],
+              "text": "Municipal Accountant"
+            },
+            {
+              "cells": [
+                "LOCAL DISASTER RISK REDUCTION AND MANAGEMENT FUND UTILIZATION"
+              ],
+              "text": "LOCAL DISASTER RISK REDUCTION AND MANAGEMENT FUND UTILIZATION"
+            },
+            {
+              "cells": ["For the Month of September 2020"],
+              "text": "For the Month of September 2020"
+            },
+            {
+              "cells": ["MUNICIPALITY OF MIAGAO, ILOILO"],
+              "text": "MUNICIPALITY OF MIAGAO, ILOILO"
+            },
+            {
+              "cells": ["NDRRMF", "From other", "From Other"],
+              "text": "NDRRMF From other From Other"
+            },
+            {
+              "cells": ["LGUs", "Sources", "Total"],
+              "text": "LGUs Sources Total"
+            },
+            {
+              "cells": ["0", "0", "10,540,000.00"],
+              "text": "0 0 10,540,000.00"
+            },
+            {
+              "cells": ["6,347,085.06"],
+              "text": "6,347,085.06"
+            },
+            {
+              "cells": ["11,663,760.76"],
+              "text": "11,663,760.76"
+            },
+            {
+              "cells": ["0.00"],
+              "text": "0.00"
+            },
+            {
+              "cells": ["28,550,845.82"],
+              "text": "28,550,845.82"
+            },
+            {
+              "cells": ["838,200.00"],
+              "text": "838,200.00"
+            },
+            {
+              "cells": ["285,210.00"],
+              "text": "285,210.00"
+            },
+            {
+              "cells": ["1,342,814.00"],
+              "text": "1,342,814.00"
+            },
+            {
+              "cells": ["4,738.70"],
+              "text": "4,738.70"
+            },
+            {
+              "cells": ["57,800.00"],
+              "text": "57,800.00"
+            },
+            {
+              "cells": ["231,027.00"],
+              "text": "231,027.00"
+            },
+            {
+              "cells": ["7,000.00"],
+              "text": "7,000.00"
+            },
+            {
+              "cells": ["11,802.45"],
+              "text": "11,802.45"
+            },
+            {
+              "cells": ["821,760.32"],
+              "text": "821,760.32"
+            },
+            {
+              "cells": ["43,791.50"],
+              "text": "43,791.50"
+            },
+            {
+              "cells": ["485,000.00"],
+              "text": "485,000.00"
+            },
+            {
+              "cells": ["809,750.00"],
+              "text": "809,750.00"
+            },
+            {
+              "cells": ["344,636.88"],
+              "text": "344,636.88"
+            },
+            {
+              "cells": ["287,152.00"],
+              "text": "287,152.00"
+            },
+            {
+              "cells": ["133,000.00"],
+              "text": "133,000.00"
+            },
+            {
+              "cells": ["512,000.00"],
+              "text": "512,000.00"
+            },
+            {
+              "cells": ["27,169.00"],
+              "text": "27,169.00"
+            },
+            {
+              "cells": ["28,800.00"],
+              "text": "28,800.00"
+            },
+            {
+              "cells": ["51,888.75"],
+              "text": "51,888.75"
+            },
+            {
+              "cells": ["831,000.00"],
+              "text": "831,000.00"
+            },
+            {
+              "cells": ["500,000.00"],
+              "text": "500,000.00"
+            },
+            {
+              "cells": ["7,654,540.60"],
+              "text": "7,654,540.60"
+            },
+            {
+              "cells": ["20,896,305.22"],
+              "text": "20,896,305.22"
+            },
+            {
+              "cells": [
+                "We hereby certify that we have reviewed the contents and hereby attest to the veracity and correctness of the data or inform contained in this document."
+              ],
+              "text": "We hereby certify that we have reviewed the contents and hereby attest to the veracity and correctness of the data or inform contained in this document."
+            }
+          ]
+        }
+      ],
+      "signatories": [
+        {
+          "name": "Maylene T. Servidad",
+          "position": "Municipal Accountant",
+          "pageNumber": 1,
+          "evidence": "Signature marker and adjacent printed name and position",
+          "recordedDate": "For the Month of September 2020",
+          "dateBasis": "document reporting period"
+        }
+      ]
+    },
+    {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2023/05/AWARD-NISMAL-CORP.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/notice-of-award-7/",
+      "sourceTitle": "NOTICE OF AWARD",
+      "sourceFileName": "AWARD-NISMAL-CORP.pdf",
+      "publishedAt": "2022-12-23T15:54:17",
+      "originalLabel": "AWARD-NISMAL-CORP.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2023/05/AWARD-NISMAL-CORP.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/notice-of-award-7/",
+          "sourceTitle": "NOTICE OF AWARD",
+          "publishedAt": "2022-12-23T15:54:17",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "AWARD-NISMAL-CORP.pdf"
+        }
+      ],
+      "documentSha256": "7ecd57a065588f496a447479bc9da0a352c4b0e6f63d4b7d1431244e20d92ab3",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "Tesseract OCR",
+      "normalizedCategory": "other",
+      "normalizedCategoryLabel": "Other / unclassified",
+      "categoryBasis": "source filename",
+      "parsedTitle": null,
+      "reportingPeriod": null,
+      "extractionStatus": "no_text",
+      "pageCount": 0,
+      "tablePages": [],
+      "signatories": []
+    },
+    {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2023/01/BAC20230118_16392836.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/minutes-of-bidding/",
+      "sourceTitle": "Minutes of Bidding",
+      "sourceFileName": "BAC20230118_16392836.pdf",
+      "publishedAt": "2023-01-18T16:51:11",
+      "originalLabel": "BAC20230118_16392836.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2023/01/BAC20230118_16392836.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/minutes-of-bidding/",
+          "sourceTitle": "Minutes of Bidding",
+          "publishedAt": "2023-01-18T16:51:11",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "BAC20230118_16392836.pdf"
+        }
+      ],
+      "documentSha256": "507409d0805193cb6fa62e5fc9be15d38263e5b0ae9b29f89e9c5c58f9237640",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "Tesseract OCR",
+      "normalizedCategory": "other",
+      "normalizedCategoryLabel": "Other / unclassified",
+      "categoryBasis": "source filename",
+      "parsedTitle": null,
+      "reportingPeriod": null,
+      "extractionStatus": "no_text",
+      "pageCount": 0,
+      "tablePages": [],
+      "signatories": []
+    },
+    {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2025/11/consolidated-report-1qt-2025.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2025-full-disclosure/",
+      "sourceTitle": "2025 Full Disclosure",
+      "sourceFileName": "consolidated-report-1qt-2025.pdf",
+      "publishedAt": "2025-03-21T11:14:37",
+      "originalLabel": "consolidated-report-1qt-2025.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2025/11/consolidated-report-1qt-2025.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2025-full-disclosure/",
+          "sourceTitle": "2025 Full Disclosure",
+          "publishedAt": "2025-03-21T11:14:37",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "consolidated-report-1qt-2025.pdf"
+        }
+      ],
+      "documentSha256": "36ce811aa2fa4dd226496a49f1870e071783838c11e5bbc5da329c2f2b22f75f",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "PyMuPDF native text + Tesseract OCR",
+      "normalizedCategory": "other",
+      "normalizedCategoryLabel": "Other / unclassified",
+      "categoryBasis": "source filename",
+      "parsedTitle": null,
+      "reportingPeriod": null,
+      "extractionStatus": "text_extracted",
+      "pageCount": 1,
+      "tablePages": [
+        {
+          "pageNumber": 1,
+          "rows": [
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            },
+            {
+              "cells": ["CamScanner"],
+              "text": "CamScanner"
+            }
+          ]
+        }
+      ],
+      "signatories": []
+    },
+    {
       "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2019/04/SEF-Utilization-as-of-MArch-31-2019.pdf",
       "sourcePageUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
       "sourceTitle": "FULL DISCLOSURE FOR CY 2019",
@@ -12466,7 +13895,11 @@
           "publishedAt": "2019-04-05T05:43:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SEF-Utilization-as-of-MArch-31-2019.pdf"
+          "fileName": "SEF-Utilization-as-of-MArch-31-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceDate": "2019-04-05T05:43:41",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2019/04/SEF-Utilization-as-of-MArch-31-2019.pdf",
@@ -12475,7 +13908,11 @@
           "publishedAt": "2019-04-01T06:01:31",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SEF-Utilization-as-of-MArch-31-2019.pdf"
+          "fileName": "SEF-Utilization-as-of-MArch-31-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/financial-statements/special-education-fund-and-expenditure-estimate/sef-utilization-as-of-march-31-2019/",
+          "sourceDate": "2019-04-01T06:01:31",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/SEF-UTILIZATION-AS-OF-MARCH-2019.pdf",
@@ -12634,7 +14071,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION-1.pdf"
+          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "009c481020a7e801a466e9310a49ae8a9b15d80eae93bf1d637102c79e9b07a1",
@@ -12808,7 +14249,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SEF-Utilization-as-of-June30-2019.xlsx-Sheet2.pdf"
+          "fileName": "SEF-Utilization-as-of-June30-2019.xlsx-Sheet2.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "605e3b9e5bcbfa24c0e855bc255e561861a91ec026439f99157b26c980ce50bc",
@@ -12958,7 +14403,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SEF-UTILIZATION-AS-OF-SEPTEMBER-2019.pdf"
+          "fileName": "SEF-UTILIZATION-AS-OF-SEPTEMBER-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "5f7b2241a9cf504255e6af65a2928e1dd831b35e6b906661a58d6d654b7843a1",
@@ -13108,7 +14557,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION.pdf"
+          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "708b49a3733e03456cb11c11457d25262841d5192beccca1b609351d5e604850",
@@ -13258,7 +14711,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION.pdf"
+          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "e61f46327c3b65bd13ddaee7f9fd8c4e74fe14985369c278b3a40507a93e61e1",
@@ -13394,6 +14851,182 @@
       ]
     },
     {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/SEF-Utilization-as-of-Sept30-2020.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/sef-utilization-as-of-sept30-2020/",
+      "sourceTitle": "SEF-Utilization-as-of-Sept30-2020",
+      "sourceFileName": "SEF-Utilization-as-of-Sept30-2020.pdf",
+      "publishedAt": "2020-12-23T07:30:32",
+      "originalLabel": "SEF-Utilization-as-of-Sept30-2020.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/SEF-Utilization-as-of-Sept30-2020.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/sef-utilization-as-of-sept30-2020/",
+          "sourceTitle": "SEF-Utilization-as-of-Sept30-2020",
+          "publishedAt": "2020-12-23T07:30:32",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "SEF-Utilization-as-of-Sept30-2020.pdf"
+        }
+      ],
+      "documentSha256": "df9f294aaa8257abeed673a27707ee9a7f7aa2b00ef10f6b170115dc0837f81a",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "PyMuPDF native text + Tesseract OCR",
+      "normalizedCategory": "sef-utilization",
+      "normalizedCategoryLabel": "Report of SEF utilization",
+      "categoryBasis": "document heading",
+      "parsedTitle": "REPORT OF SEF UTILIZATION",
+      "reportingPeriod": null,
+      "extractionStatus": "text_extracted",
+      "pageCount": 1,
+      "tablePages": [
+        {
+          "pageNumber": 1,
+          "rows": [
+            {
+              "cells": ["Republic of the Philippines"],
+              "text": "Republic of the Philippines"
+            },
+            {
+              "cells": ["Province of Iloilo"],
+              "text": "Province of Iloilo"
+            },
+            {
+              "cells": ["MUNICIPALITY OF MIAGAO"],
+              "text": "MUNICIPALITY OF MIAGAO"
+            },
+            {
+              "cells": ["REPORT OF SEF UTILIZATION"],
+              "text": "REPORT OF SEF UTILIZATION"
+            },
+            {
+              "cells": ["For the Quarter Ended September 30, 2020"],
+              "text": "For the Quarter Ended September 30, 2020"
+            },
+            {
+              "cells": ["Province/City/Municipality: Miagao"],
+              "text": "Province/City/Municipality: Miagao"
+            },
+            {
+              "cells": ["Receipt from SEF", "2,571,372.75"],
+              "text": "Receipt from SEF 2,571,372.75",
+              "item": "Receipt from SEF",
+              "value": "2,571,372.75"
+            },
+            {
+              "cells": ["Surplus CY 2019", "847,281.00"],
+              "text": "Surplus CY 2019 847,281.00",
+              "item": "Surplus CY 2019",
+              "value": "847,281.00"
+            },
+            {
+              "cells": ["Continuing Appropriations", "3,781,559.71"],
+              "text": "Continuing Appropriations 3,781,559.71",
+              "item": "Continuing Appropriations",
+              "value": "3,781,559.71"
+            },
+            {
+              "cells": ["Total", "7,200,213.46"],
+              "text": "Total 7,200,213.46",
+              "item": "Total",
+              "value": "7,200,213.46"
+            },
+            {
+              "cells": ["Less:", "Disbursement:"],
+              "text": "Less: Disbursement:"
+            },
+            {
+              "cells": ["Capital Outlay"],
+              "text": "Capital Outlay"
+            },
+            {
+              "cells": ["School Buildings", "50,000.00"],
+              "text": "School Buildings 50,000.00",
+              "item": "School Buildings",
+              "value": "50,000.00"
+            },
+            {
+              "cells": ["Total Expenditures", "50,000.00"],
+              "text": "Total Expenditures 50,000.00",
+              "item": "Total Expenditures",
+              "value": "50,000.00"
+            },
+            {
+              "cells": ["Balance", "7,150,213.46"],
+              "text": "Balance 7,150,213.46",
+              "item": "Balance",
+              "value": "7,150,213.46"
+            },
+            {
+              "cells": ["Ceritfied Correct:"],
+              "text": "Ceritfied Correct:"
+            },
+            {
+              "cells": ["(Sgd.)"],
+              "text": "(Sgd.)"
+            },
+            {
+              "cells": ["MAYLENE T. SERVIDAD"],
+              "text": "MAYLENE T. SERVIDAD"
+            },
+            {
+              "cells": ["Municipal Accountant"],
+              "text": "Municipal Accountant"
+            },
+            {
+              "cells": ["Approved by:"],
+              "text": "Approved by:"
+            },
+            {
+              "cells": ["(Sgd.)"],
+              "text": "(Sgd.)"
+            },
+            {
+              "cells": ["HON. MACARIO N. NAPULAN, M.D"],
+              "text": "HON. MACARIO N. NAPULAN, M.D"
+            },
+            {
+              "cells": ["Municipal Mayor"],
+              "text": "Municipal Mayor"
+            },
+            {
+              "cells": ["MAYLENE T. SERVIDAD"],
+              "text": "MAYLENE T. SERVIDAD"
+            },
+            {
+              "cells": ["Municipal Accountant"],
+              "text": "Municipal Accountant"
+            },
+            {
+              "cells": ["(Sgd.)"],
+              "text": "(Sgd.)"
+            },
+            {
+              "cells": ["HON. MACARIO N. NAPULAN, M.D"],
+              "text": "HON. MACARIO N. NAPULAN, M.D"
+            }
+          ]
+        }
+      ],
+      "signatories": [
+        {
+          "name": "Maylene T. Servidad",
+          "position": "Municipal Accountant",
+          "pageNumber": 1,
+          "evidence": "Signature marker and adjacent printed name and position",
+          "recordedDate": "2020-12-23",
+          "dateBasis": "source publication date"
+        },
+        {
+          "name": "Macario N. Napulan, M.D.",
+          "position": "Municipal Mayor",
+          "pageNumber": 1,
+          "evidence": "Signature marker and adjacent printed name and position",
+          "recordedDate": "2020-12-23",
+          "dateBasis": "source publication date"
+        }
+      ]
+    },
+    {
       "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/ANNUAL-STATEMENT-OF-INDEBTEDNESS-PAYMENTS-AND-BALANCES-SIPB.pdf",
       "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
       "sourceTitle": "2019 Full Disclosure",
@@ -13408,7 +15041,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "ANNUAL-STATEMENT-OF-INDEBTEDNESS-PAYMENTS-AND-BALANCES-SIPB.pdf"
+          "fileName": "ANNUAL-STATEMENT-OF-INDEBTEDNESS-PAYMENTS-AND-BALANCES-SIPB.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "6b30b50f6ca4b4794268982262b43f83d2f471997638407b7193a2f828cadf3a",
@@ -13845,7 +15482,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-DEBT-SERVICES-1.pdf"
+          "fileName": "STATEMENT-OF-DEBT-SERVICES-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "3e3f5196bd37a6bfb30c2629d37ef1b5bb7511f0324a9f9068d207bc9e1a4c1b",
@@ -14087,7 +15728,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Statement-of-Debt-Services-June-30-2019.xlsx-2nd-qtr-2019.pdf"
+          "fileName": "Statement-of-Debt-Services-June-30-2019.xlsx-2nd-qtr-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "6c4debd1f08582281c1b6be28975a45e69c25da3dbb3937ce27ade55339e7c05",
@@ -14329,7 +15974,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-DEBT-SERVICES.pdf"
+          "fileName": "STATEMENT-OF-DEBT-SERVICES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/Statement-of-Debt-Services-March-31-2019.pdf",
@@ -14573,7 +16222,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-DEBT-SERVICES-1.pdf"
+          "fileName": "STATEMENT-OF-DEBT-SERVICES-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "bbc97f32a9106059bb6437671cb2b46e519eeaef1884bb1803471616b0e493d6",
@@ -14861,7 +16514,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-DEBT-SERVICES.pdf"
+          "fileName": "STATEMENT-OF-DEBT-SERVICES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "31056ac5503beb75207e4e685524d50c40b2e470cfd94e596386b7b70163348f",
@@ -15166,7 +16823,11 @@
           "publishedAt": "2020-12-23T07:31:29",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Statement-of-Debt-Services-Sept.-2020.pdf"
+          "fileName": "Statement-of-Debt-Services-Sept.-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/statement-of-debt-services-sept-2020/",
+          "sourceDate": "2020-12-23T07:31:29",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/Statement-of-Debt-Services-Sept.-2020.pdf",
@@ -15175,7 +16836,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Statement-of-Debt-Services-Sept.-2020.pdf"
+          "fileName": "Statement-of-Debt-Services-Sept.-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "6cd901237ef51e640ca0f1fe62d9558e6373c07c11d4b127cde77a513ff00a57",
@@ -15480,7 +17145,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES-1.pdf"
+          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "0b878b91cf7edc1ddb18401eb543041792fe190cb606afc629c78f49149a29cb",
@@ -15908,7 +17577,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES-2.pdf"
+          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES-2.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "6f72fb39205a5f7dbdc7dbca9edbec99a3084827edb17223ac66d0b5b8623f0d",
@@ -16336,7 +18009,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES.pdf"
+          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "150b7c302988e6b756ea2f53ca7b4607254f9e4abef3453bb756d8589307c650",
@@ -17099,7 +18776,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES.pdf"
+          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "a14102ea5fb7445a737a55fb7f0c928d3009f528310a9e724ae6ad08d7816f27",
@@ -17859,7 +19540,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "supplemental-ppmp-2019-DA.xlsx-Sheet1.pdf"
+          "fileName": "supplemental-ppmp-2019-DA.xlsx-Sheet1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "d0e9c7403eb3dc4f665596b649be8d193343498ce2f93212fbdbf9ae211e6140",
@@ -18114,7 +19799,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SUPPLEMENTAL-PPMP.pdf"
+          "fileName": "SUPPLEMENTAL-PPMP.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/Supplemental-PPMP.pdf",
@@ -18434,7 +20123,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Supplemental.ppmp_.2019.MPDO_.doc.pdf"
+          "fileName": "Supplemental.ppmp_.2019.MPDO_.doc.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "9a02a0f250523f3754b2a75635dde4439ec4c20facac370f9ed73272e7f6e090",
@@ -18597,7 +20290,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SUPPLEMENTAL-PROCUREMENT-PLAN.pdf"
+          "fileName": "SUPPLEMENTAL-PROCUREMENT-PLAN.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "367a0dedaab951f707026aaea9267c144f2a3f6d4a3ef1d1d117e08b8983af49",
@@ -18855,7 +20552,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TF-Utilization-June-2019.xlsx-Trust-Fund-Utilization.pdf"
+          "fileName": "TF-Utilization-June-2019.xlsx-Trust-Fund-Utilization.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "1bf43c113dfb8a363d8479de07e5843f07d5bc88698f6925188cfae01945b4a9",
@@ -20231,7 +21932,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION-AS-OF-MARCH-2019.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION-AS-OF-MARCH-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/TRUST-FUND-Utilization-March-2019.pdf",
@@ -21590,7 +23295,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "3b0093ff687d31baedde6dc1ed580cdd0b55139f225efc3c7194f1084244ded1",
@@ -23042,7 +24751,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "UNLIQUADATED-CASH-ADVANCES.pdf"
+          "fileName": "UNLIQUADATED-CASH-ADVANCES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "3deb134902eb60dd6565c2b46f10f7028721b871fc5dd398529e27d6d009a41f",
@@ -24196,7 +25909,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Unliquidated-CA-as-of-June-30-2019.xlsx-Sheet5.pdf"
+          "fileName": "Unliquidated-CA-as-of-June-30-2019.xlsx-Sheet5.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "82fe671c3c3d02ed6f55261a8aa384c64053438cd32d09d22901717d2964fef9",
@@ -25241,6 +26958,2178 @@
       "signatories": []
     },
     {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/UNLIQUIDATED-CASH-ADVANCES-1.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+      "sourceTitle": "2019 Full Disclosure",
+      "sourceFileName": "UNLIQUIDATED-CASH-ADVANCES-1.pdf",
+      "publishedAt": "2020-01-06T19:52:15",
+      "originalLabel": "UNLIQUIDATED-CASH-ADVANCES-1.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/UNLIQUIDATED-CASH-ADVANCES-1.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceTitle": "2019 Full Disclosure",
+          "publishedAt": "2020-01-06T19:52:15",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "UNLIQUIDATED-CASH-ADVANCES-1.pdf"
+        }
+      ],
+      "documentSha256": "41c58f8b7c80f1ca7c8d889d5c4c5cd71a917505db8d0b980c95fd02e116ade3",
+      "parseStatus": "no_text_detected",
+      "extractionMethod": "Tesseract OCR",
+      "normalizedCategory": "unliquidated-cash-advances",
+      "normalizedCategoryLabel": "Unliquidated cash advances",
+      "categoryBasis": "document heading",
+      "parsedTitle": "FDP Form 12 - Unliquidated Cash Advances",
+      "reportingPeriod": "As of December 31, 2019",
+      "extractionStatus": "text_extracted",
+      "pageCount": 1,
+      "tablePages": [
+        {
+          "pageNumber": 1,
+          "rows": [
+            {
+              "cells": ["FDP Form 12 - Unliquidated Cash Advances"],
+              "text": "FDP Form 12 - Unliquidated Cash Advances"
+            },
+            {
+              "cells": ["UNLIQUIDATED CASH ADVANCES"],
+              "text": "UNLIQUIDATED CASH ADVANCES"
+            },
+            {
+              "cells": ["As of December 31, 2019"],
+              "text": "As of December 31, 2019"
+            },
+            {
+              "cells": ["Municipality : Miagao"],
+              "text": "Municipality : Miagao"
+            },
+            {
+              "cells": ["Amount Due"],
+              "text": "Amount Due"
+            },
+            {
+              "cells": [
+                "Name of Debtor",
+                "Amount",
+                "Date Granted",
+                "Purpose",
+                "Current",
+                "Past Due"
+              ],
+              "text": "Name of Debtor Amount Date Granted Purpose Current Past Due"
+            },
+            {
+              "cells": [
+                "(In alphabetical order)",
+                "Balance",
+                "Less than 30",
+                "31-90 days",
+                "91-365 days",
+                "Over 1 yr.",
+                "over 2 yrs.",
+                "3 yrs and",
+                "Remarks"
+              ],
+              "text": "(In alphabetical order) Balance Less than 30 31-90 days 91-365 days Over 1 yr. over 2 yrs. 3 yrs and Remarks"
+            },
+            {
+              "cells": ["days", "above"],
+              "text": "days above"
+            },
+            {
+              "cells": ["GENERAL FUND"],
+              "text": "GENERAL FUND"
+            },
+            {
+              "cells": [
+                "Unnamed",
+                "2,267.26",
+                "undated",
+                "C.A /P.S",
+                "2,267.26"
+              ],
+              "text": "Unnamed 2,267.26 undated C.A /P.S 2,267.26"
+            },
+            {
+              "cells": ["Unnamed", "553.66", "undated", "C.A /MOOE", "553.66"],
+              "text": "Unnamed 553.66 undated C.A /MOOE 553.66"
+            },
+            {
+              "cells": [
+                "Unnamed",
+                "20,909.64",
+                "undated",
+                "C.A /MOOE",
+                "20,909.64"
+              ],
+              "text": "Unnamed 20,909.64 undated C.A /MOOE 20,909.64"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "498.85",
+                "12/26/2019 C.A /MOOE",
+                "498.85",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 498.85 12/26/2019 C.A /MOOE 498.85 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "1,989.97",
+                "12/27/2019 C.A /MOOE",
+                "1,989.97",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 1,989.97 12/27/2019 C.A /MOOE 1,989.97 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "1,000.00",
+                "8/30/2019",
+                "C.A /Payroll- refund",
+                "1,000.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 1,000.00 8/30/2019 C.A /Payroll- refund 1,000.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "3,960.00",
+                "3/15/2019",
+                "C.A /Payroll- refund",
+                "3,960.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 3,960.00 3/15/2019 C.A /Payroll- refund 3,960.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "5,280.00",
+                "3/15/2019",
+                "C.A /Payroll- refund",
+                "5,280.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 5,280.00 3/15/2019 C.A /Payroll- refund 5,280.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "3,800.00",
+                "5/30/2019",
+                "C.A /Payroll- refund",
+                "3,800.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 3,800.00 5/30/2019 C.A /Payroll- refund 3,800.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "1,200.00",
+                "10/14/2019 C.A /Payroll- refund",
+                "1,200.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 1,200.00 10/14/2019 C.A /Payroll- refund 1,200.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "1,000.00",
+                "11/6/2019",
+                "C.A /Payroll- refund",
+                "1,000.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 1,000.00 11/6/2019 C.A /Payroll- refund 1,000.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "4,000.00",
+                "12/23/2019 C.A /Payroll- refund",
+                "4,000.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 4,000.00 12/23/2019 C.A /Payroll- refund 4,000.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "4,000.00",
+                "12/23/2019 C.A /Payroll- refund",
+                "4,000.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 4,000.00 12/23/2019 C.A /Payroll- refund 4,000.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "219.86",
+                "12/27/2019 C.A /Payroll- refund",
+                "219.86",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Mary Jill Momper 219.86 12/27/2019 C.A /Payroll- refund 219.86 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Ninfa Momblan",
+                "15,000.00",
+                "12/17/2019 C.A /Payroll",
+                "15,000.00",
+                "unliquidated"
+              ],
+              "text": "Ninfa Momblan 15,000.00 12/17/2019 C.A /Payroll 15,000.00 unliquidated"
+            },
+            {
+              "cells": [
+                "Ninfa Momblan",
+                "9,438.00",
+                "9/12/2019",
+                "C.A /Payroll- refund",
+                "9,438.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Ninfa Momblan 9,438.00 9/12/2019 C.A /Payroll- refund 9,438.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Ninfa Momblan",
+                "1,320.00",
+                "3/12/2019",
+                "C.A /Payroll - refund",
+                "1,320.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Ninfa Momblan 1,320.00 3/12/2019 C.A /Payroll - refund 1,320.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Macario Napulan , M.D.",
+                "40,000.00",
+                "7/24/2017",
+                "Inteligence fund",
+                "40,000.00"
+              ],
+              "text": "Macario Napulan , M.D. 40,000.00 7/24/2017 Inteligence fund 40,000.00"
+            },
+            {
+              "cells": [
+                "Glenda Losanta",
+                "6,656.00",
+                "9/25/2017",
+                "TEV",
+                "6,656.00"
+              ],
+              "text": "Glenda Losanta 6,656.00 9/25/2017 TEV 6,656.00"
+            },
+            {
+              "cells": [
+                "Robert Galvez",
+                "22,475.00",
+                "3/22/2019",
+                "TEV",
+                "22,475.00",
+                "unliquidated"
+              ],
+              "text": "Robert Galvez 22,475.00 3/22/2019 TEV 22,475.00 unliquidated"
+            },
+            {
+              "cells": [
+                "Robert Galvez",
+                "325.00",
+                "9/20/2019",
+                "TEV",
+                "325.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Robert Galvez 325.00 9/20/2019 TEV 325.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Luningning Tuparan",
+                "0.50",
+                "2/28/2019",
+                "TEV",
+                "0.50"
+              ],
+              "text": "Luningning Tuparan 0.50 2/28/2019 TEV 0.50"
+            },
+            {
+              "cells": [
+                "Jane Valenzuela",
+                "50.00",
+                "4/16/2019",
+                "TEV",
+                "50.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Jane Valenzuela 50.00 4/16/2019 TEV 50.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Sherwin Keith Faina",
+                "1,330.60",
+                "6/7/2019",
+                "TEV",
+                "1,330.60",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Sherwin Keith Faina 1,330.60 6/7/2019 TEV 1,330.60 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Anecito Patriarca",
+                "2,601.50",
+                "11/28/2019 TEV",
+                "2,601.50",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Anecito Patriarca 2,601.50 11/28/2019 TEV 2,601.50 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Rosalinda Mueda",
+                "110.00",
+                "11/14/2019 TEV",
+                "110.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Rosalinda Mueda 110.00 11/14/2019 TEV 110.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Pedro Zinon Nico",
+                "1,330.60",
+                "6/7/2019",
+                "TEV",
+                "1,330.60",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Pedro Zinon Nico 1,330.60 6/7/2019 TEV 1,330.60 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Ramil Naciongayo",
+                "410.00",
+                "6/8/2019",
+                "TEV",
+                "410.00",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Ramil Naciongayo 410.00 6/8/2019 TEV 410.00 Refunded Jan. 2020"
+            },
+            {
+              "cells": [
+                "Dolores Partidas",
+                "2,577.50",
+                "11/28/2019 TEV",
+                "2,577.50",
+                "Refunded Jan. 2020"
+              ],
+              "text": "Dolores Partidas 2,577.50 11/28/2019 TEV 2,577.50 Refunded Jan. 2020"
+            },
+            {
+              "cells": ["MARKET"],
+              "text": "MARKET"
+            },
+            {
+              "cells": [
+                "Aimee Marie Biboso",
+                "552.81",
+                "undated",
+                "C.A /P.S",
+                "552.81"
+              ],
+              "text": "Aimee Marie Biboso 552.81 undated C.A /P.S 552.81"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "0.30",
+                "1/31/2019",
+                "C.A /Payroll",
+                "0.30"
+              ],
+              "text": "Mary Jill H. Momper 0.30 1/31/2019 C.A /Payroll 0.30"
+            },
+            {
+              "cells": ["SLAUGHTERHOUSE"],
+              "text": "SLAUGHTERHOUSE"
+            },
+            {
+              "cells": [
+                "Ninfa Momblan",
+                "360.00",
+                "12/19/2019 C.A /Payroll",
+                "360.00"
+              ],
+              "text": "Ninfa Momblan 360.00 12/19/2019 C.A /Payroll 360.00"
+            },
+            {
+              "cells": ["S.E.F"],
+              "text": "S.E.F"
+            },
+            {
+              "cells": ["Aimee Marie Biboso", "0.50", "undated", "0.50"],
+              "text": "Aimee Marie Biboso 0.50 undated 0.50"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "0.50",
+                "5/24/2019",
+                "C.A /MOOE/Payroll",
+                "0.50"
+              ],
+              "text": "Mary Jill Momper 0.50 5/24/2019 C.A /MOOE/Payroll 0.50"
+            },
+            {
+              "cells": ["TRUST FUND", "-"],
+              "text": "TRUST FUND -"
+            },
+            {
+              "cells": [
+                "unnamed",
+                "54,645.02",
+                "undated",
+                "Unreconcilled Amount",
+                "54,645.02"
+              ],
+              "text": "unnamed 54,645.02 undated Unreconcilled Amount 54,645.02"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "1,231.48",
+                "11/8/2019",
+                "aicS/Refund",
+                "1,231.48",
+                "Refunded Jan. 7/2020"
+              ],
+              "text": "Mary Jill Momper 1,231.48 11/8/2019 aicS/Refund 1,231.48 Refunded Jan. 7/2020"
+            },
+            {
+              "cells": [
+                "Mary Jill Momper",
+                "7,200.00",
+                "12/13/2019",
+                "F/A Refund",
+                "7,200.00",
+                "Refunded Jan. 10/2020"
+              ],
+              "text": "Mary Jill Momper 7,200.00 12/13/2019 F/A Refund 7,200.00 Refunded Jan. 10/2020"
+            },
+            {
+              "cells": [
+                "Total",
+                "218,294.55",
+                "33,268.68",
+                "7,520.48",
+                "51,920.00",
+                "0.50",
+                "46,656.00",
+                "78,",
+                "928.89",
+                "-"
+              ],
+              "text": "Total 218,294.55 33,268.68 7,520.48 51,920.00 0.50 46,656.00 78, 928.89 -"
+            },
+            {
+              "cells": [
+                "We hereby certify that i have reviewed the contents and hereby attest to the veracity and correctness of the date"
+              ],
+              "text": "We hereby certify that i have reviewed the contents and hereby attest to the veracity and correctness of the date"
+            },
+            {
+              "cells": ["or information contained in this document."],
+              "text": "or information contained in this document."
+            },
+            {
+              "cells": [
+                "(Sgd.) MAYLENE T. SERVIDAD",
+                "( Sgd.) HON. MACARIO NAPULAN, M.D"
+              ],
+              "text": "(Sgd.) MAYLENE T. SERVIDAD ( Sgd.) HON. MACARIO NAPULAN, M.D"
+            },
+            {
+              "cells": ["Municipal Accountant", "LCE"],
+              "text": "Municipal Accountant LCE"
+            }
+          ]
+        }
+      ],
+      "signatories": [
+        {
+          "name": "Maylene T. Servidad",
+          "position": "Municipal Accountant",
+          "pageNumber": 1,
+          "evidence": "Signature marker and adjacent printed name and position",
+          "recordedDate": "As of December 31, 2019",
+          "dateBasis": "document reporting period"
+        },
+        {
+          "name": "Macario Napulan, M.D.",
+          "position": "LCE",
+          "pageNumber": 1,
+          "evidence": "Signature marker and adjacent printed name and position",
+          "recordedDate": "As of December 31, 2019",
+          "dateBasis": "document reporting period"
+        }
+      ]
+    },
+    {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/UNLIQUIDATED-CASH-ADVANCES-AS-OF-MARCH-2019.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+      "sourceTitle": "2019 Full Disclosure",
+      "sourceFileName": "UNLIQUIDATED-CASH-ADVANCES-AS-OF-MARCH-2019.pdf",
+      "publishedAt": "2020-01-06T19:52:15",
+      "originalLabel": "UNLIQUIDATED-CASH-ADVANCES-AS-OF-MARCH-2019.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/UNLIQUIDATED-CASH-ADVANCES-AS-OF-MARCH-2019.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceTitle": "2019 Full Disclosure",
+          "publishedAt": "2020-01-06T19:52:15",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "UNLIQUIDATED-CASH-ADVANCES-AS-OF-MARCH-2019.pdf"
+        },
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/Unliquidated-CA-as-of-March-2019.xlsx-1stQuarter-1.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/financial-statements/cash-advances/unliquidated-cash-advances-as-of-march-31-2019/",
+          "sourceTitle": "UNLIQUIDATED CASH ADVANCES AS OF MARCH 31, 2019",
+          "publishedAt": "2019-04-04T05:36:27",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "Unliquidated-CA-as-of-March-2019.xlsx-1stQuarter-1.pdf"
+        },
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/Unliquidated-CA-as-of-March-2019.xlsx-1stQuarter.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceTitle": "FULL DISCLOSURE FOR CY 2019",
+          "publishedAt": "2019-04-05T05:43:41",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "Unliquidated-CA-as-of-March-2019.xlsx-1stQuarter.pdf"
+        }
+      ],
+      "documentSha256": "3647cc16dc101da75f49618bfab16f1d1d0bca10c88421e457b0bcab09d3eb6f",
+      "parseStatus": "no_text_detected",
+      "extractionMethod": "Tesseract OCR",
+      "normalizedCategory": "unliquidated-cash-advances",
+      "normalizedCategoryLabel": "Unliquidated cash advances",
+      "categoryBasis": "source filename",
+      "parsedTitle": null,
+      "reportingPeriod": null,
+      "extractionStatus": "text_extracted",
+      "pageCount": 1,
+      "tablePages": [
+        {
+          "pageNumber": 1,
+          "rows": [
+            {
+              "cells": [
+                "& T &Å½ÆÅµ Ï­Ï® Í² eÅ¶Å¯ÅÆÆµÅÄÄÆÄÄ",
+                "ÄÆÅ",
+                "ÄÇÄÅ¶ÄÄÆ"
+              ],
+              "text": "& T &Å½ÆÅµ Ï­Ï® Í² eÅ¶Å¯ÅÆÆµÅÄÄÆÄÄ ÄÆÅ ÄÇÄÅ¶ÄÄÆ"
+            },
+            {
+              "cells": ["eB>/Ve/", "a", "^,", "p B", "^"],
+              "text": "eB>/Ve/ a ^, p B ^"
+            },
+            {
+              "cells": ["Æ Å½Ä¨ AÄÆÄÅ Ï¯Ï­Í Ï®Ï¬Ï­Ïµ"],
+              "text": "Æ Å½Ä¨ AÄÆÄÅ Ï¯Ï­Í Ï®Ï¬Ï­Ïµ"
+            },
+            {
+              "cells": ["AÆµÅ¶ÅÄÅÆÄÅ¯ÅÆÇ Í AÅÄÅÄÅ½"],
+              "text": "AÆµÅ¶ÅÄÅÆÄÅ¯ÅÆÇ Í AÅÄÅÄÅ½"
+            },
+            {
+              "cells": ["ÅµÅ½ÆµÅ¶Æ", "ÆµÄ"],
+              "text": "ÅµÅ½ÆµÅ¶Æ ÆµÄ"
+            },
+            {
+              "cells": [
+                "BÄÅµÄ Å½Ä¨",
+                "ÄÄÆÅ½Æ",
+                "ÅµÅ½ÆµÅ¶Æ",
+                "ÄÆÄ 'ÆÄÅ¶ÆÄÄ",
+                "TÆµÆÆÅ½ÆÄ",
+                "ÆµÆÆÄÅ¶Æ",
+                "TÄÆÆ",
+                "ÆµÄ"
+              ],
+              "text": "BÄÅµÄ Å½Ä¨ ÄÄÆÅ½Æ ÅµÅ½ÆµÅ¶Æ ÄÆÄ 'ÆÄÅ¶ÆÄÄ TÆµÆÆÅ½ÆÄ ÆµÆÆÄÅ¶Æ TÄÆÆ ÆµÄ"
+            },
+            {
+              "cells": [
+                "Í¾/Å¶ ÄÅ¯ÆÅÄÄÄÆÅÄÄÅ¯ Å½ÆÄÄÆÍ¿",
+                "ÄÅ¯ÄÅ¶ÄÄ",
+                ">ÄÆÆ ÆÅÄÅ¶ Ï¯Ï¬",
+                "Ï¯Ï­Í²ÏµÏ¬ ÄÄÇÆ",
+                "ÏµÏ­Í²Ï¯Ï²Ï± ÄÄÇÆ",
+                "HÇÄÆ Ï­ ÇÆÍ",
+                "Å½ÇÄÆ Ï® ÇÆÆÍ",
+                "Ï¯ ÇÆÆ ÄÅ¶Ä",
+                "WÄÅµÄÆÅ¬Æ"
+              ],
+              "text": "Í¾/Å¶ ÄÅ¯ÆÅÄÄÄÆÅÄÄÅ¯ Å½ÆÄÄÆÍ¿ ÄÅ¯ÄÅ¶ÄÄ >ÄÆÆ ÆÅÄÅ¶ Ï¯Ï¬ Ï¯Ï­Í²ÏµÏ¬ ÄÄÇÆ ÏµÏ­Í²Ï¯Ï²Ï± ÄÄÇÆ HÇÄÆ Ï­ ÇÆÍ Å½ÇÄÆ Ï® ÇÆÆÍ Ï¯ ÇÆÆ ÄÅ¶Ä WÄÅµÄÆÅ¬Æ"
+            },
+            {
+              "cells": ["ÄÄÇÆ", "ÄÄÅ½ÇÄ"],
+              "text": "ÄÄÇÆ ÄÄÅ½ÇÄ"
+            },
+            {
+              "cells": ["' B W > &eB"],
+              "text": "' B W > &eB"
+            },
+            {
+              "cells": ["eÅ¶Å¶ÄÅµÄÄ"],
+              "text": "eÅ¶Å¶ÄÅµÄÄ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï®ÍÏ®Ï²Ï³ÍÏ®Ï²Í¿",
+                "ÆµÅ¶ÄÄÆÄÄ",
+                "Í",
+                "Í¬TÍ^",
+                "Í¾",
+                "Ï®ÍÏ®Ï²Ï³ÍÏ®Ï²Í¿"
+              ],
+              "text": "Í¾ Ï®ÍÏ®Ï²Ï³ÍÏ®Ï²Í¿ ÆµÅ¶ÄÄÆÄÄ Í Í¬TÍ^ Í¾ Ï®ÍÏ®Ï²Ï³ÍÏ®Ï²Í¿"
+            },
+            {
+              "cells": ["eÅ¶Å¶ÄÅµÄÄ"],
+              "text": "eÅ¶Å¶ÄÅµÄÄ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï±Ï±Ï¯ÍÏ²Ï²Í¿",
+                "ÆµÅ¶ÄÄÆÄÄ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï±Ï±Ï¯ÍÏ²Ï²Í¿"
+              ],
+              "text": "Í¾ Ï±Ï±Ï¯ÍÏ²Ï²Í¿ ÆµÅ¶ÄÄÆÄÄ Í Í¬AHH Í¾ Ï±Ï±Ï¯ÍÏ²Ï²Í¿"
+            },
+            {
+              "cells": ["eÅ¶Å¶ÄÅµÄÄ"],
+              "text": "eÅ¶Å¶ÄÅµÄÄ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï®Ï¬ÍÏµÏ¬ÏµÍÏ²Ï°Í¿",
+                "ÆµÅ¶ÄÄÆÄÄ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï®Ï¬ÍÏµÏ¬ÏµÍÏ²Ï°Í¿"
+              ],
+              "text": "Í¾ Ï®Ï¬ÍÏµÏ¬ÏµÍÏ²Ï°Í¿ ÆµÅ¶ÄÄÆÄÄ Í Í¬AHH Í¾ Ï®Ï¬ÍÏµÏ¬ÏµÍÏ²Ï°Í¿"
+            },
+            {
+              "cells": ["AÄÆÇ :ÅÅ¯Å¯ AÅ½ÅµÆÄÆ"],
+              "text": "AÄÆÇ :ÅÅ¯Å¯ AÅ½ÅµÆÄÆ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "ÏµÏµÏµÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬Ï­Ï±Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "ÏµÏµÏµÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ ÏµÏµÏµÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬Ï­Ï±Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ ÏµÏµÏµÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["AÄÆÇ :ÅÅ¯Å¯ AÅ½ÅµÆÄÆ"],
+              "text": "AÄÆÇ :ÅÅ¯Å¯ AÅ½ÅµÆÄÆ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï³ÏµÍÏ®Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï­Ï°Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï³ÏµÍÏ®Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï³ÏµÍÏ®Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï­Ï°Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï³ÏµÍÏ®Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["AÄÆÇ :ÅÅ¯Å¯ AÅ½ÅµÆÄÆ"],
+              "text": "AÄÆÇ :ÅÅ¯Å¯ AÅ½ÅµÆÄÆ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï²Ï´ÍÏµÏ²Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï­ÏµÍ¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï­Ï²Ï´ÍÏµÏ²Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï­Ï²Ï´ÍÏµÏ²Ï¬ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï­ÏµÍ¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï­Ï²Ï´ÍÏµÏ²Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï³Ï¯Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬Ï­Ï­Í¬Ï®Ï¬Ï­Ïµ",
+                "TÄÇÆÅ½Å¯Å¯",
+                "Å¯Å½ÆÅÅÅ¶Å",
+                "Å¯Å¯Å½ÇÍ",
+                "Í¾",
+                "Ï³Ï¯Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï³Ï¯Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬Ï­Ï­Í¬Ï®Ï¬Ï­Ïµ TÄÇÆÅ½Å¯Å¯ Å¯Å½ÆÅÅÅ¶Å Å¯Å¯Å½ÇÍ Í¾ Ï³Ï¯Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯Ï¯ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï®Í¬Ï­Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï¯Ï¯ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¯Ï¯ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï®Í¬Ï­Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï¯Ï¯ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯Ï²ÍÏ´Ï³Ï±ÍÏ¬Ï¬Í¿",
+                "Ï®Í¬Ï±Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï¯Ï²ÍÏ´Ï³Ï±ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¯Ï²ÍÏ´Ï³Ï±ÍÏ¬Ï¬Í¿ Ï®Í¬Ï±Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï¯Ï²ÍÏ´Ï³Ï±ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯ÏµÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï®Í¬Ï³Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï¯ÏµÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¯ÏµÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï®Í¬Ï³Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï¯ÏµÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï®ÍÏ²ÏµÏ­ÍÏ®Ï´Í¿",
+                "Ï®Í¬Ï­Ï´Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï­Ï®ÍÏ²ÏµÏ­ÍÏ®Ï´Í¿"
+              ],
+              "text": "Í¾ Ï­Ï®ÍÏ²ÏµÏ­ÍÏ®Ï´Í¿ Ï®Í¬Ï­Ï´Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï­Ï®ÍÏ²ÏµÏ­ÍÏ®Ï´Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï²Ï°ÍÏ°Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï®Í¬Ï®Ï¬Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï²Ï°ÍÏ°Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï²Ï°ÍÏ°Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï®Í¬Ï®Ï¬Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï²Ï°ÍÏ°Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï°Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï­Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï­Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï°Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï­Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï´ÍÏ±Ï­Ï´ÍÏ¯Ï°Í¿",
+                "Ï¯Í¬Ï²Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï´ÍÏ±Ï­Ï´ÍÏ¯Ï°Í¿"
+              ],
+              "text": "Í¾ Ï´ÍÏ±Ï­Ï´ÍÏ¯Ï°Í¿ Ï¯Í¬Ï²Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï´ÍÏ±Ï­Ï´ÍÏ¯Ï°Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï´Ï¬ÍÏ±Ï®Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï­Ï­Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH",
+                "Í¾",
+                "Ï´Ï¬ÍÏ±Ï®Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï´Ï¬ÍÏ±Ï®Ï¬ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï­Ï­Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¾ Ï´Ï¬ÍÏ±Ï®Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï±Ï°ÍÏ®Ï¬Ï³ÍÏ³Ï¬Í¿",
+                "Ï®Í¬Ï®Ï¬Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬TÄÇÆÅ½Å¯Å¯Í¬AÅ½Å¶ÄÆÅÇÄÆÅÅ½Å¶",
+                "Í¾",
+                "Ï±Ï°ÍÏ®Ï¬Ï³ÍÏ³Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï±Ï°ÍÏ®Ï¬Ï³ÍÏ³Ï¬Í¿ Ï®Í¬Ï®Ï¬Í¬Ï®Ï¬Ï­Ïµ Í Í¬TÄÇÆÅ½Å¯Å¯Í¬AÅ½Å¶ÄÆÅÇÄÆÅÅ½Å¶ Í¾ Ï±Ï°ÍÏ®Ï¬Ï³ÍÏ³Ï¬Í¿"
+            },
+            {
+              "cells": ["AÄÄÄÆÅÅ½ BÄÆÆµÅ¯ÄÅ¶ Í AÍ Í"],
+              "text": "AÄÄÄÆÅÅ½ BÄÆÆµÅ¯ÄÅ¶ Í AÍ Í"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï°Ï¬ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï³Í¬Ï®Ï°Í¬Ï®Ï¬Ï­Ï³",
+                "/Å¶ÆÄÅ¯ÅÅÄÅ¶ÄÄ Ä¨ÆµÅ¶Ä",
+                "Í¾",
+                "Ï°Ï¬ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï°Ï¬ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï³Í¬Ï®Ï°Í¬Ï®Ï¬Ï­Ï³ /Å¶ÆÄÅ¯ÅÅÄÅ¶ÄÄ Ä¨ÆµÅ¶Ä Í¾ Ï°Ï¬ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["AÄÄÄÆÅÅ½ BÄÆÆµÅ¯ÄÅ¶ Í AÍ Í"],
+              "text": "AÄÄÄÆÅÅ½ BÄÆÆµÅ¯ÄÅ¶ Í AÍ Í"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯Ï²ÍÏ¯Ï®Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬Ï­Ï´Í¬Ï®Ï¬Ï­Ïµ",
+                "a p",
+                "Í¾",
+                "Ï¯Ï²ÍÏ¯Ï®Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¯Ï²ÍÏ¯Ï®Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬Ï­Ï´Í¬Ï®Ï¬Ï­Ïµ a p Í¾ Ï¯Ï²ÍÏ¯Ï®Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["'Å¯ÄÅ¶ÄÄ >Å½ÆÄÅ¶ÆÄ"],
+              "text": "'Å¯ÄÅ¶ÄÄ >Å½ÆÄÅ¶ÆÄ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï²ÍÏ²Ï±Ï²ÍÏ¬Ï¬Í¿",
+                "ÏµÍ¬Ï®Ï±Í¬Ï®Ï¬Ï­Ï³",
+                "a p",
+                "Í¾",
+                "Ï²ÍÏ²Ï±Ï²ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï²ÍÏ²Ï±Ï²ÍÏ¬Ï¬Í¿ ÏµÍ¬Ï®Ï±Í¬Ï®Ï¬Ï­Ï³ a p Í¾ Ï²ÍÏ²Ï±Ï²ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["Å¯ÄÄÆÆ BÄÆÆÄ"],
+              "text": "Å¯ÄÄÆÆ BÄÆÆÄ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¬ÍÏ­Ï¬Í¿",
+                "Ï­Ï®Í¬Ï¯Ï­Í¬Ï®Ï¬Ï­Ï² a p",
+                "Í¾",
+                "Ï¬ÍÏ­Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¬ÍÏ­Ï¬Í¿ Ï­Ï®Í¬Ï¯Ï­Í¬Ï®Ï¬Ï­Ï² a p Í¾ Ï¬ÍÏ­Ï¬Í¿"
+            },
+            {
+              "cells": ["Å¶ÅÄÅ¯Å", "Å¯Å¯Å"],
+              "text": "Å¶ÅÄÅ¯Å Å¯Å¯Å"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¬ÍÏ®Ï¬Í¿",
+                "Ï´Í¬Ï­Ï²Í¬Ï®Ï¬Ï­Ï³",
+                "a p",
+                "Í¾",
+                "Ï¬ÍÏ®Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¬ÍÏ®Ï¬Í¿ Ï´Í¬Ï­Ï²Í¬Ï®Ï¬Ï­Ï³ a p Í¾ Ï¬ÍÏ®Ï¬Í¿"
+            },
+            {
+              "cells": [":Å½ÅÅ¶ BÅ½ÄÄÅ¯"],
+              "text": ":Å½ÅÅ¶ BÅ½ÄÄÅ¯"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï´Ï°Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Ï¬Í¬Ï®Í¬Ï®Ï¬Ï­Ï³",
+                "a p",
+                "Í¾",
+                "Ï´Ï°Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï´Ï°Ï¬ÍÏ¬Ï¬Í¿ Ï­Ï¬Í¬Ï®Í¬Ï®Ï¬Ï­Ï³ a p Í¾ Ï´Ï°Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["WÄÇÅµÆµÅ¶ÄÅ½ AÅ½Å¶ÆÅ½Ç"],
+              "text": "WÄÇÅµÆµÅ¶ÄÅ½ AÅ½Å¶ÆÅ½Ç"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï¬ÍÏ´Ï¬Ï²ÍÏ¬Ï¬Í¿",
+                "ÏµÍ¬Ï­Ï³Í¬Ï®Ï¬Ï­Ï´",
+                "a p",
+                "Í¾",
+                "Ï­Ï¬ÍÏ´Ï¬Ï²ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï­Ï¬ÍÏ´Ï¬Ï²ÍÏ¬Ï¬Í¿ ÏµÍ¬Ï­Ï³Í¬Ï®Ï¬Ï­Ï´ a p Í¾ Ï­Ï¬ÍÏ´Ï¬Ï²ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["Å¶ÆÅÅ½Å¶Ç ^ÄÅ¯Å½ÆÅÅ½"],
+              "text": "Å¶ÆÅÅ½Å¶Ç ^ÄÅ¯Å½ÆÅÅ½"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï¯ÍÏ¬Ï®Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬Ï­Ï´Í¬Ï®Ï¬Ï­Ïµ",
+                "a p",
+                "Í¾",
+                "Ï­Ï¯ÍÏ¬Ï®Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï­Ï¯ÍÏ¬Ï®Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬Ï­Ï´Í¬Ï®Ï¬Ï­Ïµ a p Í¾ Ï­Ï¯ÍÏ¬Ï®Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": [
+                "WÅ½ÄÄÆÆ 'ÄÅ¯ÇÄÇ",
+                "Í¾",
+                "Ï®Ï®ÍÏ°Ï³Ï±ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï®Ï®Í¬Ï®Ï¬Ï­Ïµ",
+                "a p",
+                "Í¾",
+                "Ï®Ï®ÍÏ°Ï³Ï±ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "WÅ½ÄÄÆÆ 'ÄÅ¯ÇÄÇ Í¾ Ï®Ï®ÍÏ°Ï³Ï±ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï®Ï®Í¬Ï®Ï¬Ï­Ïµ a p Í¾ Ï®Ï®ÍÏ°Ï³Ï±ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": [
+                ":ÄÅ¶Ä pÄÅ¯ÄÅ¶ÇÆµÄÅ¯Ä",
+                "Í¾",
+                "Ï­Ï³ÍÏ¯Ï¬Ï²ÍÏ´Ï¬Í¿",
+                "Ï¯Í¬Ï­Ï¯Í¬Ï®Ï¬Ï­Ïµ",
+                "a p",
+                "Í¾",
+                "Ï­Ï³ÍÏ¯Ï¬Ï²ÍÏ´Ï¬Í¿"
+              ],
+              "text": ":ÄÅ¶Ä pÄÅ¯ÄÅ¶ÇÆµÄÅ¯Ä Í¾ Ï­Ï³ÍÏ¯Ï¬Ï²ÍÏ´Ï¬Í¿ Ï¯Í¬Ï­Ï¯Í¬Ï®Ï¬Ï­Ïµ a p Í¾ Ï­Ï³ÍÏ¯Ï¬Ï²ÍÏ´Ï¬Í¿"
+            },
+            {
+              "cells": [
+                ">ÄÅ¶Ç &ÄÅÅ¶Ä",
+                "Í¾",
+                "Ï­Ï¯ÍÏ¬Ï²Ï±ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï®ÏµÍ¬Ï®Ï¬Ï­Ïµ",
+                "a p",
+                "Í¾",
+                "Ï­Ï¯ÍÏ¬Ï²Ï±ÍÏ¬Ï¬Í¿"
+              ],
+              "text": ">ÄÅ¶Ç &ÄÅÅ¶Ä Í¾ Ï­Ï¯ÍÏ¬Ï²Ï±ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï®ÏµÍ¬Ï®Ï¬Ï­Ïµ a p Í¾ Ï­Ï¯ÍÏ¬Ï²Ï±ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": [
+                "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶",
+                "Í¾",
+                "Ï­Ï±ÍÏ²Ï¬Ï²ÍÏ²Ï°Í¿",
+                "Ï¯Í¬Ï­Ï¯Í¬Ï®Ï¬Ï­Ïµ",
+                "a p",
+                "Í¾",
+                "Ï­Ï±ÍÏ²Ï¬Ï²ÍÏ²Ï°Í¿"
+              ],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶ Í¾ Ï­Ï±ÍÏ²Ï¬Ï²ÍÏ²Ï°Í¿ Ï¯Í¬Ï­Ï¯Í¬Ï®Ï¬Ï­Ïµ a p Í¾ Ï­Ï±ÍÏ²Ï¬Ï²ÍÏ²Ï°Í¿"
+            },
+            {
+              "cells": [
+                "AÄÆÇ",
+                "ÅÄÅ¶Ä aÍ BÆµÄ¨ÄÄÅ¯Ä",
+                "Í¾",
+                "ÏµÍÏ¯Ï²Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï­Ï¯Í¬Ï®Ï¬Ï­Ïµ",
+                "a p",
+                "Í¾",
+                "ÏµÍÏ¯Ï²Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "AÄÆÇ ÅÄÅ¶Ä aÍ BÆµÄ¨ÄÄÅ¯Ä Í¾ ÏµÍÏ¯Ï²Ï¬ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï­Ï¯Í¬Ï®Ï¬Ï­Ïµ a p Í¾ ÏµÍÏ¯Ï²Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": [
+                "ÆÅ©ÄÅ¶Ä TÅ½Å¯ÅÄÅ½",
+                "Í¾",
+                "Ï°ÍÏ²Ï°Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï®Ï®Í¬Ï®Ï¬Ï­Ïµ",
+                "a p",
+                "Í¾",
+                "Ï°ÍÏ²Ï°Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "ÆÅ©ÄÅ¶Ä TÅ½Å¯ÅÄÅ½ Í¾ Ï°ÍÏ²Ï°Ï¬ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï®Ï®Í¬Ï®Ï¬Ï­Ïµ a p Í¾ Ï°ÍÏ²Ï°Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["A W< a"],
+              "text": "A W< a"
+            },
+            {
+              "cells": ["ÅÅµÄÄ AÄÆÅÄ", "ÅÄÅ½ÆÅ½"],
+              "text": "ÅÅµÄÄ AÄÆÅÄ ÅÄÅ½ÆÅ½"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï±Ï±Ï®ÍÏ´Ï­Í¿",
+                "ÆµÅ¶ÄÄÆÄÄ",
+                "Í",
+                "Í¬TÍ^",
+                "Í¾",
+                "Ï±Ï±Ï®ÍÏ´Ï­Í¿"
+              ],
+              "text": "Í¾ Ï±Ï±Ï®ÍÏ´Ï­Í¿ ÆµÅ¶ÄÄÆÄÄ Í Í¬TÍ^ Í¾ Ï±Ï±Ï®ÍÏ´Ï­Í¿"
+            },
+            {
+              "cells": ["ÅÅµÄÄ AÄÆÅÄ", "ÅÄÅ½ÆÅ½"],
+              "text": "ÅÅµÄÄ AÄÆÅÄ ÅÄÅ½ÆÅ½"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¬ÍÏ­Ï¬Í¿",
+                "ÆµÅ¶ÄÄÆÄÄ",
+                "Í",
+                "Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯",
+                "Í¾",
+                "Ï¬ÍÏ­Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¬ÍÏ­Ï¬Í¿ ÆµÅ¶ÄÄÆÄÄ Í Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯ Í¾ Ï¬ÍÏ­Ï¬Í¿"
+            },
+            {
+              "cells": ["'Å¯ÄÅ¶ÄÄ >Å½ÆÄÅ¶ÆÄ"],
+              "text": "'Å¯ÄÅ¶ÄÄ >Å½ÆÄÅ¶ÆÄ"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Ï®Í¬Ï¯Ï­Í¬Ï®Ï¬Ï­Ï³",
+                "Í",
+                "Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯",
+                "Í¾",
+                "Ï¯Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¯Ï¬ÍÏ¬Ï¬Í¿ Ï­Ï®Í¬Ï¯Ï­Í¬Ï®Ï¬Ï­Ï³ Í Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯ Í¾ Ï¯Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["ÅÅµÄÄ AÄÆÅÄ", "ÅÄÅ½ÆÅ½"],
+              "text": "ÅÅµÄÄ AÄÆÅÄ ÅÄÅ½ÆÅ½"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï´Ï¯ÍÏµÏµÍ¿",
+                "Ï­Ï®Í¬Ï¯Ï­Í¬Ï®Ï¬Ï­Ï³",
+                "Í",
+                "Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯",
+                "Í¾",
+                "Ï­Ï´Ï¯ÍÏµÏµÍ¿"
+              ],
+              "text": "Í¾ Ï­Ï´Ï¯ÍÏµÏµÍ¿ Ï­Ï®Í¬Ï¯Ï­Í¬Ï®Ï¬Ï­Ï³ Í Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯ Í¾ Ï­Ï´Ï¯ÍÏµÏµÍ¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï®Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬Ï­Ï­Í¬Ï®Ï¬Ï­Ïµ",
+                "TÄÇÆÅ½Å¯Å¯",
+                "Å¯Å½ÆÅÅÅ¶Å",
+                "Å¯Å¯Å½ÇÍ",
+                "Í¾",
+                "Ï­Ï®Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï­Ï®Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬Ï­Ï­Í¬Ï®Ï¬Ï­Ïµ TÄÇÆÅ½Å¯Å¯ Å¯Å½ÆÅÅÅ¶Å Å¯Å¯Å½ÇÍ Í¾ Ï­Ï®Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯Ï²ÍÏ°Ï­Ï°ÍÏµÏ®Í¿",
+                "Ï¯Í¬Ï±Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯Í¬Å½ÇÄÆÆÅÅµÄ",
+                "Í¾",
+                "Ï¯Ï²ÍÏ°Ï­Ï°ÍÏµÏ®Í¿"
+              ],
+              "text": "Í¾ Ï¯Ï²ÍÏ°Ï­Ï°ÍÏµÏ®Í¿ Ï¯Í¬Ï±Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯Í¬Å½ÇÄÆÆÅÅµÄ Í¾ Ï¯Ï²ÍÏ°Ï­Ï°ÍÏµÏ®Í¿"
+            },
+            {
+              "cells": ["A a Ww"],
+              "text": "A a Ww"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬ÏµÍ¬Ï®Ï¬Ï­Ïµ",
+                "TÄÇÆÅ½Å¯Å¯",
+                "Å¯Å½ÆÅÅÅ¶Å",
+                "Å¯Å¯Å½ÇÍ",
+                "Í¾",
+                "Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬ÏµÍ¬Ï®Ï¬Ï­Ïµ TÄÇÆÅ½Å¯Å¯ Å¯Å½ÆÅÅÅ¶Å Å¯Å¯Å½ÇÍ Í¾ Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["^> e',a W,He^"],
+              "text": "^> e',a W,He^"
+            },
+            {
+              "cells": [
+                "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶",
+                "Í¾",
+                "Ï°Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬Ï­Ï­Í¬Ï®Ï¬Ï­Ïµ",
+                "TÄÇÆÅ½Å¯Å¯",
+                "Å¯Å½ÆÅÅÅ¶Å",
+                "Å¯Å¯Å½ÇÍ",
+                "Í¾",
+                "Ï°Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶ Í¾ Ï°Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬Ï­Ï­Í¬Ï®Ï¬Ï­Ïµ TÄÇÆÅ½Å¯Å¯ Å¯Å½ÆÅÅÅ¶Å Å¯Å¯Å½ÇÍ Í¾ Ï°Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": [
+                "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶",
+                "Í¾",
+                "Ï­Ï³ÍÏ²ÏµÏ²ÍÏ®Ï²Í¿",
+                "Ï¯Í¬Ï±Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯",
+                "Í¾",
+                "Ï­Ï³ÍÏ²ÏµÏ²ÍÏ®Ï²Í¿"
+              ],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶ Í¾ Ï­Ï³ÍÏ²ÏµÏ²ÍÏ®Ï²Í¿ Ï¯Í¬Ï±Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯ Í¾ Ï­Ï³ÍÏ²ÏµÏ²ÍÏ®Ï²Í¿"
+            },
+            {
+              "cells": ["^THWa^ Î", "e>aeW >"],
+              "text": "^THWa^ Î e>aeW >"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬ÏµÍ¬Ï®Ï¬Ï­Ïµ",
+                "TÄÇÆÅ½Å¯Å¯",
+                "Å¯Å½ÆÅÅÅ¶Å",
+                "Å¯Å¯Å½ÇÍ",
+                "Í¾",
+                "Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬ÏµÍ¬Ï®Ï¬Ï­Ïµ TÄÇÆÅ½Å¯Å¯ Å¯Å½ÆÅÅÅ¶Å Å¯Å¯Å½ÇÍ Í¾ Ï²ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": [",", ">a, ^ Wp/", "^"],
+              "text": ", >a, ^ Wp/ ^"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï­Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬ÏµÍ¬Ï®Ï¬Ï­Ïµ",
+                "TÄÇÆÅ½Å¯Å¯",
+                "Å¯Å½ÆÅÅÅ¶Å",
+                "Å¯Å¯Å½ÇÍ",
+                "Í¾",
+                "Ï­Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï­Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬ÏµÍ¬Ï®Ï¬Ï­Ïµ TÄÇÆÅ½Å¯Å¯ Å¯Å½ÆÅÅÅ¶Å Å¯Å¯Å½ÇÍ Í¾ Ï­Ï®ÍÏ¬Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï²ÍÏ°Ï¯Ï±ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï²Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬TÄÇÆÅ½Å¯Å¯Í¬^ÆµÄÆÅÆÆÄÅ¶ÄÄ",
+                "Í¾",
+                "Ï²ÍÏ°Ï¯Ï±ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï²ÍÏ°Ï¯Ï±ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï²Í¬Ï®Ï¬Ï­Ïµ Í Í¬TÄÇÆÅ½Å¯Å¯Í¬^ÆµÄÆÅÆÆÄÅ¶ÄÄ Í¾ Ï²ÍÏ°Ï¯Ï±ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "ÏµÍÏ¬Ï±Ï­ÍÏ­Ï²Í¿",
+                "Ï¯Í¬Ï®Ï²Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯",
+                "Í¾",
+                "ÏµÍÏ¬Ï±Ï­ÍÏ­Ï²Í¿"
+              ],
+              "text": "Í¾ ÏµÍÏ¬Ï±Ï­ÍÏ­Ï²Í¿ Ï¯Í¬Ï®Ï²Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯ Í¾ ÏµÍÏ¬Ï±Ï­ÍÏ­Ï²Í¿"
+            },
+            {
+              "cells": ["^Í Í&"],
+              "text": "^Í Í&"
+            },
+            {
+              "cells": ["ÅÅµÄÄ AÄÆÅÄ", "ÅÄÅ½ÆÅ½"],
+              "text": "ÅÅµÄÄ AÄÆÅÄ ÅÄÅ½ÆÅ½"
+            },
+            {
+              "cells": ["Í¾", "Ï¬ÍÏ±Ï¬Í¿", "ÆµÅ¶ÄÄÆÄÄ", "Í¾", "Ï¬ÍÏ±Ï¬Í¿"],
+              "text": "Í¾ Ï¬ÍÏ±Ï¬Í¿ ÆµÅ¶ÄÄÆÄÄ Í¾ Ï¬ÍÏ±Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯ÍÏ´Ï¬Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï­Í¬Ï®Ï´Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯",
+                "Í¾",
+                "Ï¯ÍÏ´Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¯ÍÏ´Ï¬Ï¬ÍÏ¬Ï¬Í¿ Ï­Í¬Ï®Ï´Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯ Í¾ Ï¯ÍÏ´Ï¬Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶"
+            },
+            {
+              "cells": [
+                "Í¾",
+                "Ï¯Ï¯ÍÏ±Ï±Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï±Í¬Ï®Ï¬Ï­Ïµ",
+                "Í",
+                "Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯",
+                "Í¾",
+                "Ï¯Ï¯ÍÏ±Ï±Ï¬ÍÏ¬Ï¬Í¿"
+              ],
+              "text": "Í¾ Ï¯Ï¯ÍÏ±Ï±Ï¬ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï±Í¬Ï®Ï¬Ï­Ïµ Í Í¬AHH Í¬TÄÇÆÅ½Å¯Å¯ Í¾ Ï¯Ï¯ÍÏ±Ï±Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": ["aWe^a &eB"],
+              "text": "aWe^a &eB"
+            },
+            {
+              "cells": ["eÅ¶ÆÄÄÅ½Å¶ÄÅÅ¯Å¯ÄÄ", "ÅµÅ½ÆµÅ¶Æ"],
+              "text": "eÅ¶ÆÄÄÅ½Å¶ÄÅÅ¯Å¯ÄÄ ÅµÅ½ÆµÅ¶Æ"
+            },
+            {
+              "cells": ["ÆµÅ¶Å¶ÄÅµÄÄ", "Í¾", "Ï±Ï°ÍÏ²Ï°Ï±ÍÏ¬Ï®Í¿", "ÆµÅ¶ÄÄÆÄÄ"],
+              "text": "ÆµÅ¶Å¶ÄÅµÄÄ Í¾ Ï±Ï°ÍÏ²Ï°Ï±ÍÏ¬Ï®Í¿ ÆµÅ¶ÄÄÆÄÄ"
+            },
+            {
+              "cells": ["Í¾", "Ï±Ï°ÍÏ²Ï°Ï±ÍÏ¬Ï®Í¿"],
+              "text": "Í¾ Ï±Ï°ÍÏ²Ï°Ï±ÍÏ¬Ï®Í¿"
+            },
+            {
+              "cells": [
+                "ÅÅµÄÄ AÄÆÅÄ",
+                "ÅÄÅ½ÆÅ½",
+                "Í¾",
+                "Ï¬ÍÏ®Ï¬Í¿",
+                "Ï®Í¬ÏµÍ¬Ï®Ï¬Ï­Ï²",
+                "^ÄÅ¯ÄÆÅÄÆÍ¬qÄÅÄÆ :H"
+              ],
+              "text": "ÅÅµÄÄ AÄÆÅÄ ÅÄÅ½ÆÅ½ Í¾ Ï¬ÍÏ®Ï¬Í¿ Ï®Í¬ÏµÍ¬Ï®Ï¬Ï­Ï² ^ÄÅ¯ÄÆÅÄÆÍ¬qÄÅÄÆ :H"
+            },
+            {
+              "cells": ["Í¾", "Ï¬ÍÏ®Ï¬Í¿"],
+              "text": "Í¾ Ï¬ÍÏ®Ï¬Í¿"
+            },
+            {
+              "cells": [
+                "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶",
+                "Í¾",
+                "Ï¯Ï´ÍÏ²Ï±Ï¬ÍÏ¬Ï¬Í¿",
+                "Ï¯Í¬Ï²Í¬Ï®Ï¬Ï­Ïµ",
+                "^ÄÅ¯ÄÆÅÄÆÍ¬qÄÅÄÆ :H"
+              ],
+              "text": "BÅÅ¶Ä¨Ä AÅ½ÅµÄÅ¯ÄÅ¶ Í¾ Ï¯Ï´ÍÏ²Ï±Ï¬ÍÏ¬Ï¬Í¿ Ï¯Í¬Ï²Í¬Ï®Ï¬Ï­Ïµ ^ÄÅ¯ÄÆÅÄÆÍ¬qÄÅÄÆ :H"
+            },
+            {
+              "cells": ["Í¾", "Ï¯Ï´ÍÏ²Ï±Ï¬ÍÏ¬Ï¬Í¿"],
+              "text": "Í¾ Ï¯Ï´ÍÏ²Ï±Ï¬ÍÏ¬Ï¬Í¿"
+            },
+            {
+              "cells": [
+                "aÅ½ÆÄÅ¯",
+                "Í¾ Ï®ÍÏµÏ®Ï³ÍÏ®Ï¬Ï´ÍÏ±Ï´Í¿",
+                "Í¾",
+                "Ï°Ï³Ï®ÍÏ°Ï­Ï¬ÍÏ³Ï´Í¿ Í¾ Ï®ÍÏ®Ï²Ï¯ÍÏ­Ï°Ï°ÍÏ²Ï®Í¿ Í¾",
+                "Ï²Ï±ÍÏ­ÏµÏ³ÍÏ²ÏµÍ¿ Í¾",
+                "Ï°Ï³ÍÏ±Ï®Ï²ÍÏ¬Ï¬Í¿ Í¾",
+                "Ï¬ÍÏ®Ï¬Í¿ Í¾",
+                "Ï³Ï´ÍÏµÏ®ÏµÍÏ®ÏµÍ¿ Í¾",
+                "Í²à´®à´®Í¿"
+              ],
+              "text": "aÅ½ÆÄÅ¯ Í¾ Ï®ÍÏµÏ®Ï³ÍÏ®Ï¬Ï´ÍÏ±Ï´Í¿ Í¾ Ï°Ï³Ï®ÍÏ°Ï­Ï¬ÍÏ³Ï´Í¿ Í¾ Ï®ÍÏ®Ï²Ï¯ÍÏ­Ï°Ï°ÍÏ²Ï®Í¿ Í¾ Ï²Ï±ÍÏ­ÏµÏ³ÍÏ²ÏµÍ¿ Í¾ Ï°Ï³ÍÏ±Ï®Ï²ÍÏ¬Ï¬Í¿ Í¾ Ï¬ÍÏ®Ï¬Í¿ Í¾ Ï³Ï´ÍÏµÏ®ÏµÍÏ®ÏµÍ¿ Í¾ Í²à´®à´®Í¿"
+            },
+            {
+              "cells": [
+                "qÄ ÅÄÆÄÄÇ ÄÄÆÆÅÄ¨Ç ÆÅÄÆ Å ÅÄÇÄ ÆÄÇÅÄÇÄÄ ÆÅÄ ÄÅ½Å¶ÆÄÅ¶ÆÆ ÄÅ¶Ä ÅÄÆÄÄÇ ÄÆÆÄÆÆ ÆÅ½ ÆÅÄ ÇÄÆÄÄÅÆÇ ÄÅ¶Ä ÄÅ½ÆÆÄÄÆÅ¶ÄÆÆ Å½Ä¨ ÆÅÄ ÄÄÆÄ"
+              ],
+              "text": "qÄ ÅÄÆÄÄÇ ÄÄÆÆÅÄ¨Ç ÆÅÄÆ Å ÅÄÇÄ ÆÄÇÅÄÇÄÄ ÆÅÄ ÄÅ½Å¶ÆÄÅ¶ÆÆ ÄÅ¶Ä ÅÄÆÄÄÇ ÄÆÆÄÆÆ ÆÅ½ ÆÅÄ ÇÄÆÄÄÅÆÇ ÄÅ¶Ä ÄÅ½ÆÆÄÄÆÅ¶ÄÆÆ Å½Ä¨ ÆÅÄ ÄÄÆÄ"
+            },
+            {
+              "cells": [
+                "Å½Æ ÅÅ¶Ä¨Å½ÆÅµÄÆÅÅ½Å¶ ÄÅ½Å¶ÆÄÅÅ¶ÄÄ ÅÅ¶ ÆÅÅÆ ÄÅ½ÄÆµÅµÄÅ¶ÆÍ"
+              ],
+              "text": "Å½Æ ÅÅ¶Ä¨Å½ÆÅµÄÆÅÅ½Å¶ ÄÅ½Å¶ÆÄÅÅ¶ÄÄ ÅÅ¶ ÆÅÅÆ ÄÅ½ÄÆµÅµÄÅ¶ÆÍ"
+            },
+            {
+              "cells": ["A w> B", "aÍ ^ Wp/", ",HBÍ A", "W/H B Te> BÍ AÍ"],
+              "text": "A w> B aÍ ^ Wp/ ,HBÍ A W/H B Te> BÍ AÍ"
+            },
+            {
+              "cells": ["AÆµÅ¶ÅÄÅÆÄÅ¯", "ÄÄÅ½ÆµÅ¶ÆÄÅ¶Æ", ">"],
+              "text": "AÆµÅ¶ÅÄÅÆÄÅ¯ ÄÄÅ½ÆµÅ¶ÆÄÅ¶Æ >"
+            }
+          ]
+        }
+      ],
+      "signatories": []
+    },
+    {
+      "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/08/UNLIQUIDATED-CASH-ADVANCES-1Q-2020.pdf",
+      "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+      "sourceTitle": "2020 Full Disclosure",
+      "sourceFileName": "UNLIQUIDATED-CASH-ADVANCES-1Q-2020.pdf",
+      "publishedAt": "2020-07-28T19:55:25",
+      "originalLabel": "UNLIQUIDATED-CASH-ADVANCES-1Q-2020.pdf",
+      "sourceReferences": [
+        {
+          "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/08/UNLIQUIDATED-CASH-ADVANCES-1Q-2020.pdf",
+          "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceTitle": "2020 Full Disclosure",
+          "publishedAt": "2020-07-28T19:55:25",
+          "sourceElement": "a",
+          "sourceAttribute": "href",
+          "fileName": "UNLIQUIDATED-CASH-ADVANCES-1Q-2020.pdf"
+        }
+      ],
+      "documentSha256": "5ca5b6d788bd5728393e2a73af3f01ea2faa6273fea4bce3923e05a07b9f270e",
+      "parseStatus": "ocr_text_found",
+      "extractionMethod": "PyMuPDF native text + Tesseract OCR",
+      "normalizedCategory": "unliquidated-cash-advances",
+      "normalizedCategoryLabel": "Unliquidated cash advances",
+      "categoryBasis": "document heading",
+      "parsedTitle": "FDP Form 12 - Unliquidated Cash Advances",
+      "reportingPeriod": null,
+      "extractionStatus": "text_extracted",
+      "pageCount": 1,
+      "tablePages": [
+        {
+          "pageNumber": 1,
+          "rows": [
+            {
+              "cells": ["FDP Form 12 - Unliquidated Cash Advances"],
+              "text": "FDP Form 12 - Unliquidated Cash Advances"
+            },
+            {
+              "cells": ["UNLIQUIDATED CASH ADVANCES"],
+              "text": "UNLIQUIDATED CASH ADVANCES"
+            },
+            {
+              "cells": ["As of March", "2020"],
+              "text": "As of March 2020",
+              "item": "As of March",
+              "value": "2020"
+            },
+            {
+              "cells": ["Municipality : Miagao"],
+              "text": "Municipality : Miagao"
+            },
+            {
+              "cells": ["Amount Due"],
+              "text": "Amount Due"
+            },
+            {
+              "cells": [
+                "Name of Debtor",
+                "Amount",
+                "Date Granted",
+                "Purpose",
+                "Current",
+                "Past Due",
+                "Remarks"
+              ],
+              "text": "Name of Debtor Amount Date Granted Purpose Current Past Due Remarks"
+            },
+            {
+              "cells": [
+                "(In alphabetical order)",
+                "Balance",
+                "Less than 30",
+                "31-90 days",
+                "91-365 days",
+                "Over 1 yr.",
+                "over 2 yrs.",
+                "3 yrs and"
+              ],
+              "text": "(In alphabetical order) Balance Less than 30 31-90 days 91-365 days Over 1 yr. over 2 yrs. 3 yrs and"
+            },
+            {
+              "cells": ["days", "above"],
+              "text": "days above"
+            },
+            {
+              "cells": ["GENERAL FUND"],
+              "text": "GENERAL FUND"
+            },
+            {
+              "cells": [
+                "Unnamed",
+                "2,267.26",
+                "undated",
+                "C.A /P.S",
+                "2,267.26"
+              ],
+              "text": "Unnamed 2,267.26 undated C.A /P.S 2,267.26"
+            },
+            {
+              "cells": ["Unnamed", "553.66", "undated", "C.A /MOOE", "553.66"],
+              "text": "Unnamed 553.66 undated C.A /MOOE 553.66"
+            },
+            {
+              "cells": [
+                "Unnamed",
+                "20,909.64",
+                "undated",
+                "C.A /MOOE",
+                "20,909.64"
+              ],
+              "text": "Unnamed 20,909.64 undated C.A /MOOE 20,909.64"
+            },
+            {
+              "cells": [
+                "Ninfa Momblan",
+                "15,000.00",
+                "12/17/2019 C.A /MOOE",
+                "15,000.00"
+              ],
+              "text": "Ninfa Momblan 15,000.00 12/17/2019 C.A /MOOE 15,000.00"
+            },
+            {
+              "cells": [
+                "Ninfa Momblan",
+                "10,548.88",
+                "2/28/2020",
+                "C.A /MOOE",
+                "10,548.88"
+              ],
+              "text": "Ninfa Momblan 10,548.88 2/28/2020 C.A /MOOE 10,548.88"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "200,000.00",
+                "3/23/2020",
+                "C.A /Misc. expenses",
+                "200,000.00"
+              ],
+              "text": "Mary Jill H. Momper 200,000.00 3/23/2020 C.A /Misc. expenses 200,000.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "100,000.00",
+                "3/23/2020",
+                "C.A /Misc. expenses",
+                "100,000.00"
+              ],
+              "text": "Mary Jill H. Momper 100,000.00 3/23/2020 C.A /Misc. expenses 100,000.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "96,982.08",
+                "3/20/2020",
+                "C.A /Payroll",
+                "96,982.08",
+                "liquidated April"
+              ],
+              "text": "Mary Jill H. Momper 96,982.08 3/20/2020 C.A /Payroll 96,982.08 liquidated April"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "18,000.00",
+                "1/14/20",
+                "C.A /MOOE",
+                "18,000.00"
+              ],
+              "text": "Mary Jill H. Momper 18,000.00 1/14/20 C.A /MOOE 18,000.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "18,550.00",
+                "1/16/20",
+                "C.A /MOOE",
+                "18,550.00"
+              ],
+              "text": "Mary Jill H. Momper 18,550.00 1/16/20 C.A /MOOE 18,550.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "159,720.00",
+                "1/29/20",
+                "C.A /MOOE",
+                "159,720.00"
+              ],
+              "text": "Mary Jill H. Momper 159,720.00 1/29/20 C.A /MOOE 159,720.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "15,500.00",
+                "2/4/20",
+                "C.A /MOOE",
+                "15,500.00"
+              ],
+              "text": "Mary Jill H. Momper 15,500.00 2/4/20 C.A /MOOE 15,500.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "48,550.00",
+                "2/4/20",
+                "C.A /MOOE",
+                "48,550.00"
+              ],
+              "text": "Mary Jill H. Momper 48,550.00 2/4/20 C.A /MOOE 48,550.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "15,000.00",
+                "2/5/20",
+                "C.A /MOOE",
+                "15,000.00"
+              ],
+              "text": "Mary Jill H. Momper 15,000.00 2/5/20 C.A /MOOE 15,000.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "646,387.13",
+                "2/19/2020",
+                "C.A /MOOE",
+                "646,387.13",
+                "liquidated April"
+              ],
+              "text": "Mary Jill H. Momper 646,387.13 2/19/2020 C.A /MOOE 646,387.13 liquidated April"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "15,500.00",
+                "3/3/2020",
+                "C.A /MOOE",
+                "15,500.00"
+              ],
+              "text": "Mary Jill H. Momper 15,500.00 3/3/2020 C.A /MOOE 15,500.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "33,750.00",
+                "3/19/2020",
+                "C.A /MOOE",
+                "33,750.00",
+                "liquidated April"
+              ],
+              "text": "Mary Jill H. Momper 33,750.00 3/19/2020 C.A /MOOE 33,750.00 liquidated April"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "168,960.00",
+                "3/19/2020",
+                "C.A /MOOE",
+                "168,960.00",
+                "liquidated April"
+              ],
+              "text": "Mary Jill H. Momper 168,960.00 3/19/2020 C.A /MOOE 168,960.00 liquidated April"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "28,912.05",
+                "3/31/2020",
+                "C.A /MOOE",
+                "28,912.05",
+                "liquidated April"
+              ],
+              "text": "Mary Jill H. Momper 28,912.05 3/31/2020 C.A /MOOE 28,912.05 liquidated April"
+            },
+            {
+              "cells": [
+                "Macario Napulan , M.D.",
+                "40,000.00",
+                "7/24/2017",
+                "Inteligence fund",
+                "40,000.00"
+              ],
+              "text": "Macario Napulan , M.D. 40,000.00 7/24/2017 Inteligence fund 40,000.00"
+            },
+            {
+              "cells": [
+                "Macario Napulan , M.D.",
+                "39,260.00",
+                "2/12/2020",
+                "TEV",
+                "39,260.00"
+              ],
+              "text": "Macario Napulan , M.D. 39,260.00 2/12/2020 TEV 39,260.00"
+            },
+            {
+              "cells": [
+                "Macario Napulan , M.D.",
+                "250,000.00",
+                "3/20/2020",
+                "Inteligence fund",
+                "250,000.00"
+              ],
+              "text": "Macario Napulan , M.D. 250,000.00 3/20/2020 Inteligence fund 250,000.00"
+            },
+            {
+              "cells": [
+                "Hon. Leonardo Naldoza",
+                "21,000.00",
+                "2/24/2020",
+                "TEV",
+                "21,000.00"
+              ],
+              "text": "Hon. Leonardo Naldoza 21,000.00 2/24/2020 TEV 21,000.00"
+            },
+            {
+              "cells": [
+                "Glenda Losanta",
+                "6,656.00",
+                "9/25/2017",
+                "TEV",
+                "6,656.00"
+              ],
+              "text": "Glenda Losanta 6,656.00 9/25/2017 TEV 6,656.00"
+            },
+            {
+              "cells": ["Hon. Luningning Tuparan", "0.50", "2/28/2019", "0.50"],
+              "text": "Hon. Luningning Tuparan 0.50 2/28/2019 0.50"
+            },
+            {
+              "cells": [
+                "Hon. Robert C. Galvez",
+                "21,000.00",
+                "2/27/2020",
+                "TEV",
+                "21,000.00"
+              ],
+              "text": "Hon. Robert C. Galvez 21,000.00 2/27/2020 TEV 21,000.00"
+            },
+            {
+              "cells": [
+                "Hon. Robert C. Galvez",
+                "343.00",
+                "9/20/2019",
+                "TEV",
+                "343.00"
+              ],
+              "text": "Hon. Robert C. Galvez 343.00 9/20/2019 TEV 343.00"
+            },
+            {
+              "cells": [
+                "Hon. Carmelo Nochete",
+                "938.76",
+                "2/12/2020",
+                "TEV",
+                "938.76"
+              ],
+              "text": "Hon. Carmelo Nochete 938.76 2/12/2020 TEV 938.76"
+            },
+            {
+              "cells": ["Hon. Mario Thomas Nicolas P."],
+              "text": "Hon. Mario Thomas Nicolas P."
+            },
+            {
+              "cells": [
+                "Torrecampo",
+                "1,243.24",
+                "2/12/2020",
+                "TEV",
+                "1,243.24"
+              ],
+              "text": "Torrecampo 1,243.24 2/12/2020 TEV 1,243.24"
+            },
+            {
+              "cells": [
+                "Hon. Gemma Nulada",
+                "1,168.24",
+                "2/12/2020",
+                "TEV",
+                "1,168.24"
+              ],
+              "text": "Hon. Gemma Nulada 1,168.24 2/12/2020 TEV 1,168.24"
+            },
+            {
+              "cells": ["Jane Valenzuela", "0.50", "2/28/2019", "TEV", "0.50"],
+              "text": "Jane Valenzuela 0.50 2/28/2019 TEV 0.50"
+            },
+            {
+              "cells": ["Ramil Naciongayo", "410.00", "6/8/2019", "410.00"],
+              "text": "Ramil Naciongayo 410.00 6/8/2019 410.00"
+            },
+            {
+              "cells": [
+                "Antonio T. Quilantang",
+                "21,000.00",
+                "2/24/2020",
+                "TEV",
+                "21,000.00"
+              ],
+              "text": "Antonio T. Quilantang 21,000.00 2/24/2020 TEV 21,000.00"
+            },
+            {
+              "cells": [
+                "Joseph M. Cartago",
+                "3,360.00",
+                "2/12/2020",
+                "TEV",
+                "3,360.00"
+              ],
+              "text": "Joseph M. Cartago 3,360.00 2/12/2020 TEV 3,360.00"
+            },
+            {
+              "cells": [
+                "Rosalinda S. Mueda",
+                "23,870.00",
+                "3/10/2020",
+                "TEV",
+                "23,870.00"
+              ],
+              "text": "Rosalinda S. Mueda 23,870.00 3/10/2020 TEV 23,870.00"
+            },
+            {
+              "cells": [
+                "Rosan Frances Anselle G. Famatid",
+                "21,000.00",
+                "2/24/2020",
+                "TEV",
+                "21,000.00"
+              ],
+              "text": "Rosan Frances Anselle G. Famatid 21,000.00 2/24/2020 TEV 21,000.00"
+            },
+            {
+              "cells": [
+                "Anthony A. Selorio",
+                "17,000.00",
+                "3/3/2020",
+                "TEV",
+                "17,000.00"
+              ],
+              "text": "Anthony A. Selorio 17,000.00 3/3/2020 TEV 17,000.00"
+            },
+            {
+              "cells": [
+                "Franco Carlo M. Monteclaro",
+                "21,000.00",
+                "2/24/2020",
+                "TEV",
+                "21,000.00"
+              ],
+              "text": "Franco Carlo M. Monteclaro 21,000.00 2/24/2020 TEV 21,000.00"
+            },
+            {
+              "cells": [
+                "Ma. Gilga N. Noveros",
+                "23,870.00",
+                "3/10/2020",
+                "TEV",
+                "23,870.00"
+              ],
+              "text": "Ma. Gilga N. Noveros 23,870.00 3/10/2020 TEV 23,870.00"
+            },
+            {
+              "cells": [
+                "John F. Nocal",
+                "17,530.00",
+                "3/5/2020",
+                "TEV",
+                "17,530.00"
+              ],
+              "text": "John F. Nocal 17,530.00 3/5/2020 TEV 17,530.00"
+            },
+            {
+              "cells": [
+                "Jayfel F. Conato",
+                "17,530.00",
+                "3/9/2020",
+                "TEV",
+                "17,530.00"
+              ],
+              "text": "Jayfel F. Conato 17,530.00 3/9/2020 TEV 17,530.00"
+            },
+            {
+              "cells": [
+                "Hon. Chelsea M. Nagaynay",
+                "24,724.44",
+                "2/24/2020",
+                "TEV",
+                "24,724.44"
+              ],
+              "text": "Hon. Chelsea M. Nagaynay 24,724.44 2/24/2020 TEV 24,724.44"
+            },
+            {
+              "cells": [
+                "Mark Ferdinand F. Moragas",
+                "21,000.00",
+                "2/24/2020",
+                "TEV",
+                "21,000.00"
+              ],
+              "text": "Mark Ferdinand F. Moragas 21,000.00 2/24/2020 TEV 21,000.00"
+            },
+            {
+              "cells": [
+                "Rose Yanna R. Mallo",
+                "17,530.00",
+                "3/5/2020",
+                "TEV",
+                "17,530.00"
+              ],
+              "text": "Rose Yanna R. Mallo 17,530.00 3/5/2020 TEV 17,530.00"
+            },
+            {
+              "cells": [
+                "Jonna Mae M. Salaya",
+                "16,210.00",
+                "3/5/2020",
+                "TEV",
+                "16,210.00"
+              ],
+              "text": "Jonna Mae M. Salaya 16,210.00 3/5/2020 TEV 16,210.00"
+            },
+            {
+              "cells": [
+                "Ian N. Garcia",
+                "17,530.00",
+                "3/5/2020",
+                "TEV",
+                "17,530.00"
+              ],
+              "text": "Ian N. Garcia 17,530.00 3/5/2020 TEV 17,530.00"
+            },
+            {
+              "cells": [
+                "Hon. Gemma Rei S. Nismal",
+                "24,820.00",
+                "2/13/2020",
+                "TEV",
+                "24,820.00"
+              ],
+              "text": "Hon. Gemma Rei S. Nismal 24,820.00 2/13/2020 TEV 24,820.00"
+            },
+            {
+              "cells": [
+                "Ma. Leby F. GequiÃ±ana",
+                "3,360.00",
+                "2/12/2020",
+                "TEV",
+                "3,360.00"
+              ],
+              "text": "Ma. Leby F. GequiÃ±ana 3,360.00 2/12/2020 TEV 3,360.00"
+            },
+            {
+              "cells": [
+                "Jaycon P. Momville",
+                "17,530.00",
+                "3/9/2020",
+                "TEV",
+                "17,530.00"
+              ],
+              "text": "Jaycon P. Momville 17,530.00 3/9/2020 TEV 17,530.00"
+            },
+            {
+              "cells": ["MARKET"],
+              "text": "MARKET"
+            },
+            {
+              "cells": [
+                "Aimee Marie Biboso",
+                "552.61",
+                "undated",
+                "C.A/PS",
+                "552.61"
+              ],
+              "text": "Aimee Marie Biboso 552.61 undated C.A/PS 552.61"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "0.30",
+                "1/31/2019",
+                "C.A/ Payroll",
+                "0.30"
+              ],
+              "text": "Mary Jill H. Momper 0.30 1/31/2019 C.A/ Payroll 0.30"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "80,873.68",
+                "3/29/2020",
+                "monetization of leave credits",
+                "80,873.68",
+                "liquidated April"
+              ],
+              "text": "Mary Jill H. Momper 80,873.68 3/29/2020 monetization of leave credits 80,873.68 liquidated April"
+            },
+            {
+              "cells": ["S.E.F"],
+              "text": "S.E.F"
+            },
+            {
+              "cells": ["Aimee Marie Biboso", "0.50", "undated", "0.50"],
+              "text": "Aimee Marie Biboso 0.50 undated 0.50"
+            },
+            {
+              "cells": ["Mary Jill H. Momper", "0.50", "5/24/2019", "0.50"],
+              "text": "Mary Jill H. Momper 0.50 5/24/2019 0.50"
+            },
+            {
+              "cells": ["TRUST FUND", "-"],
+              "text": "TRUST FUND -"
+            },
+            {
+              "cells": [
+                "unnamed",
+                "54,645.02",
+                "undated",
+                "Unreconcilled Amount",
+                "54,645.02"
+              ],
+              "text": "unnamed 54,645.02 undated Unreconcilled Amount 54,645.02"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "45,000.00",
+                "2/7/2020",
+                "Hon. Habagat X -Trail",
+                "45,000.00"
+              ],
+              "text": "Mary Jill H. Momper 45,000.00 2/7/2020 Hon. Habagat X -Trail 45,000.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "24,000.00",
+                "3/2/2020",
+                "F/A CIU",
+                "24,000.00",
+                "liquidated April"
+              ],
+              "text": "Mary Jill H. Momper 24,000.00 3/2/2020 F/A CIU 24,000.00 liquidated April"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "4,800.00",
+                "3/19/2020",
+                "F/A Brgy. Nutrition Scholars",
+                "4,800.00",
+                "liquidated April"
+              ],
+              "text": "Mary Jill H. Momper 4,800.00 3/19/2020 F/A Brgy. Nutrition Scholars 4,800.00 liquidated April"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "148,730.00",
+                "3/19/2020",
+                "Payroll Job Order",
+                "148,730.00"
+              ],
+              "text": "Mary Jill H. Momper 148,730.00 3/19/2020 Payroll Job Order 148,730.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "24,900.00",
+                "3/19/2020",
+                "Payroll Job Order",
+                "24,900.00"
+              ],
+              "text": "Mary Jill H. Momper 24,900.00 3/19/2020 Payroll Job Order 24,900.00"
+            },
+            {
+              "cells": [
+                "Mary Jill H. Momper",
+                "19,200.00",
+                "3/31/2020",
+                "Payroll Job Order",
+                "19,200.00"
+              ],
+              "text": "Mary Jill H. Momper 19,200.00 3/31/2020 Payroll Job Order 19,200.00"
+            },
+            {
+              "cells": [
+                "Total",
+                "2,708,677.99",
+                "1,375,756.69",
+                "995,311.81",
+                "252,023.00",
+                "1.80",
+                "-",
+                "85,584.69"
+              ],
+              "text": "Total 2,708,677.99 1,375,756.69 995,311.81 252,023.00 1.80 - 85,584.69"
+            },
+            {
+              "cells": [
+                "We hereby certify that i have reviewed the contents and hereby attest to the veracity and correctness of the date"
+              ],
+              "text": "We hereby certify that i have reviewed the contents and hereby attest to the veracity and correctness of the date"
+            },
+            {
+              "cells": ["or information contained in this document."],
+              "text": "or information contained in this document."
+            },
+            {
+              "cells": [
+                "MAYLENE T. SERVIDAD",
+                "-",
+                "HON. MACARIO NAPULAN, M.D"
+              ],
+              "text": "MAYLENE T. SERVIDAD - HON. MACARIO NAPULAN, M.D"
+            },
+            {
+              "cells": ["Municipal Accountant", "LCE"],
+              "text": "Municipal Accountant LCE"
+            },
+            {
+              "cells": ["(2,708,677.99)"],
+              "text": "(2,708,677.99)"
+            }
+          ]
+        }
+      ],
+      "signatories": []
+    },
+    {
       "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/09/UNLIQUIDATED-CASH-ADVANCES.pdf",
       "sourcePageUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
       "sourceTitle": "2020 Full Disclosure",
@@ -25255,7 +29144,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "UNLIQUIDATED-CASH-ADVANCES.pdf"
+          "fileName": "UNLIQUIDATED-CASH-ADVANCES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "14b998bbd4b519b839aa74b3e46cab04404592cf351b881f3193dec4fcc745aa",
@@ -25977,7 +29870,11 @@
           "publishedAt": "2020-12-23T07:34:14",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Unliquidated-CAsh-Advances-Sept.2020.pdf"
+          "fileName": "Unliquidated-CAsh-Advances-Sept.2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/unliquidated-cash-advances-sept-2020/",
+          "sourceDate": "2020-12-23T07:34:14",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/Unliquidated-CAsh-Advances-Sept.2020.pdf",
@@ -25986,7 +29883,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Unliquidated-CAsh-Advances-Sept.2020.pdf"
+          "fileName": "Unliquidated-CAsh-Advances-Sept.2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "documentSha256": "bd833e8808aad8a4f6d2e6079637e85a390bd77247f34816479a3b734ab9e9d1",

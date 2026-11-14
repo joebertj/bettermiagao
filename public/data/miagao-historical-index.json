@@ -1,11 +1,15 @@
 {
-  "generatedAtUtc": "2026-11-14T14:17:58+00:00",
+  "generatedAtUtc": "2026-11-14T14:23:36+00:00",
   "parserStatus": "complete",
   "parserUpdatedAtUtc": "2026-11-14T12:09:58+00:00",
   "summary": {
     "sourceDocuments": 804,
     "parserCandidateDocuments": 654,
     "completedDocuments": 654,
+    "pdfCandidateDocuments": 147,
+    "pdfCompletedDocuments": 147,
+    "jpegCandidateDocuments": 507,
+    "jpegCompletedDocuments": 507,
     "unsupportedDocuments": 150,
     "ocrPageRows": 651,
     "nativeTextDocuments": 107,
