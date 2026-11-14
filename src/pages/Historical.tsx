@@ -62,7 +62,9 @@ type HistoricalIndex = {
   parserUpdatedAtUtc: string | null;
   summary: {
     sourceDocuments: number;
+    parserCandidateDocuments: number;
     completedDocuments: number;
+    unsupportedDocuments: number;
     ocrPageRows: number;
     nativeTextDocuments: number;
     errorDocuments: number;
@@ -374,14 +376,16 @@ export default function Historical() {
 
       {data && (
         <section
-          className="mb-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-5"
+          className="mb-2 grid gap-3 sm:grid-cols-2 xl:grid-cols-7"
           aria-label="Parser coverage"
         >
           {[
             ['Source files', data.summary.sourceDocuments],
+            ['PDF/JPEG candidates', data.summary.parserCandidateDocuments],
             ['Parsed files', data.summary.completedDocuments],
             ['OCR page records', data.summary.ocrPageRows],
             ['Pending', data.summary.pendingDocuments],
+            ['Other file types', data.summary.unsupportedDocuments],
             [
               'Errors / skipped',
               data.summary.errorDocuments +
@@ -399,6 +403,13 @@ export default function Historical() {
             </article>
           ))}
         </section>
+      )}
+      {data && tables && (
+        <p className="mb-6 text-sm text-slate-600">
+          Structured tables are extracted from {tables.documents.length} parsed
+          files. They are included in “Parsed files”; OCR page records count
+          pages, so these figures overlap and should not be added together.
+        </p>
       )}
 
       <section className="rounded-2xl border border-gray-200 bg-white p-4 sm:p-6">

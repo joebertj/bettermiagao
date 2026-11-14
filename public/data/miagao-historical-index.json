@@ -1,15 +1,17 @@
 {
-  "generatedAtUtc": "2026-11-14T12:22:20+00:00",
+  "generatedAtUtc": "2026-11-14T14:17:58+00:00",
   "parserStatus": "complete",
   "parserUpdatedAtUtc": "2026-11-14T12:09:58+00:00",
   "summary": {
     "sourceDocuments": 804,
+    "parserCandidateDocuments": 654,
     "completedDocuments": 654,
+    "unsupportedDocuments": 150,
     "ocrPageRows": 651,
     "nativeTextDocuments": 107,
     "errorDocuments": 0,
     "intentionallySkippedDocuments": 0,
-    "pendingDocuments": 150
+    "pendingDocuments": 0
   },
   "rows": [
     {
@@ -5676,7 +5678,11 @@
           "publishedAt": "2023-11-24T15:55:51",
           "sourceElement": "iframe",
           "sourceAttribute": "src",
-          "fileName": "Bidding-Documents-Opening-of-Roads-Kirayan-Taas-to-Pungtod-Naulid-revised.pdf"
+          "fileName": "Bidding-Documents-Opening-of-Roads-Kirayan-Taas-to-Pungtod-Naulid-revised.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-the-opening-of-roads-kirayan-tacas-crossing-puto-pungtod-naulid-brgy-kirayan-tacas-crossing-puto-brgy-pungtod-naulid-miagao-iloilo/",
+          "sourceDate": "2023-11-24T15:55:51",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -5704,7 +5710,11 @@
           "publishedAt": "2023-11-24T15:54:16",
           "sourceElement": "iframe",
           "sourceAttribute": "src",
-          "fileName": "Bidding-Documents-MDRRMO-OpCen-Phase-I-1.pdf"
+          "fileName": "Bidding-Documents-MDRRMO-OpCen-Phase-I-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-the-construction-of-operation-center-building-phase-i-for-use-of-mdrrmo-miagao-iloilo/",
+          "sourceDate": "2023-11-24T15:54:16",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -5732,7 +5742,11 @@
           "publishedAt": "2023-11-16T11:02:36",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Science-and-Research-Lab-revised-rebid-1.pdf"
+          "fileName": "Bidding-Documents-Science-and-Research-Lab-revised-rebid-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-30/",
+          "sourceDate": "2023-11-16T11:02:36",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -5760,7 +5774,11 @@
           "publishedAt": "2023-11-09T11:19:29",
           "sourceElement": "iframe",
           "sourceAttribute": "src",
-          "fileName": "Final-Bidding-Documents-OMA-1.pdf"
+          "fileName": "Final-Bidding-Documents-OMA-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid-29/",
+          "sourceDate": "2023-11-09T11:19:29",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -6320,7 +6338,11 @@
           "publishedAt": "2023-06-09T08:50:59",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Concreting-of-Road-Naclub-ES.pdf"
+          "fileName": "Bidding-Documents-Concreting-of-Road-Naclub-ES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-26/",
+          "sourceDate": "2023-06-09T08:50:59",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -6348,7 +6370,11 @@
           "publishedAt": "2023-06-09T08:50:59",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Opening-of-Roads-Kirayan-Taas-to-Pungtod-Naulid.docx.pdf"
+          "fileName": "Bidding-Documents-Opening-of-Roads-Kirayan-Taas-to-Pungtod-Naulid.docx.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-26/",
+          "sourceDate": "2023-06-09T08:50:59",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -6376,7 +6402,11 @@
           "publishedAt": "2023-06-09T08:50:59",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Opening-of-Roads-Tiglawa-Buenavista.pdf"
+          "fileName": "Bidding-Documents-Opening-of-Roads-Tiglawa-Buenavista.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-26/",
+          "sourceDate": "2023-06-09T08:50:59",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -6852,7 +6882,11 @@
           "publishedAt": "2022-12-22T14:31:54",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-MDRRMO-rescue-boat.pdf"
+          "fileName": "Bidding-Documents-MDRRMO-rescue-boat.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-24/",
+          "sourceDate": "2022-12-22T14:31:54",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -6880,7 +6914,11 @@
           "publishedAt": "2022-12-13T13:32:01",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-WSS-Ticdalan.pdf"
+          "fileName": "Bidding-Documents-WSS-Ticdalan.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-23/",
+          "sourceDate": "2022-12-13T13:32:01",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -6964,7 +7002,11 @@
           "publishedAt": "2022-12-05T15:04:42",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-MHO-Desktop-Comp.pdf"
+          "fileName": "Bidding-Documents-MHO-Desktop-Comp.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-22/",
+          "sourceDate": "2022-12-05T15:04:42",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -6992,7 +7034,11 @@
           "publishedAt": "2022-12-05T15:04:42",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Slughterhouse-GenSet.pdf"
+          "fileName": "Bidding-Documents-Slughterhouse-GenSet.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-22/",
+          "sourceDate": "2022-12-05T15:04:42",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7048,7 +7094,11 @@
           "publishedAt": "2022-11-28T16:23:43",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-MHO-Drugs-and-Medicines.pdf"
+          "fileName": "Bidding-Documents-MHO-Drugs-and-Medicines.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-20/",
+          "sourceDate": "2022-11-28T16:23:43",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7104,7 +7154,11 @@
           "publishedAt": "2022-11-25T08:57:44",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Handheld-Radio.pdf"
+          "fileName": "Bidding-Documents-Handheld-Radio.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-19/",
+          "sourceDate": "2022-11-25T08:57:44",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7160,7 +7214,11 @@
           "publishedAt": "2022-11-18T13:07:48",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Const-of-Hanging-Bridge-Brgy-Toog.pdf"
+          "fileName": "Bidding-Documents-Const-of-Hanging-Bridge-Brgy-Toog.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-17/",
+          "sourceDate": "2022-11-18T13:07:48",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7216,7 +7274,11 @@
           "publishedAt": "2022-11-17T16:23:18",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Concreting-of-Road-Kirayan-Tacas-Bliss-Area.pdf"
+          "fileName": "Bidding-Documents-Concreting-of-Road-Kirayan-Tacas-Bliss-Area.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-16/",
+          "sourceDate": "2022-11-17T16:23:18",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7244,7 +7306,11 @@
           "publishedAt": "2022-11-09T09:31:05",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "New-Bidding-Documents-Comp-of-MRF-Bldg.docx.pdf"
+          "fileName": "New-Bidding-Documents-Comp-of-MRF-Bldg.docx.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-15/",
+          "sourceDate": "2022-11-09T09:31:05",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7412,7 +7478,11 @@
           "publishedAt": "2022-10-20T09:51:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Cementing-of-Brgy-Road-Pungtod-Monteclaro.pdf"
+          "fileName": "Bidding-Documents-Cementing-of-Brgy-Road-Pungtod-Monteclaro.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-13/",
+          "sourceDate": "2022-10-20T09:51:41",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7440,7 +7510,11 @@
           "publishedAt": "2022-10-10T05:41:16",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Comp-of-MRF-Bldg-Brgy.-Baybay-Norte.pdf"
+          "fileName": "Bidding-Documents-Comp-of-MRF-Bldg-Brgy.-Baybay-Norte.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-12/",
+          "sourceDate": "2022-10-10T05:41:16",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7496,7 +7570,11 @@
           "publishedAt": "2022-10-10T05:41:16",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-NCDC-Aircon-Rebid.pdf"
+          "fileName": "Bidding-Documents-NCDC-Aircon-Rebid.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-12/",
+          "sourceDate": "2022-10-10T05:41:16",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7580,7 +7658,11 @@
           "publishedAt": "2022-09-19T07:24:12",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Basura-Mo-Pagkaon-Ko.pdf"
+          "fileName": "Bidding-Documents-Basura-Mo-Pagkaon-Ko.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-10/",
+          "sourceDate": "2022-09-19T07:24:12",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7608,7 +7690,11 @@
           "publishedAt": "2022-09-19T07:24:12",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Const-of-Hanging-Bridge-Brgy-Oyaoy.pdf"
+          "fileName": "Bidding-Documents-Const-of-Hanging-Bridge-Brgy-Oyaoy.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-10/",
+          "sourceDate": "2022-09-19T07:24:12",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7664,7 +7750,11 @@
           "publishedAt": "2022-09-19T07:24:12",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-NCDC-Aircon.pdf"
+          "fileName": "Bidding-Documents-NCDC-Aircon.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-10/",
+          "sourceDate": "2022-09-19T07:24:12",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7692,7 +7782,11 @@
           "publishedAt": "2022-09-16T07:09:31",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-MSWDO-Pick-Up.pdf"
+          "fileName": "Bidding-Documents-MSWDO-Pick-Up.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-9/",
+          "sourceDate": "2022-09-16T07:09:31",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -7720,7 +7814,11 @@
           "publishedAt": "2022-09-16T07:09:31",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Pyrolysis-System.pdf"
+          "fileName": "Bidding-Documents-Pyrolysis-System.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-9/",
+          "sourceDate": "2022-09-16T07:09:31",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8028,7 +8126,11 @@
           "publishedAt": "2022-07-13T08:15:47",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "FINAL-Bidding-Docs-Kalahi-Public-Address-System-1.pdf"
+          "fileName": "FINAL-Bidding-Docs-Kalahi-Public-Address-System-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-6/",
+          "sourceDate": "2022-07-13T08:15:47",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8056,7 +8158,11 @@
           "publishedAt": "2022-07-13T08:15:47",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "final-Bidding-Documents-Kalahi-Pre-and-Post-Harvest-Narat-an-1-1.pdf"
+          "fileName": "final-Bidding-Documents-Kalahi-Pre-and-Post-Harvest-Narat-an-1-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-6/",
+          "sourceDate": "2022-07-13T08:15:47",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8196,7 +8302,11 @@
           "publishedAt": "2022-05-24T08:54:05",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-MENRO-Dumptruck-Rebid.pdf"
+          "fileName": "Bidding-Documents-MENRO-Dumptruck-Rebid.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-4/",
+          "sourceDate": "2022-05-24T08:54:05",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8224,7 +8334,11 @@
           "publishedAt": "2022-05-24T08:54:05",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-MENRO-Pyrolysis-Machine-Rebid.pdf"
+          "fileName": "Bidding-Documents-MENRO-Pyrolysis-Machine-Rebid.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-4/",
+          "sourceDate": "2022-05-24T08:54:05",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8280,7 +8394,11 @@
           "publishedAt": "2022-05-05T02:47:32",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-MENRO-Dumptruck.pdf"
+          "fileName": "Bidding-Documents-MENRO-Dumptruck.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-3/",
+          "sourceDate": "2022-05-05T02:47:32",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8308,7 +8426,11 @@
           "publishedAt": "2022-05-05T02:47:32",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-MENRO-Pyrolysis-Machine.pdf"
+          "fileName": "Bidding-Documents-MENRO-Pyrolysis-Machine.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-3/",
+          "sourceDate": "2022-05-05T02:47:32",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8476,7 +8598,11 @@
           "publishedAt": "2022-02-21T06:10:09",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Rescue-Boat-MDRRMO.pdf"
+          "fileName": "Bidding-Documents-Rescue-Boat-MDRRMO.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid/",
+          "sourceDate": "2022-02-21T06:10:09",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8504,7 +8630,11 @@
           "publishedAt": "2022-02-21T06:10:09",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Speed-Boat-OMA.pdf"
+          "fileName": "Bidding-Documents-Speed-Boat-OMA.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid/",
+          "sourceDate": "2022-02-21T06:10:09",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8913,7 +9043,11 @@
           "publishedAt": "2020-12-23T07:34:14",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Unliquidated-CAsh-Advances-Sept.2020.pdf"
+          "fileName": "Unliquidated-CAsh-Advances-Sept.2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/unliquidated-cash-advances-sept-2020/",
+          "sourceDate": "2020-12-23T07:34:14",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/Unliquidated-CAsh-Advances-Sept.2020.pdf",
@@ -8922,7 +9056,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Unliquidated-CAsh-Advances-Sept.2020.pdf"
+          "fileName": "Unliquidated-CAsh-Advances-Sept.2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8950,7 +9088,11 @@
           "publishedAt": "2020-12-23T07:32:36",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TF-Utilization-Sept.-30-2020.pdf"
+          "fileName": "TF-Utilization-Sept.-30-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/tf-utilization-sept-30-2020/",
+          "sourceDate": "2020-12-23T07:32:36",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/TF-Utilization-Sept.-30-2020.pdf",
@@ -8959,7 +9101,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TF-Utilization-Sept.-30-2020.pdf"
+          "fileName": "TF-Utilization-Sept.-30-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -8987,7 +9133,11 @@
           "publishedAt": "2020-12-23T07:31:29",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Statement-of-Debt-Services-Sept.-2020.pdf"
+          "fileName": "Statement-of-Debt-Services-Sept.-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/statement-of-debt-services-sept-2020/",
+          "sourceDate": "2020-12-23T07:31:29",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/12/Statement-of-Debt-Services-Sept.-2020.pdf",
@@ -8996,7 +9146,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Statement-of-Debt-Services-Sept.-2020.pdf"
+          "fileName": "Statement-of-Debt-Services-Sept.-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -9108,7 +9262,11 @@
           "publishedAt": "2020-12-23T07:07:00",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Cash-Flow-Statement-as-of-Sept.-30-2020.pdf"
+          "fileName": "Cash-Flow-Statement-as-of-Sept.-30-2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/financial-statements/statement-of-cash-flow/26947/",
+          "sourceDate": "2020-12-23T07:07:00",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -9350,7 +9508,11 @@
           "publishedAt": "2020-11-10T07:44:55",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Monobloc-Chairs.pdf"
+          "fileName": "Bidding-Documents-Monobloc-Chairs.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-monobloc-chairs-for-use-of-the-liga-nga-mga-barangay-miagao-chapter/",
+          "sourceDate": "2020-11-10T07:44:55",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -9378,7 +9540,11 @@
           "publishedAt": "2020-11-10T07:38:18",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Concreting-of-Road_Bugtong-Lumangan.pdf"
+          "fileName": "Bidding-Documents-Concreting-of-Road_Bugtong-Lumangan.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/uncategorized/invitation-to-bid-for-the-concreting-of-road-brgy-bugtong-lumangan-miagao-iloilo/",
+          "sourceDate": "2020-11-10T07:38:18",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -9406,7 +9572,11 @@
           "publishedAt": "2020-10-15T06:07:22",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Risograph-PR-1179.pdf"
+          "fileName": "Bidding-Documents-Risograph-PR-1179.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid-for-equipment-to-be-used-in-the-implementation-of-printed-learning-modality-in-the-municipality-miagao-iloilo-2/",
+          "sourceDate": "2020-10-15T06:07:22",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -9434,7 +9604,11 @@
           "publishedAt": "2020-10-15T06:03:19",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Bidding-Documents-Risograph-PR-1178.pdf"
+          "fileName": "Bidding-Documents-Risograph-PR-1178.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid-for-equipment-to-be-used-in-the-implementation-of-printed-learning-modality-in-the-municipality-miagao-iloilo/",
+          "sourceDate": "2020-10-15T06:03:19",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -9938,7 +10112,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES-B.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES-B.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -9966,7 +10144,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -9994,7 +10176,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "HUMAN-RESOURCE-COMPLEMENT.pdf"
+          "fileName": "HUMAN-RESOURCE-COMPLEMENT.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10022,7 +10208,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF.pdf"
+          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10050,7 +10240,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW.pdf"
+          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10078,7 +10272,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION.pdf"
+          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10106,7 +10304,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES.pdf"
+          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10134,7 +10336,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SUPPLEMENTAL-PROCUREMENT-PLAN.pdf"
+          "fileName": "SUPPLEMENTAL-PROCUREMENT-PLAN.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10162,7 +10368,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10302,7 +10512,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-CIVIL-WORKS-2ND-Q.2020.pdf"
+          "fileName": "BID-RESULTS-CIVIL-WORKS-2ND-Q.2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10330,7 +10544,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-CIVIL-WORKS-AND-GOODS-BID-OUT-2ND-Q.2020.pdf"
+          "fileName": "BID-RESULTS-CIVIL-WORKS-AND-GOODS-BID-OUT-2ND-Q.2020.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10358,7 +10576,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "HUMAN-RESOURCE-COMPLEMENT.pdf"
+          "fileName": "HUMAN-RESOURCE-COMPLEMENT.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10386,7 +10608,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF.pdf"
+          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10414,7 +10640,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW.pdf"
+          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10442,7 +10672,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION.pdf"
+          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10470,7 +10704,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-DEBT-SERVICES-1.pdf"
+          "fileName": "STATEMENT-OF-DEBT-SERVICES-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10498,7 +10736,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-DEBT-SERVICES.pdf"
+          "fileName": "STATEMENT-OF-DEBT-SERVICES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10526,7 +10768,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10554,7 +10800,11 @@
           "publishedAt": "2020-07-28T19:55:25",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "UNLIQUIDATED-CASH-ADVANCES.pdf"
+          "fileName": "UNLIQUIDATED-CASH-ADVANCES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2020-full-disclosure/",
+          "sourceDate": "2020-07-28T19:55:25",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10694,7 +10944,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "20-IRA-UTILIZATION-3.pdf"
+          "fileName": "20-IRA-UTILIZATION-3.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/20-IRA-UTILIZATION.pdf",
@@ -10731,7 +10985,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "20-IRA-UTILIZATION-4.pdf"
+          "fileName": "20-IRA-UTILIZATION-4.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10759,7 +11017,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-1.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10787,7 +11049,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/BID-RESULTS-ON-GOODS-and-CIVIL-WORKS-1st-Qtr.-2019.xlsx-Civil-Works-Bid-Out.pdf",
@@ -10833,7 +11099,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-1.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10861,7 +11131,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-2.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-2.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10889,7 +11163,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "CASH-FLOW-AS-OF-JUNE-2019.pdf"
+          "fileName": "CASH-FLOW-AS-OF-JUNE-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10917,7 +11195,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "CASH-FLOW-AS-OF-MARCH-2019.pdf"
+          "fileName": "CASH-FLOW-AS-OF-MARCH-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/Cash-Flow-as-of-March-31-2019.xlsx-Sheet2.pdf",
@@ -10963,7 +11245,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "CASH-FLOW.pdf"
+          "fileName": "CASH-FLOW.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -10991,7 +11277,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LDRMMF-UTILIZATION-AS-OF-SEPTEMBER-2019.pdf"
+          "fileName": "LDRMMF-UTILIZATION-AS-OF-SEPTEMBER-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11019,7 +11309,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LDRMMF-UTILIZATION.pdf"
+          "fileName": "LDRMMF-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11093,7 +11387,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "MANPOWER-COMPLEMENT-1.pdf"
+          "fileName": "MANPOWER-COMPLEMENT-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11121,7 +11419,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "MANPOWER-COMPLEMENT-2.pdf"
+          "fileName": "MANPOWER-COMPLEMENT-2.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11149,7 +11451,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SEF-UTILIZATION-AS-OF-SEPTEMBER-2019.pdf"
+          "fileName": "SEF-UTILIZATION-AS-OF-SEPTEMBER-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11177,7 +11483,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SEF-Utilization-as-of-June30-2019.xlsx-Sheet2.pdf"
+          "fileName": "SEF-Utilization-as-of-June30-2019.xlsx-Sheet2.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11205,7 +11515,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-DEBT-SERVICES-1.pdf"
+          "fileName": "STATEMENT-OF-DEBT-SERVICES-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11233,7 +11547,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-DEBT-SERVICES.pdf"
+          "fileName": "STATEMENT-OF-DEBT-SERVICES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/Statement-of-Debt-Services-March-31-2019.pdf",
@@ -11279,7 +11597,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES-1.pdf"
+          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11307,7 +11629,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES-2.pdf"
+          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES-2.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11335,7 +11661,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SUPPLEMENTAL-PPMP.pdf"
+          "fileName": "SUPPLEMENTAL-PPMP.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/Supplemental-PPMP.pdf",
@@ -11381,7 +11711,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Statement-of-Debt-Services-June-30-2019.xlsx-2nd-qtr-2019.pdf"
+          "fileName": "Statement-of-Debt-Services-June-30-2019.xlsx-2nd-qtr-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11409,7 +11743,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Supplemental.ppmp_.2019.MPDO_.doc.pdf"
+          "fileName": "Supplemental.ppmp_.2019.MPDO_.doc.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11437,7 +11775,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TF-Utilization-June-2019.xlsx-Trust-Fund-Utilization.pdf"
+          "fileName": "TF-Utilization-June-2019.xlsx-Trust-Fund-Utilization.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11465,7 +11807,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION-AS-OF-MARCH-2019.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION-AS-OF-MARCH-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/TRUST-FUND-Utilization-March-2019.pdf",
@@ -11511,7 +11857,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11539,7 +11889,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "UNLIQUADATED-CASH-ADVANCES.pdf"
+          "fileName": "UNLIQUADATED-CASH-ADVANCES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11705,7 +12059,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Unliquidated-CA-as-of-June-30-2019.xlsx-Sheet5.pdf"
+          "fileName": "Unliquidated-CA-as-of-June-30-2019.xlsx-Sheet5.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11733,7 +12091,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "supplemental-ppmp-2019-DA.xlsx-Sheet1.pdf"
+          "fileName": "supplemental-ppmp-2019-DA.xlsx-Sheet1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11873,7 +12235,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "ANNUAL-STATEMENT-OF-INDEBTEDNESS-PAYMENTS-AND-BALANCES-SIPB.pdf"
+          "fileName": "ANNUAL-STATEMENT-OF-INDEBTEDNESS-PAYMENTS-AND-BALANCES-SIPB.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11901,7 +12267,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-CIVIL-WORKS.pdf"
+          "fileName": "BID-RESULTS-ON-CIVIL-WORKS.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11929,7 +12299,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-AND-SERVICES-AND-CONSULTING-SERVICES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11957,7 +12331,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "HUMAN-RESOURCE-COMPLEMENT-1.pdf"
+          "fileName": "HUMAN-RESOURCE-COMPLEMENT-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -11985,7 +12363,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF-1.pdf"
+          "fileName": "LOCAL-DISASTER-RISK-REDUCTION-AND-MANAGEMENT-FUND-UTILIZATION-LDRRMF-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -12013,7 +12395,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW-1.pdf"
+          "fileName": "QUARTERLY-STATEMENT-OF-CASH-FLOW-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -12041,7 +12427,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION-1.pdf"
+          "fileName": "REPORT-OF-SPECIAL-EDUCATION-FUND-UTILIZATION-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -12069,7 +12459,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES.pdf"
+          "fileName": "STATEMENT-OF-RECEIPTS-AND-EXPENDITURES.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -12097,7 +12491,11 @@
           "publishedAt": "2020-01-06T19:52:15",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "TRUST-FUND-UTILIZATION-1.pdf"
+          "fileName": "TRUST-FUND-UTILIZATION-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/2019-full-disclosure/",
+          "sourceDate": "2020-01-06T19:52:15",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -12965,7 +13363,11 @@
           "publishedAt": "2019-04-05T05:43:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "20-IRA-UTILIZATION.pdf"
+          "fileName": "20-IRA-UTILIZATION.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceDate": "2019-04-05T05:43:41",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/20-IRA-UTILIZATION-2.pdf",
@@ -13002,7 +13404,11 @@
           "publishedAt": "2019-04-05T05:43:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SEF-Utilization-as-of-MArch-31-2019.pdf"
+          "fileName": "SEF-Utilization-as-of-MArch-31-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceDate": "2019-04-05T05:43:41",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2019/04/SEF-Utilization-as-of-MArch-31-2019.pdf",
@@ -13011,7 +13417,11 @@
           "publishedAt": "2019-04-01T06:01:31",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "SEF-Utilization-as-of-MArch-31-2019.pdf"
+          "fileName": "SEF-Utilization-as-of-MArch-31-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/financial-statements/special-education-fund-and-expenditure-estimate/sef-utilization-as-of-march-31-2019/",
+          "sourceDate": "2019-04-01T06:01:31",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/SEF-UTILIZATION-AS-OF-MARCH-2019.pdf",
@@ -13048,7 +13458,11 @@
           "publishedAt": "2019-04-05T05:43:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceDate": "2019-04-05T05:43:41",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf",
@@ -13057,7 +13471,11 @@
           "publishedAt": "2019-04-03T08:17:42",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf"
+          "fileName": "BID-RESULTS-ON-GOODS-1st-Qtr.-2019.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/bid-results/bid-result-on-goods/",
+          "sourceDate": "2019-04-03T08:17:42",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/BID-RESULTS-ON-GOODS.pdf",
@@ -13094,7 +13512,11 @@
           "publishedAt": "2019-04-05T05:43:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf"
+          "fileName": "MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/full-disclosure-for-cy-2019/",
+          "sourceDate": "2019-04-05T05:43:41",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf",
@@ -13103,7 +13525,11 @@
           "publishedAt": "2019-04-03T02:54:56",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf"
+          "fileName": "MANPOWER-COMPLEMENT-1st-quarter-2019.xlsx-Sheet1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/manpower-complement/manpower-complement-as-of-march-2019/",
+          "sourceDate": "2019-04-03T02:54:56",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2020/03/MANPOWER-COMPLEMENT.pdf",
@@ -17616,7 +18042,11 @@
           "publishedAt": "2019-02-26T02:32:46",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Section-1-Invitation-to-Bid-sfr-sr-1.pdf"
+          "fileName": "Section-1-Invitation-to-Bid-sfr-sr-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-the-construction-repair-of-cdc-child-development-center-brgy-san-rafael-miagao-iloilo/",
+          "sourceDate": "2019-02-26T02:32:46",
+          "element": "a",
+          "attribute": "href"
         },
         {
           "documentUrl": "https://www.miagao.gov.ph/wp-content/uploads/2019/02/Section-1-Invitation-to-Bid-sfr-sr.pdf",
@@ -18079,7 +18509,11 @@
           "publishedAt": "2018-12-07T01:48:11",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Section-I-Invitation-to-Bid-local-access.pdf"
+          "fileName": "Section-I-Invitation-to-Bid-local-access.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/section-i-invitation-to-bid-local-access/",
+          "sourceDate": "2018-12-07T01:48:11",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -18639,7 +19073,11 @@
           "publishedAt": "2018-10-22T02:57:17",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Invitation-to-Bid-Concreting-of-Baybay-Norte-Igcabidio-Road.pdf"
+          "fileName": "Invitation-to-Bid-Concreting-of-Baybay-Norte-Igcabidio-Road.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-the-concreting-of-brgy-baybay-norte-road-section-and-concreting-of-brgy-oyungan-brgy-igcabidio-road-section/",
+          "sourceDate": "2018-10-22T02:57:17",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -19087,7 +19525,11 @@
           "publishedAt": "2018-10-05T05:11:49",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Invitation-to-Bid-for-Ten-10-Units-Laptop-for-the-Use-of-the-Office-of-Sangguniang-Bayan-Miagao-Iloilo.pdf"
+          "fileName": "Invitation-to-Bid-for-Ten-10-Units-Laptop-for-the-Use-of-the-Office-of-Sangguniang-Bayan-Miagao-Iloilo.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-ten-10-units-laptop-for-the-use-of-the-office-of-the-sangguniang-bayan-miagao-iloilo/",
+          "sourceDate": "2018-10-05T05:11:49",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -19115,7 +19557,11 @@
           "publishedAt": "2018-10-03T08:00:41",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Invitation-to-BID-for-IT-Equipment-for-use-of-MTO.pdf"
+          "fileName": "Invitation-to-BID-for-IT-Equipment-for-use-of-MTO.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-i-t-equipment-for-use-of-treasurers-office/",
+          "sourceDate": "2018-10-03T08:00:41",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -20487,7 +20933,11 @@
           "publishedAt": "2018-09-19T06:28:46",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Section-1-Invitation-to-Bid-la-con-ws-rebid-1.pdf"
+          "fileName": "Section-1-Invitation-to-Bid-la-con-ws-rebid-1.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-the-construction-of-la-consolacion-elem-school-water-system-brgy-la-consolacion-miagao-iloilo/",
+          "sourceDate": "2018-09-19T06:28:46",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
@@ -21775,7 +22225,11 @@
           "publishedAt": "2018-09-19T06:25:40",
           "sourceElement": "a",
           "sourceAttribute": "href",
-          "fileName": "Section-1-Invitation-to-Bid-mwest-ws-rebid.pdf"
+          "fileName": "Section-1-Invitation-to-Bid-mwest-ws-rebid.pdf",
+          "sourceUrl": "https://www.miagao.gov.ph/transparency/bids-and-awards/invitation-to-bid/invitation-to-bid-for-the-construction-of-miagao-west-central-elem-school-water-system-miagao-iloilo/",
+          "sourceDate": "2018-09-19T06:25:40",
+          "element": "a",
+          "attribute": "href"
         }
       ],
       "pageNumber": null,
