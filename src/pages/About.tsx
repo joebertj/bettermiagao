@@ -172,6 +172,28 @@ export default function About() {
           Visit the official Municipality of Miagao website{' '}
           <ExternalLink size={14} />
         </a>
+        <h2 className="pt-2 text-xl font-bold">Related BetterGov projects</h2>
+        <p className="leading-7 text-gray-700">
+          Explore the related public data and research sites:
+        </p>
+        <ul className="list-disc space-y-2 pl-5 leading-7 text-gray-700">
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://visualizations.bettergov.ph/sources"
+            >
+              BetterGov visualizations · data sources
+            </a>
+          </li>
+          <li>
+            <a
+              className="font-semibold text-blue-800 underline"
+              href="https://research.bettergov.ph/"
+            >
+              BetterGov research · budget and project analysis
+            </a>
+          </li>
+        </ul>
       </div>
     </main>
   );
