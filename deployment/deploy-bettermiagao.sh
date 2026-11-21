@@ -7,17 +7,11 @@ if [[ -f "$REPO_ROOT/.env" ]]; then
   # Read only the target setting; do not execute arbitrary .env contents.
   ENV_SSH_TARGET="$(sed -n 's/^BETTERMIAGAO_SSH_TARGET=//p' "$REPO_ROOT/.env" | tail -n 1)"
 fi
-REMOTE_TARGET="${BETTERMIAGAO_SSH_TARGET:-$ENV_SSH_TARGET}"
+REMOTE_TARGET="${BETTERMIAGAO_SSH_TARGET:-${ENV_SSH_TARGET:-joebert@10.27.79.12}}"
 REMOTE_REPO="${BETTERMIAGAO_REMOTE_REPO:-AUTO}"
 REMOTE_WEB_ROOT="/var/www/bettermiagao.org"
 BRANCH="${BETTERMIAGAO_BRANCH:-main}"
 SSH_IDENTITY="${BETTERMIAGAO_SSH_IDENTITY:-$HOME/.ssh/klti}"
-
-if [[ -z "$REMOTE_TARGET" ]]; then
-  echo "Set BETTERMIAGAO_SSH_TARGET in the local .env file (user@host or an SSH alias)." >&2
-  echo "Example: BETTERMIAGAO_SSH_TARGET=deploy@host bash deployment/deploy-bettermiagao.sh" >&2
-  exit 2
-fi
 
 for command in git ssh; do
   command -v "$command" >/dev/null 2>&1 || {
