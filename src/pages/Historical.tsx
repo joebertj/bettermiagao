@@ -24,9 +24,10 @@ type HistoricalRow = {
 
 type ParsedTableRow = {
   cells: string[];
-  text: string;
+  text?: string;
   item?: string;
   value?: string;
+  sourceRowNumber?: number;
 };
 type ParsedDocument = {
   documentUrl: string;
@@ -46,7 +47,12 @@ type ParsedDocument = {
   reportingPeriod: string | null;
   extractionStatus: string;
   pageCount: number;
-  tablePages: { pageNumber: number; rows: ParsedTableRow[] }[];
+  format?: string;
+  tablePages: {
+    pageNumber: number;
+    worksheetName?: string;
+    rows: ParsedTableRow[];
+  }[];
 };
 
 type HistoricalTables = {
@@ -131,6 +137,22 @@ const disclosureTypes = [
   {
     id: 'ira-utilization',
     label: '20% component of the IRA utilization',
+  },
+  {
+    id: 'nta-utilization',
+    label: '20% component of the NTA utilization',
+  },
+  {
+    id: 'annual-procurement-plan',
+    label: 'Annual procurement plan',
+  },
+  {
+    id: 'annual-budget-report',
+    label: 'Annual budget report',
+  },
+  {
+    id: 'gad-accomplishment-report',
+    label: 'Gender and development accomplishment report',
   },
 ] as const;
 
@@ -300,7 +322,7 @@ export default function Historical() {
       const statusMatches =
         statusFilter === 'all' || document.parseStatus === statusFilter;
       const extractedRows = document.tablePages
-        .flatMap(page => page.rows.map(row => row.text))
+        .flatMap(page => page.rows.map(row => row.text ?? row.cells.join(' ')))
         .join(' ');
       const queryMatches =
         !needle ||
@@ -368,9 +390,9 @@ export default function Historical() {
           Parsed transparency documents
         </h1>
         <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-300">
-          Search the available extracted pages and open the original documents
-          or the Miagao source pages. OCR text is a transcription aid and may
-          need review against the source scan.
+          Search the available extracted pages and spreadsheet rows, and open
+          the original documents or Miagao source pages. OCR text and extracted
+          cells are transcription aids and may need review against the source.
         </p>
         <p className="mt-3 text-sm text-slate-400">
           Parsed records refresh automatically while new documents are being
@@ -386,6 +408,27 @@ export default function Historical() {
           {[
             { label: 'Source files', value: data.summary.sourceDocuments },
             {
+              label: 'XLSX workbooks parsed',
+              value:
+                tables?.documents.filter(document => document.format === 'xlsx')
+                  .length ?? '…',
+            },
+            {
+              label: 'Legacy XLS files not parsed',
+              value: tables
+                ? Math.max(
+                    0,
+                    data.summary.unsupportedDocuments -
+                      new Set(
+                        tables.documents
+                          .filter(document => document.format === 'xlsx')
+                          .map(document => document.documentSha256)
+                          .filter(Boolean)
+                      ).size
+                  )
+                : '…',
+            },
+            {
               label: 'PDF parsed / candidates',
               value: `${data.summary.pdfCompletedDocuments} / ${data.summary.pdfCandidateDocuments}`,
             },
@@ -395,10 +438,6 @@ export default function Historical() {
             },
             { label: 'OCR page records', value: data.summary.ocrPageRows },
             { label: 'Pending', value: data.summary.pendingDocuments },
-            {
-              label: 'Non-PDF/JPEG files',
-              value: data.summary.unsupportedDocuments,
-            },
             {
               label: 'Errors / skipped',
               value:
@@ -426,7 +465,8 @@ export default function Historical() {
           bid” count subject areas, so the categories can include PDF/JPEG files
           and overlap with other totals. Structured tables are extracted from{' '}
           {tables.documents.length} parsed files and are included in “Parsed
-          files”; OCR page records count pages, not files.
+          files”; OCR page records count pages, not files. XLSX workbook cells
+          are included; legacy XLS workbooks remain unparsed.
         </p>
       )}
 
@@ -603,7 +643,9 @@ export default function Historical() {
                                   <table className="w-full border-collapse text-xs">
                                     <thead className="sticky top-0 bg-slate-100 text-left text-gray-600">
                                       <tr>
-                                        <th className="px-2 py-1.5">Page</th>
+                                        <th className="px-2 py-1.5">
+                                          Page / sheet · row
+                                        </th>
                                         <th className="px-2 py-1.5">
                                           Item / extracted cells
                                         </th>
@@ -618,7 +660,9 @@ export default function Historical() {
                                             className="border-t border-gray-100"
                                           >
                                             <td className="whitespace-nowrap px-2 py-1.5 text-gray-500">
-                                              {page.pageNumber}
+                                              {page.worksheetName
+                                                ? `${page.worksheetName} · ${row.sourceRowNumber ?? rowIndex + 1}`
+                                                : page.pageNumber}
                                             </td>
                                             <td className="px-2 py-1.5 font-mono text-gray-800">
                                               {row.item ??
@@ -641,7 +685,9 @@ export default function Historical() {
                             )}
                             <span className="mt-2 block text-xs text-gray-500">
                               {document.extractionStatus.replaceAll('_', ' ')} ·{' '}
-                              {document.pageCount} pages with text
+                              {document.format === 'xlsx'
+                                ? `${document.pageCount} worksheets`
+                                : `${document.pageCount} pages with text`}
                             </span>
                           </td>
                           <td className="px-3 py-4">

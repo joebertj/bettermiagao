@@ -1,39 +1,47 @@
 #!/usr/bin/env python3
-"""Extract comparable text rows from archived Miagao disclosure PDFs.
+"""Extract comparable text rows from archived Miagao disclosure PDFs and XLSX workbooks.
 
 Example:
   python3 scripts/build-miagao-historical-tables.py --archive-root ../nep
 
-Ghostscript's text layout is retained as parsed cells with the source filename,
-detected document heading, and reporting period. Spacing-based columns can be
-approximate; the original document link remains authoritative.
+Ghostscript's PDF text layout and spreadsheet worksheet cells are retained as
+parsed rows with the source filename, detected heading, and reporting period.
+PDF spacing-based columns can be approximate; original links remain authoritative.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import posixpath
 import re
 import subprocess
+import zipfile
+from xml.etree import ElementTree as ET
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "public/data/miagao-historical-index.json"
 OUTPUT = ROOT / "public/data/miagao-historical-tables.json"
+INVENTORY_NAME = "analysis_output/miagao-transparency-source-inventory.json"
 
 CATEGORIES = [
-    ("bid-out", "Bid-out: civil works, goods and services", re.compile(r"\bbid[- ]out\b|\bbid results?\b", re.I)),
+    ("bid-out", "Bid-out: civil works, goods and services", re.compile(r"\bbid[- ]out\b|\bbid results?\b|notice of award|minutes of bidding", re.I)),
     ("human-resource-complement", "Human resource complement", re.compile(r"human resource complement|manpower complement", re.I)),
     ("ldrrmf-utilization", "Local disaster risk reduction and management fund utilization", re.compile(r"LDR(?:R?M|MM)F?|disaster risk reduction and management fund utilization", re.I)),
     ("cash-flows", "Cash flow statement", re.compile(r"cash flow", re.I)),
     ("sef-utilization", "Report of SEF utilization", re.compile(r"SEF utilization|special education fund utilization", re.I)),
     ("receipts-expenditures", "Statement of receipts and expenditures", re.compile(r"statement of receipts and expenditures", re.I)),
     ("supplemental-procurement-plan", "Supplemental procurement plan", re.compile(r"supplemental.{0,20}(?:procurement plan|PPMP)|supplemental[ ._-]*PPMP", re.I)),
-    ("quarterly-government-projects", "Consolidated quarterly report on government projects, programs or activities", re.compile(r"quarterly report on government project", re.I)),
-    ("debt-service", "Statement of debt services", re.compile(r"debt service|indebtedness payments", re.I)),
+    ("quarterly-government-projects", "Consolidated quarterly report on government projects, programs or activities", re.compile(r"quarterly report on government project|consolidated.{0,50}report", re.I)),
+    ("debt-service", "Statement of debt services", re.compile(r"debt service|statement of indebtedness|indebtedness payments|payments and balances", re.I)),
     ("unliquidated-cash-advances", "Unliquidated cash advances", re.compile(r"unliquidated.{0,20}(?:cash )?advances?|unliquadated.{0,20}advances?|unliquidated[- ]CA[- ]", re.I)),
     ("trust-fund-utilization", "Trust fund utilization", re.compile(r"trust fund utilization|\bTF utilization\b", re.I)),
     ("ira-utilization", "20% component of the IRA utilization", re.compile(r"20.{0,20}component.{0,20}IRA.{0,20}utilization|20[- ]IRA[- ]utilization", re.I)),
+    ("nta-utilization", "20% component of the NTA utilization", re.compile(r"20.{0,20}(?:component.{0,20})?NTA.{0,20}utilization|NTA utilization", re.I)),
+    ("annual-procurement-plan", "Annual procurement plan", re.compile(r"annual.{0,25}(?:procurement plan|\bAPP\b)|\bAPP\b.{0,25}(?:procurement|plan)|\bFDP[- ]APP\b", re.I)),
+    ("annual-budget-report", "Annual budget report", re.compile(r"annual budget report|budget year.{0,10}report|\bbudget ?20\d{2}\b", re.I)),
+    ("gad-accomplishment-report", "Gender and development accomplishment report", re.compile(r"(?:gender and development|\bGAD\b).{0,50}accomplishment report|accomplishment report.{0,50}(?:gender and development|\bGAD\b)", re.I)),
 ]
 
 
@@ -86,6 +94,70 @@ def parsed_table_rows(text: str, max_rows: int = 900):
         if rows:
             pages.append({"pageNumber": page_number, "rows": rows})
     return pages
+
+
+def xlsx_sheets(path: Path):
+    """Read XLSX values with the standard library, retaining worksheet rows."""
+    namespace = {"main": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
+                 "rel": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+                 "pkg": "http://schemas.openxmlformats.org/package/2006/relationships"}
+    with zipfile.ZipFile(path) as archive:
+        names = set(archive.namelist())
+        shared_strings = []
+        if "xl/sharedStrings.xml" in names:
+            root = ET.fromstring(archive.read("xl/sharedStrings.xml"))
+            for item in root.findall("main:si", namespace):
+                shared_strings.append("".join(node.text or "" for node in item.iter(f"{{{namespace['main']}}}t")))
+
+        workbook = ET.fromstring(archive.read("xl/workbook.xml"))
+        relationships = ET.fromstring(archive.read("xl/_rels/workbook.xml.rels"))
+        targets = {}
+        for item in relationships.findall("pkg:Relationship", namespace):
+            target = item.attrib["Target"].lstrip("/")
+            if not target.startswith("xl/"):
+                target = posixpath.join("xl", target)
+            targets[item.attrib["Id"]] = posixpath.normpath(target)
+        sheets = []
+        for sheet in workbook.findall("main:sheets/main:sheet", namespace):
+            name = sheet.attrib.get("name", "Sheet")
+            target = targets.get(sheet.attrib.get(f"{{{namespace['rel']}}}id"))
+            if not target or target not in names:
+                continue
+            sheet_root = ET.fromstring(archive.read(target))
+            rows = []
+            for row in sheet_root.findall(".//main:sheetData/main:row", namespace):
+                values = []
+                for cell in row.findall("main:c", namespace):
+                    cell_ref = cell.attrib.get("r", "")
+                    column_letters = re.match(r"[A-Z]+", cell_ref)
+                    column = 0
+                    if column_letters:
+                        for letter in column_letters.group(0):
+                            column = column * 26 + ord(letter) - ord("A") + 1
+                    while len(values) < max(column - 1, 0):
+                        values.append("")
+                    cell_type = cell.attrib.get("t")
+                    value = cell.find("main:v", namespace)
+                    if cell_type == "inlineStr":
+                        text = "".join(node.text or "" for node in cell.iter(f"{{{namespace['main']}}}t"))
+                    elif value is None:
+                        text = ""
+                    elif cell_type == "s":
+                        try:
+                            text = shared_strings[int(value.text or "0")]
+                        except (ValueError, IndexError):
+                            text = value.text or ""
+                    else:
+                        text = value.text or ""
+                    values.append(text)
+                while values and not values[-1].strip():
+                    values.pop()
+                if any(value.strip() for value in values):
+                    rows.append({"rowNumber": int(row.attrib.get("r", len(rows) + 1)),
+                                 "cells": values,
+                                 "text": " | ".join(value for value in values if value.strip())})
+            sheets.append({"name": name, "rows": rows})
+    return sheets
 
 
 SIGNATURE_MARKER = re.compile(r"\(?\s*s\s*\.?\s*g\s*\.?\s*d\s*\.?\s*\)?", re.I)
@@ -237,11 +309,18 @@ def reporting_period(text: str) -> str | None:
 def infer_category(text: str, filename: str):
     heading_lines = [line.strip() for line in text.splitlines()[:35] if line.strip()]
     heading = "\n".join(heading_lines)
+    priority_ids = {"annual-procurement-plan", "supplemental-procurement-plan"}
     for category_id, label, pattern in CATEGORIES:
-        if pattern.search(heading):
+        if category_id in priority_ids and pattern.search(heading):
             return category_id, label, "document heading"
     for category_id, label, pattern in CATEGORIES:
-        if pattern.search(filename.replace("-", " ").replace("_", " ")):
+        if category_id in priority_ids and pattern.search(filename.replace("-", " ").replace("_", " ")):
+            return category_id, label, "source filename"
+    for category_id, label, pattern in CATEGORIES:
+        if category_id not in priority_ids and pattern.search(heading):
+            return category_id, label, "document heading"
+    for category_id, label, pattern in CATEGORIES:
+        if category_id not in priority_ids and pattern.search(filename.replace("-", " ").replace("_", " ")):
             return category_id, label, "source filename"
     return "other", "Other / unclassified", "source filename"
 
@@ -286,17 +365,69 @@ def main():
         if not document.get("sourcePageUrl"):
             document["sourcePageUrl"] = row.get("sourcePageUrl")
 
+    inventory_path = args.archive_root / INVENTORY_NAME
+    if inventory_path.is_file():
+        inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
+        for source in inventory.get("linkedUrls", []):
+            url = source.get("url")
+            archive = source.get("archive") or {}
+            archive_path = archive.get("localPath")
+            if not url or not archive_path or Path(urlparse(url).path).suffix.lower() != ".xlsx":
+                continue
+            refs = []
+            for ref in source.get("sources", []):
+                refs.append({
+                    "documentUrl": url,
+                    "sourcePageUrl": ref.get("sourceUrl"),
+                    "sourceTitle": ref.get("sourceTitle"),
+                    "publishedAt": ref.get("sourceDate"),
+                    "sourceElement": ref.get("element"),
+                    "sourceAttribute": ref.get("attribute"),
+                    "fileName": source_filename(url, Path(archive_path).name),
+                })
+            first_ref = refs[0] if refs else {}
+            documents.setdefault(url, {
+                "documentUrl": url,
+                "sourcePageUrl": first_ref.get("sourcePageUrl"),
+                "sourceTitle": first_ref.get("sourceTitle") or source_filename(url, "Workbook"),
+                "sourceFileName": Path(archive_path).name,
+                "sourceArchivePath": archive_path,
+                "publishedAt": first_ref.get("publishedAt"),
+                "originalLabel": source_filename(url, Path(archive_path).name),
+                "sourceReferences": refs,
+                "documentSha256": archive.get("sha256"),
+                "parseStatus": "structured_workbook",
+                "extractionMethod": "XLSX worksheet cell extraction",
+                "format": "xlsx",
+            })
+
     output_docs = []
     for url, document in documents.items():
         path = args.archive_root / document["sourceArchivePath"]
-        result = subprocess.run(
-            [args.ghostscript, "-q", "-sDEVICE=txtwrite", "-o", "-", str(path)],
-            capture_output=True,
-            check=False,
+        is_xlsx = path.suffix.lower() == ".xlsx"
+        if is_xlsx:
+            try:
+                sheets = xlsx_sheets(path)
+                raw_text = "\n".join(f"{sheet['name']}\n" + "\n".join(row["text"] for row in sheet["rows"])
+                                      for sheet in sheets)
+                result_returncode = 0
+            except (OSError, ValueError, KeyError, zipfile.BadZipFile, ET.ParseError) as exc:
+                sheets = []
+                raw_text = ""
+                result_returncode = 1
+                document["parseError"] = f"{type(exc).__name__}: {exc}"
+        else:
+            result = subprocess.run(
+                [args.ghostscript, "-q", "-sDEVICE=txtwrite", "-o", "-", str(path)],
+                capture_output=True,
+                check=False,
+            )
+            raw_text = decode_legacy_text(result.stdout.decode("latin-1", errors="replace"))
+            result_returncode = result.returncode
+        category_id, category_label, category_basis = infer_category(
+            raw_text, document["originalLabel"] + " " + (document.get("sourceTitle") or "")
         )
-        raw_text = decode_legacy_text(result.stdout.decode("latin-1", errors="replace"))
-        category_id, category_label, category_basis = infer_category(raw_text, document["originalLabel"])
-        if result.returncode:
+        if result_returncode:
             status = "extract_failed"
             raw_text = ""
         elif len(re.findall(r"[A-Za-z]{2,}", raw_text)) >= 20:
@@ -312,7 +443,16 @@ def main():
             if cleaned and any(pattern.search(cleaned) for pattern in title_patterns):
                 heading = cleaned[:240]
                 break
-        table_pages = parsed_table_rows(raw_text)
+        if is_xlsx and not result_returncode:
+            table_pages = [
+                {"pageNumber": sheet_index, "worksheetName": sheet["name"],
+                 "rows": [{"cells": row["cells"], "sourceRowNumber": row["rowNumber"]}
+                          for row in sheet["rows"]]}
+                for sheet_index, sheet in enumerate(sheets, 1)
+            ]
+            status = "spreadsheet_cells_extracted" if any(page["rows"] for page in table_pages) else "no_text"
+        else:
+            table_pages = parsed_table_rows(raw_text)
         signatories = extract_signatories(table_pages)
         signatory_date = reporting_period(raw_text)
         signatory_date_basis = "document reporting period" if signatory_date else "source publication date"
@@ -337,8 +477,8 @@ def main():
     output_docs.sort(key=lambda item: (item["normalizedCategoryLabel"], item.get("publishedAt") or "", item["originalLabel"].lower()))
     payload = {
         "generatedAt": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(timespec="seconds"),
-        "method": "Ghostscript txtwrite with spacing-based row and cell extraction",
-        "disclaimer": "Extracted cells are comparison aids. PDF text spacing and custom fonts can misalign or garble values; verify all values in the linked original.",
+        "method": "Ghostscript text extraction for PDFs and ZIP/XML worksheet cell extraction for XLSX workbooks",
+        "disclaimer": "Extracted cells are comparison aids. PDF text spacing and custom fonts can misalign or garble values; spreadsheet formulas, formatting and merged-cell layouts may not be reproduced. Verify all values in the linked original.",
         "documents": output_docs,
     }
     OUTPUT.write_text(pretty_payload(payload), encoding="utf-8")
