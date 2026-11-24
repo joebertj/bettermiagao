@@ -3,15 +3,13 @@
 
 import argparse
 from collections import defaultdict
+from functools import partial
 import json
 from pathlib import Path
-import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'src/data'
-MIAGAO = re.compile(r'\bmiag[\s‐‑–-]?ao\b', re.I)
-CODE = '0603030000'
 STAGE_ORDER = {'SCR': 0, 'HGAB 3rd': 1, 'NEP': 2, 'GAA': 3}
 PROGRAMS = {'dpwh': 'DPWH infrastructure', 'fmr': 'Farm-to-market roads',
             'hfep': 'Health facilities', 'nia': 'NIA irrigation'}
@@ -35,14 +33,14 @@ def stage(row, amount, url, label):
     return {'amountPesos': pesos(row[amount]), 'url': row[url] or None, 'source': label}
 
 
-def scr_records(source, assets, classify):
+def scr_records(source, assets, classify, miagao_pattern):
     rows = []
     for row in source['rows']:
         if row['program'] not in PROGRAMS:
             continue
         title, house_title = row['title'], row['house_title']
         asset = next((item for key, item in assets.items() if key in title or key in house_title), None)
-        if not MIAGAO.search(title) and not MIAGAO.search(house_title) and not asset:
+        if not miagao_pattern.search(title) and not miagao_pattern.search(house_title) and not asset:
             continue
         pap = row.get('pap') or ''
         category = ('Bridge' if asset else classify(title) or classify(pap)
@@ -65,18 +63,7 @@ def scr_records(source, assets, classify):
     return sorted(rows, key=lambda row: (row['program'], row['title'].casefold(), row['id']))
 
 
-def annual_groups(historical, snapshot, scr, assets, places, key, geographic_title):
-    def location_title(title):
-        return re.sub(r'\s+[-–—]\s+(?=(?:sta(?:tion)?|chainage)\b)', ' ', title, count=1, flags=re.I)
-
-    def title_key(title):
-        base, _ = geographic_title(location_title(title))
-        return re.sub(r'\bconsrtruction\b', 'construction', key(MIAGAO.sub('miagao', base)))
-
-    def in_miagao(title):
-        return any(places.lineage(code).get('municipality') == CODE
-                   for code in places.resolve(location_title(title)))
-
+def annual_groups(annual, snapshot, scr, assets, title_key, in_miagao):
     groups = defaultdict(dict)
 
     def add(group, row):
@@ -88,12 +75,11 @@ def annual_groups(historical, snapshot, scr, assets, places, key, geographic_tit
                 'source': reference, 'url': None, 'category': category}
 
     seen_annual = set()
-    for year, rows in historical.items():
-        for row in rows:
-            title = row['name']
-            if MIAGAO.search(title) and row['amount'] > 0 and in_miagao(title):
-                seen_annual.add((year, title_key(title), row['amount']))
-                add(title_key(title), annual_row(year, title, row['amount'], row['source'], row['category']))
+    for year, row in annual:
+        title = row['name']
+        key = title_key(title)
+        seen_annual.add((year, key, row['amount']))
+        add(key, annual_row(year, title, row['amount'], row['source'], row['category']))
     for row in snapshot['projects']:
         year, title, amount = row['year'], row['name'], row['amountPesos']
         if row['stage'] == 'GAA' and amount > 0 and in_miagao(title) and (year, title_key(title), amount) not in seen_annual:
@@ -143,9 +129,9 @@ def annual_groups(historical, snapshot, scr, assets, places, key, geographic_tit
     return sorted(result, key=lambda row: (-len(row['years']), -row['gaaTotalPesos'], row['title']))
 
 
-def browser_assets(public):
+def browser_assets(public, municipality_code):
     index = read(public / 'repeat-project-browser-data.json')
-    town = next(node for node in index['geography'] if node[0] == CODE)
+    town = next(node for node in index['geography'] if node[0] == municipality_code)
     assets = {}
     for offset in town[4]:
         part, position = divmod(offset, index['pageSize'])
@@ -163,17 +149,18 @@ def main():
     args = parser.parse_args()
     sys.path.insert(0, str(args.nep_root.resolve()))
     from analyze_priority_repeats import classify, previous_rows
-    from lane_cost_enrichment import key
-    from location_data.location_text import geographic_title
+    from location_data.miagao_historical_repeats import CODE, MIAGAO, annual_rows, in_miagao, title_key
     from location_data.repeat_browser_places import RepeatPlaces
 
     public = args.preview_root
     source = read(public / 'scr-data.json')
-    assets = browser_assets(public)
-    scr = scr_records(source, assets, classify)
+    assets = browser_assets(public, CODE)
+    scr = scr_records(source, assets, classify, MIAGAO)
     historical = previous_rows(list(range(2016, 2027)))
     local = read(DATA / 'miagao-projects.json')
-    repeats = annual_groups(historical, local, scr, assets, RepeatPlaces(), key, geographic_title)
+    places = RepeatPlaces()
+    repeats = annual_groups(annual_rows(historical, places), local, scr, assets,
+                            title_key, partial(in_miagao, places=places))
     write('miagao-scr.json', {'rows': scr, 'programs': PROGRAMS,
                             'sourceUrl': 'https://research.bettergov.ph/static/nep-preview/scr.html'})
     write('miagao-repeats.json', {'firstYear': min(historical), 'lastGaaYear': max(historical), 'projects': repeats})
