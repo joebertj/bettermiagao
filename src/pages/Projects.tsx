@@ -7,6 +7,7 @@ import {
   Search,
 } from 'lucide-react';
 import records from '../data/miagao-projects.json';
+import scr from '../data/miagao-scr.json';
 import niaRecords from '../data/miagao-nia-projects.json';
 import { miagaoBarangays } from '../data/miagao-barangays';
 import Glance from './Glance';
@@ -41,31 +42,70 @@ const money = new Intl.NumberFormat('en-PH', {
   maximumFractionDigits: 0,
 });
 
+type Project = Pick<
+  (typeof records.projects)[number],
+  'year' | 'stage' | 'category' | 'name' | 'amountPesos' | 'source'
+> & { sourceUrl: string | null; status: string; barangays: string[] };
+
+const scrProjects: Project[] = scr.rows.flatMap(row =>
+  row.program === 'dpwh' && row.scr && row.scr.amountPesos > 0
+    ? [
+        {
+          year: 2027,
+          stage: 'SCR',
+          category: row.category,
+          name: row.title,
+          amountPesos: row.scr.amountPesos,
+          source: row.scr.source,
+          sourceUrl: row.scr.url,
+          status: row.status,
+          barangays: row.barangays,
+        },
+      ]
+    : []
+);
+const allProjects = [
+  ...records.projects.map(row => ({
+    ...row,
+    sourceUrl: null,
+    status: '',
+    barangays: [] as string[],
+  })),
+  ...scrProjects,
+];
+const searchKey = (text: string) =>
+  text.toLowerCase().replace(/miag-ao/g, 'miagao');
+
 export default function Projects() {
   const [year, setYear] = useState('all');
+  const [stage, setStage] = useState('all');
+  const [proposalStage, setProposalStage] = useState('SCR');
   const [category, setCategory] = useState('all');
   const [barangay, setBarangay] = useState('all');
   const [query, setQuery] = useState('');
   const [amountOrder, setAmountOrder] = useState<'desc' | 'asc'>('desc');
   const [language, setLanguage] = useState<'en' | 'krj'>('en');
   const karayA = language === 'krj';
-  const years = [
-    ...new Set(records.projects.map(project => project.year)),
-  ].sort((a, b) => b - a);
+  const years = [...new Set(allProjects.map(project => project.year))].sort(
+    (a, b) => b - a
+  );
   const categories = [
-    ...new Set(records.projects.map(project => project.category)),
+    ...new Set(allProjects.map(project => project.category)),
   ].sort();
-  const q = query.trim().toLowerCase();
-  const filtered = records.projects
+  const q = searchKey(query.trim());
+  const filtered = allProjects
     .filter(
       project =>
         (year === 'all' || project.year === Number(year)) &&
+        (stage === 'all' || project.stage === stage) &&
         (category === 'all' || project.category === category) &&
-        (barangay === 'all' || titleMentions(project.name, barangay)) &&
+        (barangay === 'all' ||
+          project.barangays.includes(barangay) ||
+          titleMentions(project.name, barangay)) &&
         (!q ||
-          `${project.name} ${project.source} ${project.category}`
-            .toLowerCase()
-            .includes(q))
+          searchKey(
+            `${project.name} ${project.source} ${project.category} ${project.barangays.join(' ')}`
+          ).includes(q))
     )
     .sort((a, b) =>
       amountOrder === 'desc'
@@ -75,7 +115,14 @@ export default function Projects() {
   const recent = records.projects.filter(
     project => project.year >= 2017 && project.year <= 2026
   );
-  const proposed = records.projects.filter(project => project.year === 2027);
+  const houseProjects = allProjects.filter(
+    project => project.stage === 'HGAB 3rd'
+  );
+  const proposed = proposalStage === 'SCR' ? scrProjects : houseProjects;
+  const scrTotal = scrProjects.reduce(
+    (sum, project) => sum + project.amountPesos,
+    0
+  );
   const annual = years
     .filter(value => value !== 2027)
     .map(value => ({
@@ -98,8 +145,10 @@ export default function Projects() {
   const proposedBarangays = miagaoBarangays
     .map(name => ({
       name,
-      count: proposed.filter(project => titleMentions(project.name, name))
-        .length,
+      count: proposed.filter(
+        project =>
+          project.barangays.includes(name) || titleMentions(project.name, name)
+      ).length,
     }))
     .filter(item => item.count)
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
@@ -138,14 +187,13 @@ export default function Projects() {
         </h1>
         <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-300">
           {karayA
-            ? 'Mga rekord kang DPWH GAA kag FY2027 House proposal nga ang titulo nagngaran kang Miagao, Iloilo.'
-            : 'Explore historical DPWH GAA lines and the FY2027 House proposal records whose published titles mention Miagao, Iloilo.'}
+            ? 'Mga rekord kang DPWH GAA kag FY2027 House kag Senado nga mga proposal para sa Miagao, Iloilo.'
+            : 'Explore historical DPWH GAA lines and FY2027 House and Senate Committee Report (SCR) proposals linked to Miagao, Iloilo.'}
         </p>
         <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">
-          This is a title-matched list. It can miss projects named only for a
-          barangay or another locality, and some corridor works may extend
-          beyond Miagao. Amounts are budget figures, not proof of spending or
-          completion.
+          Most rows are linked by the town name in the published title. The DPWH
+          bridge inventory also identifies Oyungan Bridge. Listed amounts come
+          from budget documents.
         </p>
         <div
           className="mt-8 grid gap-3 md:grid-cols-3"
@@ -163,19 +211,17 @@ export default function Projects() {
           <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
             <p className="text-sm text-slate-300">FY2027 House proposal</p>
             <strong className="mt-2 block text-3xl">
-              {proposed.length.toLocaleString()}
+              {houseProjects.length.toLocaleString()}
             </strong>
             <p className="mt-1 text-sm text-slate-300">project rows</p>
           </article>
           <article className="rounded-2xl bg-blue-700 p-5">
-            <p className="text-sm text-blue-100">FY2027 proposed allocation</p>
+            <p className="text-sm text-blue-100">FY2027 SCR proposal</p>
             <strong className="mt-2 block text-3xl">
-              {money.format(
-                proposed.reduce((sum, project) => sum + project.amountPesos, 0)
-              )}
+              {money.format(scrTotal)}
             </strong>
             <p className="mt-1 text-sm text-blue-100">
-              House 3rd-reading extract · proposal, not enacted GAA
+              {scrProjects.length} DPWH rows with positive SCR allocations
             </p>
           </article>
         </div>
@@ -297,9 +343,19 @@ export default function Projects() {
             What appears in the 2027 proposal?
           </h2>
           <p className="mb-5 mt-1 text-sm text-gray-600">
-            Current House 3rd-reading extract, grouped by BetterGov project
-            category.
+            Listed allocations by project category for the selected proposal.
           </p>
+          <label className="mb-5 block font-medium">
+            Proposal version
+            <select
+              className="ml-2 rounded-lg border border-gray-300 px-2 py-1"
+              value={proposalStage}
+              onChange={event => setProposalStage(event.target.value)}
+            >
+              <option value="SCR">Senate Committee Report</option>
+              <option value="HGAB 3rd">House 3rd reading</option>
+            </select>
+          </label>
           <div className="space-y-5">
             {proposedTypes.map(item => (
               <div key={item.name}>
@@ -326,8 +382,8 @@ export default function Projects() {
             ))}
           </div>
           <p className="mt-5 text-xs leading-5 text-gray-500">
-            The FY2027 values are proposed allocations in the House bill and may
-            change during the legislative process.
+            Each version is shown separately. The proposals can change during
+            the legislative process.
           </p>
         </div>
       </section>
@@ -339,7 +395,7 @@ export default function Projects() {
         aria-labelledby="barangay-title"
       >
         <p className="text-sm font-bold uppercase tracking-widest text-blue-800">
-          FY2027 · Barangay title mentions
+          FY2027 · Barangay links
         </p>
         <h2
           id="barangay-title"
@@ -347,12 +403,12 @@ export default function Projects() {
         >
           {karayA
             ? 'Ano nga mga barangay ang ara sa mga titulo?'
-            : 'Which barangays appear in project titles?'}
+            : 'Which barangays are linked to projects?'}
         </h2>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-700">
           {karayA
             ? 'Mga ngaran kang barangay nga ara sa titulo lamang ang gin-ihap. Isa ka proyekto mahimo magngaran kang madamo nga barangay, gani indi ginbahin-bahin ang kantidad.'
-            : 'Counts are exact name mentions matched against Miagao’s PSGC barangay list. One road may name several barangays, so these are title mentions, not unique project sites; allocations are not split across barangays.'}
+            : 'Counts use title mentions and the DPWH bridge inventory where available. One project may cover several barangays. Allocations are kept at the project level.'}
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           {proposedBarangays.map(item => (
@@ -361,6 +417,7 @@ export default function Projects() {
               type="button"
               onClick={() => {
                 setYear('2027');
+                setStage(proposalStage);
                 setBarangay(item.name);
                 document
                   .getElementById('project-rows')
@@ -374,9 +431,8 @@ export default function Projects() {
           ))}
         </div>
         <p className="mt-4 text-xs leading-5 text-gray-600">
-          {proposedBarangays.length} of 119 barangay names appear in at least
-          one FY2027 title. PSGC spelling is used for matching; a differently
-          spelled source title may not match.
+          {proposedBarangays.length} of 119 barangays are linked to rows in the
+          selected proposal version.
         </p>
       </section>
 
@@ -422,9 +478,22 @@ export default function Projects() {
               {years.map(value => (
                 <option key={value} value={value}>
                   {value}
-                  {value === 2027 ? ' · House proposal' : ' · GAA'}
+                  {value === 2027 ? ' · proposals' : ' · GAA'}
                 </option>
               ))}
+            </select>
+          </label>
+          <label>
+            <span className="sr-only">Filter budget stage</span>
+            <select
+              className="h-11 w-full rounded-lg border border-gray-300 px-3"
+              value={stage}
+              onChange={event => setStage(event.target.value)}
+            >
+              <option value="all">All budget stages</option>
+              <option value="GAA">Enacted GAA</option>
+              <option value="HGAB 3rd">House 3rd reading</option>
+              <option value="SCR">Senate Committee Report</option>
             </select>
           </label>
           <label>
@@ -441,7 +510,7 @@ export default function Projects() {
             </select>
           </label>
           <label>
-            <span className="sr-only">Filter barangay named in title</span>
+            <span className="sr-only">Filter barangay</span>
             <select
               className="h-11 w-full rounded-lg border border-gray-300 px-3"
               value={barangay}
@@ -522,7 +591,19 @@ export default function Projects() {
                     {money.format(project.amountPesos)}
                   </td>
                   <td className="min-w-56 px-4 py-3 text-xs leading-5 text-gray-600">
-                    {project.source}
+                    {project.sourceUrl ? (
+                      <a
+                        href={project.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-blue-800 underline"
+                      >
+                        {project.source}
+                      </a>
+                    ) : (
+                      project.source
+                    )}
+                    {project.status && <div>{project.status}</div>}
                   </td>
                 </tr>
               ))}

@@ -18,7 +18,10 @@ export const mainNavigation: NavigationItem[] = [
   {
     label: 'National',
     href: '/projects',
-    children: [{ label: 'FY2027 budget comparison', href: '/budget' }],
+    children: [
+      { label: 'FY2027 budget comparison', href: '/budget' },
+      { label: 'Repeats', href: '/repeats' },
+    ],
   },
   { label: 'About', href: '/about' },
 ];

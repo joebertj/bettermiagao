@@ -1,0 +1,1085 @@
+{
+  "rows": [
+    {
+      "id": "house-reading:14164",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction (Completion) of Multi-Purpose Building, Barangay Guibongan, Miagao, Iloilo - (10.639497, 122.249494)",
+      "houseTitle": "Construction (Completion) of Multi-Purpose Building, Barangay Guibongan, Miagao, Iloilo - (10.639497, 122.249494)",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 10000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=817",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14144",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction (Completion) of Multi-Purpose Building, Miagao, Iloilo – (10.646755, 122.245435)",
+      "houseTitle": "Construction (Completion) of Multi-Purpose Building, Miagao, Iloilo – (10.646755, 122.245435)",
+      "office": "Central Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 265459000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=645",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=122",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14202",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction (Rehabilitation) of Multi-Purpose Building, Orbe St., Baybay Norte, Miagao, Iloilo, 10.640448, 122. 238651",
+      "houseTitle": "Construction (Rehabilitation) of Multi-Purpose Building, Orbe St., Baybay Norte, Miagao, Iloilo, 10.640448, 122. 238651",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 40000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:4483",
+      "program": "dpwh",
+      "category": "Flood control",
+      "title": "Construction of Bacauan River Control Project, Barangay Palaca, Miagao, Iloilo (Section 1 - 10.639494, 122.212922;10.641136, 122.212367) , (Section 2 - 10.641114, 122.210275; 10.642678, 122.208111)",
+      "houseTitle": "Construction of Bacauan River Control Project, Barangay Palaca, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=356",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 63000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=310",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 63000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=18",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:9094",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Barangay Cabunotan - Barangay Olango - Barangay Alimodias Road, Miagao, Iloilo",
+      "houseTitle": "Construction of Barangay Cabunotan - Barangay Olango - Barangay Alimodias Road, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 92330000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=433",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=55",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:9095",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Barangay Durog - Barangay Tigmarabo Road, Miagao, Iloilo",
+      "houseTitle": "Construction of Barangay Durog - Barangay Tigmarabo Road, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 92330000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=433",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=55",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:9132",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Barangay Igtuba - Barangay Kirayan Tacas Road, narangay Igtuba and Barangay Kirayan Tacas, Miagao, Iloilo",
+      "houseTitle": "Construction of Barangay Igtuba - Barangay Kirayan Tacas Road, narangay Igtuba and Barangay Kirayan Tacas, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 39000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=571",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=98",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:9131",
+      "program": "dpwh",
+      "category": "Bridge",
+      "title": "Construction of Cubay Ubos to Pungtod Monteclaro Bridge Phase 2, Barangay Cubay Ubos and Barangay Puntod Monteclaro, Miagao, Iloilo, 122.218260, 10.683983",
+      "houseTitle": "Construction of Cubay Ubos to Pungtod Monteclaro Bridge Phase 2, Barangay Cubay Ubos and Barangay Puntod Monteclaro, Miagao, Iloilo, 122.218260, 10.683983",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 9000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=571",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=98",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:9130",
+      "program": "dpwh",
+      "category": "Bridge",
+      "title": "Construction of Cubay Ubos to Pungtod Monteclaro Bridge, Sta. 0+000 - Sta. 0+100, Barangay Cubay Ubos and Barangay Puntod Monteclaro, Miagao, Iloilo (10.682522, 122.219111; 10.683158, 122.219769)",
+      "houseTitle": "Construction of Cubay Ubos to Pungtod Monteclaro Bridge, Barangay Cubay Ubos and Barangay Puntod Monteclaro, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 5000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=526",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 9000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=571",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 9000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=98",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "stage:16675",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Kirayan Norte Shoreline Protection including Access Roads and Utilities, Sta. 28 + 904-Sta. 29 + 244, Barangay Kirayan Norte, Miagao, Iloilo",
+      "houseTitle": null,
+      "office": "Central Office",
+      "status": "NEP only",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 92330000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=357",
+        "source": "National Expenditure Program"
+      },
+      "house": null,
+      "scr": null
+    },
+    {
+      "id": "house-reading:4491",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Kirayan Norte Shoreline Protection including Access Roads, Sta. 27+861- Sta. 28+200, Barangay Kirayan Norte, Miagao, Iloilo",
+      "houseTitle": "Construction of Kirayan Norte Shoreline Protection including Access Roads, Sta. 27+861- Sta. 28+200, Barangay Kirayan Norte, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 92330000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=311",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "stage:16676",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Kirayan Sur Shoreline Protection including Access Roads and Utilities, Sta. 29 + 609-Sta. 29 + 949, Barangay Kirayan Sur, Miagao, Iloilo",
+      "houseTitle": null,
+      "office": "Central Office",
+      "status": "NEP only",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 92330000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=357",
+        "source": "National Expenditure Program"
+      },
+      "house": null,
+      "scr": null
+    },
+    {
+      "id": "house-reading:4492",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Kirayan Sur Shoreline Protection including Access Roads, Sta. 28+693 - Sta. 29+007, Barangay Kirayan Sur, Miagao, Iloilo",
+      "houseTitle": "Construction of Kirayan Sur Shoreline Protection including Access Roads, Sta. 28+693 - Sta. 29+007, Barangay Kirayan Sur, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 92330000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=311",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "stage:16677",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Miagao Shoreline Protection Including Access Roads and Utilities, Sta. 28 + 084-Sta. 28 + 424, Barangay Banuyao - Barangay Naulid, Miagao, Iloilo",
+      "houseTitle": null,
+      "office": "Central Office",
+      "status": "NEP only",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 91993000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=357",
+        "source": "National Expenditure Program"
+      },
+      "house": null,
+      "scr": null
+    },
+    {
+      "id": "stage:16678",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Miagao Shoreline Protection Including Access Roads and Utilities, Sta. 28 + 354-Sta. 28 + 694, Barangay Kirayan Norte - Barangay Banuyao, Miagao, Iloilo",
+      "houseTitle": null,
+      "office": "Central Office",
+      "status": "NEP only",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 92330000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=357",
+        "source": "National Expenditure Program"
+      },
+      "house": null,
+      "scr": null
+    },
+    {
+      "id": "house-reading:4496",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 27+512 - Sta. 27+856, Barangay Kirayan Norte - Barangay Banuyao, Miagao, Iloilo",
+      "houseTitle": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 27+512 - Sta. 27+856, Barangay Kirayan Norte - Barangay Banuyao, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 92330000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=311",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:4497",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 29+682 - Sta. 30+175, Barangay Guibongan, Miagao, Iloilo",
+      "houseTitle": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 29+682 - Sta. 30+175, Barangay Guibongan, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 138495000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=311",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:4498",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 37+621 - Sta. 38+135, Barangay Lanutan - Barangay San Rafael, Miagao, Iloilo",
+      "houseTitle": "Construction of Miagao Shoreline Protection including Access Roads, Sta. 37+621 - Sta. 38+135, Barangay Lanutan - Barangay San Rafael, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 138495000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=311",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14171",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Banbanan, Miagao, Iloilo, (10.686389, 122.207953)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Banbanan, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=637",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=817",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=178",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14173",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Baybay Norte, Miagao, Iloilo",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Baybay Norte, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 9000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14179",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Dawog, Miagao, Iloilo, (10.677182, 122.229399)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Dawog, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=637",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14183",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Igsoligue, Miagao, Iloilo, (10.657430, 122.162967)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Igsoligue, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=637",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14184",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Igtuba, Miagao, Iloilo, (10.646522, 122.244697)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Igtuba, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 9000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=637",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 9000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 9000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14189",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay La Consolacion, Miagao, Iloilo, (10.695661, 122.180672)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay La Consolacion, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=637",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14188",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Lacadon, Miagao, Iloilo, (10.627148, 122.161611)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Lacadon, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=637",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14191",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Lumangan, Miagao, Iloilo, (10.647956, 122.209085)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Lumangan, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=637",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14197",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Nam-o Sur, Miagao, Iloilo, (10.6464462, 122.1766135)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Nam-o Sur, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=637",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:14198",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Barangay Palaca, Miagao, Iloilo, (10.63922, 122.208235)",
+      "houseTitle": "Construction of Multi-Purpose Building, Barangay Palaca, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=638",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=818",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 8000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=179",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "stage:17485",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Construction of Multi-Purpose Building, Indag-an, Miagao, Iloilo",
+      "houseTitle": null,
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "NEP only",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 9000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=638",
+        "source": "National Expenditure Program"
+      },
+      "house": null,
+      "scr": null
+    },
+    {
+      "id": "house-reading:9135",
+      "program": "dpwh",
+      "category": "Road",
+      "title": "Construction of Naclub - Igbugo Road, Barangay Naclub and Igbugo, Miagao, Iloilo",
+      "houseTitle": "Construction of Naclub - Igbugo Road, Barangay Naclub and Igbugo, Miagao, Iloilo",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 45000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=571",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=98",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:4501",
+      "program": "dpwh",
+      "category": "Flood control",
+      "title": "Construction of Oyungan River Control Project, Barangay Oyungan, Miagao, Iloilo (10.625917, 122.191981; 10.629169, 122.190425)",
+      "houseTitle": "Construction of Oyungan River Control Project, Barangay Oyungan, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=357",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=311",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:4510",
+      "program": "dpwh",
+      "category": "Flood control",
+      "title": "Construction of Tumagbok River Control Project, Barangay Bagumbayan, Miagao, Iloilo",
+      "houseTitle": "Construction of Tumagbok River Control Project, Barangay Bagumbayan, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Unchanged",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=311",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=311",
+        "source": "House schedule carried into SCR"
+      }
+    },
+    {
+      "id": "stage:16684",
+      "program": "dpwh",
+      "category": "Flood control",
+      "title": "Construction of Tumagbok River Control Project, Barangay Bayunan, Miagao, Iloilo",
+      "houseTitle": null,
+      "office": "Central Office",
+      "status": "NEP only",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=358",
+        "source": "National Expenditure Program"
+      },
+      "house": null,
+      "scr": null
+    },
+    {
+      "id": "stage:16685",
+      "program": "dpwh",
+      "category": "Flood control",
+      "title": "Construction of Tumagbok River Control Project, Barangay Durog, Miagao, Iloilo",
+      "houseTitle": null,
+      "office": "Central Office",
+      "status": "NEP only",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=358",
+        "source": "National Expenditure Program"
+      },
+      "house": null,
+      "scr": null
+    },
+    {
+      "id": "house-reading:4511",
+      "program": "dpwh",
+      "category": "Flood control",
+      "title": "Construction of Tumagbok River Control Project, Barangay Malagyan, Miagao, Iloilo (10.659072, 122.232203; 10.661281, 122.230722)",
+      "houseTitle": "Construction of Tumagbok River Control Project, Barangay Malagyan, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 86800000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=358",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 86800000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=312",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 86800000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:4512",
+      "program": "dpwh",
+      "category": "Flood control",
+      "title": "Construction of Tumagbok River Control Project, Barangay Oya-oy, Miagao, Iloilo (10.718250, 122.206886; 10.723281, 122.208858)",
+      "houseTitle": "Construction of Tumagbok River Control Project, Barangay Oya-oy, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=358",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=312",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:4513",
+      "program": "dpwh",
+      "category": "Flood control",
+      "title": "Construction of Tumagbok River Control Project, Barangay San Jose, Miagao, Iloilo (10.704053, 122.203117; 10.709053, 122.201339)",
+      "houseTitle": "Construction of Tumagbok River Control Project, Barangay San Jose, Miagao, Iloilo",
+      "office": "Central Office",
+      "status": "Renamed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=358",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=312",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 93000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=19",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house-reading:2708",
+      "program": "dpwh",
+      "category": "Bridge",
+      "title": "Oyungan Br. (B00135PN) along Iloilo-Antique Rd",
+      "houseTitle": "Oyungan Br. (B00135PN) along Iloilo-Antique Rd",
+      "office": "Central Office",
+      "status": "Unchanged",
+      "barangays": ["Oyungan"],
+      "locationBasis": "DPWH bridge inventory · B00135PN · Oyungan, Miagao, Iloilo",
+      "nep": {
+        "amountPesos": 30000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-vol-iib.pdf#page=313",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 30000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=258",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 30000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=258",
+        "source": "House schedule carried into SCR"
+      }
+    },
+    {
+      "id": "house-reading:14203",
+      "program": "dpwh",
+      "category": "Multi-purpose building",
+      "title": "Rehabilitation of Multi-Purpose Building, Barangay Kirayan Tacas, Miagao, Iloilo, 10.647757, 122. 245996",
+      "houseTitle": "Rehabilitation of Multi-Purpose Building, Barangay Kirayan Tacas, Miagao, Iloilo, 10.647757, 122. 245996",
+      "office": "Iloilo 1st District Engineering Office",
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 20000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ic.pdf#page=817",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a4.pdf#page=178",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house_only:ib:p709:r2",
+      "program": "fmr",
+      "category": "Farm-to-market roads",
+      "title": "Concreting of Brgy. Alimodias FMR, Brgy. Alimodias, Miag-ao, Iloilo",
+      "houseTitle": "Concreting of Brgy. Alimodias FMR, Brgy. Alimodias, Miag-ao, Iloilo",
+      "office": null,
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 30000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=709",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a1.pdf#page=105",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house_only:ib:p709:r13",
+      "program": "fmr",
+      "category": "Farm-to-market roads",
+      "title": "Concreting of Brgy. Ilog-Ilog - Brgy. Narorogan FMR, Brgy. Ilog-Ilog and Brgy. Narrorogan, Miagao, Iloilo",
+      "houseTitle": "Concreting of Brgy. Ilog-Ilog - Brgy. Narorogan FMR, Brgy. Ilog-Ilog and Brgy. Narrorogan, Miagao, Iloilo",
+      "office": null,
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 27500000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=709",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a1.pdf#page=106",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house_only:ib:p709:r14",
+      "program": "fmr",
+      "category": "Farm-to-market roads",
+      "title": "Concreting of Brgy. Kirayan Tacas to Brgy. Pungtod Naulid FMR, Brgy. Kirayan Tacas and Brgy. Pungtod Naulid, Miagao, Iloilo",
+      "houseTitle": "Concreting of Brgy. Kirayan Tacas - Brgy. Pungtod Naulid FMR, Brgy. Kirayan Tacas and Brgy. Pungtod, Naulid, Miagao, Iloilo",
+      "office": null,
+      "status": "Raised",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 52000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=709",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 60000000,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a1.pdf#page=106",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house_only:ib:p709:r5",
+      "program": "fmr",
+      "category": "Farm-to-market roads",
+      "title": "Concreting of Brgy. Olango - Brgy. Pudpud FMR, Brgy. Olango and Brgy. Pudpud, Miagao, Iloilo",
+      "houseTitle": "Concreting of Brgy. Olango - Brgy. Pudpud FMR, Brgy. Olango and Brgy. Pudpud, Miagao, Iloilo",
+      "office": null,
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 30750000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=709",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a1.pdf#page=105",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house_only:ib:p709:r12",
+      "program": "fmr",
+      "category": "Farm-to-market roads",
+      "title": "Concreting of Brgy. San Fernando - Brgy. Buenavista Norte FMR, Brgy. San Fernando and Brgy. Buenavista Norte, Miagao, Iloilo,",
+      "houseTitle": "Concreting of Brgy. San Fernando - Brgy. Buenavista Norte FMR, Brgy. San Fernando and Brgy. Buenavista Norte, Miagao, Iloilo,",
+      "office": null,
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 40000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=709",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a1.pdf#page=106",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "house_only:ib:p709:r4",
+      "program": "fmr",
+      "category": "Farm-to-market roads",
+      "title": "Concreting of Brgy. Tigmarabo FMR, Brgy. Tigmarabo, Miagao, Iloilo",
+      "houseTitle": "Concreting of Brgy. Tigmarabo FMR, Brgy. Tigmarabo, Miagao, Iloilo",
+      "office": null,
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 42000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=709",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a1.pdf#page=105",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "pair:nep_fmr:p34:r9:ib:p708:r7",
+      "program": "fmr",
+      "category": "Farm-to-market roads",
+      "title": "Construction of Brgy. Dawog FMR, Brgy. Dawog, Miagao, Iloilo",
+      "houseTitle": "Construction of Brgy. Dawog FMR, Brgy. Dawog, Miagao, Iloilo",
+      "office": null,
+      "status": "Removed",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": {
+        "amountPesos": 60000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/nep2027-fmr.pdf#page=34",
+        "source": "National Expenditure Program"
+      },
+      "house": {
+        "amountPesos": 60000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=708",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 0,
+        "url": "https://budget-assets.bettergov.ph/senate/2027/pdf/senate-cr-annex-a1.pdf#page=103",
+        "source": "Senate Committee Report"
+      }
+    },
+    {
+      "id": "ib:p880:r52|medical_equipment",
+      "program": "hfep",
+      "category": "Health facilities",
+      "title": "Miagao Super Health Center",
+      "houseTitle": "Miagao Super Health Center",
+      "office": null,
+      "status": "Unchanged",
+      "barangays": [],
+      "locationBasis": "Miagao or Miag-ao in source title",
+      "nep": null,
+      "house": {
+        "amountPesos": 10000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=880",
+        "source": "House 3rd reading"
+      },
+      "scr": {
+        "amountPesos": 10000000,
+        "url": "https://budget-assets.bettergov.ph/hgab/2027/pdf/hb10858-3r-vol-ib.pdf#page=880",
+        "source": "House schedule carried into SCR"
+      }
+    }
+  ],
+  "programs": {
+    "dpwh": "DPWH infrastructure",
+    "fmr": "Farm-to-market roads",
+    "hfep": "Health facilities",
+    "nia": "NIA irrigation"
+  },
+  "sourceUrl": "https://research.bettergov.ph/static/nep-preview/scr.html"
+}

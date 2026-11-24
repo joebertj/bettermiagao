@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowDownToLine, ExternalLink, Search } from 'lucide-react';
+import ScrComparison from '../components/budget/ScrComparison';
 
 const API = 'https://budget.bettergov.ph/api/v1/hgab/2027';
 const DATASETS = ['dpwh', 'fmr', 'hfep', 'nia'] as const;
@@ -122,6 +123,7 @@ function normalize(text: string) {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
+    .replace(/\bmiag[\s-]?ao\b/g, 'miagao')
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
 }
@@ -321,12 +323,11 @@ export default function Budget() {
           Miagao · National budget
         </p>
         <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-          FY2027 projects in the NEP and House bill
+          Miagao’s FY2027 budget proposals
         </h1>
         <p className="mt-4 max-w-4xl text-lg leading-8 text-slate-300">
-          Compare the National Expenditure Program (NEP) with the House of
-          Representatives’ version of House Bill 10858 for project rows whose
-          published titles name Miagao, Iloilo.
+          Compare Miagao-linked projects across the National Expenditure Program
+          (NEP), House Bill 10858 and the Senate Committee Report (SCR).
         </p>
         <p className="mt-3 max-w-4xl text-sm leading-6 text-slate-400">
           These are proposed amounts, not spending. Rows found in one version or
@@ -334,27 +335,38 @@ export default function Budget() {
           labels do not prove that two differently named lines are the same
           project.
         </p>
+      </header>
+
+      <ScrComparison />
+
+      <section className="mb-6" aria-labelledby="house-nep-comparison">
+        <h2
+          id="house-nep-comparison"
+          className="text-2xl font-bold text-slate-950"
+        >
+          NEP and House bill API comparison
+        </h2>
         <div
-          className="mt-7 grid gap-3 md:grid-cols-3"
+          className="mt-4 grid gap-3 md:grid-cols-3"
           aria-label="Separate budget version totals"
         >
-          <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <p className="text-sm text-slate-300">NEP · President’s proposal</p>
+          <article className="rounded-2xl border border-slate-200 bg-white p-5">
+            <p className="text-sm text-slate-700">NEP · President’s proposal</p>
             <strong className="mt-2 block text-2xl sm:text-3xl">
               {loaded ? peso(totals.nep) : 'Loading…'}
             </strong>
-            <p className="mt-1 text-sm text-slate-300">
+            <p className="mt-1 text-sm text-slate-700">
               {totals.nepRows} rows with an NEP amount
             </p>
           </article>
-          <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <p className="text-sm text-slate-300">
+          <article className="rounded-2xl border border-slate-200 bg-white p-5">
+            <p className="text-sm text-slate-700">
               House Bill 10858 · House version
             </p>
             <strong className="mt-2 block text-2xl sm:text-3xl">
               {loaded ? peso(totals.house) : 'Loading…'}
             </strong>
-            <p className="mt-1 text-sm text-slate-300">
+            <p className="mt-1 text-sm text-slate-700">
               {totals.houseRows} rows with a House amount
             </p>
           </article>
@@ -368,7 +380,7 @@ export default function Budget() {
             </p>
           </article>
         </div>
-      </header>
+      </section>
 
       <section
         className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-950"

@@ -12,6 +12,7 @@ import Ayuda from './pages/Ayuda';
 import AppPlan from './pages/AppPlan';
 import Glance from './pages/Glance';
 import Budget from './pages/Budget';
+import Repeats from './pages/Repeats';
 import Cmpd from './pages/Cmpd';
 import Bids from './pages/Bids';
 import Historical from './pages/Historical';
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/budget" element={<Budget />} />
+          <Route path="/repeats" element={<Repeats />} />
           <Route path="/glance" element={<Glance />} />
           <Route path="/people" element={<People />} />
           <Route path="/barangays" element={<Barangays />} />
